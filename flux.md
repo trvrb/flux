@@ -58,15 +58,30 @@ Here is a table (Table [mk])...
 
 ### Genetic and antigenic data ###
 
-We compiled an antigenic dataset for hemagglutination inhibition (HI) measurements for influenza A (H3N2) by combining data used in Hay et al. [@Hay01], Smith et al. [@Smith04], Russell et al. [@Russell08], Barr et al. [@Barr10] and Cox et al. *WHO report*. This combined dataset had 1651 influenza isolates (present as either virus or sera in HI comparisons) dating from 1968 to 2011. However, the majority of isolates date from 2002 to 2007. Because we are interested in longer-term antigenic evolution, we censored the data to have at most 20 strains per year, preferentially keeping those strains with more antigenic comparisons. This censoring left 338 strains present as 320 viruses and 438 sera (replicate sera are often constructed from the same strain). Across these viruses and sera, we observe 7240 HI measurements. We queried the IRD [@IRD] and GISAID *CITE* sequence databases for HA nucleotide sequences based on strain names, e.g. A/HongKong/1/1968, of these strains. If a strain had multiple sequences in the databases we preferentially kept the IRD sequence and preferentially kept the longest sequence in IRD. Sequences were aligned using MUSCLE v3.7 under default parameters [@MUSCLE].
+We compiled an antigenic dataset for hemagglutination inhibition (HI) measurements for influenza A (H3N2) by combining data used in Hay et al. [@Hay01], Smith et al. [@Smith04], Russell et al. [@Russell08], Barr et al. [@Barr10] and Cox et al. *WHO report*. 
+This combined dataset had 1651 influenza isolates (present as either virus or sera in HI comparisons) dating from 1968 to 2011. 
+However, the majority of isolates date from 2002 to 2007. 
+Because we are interested in longer-term antigenic evolution, we censored the data to have at most 20 strains per year, preferentially keeping those strains with more antigenic comparisons. 
+This censoring left 338 strains present as 320 viruses and 438 sera (replicate sera are often constructed from the same strain). 
+Across these viruses and sera, we observe 7240 HI measurements. 
+We queried the IRD [@IRD] and GISAID *CITE* sequence databases for HA nucleotide sequences based on strain names, e.g. A/HongKong/1/1968, of these strains. 
+If a strain had multiple sequences in the databases we preferentially kept the IRD sequence and preferentially kept the longest sequence in IRD. 
+Sequences were aligned using MUSCLE v3.7 under default parameters [@MUSCLE].
 
 Antigenic data for influenza A (H1N1) was collected from sources... *ask Gytis*
 
 ### Bayesian multidimensional scaling ###
 
-We follow Smith et al. [@Smith04] and represent antigenic locations on a 2D antigenic map. Through the hemagglutination inhibition (HI) assay, there exist measurements of the cross-reactivity of hemagglutinin (HA) from one virus strain to serum raised against another strain [@Hirst43]. Thus, antigenic phenotype is measured through a series a pairwise comparisons $H_{ij}$, comparing virus from strain $i$ to sera from strain $j$. Due to experimental constraints, the distance matrix $\mathbf{H}$ is sparse; most comparisons have not be made. Our goal is to find an optimal projection of the high-dimensional distance matrix into a lower number of dimensions. We conduct this projection using Bayesian multidimensional scaling (BMDS) [@Oh01] in which a probabilistic model is constructed to quantify the fit of a particular configuration of cartographic locations to the observed matrix HI measurements.
+We follow Smith et al. [@Smith04] and represent antigenic locations on a 2D antigenic map. 
+Through the hemagglutination inhibition (HI) assay, there exist measurements of the cross-reactivity of hemagglutinin (HA) from one virus strain to serum raised against another strain [@Hirst43]. 
+Thus, antigenic phenotype is measured through a series a pairwise comparisons $H_{ij}$, comparing virus from strain $i$ to sera from strain $j$. 
+Due to experimental constraints, the distance matrix $\mathbf{H}$ is sparse; most comparisons have not be made. 
+Our goal is to find an optimal projection of the high-dimensional distance matrix into a lower number of dimensions. 
+We conduct this projection using Bayesian multidimensional scaling (BMDS) [@Oh01] in which a probabilistic model is constructed to quantify the fit of a particular configuration of cartographic locations to the observed matrix HI measurements.
 
-Let $\mathbf{X}_i \in \Re^{P}$ represent the cartographic location of strain $i$ for $i = 1,\ldots, N$. Typically, $P = 2$, but higher or lower dimensions may better reflect the data.  This gives set of distances between cartographic locations 
+Let $\mathbf{X}_i \in \Re^{P}$ represent the cartographic location of strain $i$ for $i = 1,\ldots, N$. 
+Typically, $P = 2$, but higher or lower dimensions may better reflect the data.  
+This gives set of distances between cartographic locations 
 
 $$\delta_{ij} =  || \mathbf{X}_i - \mathbf{X}_i ||_2.$$
 
@@ -77,7 +92,8 @@ $$d_{ij} =  \max{ H_{ij} } +
 		\frac{ H_{ij} }{ \max{ H_j } }
 	\right).$$
 
-and let the set $\cal I = \{ (i,j) : H_{ij} \mbox{ is measured} \}$. The goal of multidimensional scaling (MDS) optimizes over $\mathbf{X}_1,\ldots,\mathbf{X}_N$ such that
+and let the set $\cal I = \{ (i,j) : H_{ij} \mbox{ is measured} \}$. 
+The goal of multidimensional scaling (MDS) optimizes over $\mathbf{X}_1,\ldots,\mathbf{X}_N$ such that
 
 $$\sum_{(i,j) \in \cal I} 
 	\left(
@@ -89,13 +105,15 @@ A probabilistic interpretation reformulates the optimization as
 
 $$d_{ij} \sim \mbox{Normal}( \delta_{ij}, \omega ) \times 1( d_{ij} > 0 ) \mbox{ for all } (i,j) \in \cal I$$
 
-where $1 ( \cdot )$ is the indicator function for truncation. The likelihood of the antigenic distance measures is proportional to
+where $1 ( \cdot )$ is the indicator function for truncation. 
+The likelihood of the antigenic distance measures is proportional to
 
 $$\omega^{m/2} \mbox{exp} \left[
 - \frac{\omega \times SSR}{2} - \sum_{(i,j) \in \cal I} \log \Phi (\omega \times \delta_{ij})
 \right],$$
 
-where $m$ is the cardinality of $\cal I$, $SSR$ is the sum of the squared residuals and $\Phi(\cdot)$ is the standard normal CDF. We consider the conjugate prior $\omega \sim \mbox{Gamma}(a, b)$, and assume a uniform prior over $\mathbf{X}$.
+where $m$ is the cardinality of $\cal I$, $SSR$ is the sum of the squared residuals and $\Phi(\cdot)$ is the standard normal CDF. 
+We consider the conjugate prior $\omega \sim \mbox{Gamma}(a, b)$, and assume a uniform prior over $\mathbf{X}$.
 
 ### Acknowledgments ###
 
@@ -119,7 +137,14 @@ Antigenic flux (AG units per year)	0.02		0.05			1.27		26.25$\times$
 
 ![mds](figures/mds.png)\
 
-__Antigenic locations of influenza H3N2 and H1N1.__ (A) and (B) Antigenic maps showing the mean posterior location of 338 strains of H3N2 influenza and 243 strains of H1N1 influenza.  The map has been oriented so that the primary axis of variation lies along the $x$-axis (AG1), with the $y$-axis (AG2) orthogonal to this axis.  (C) and (D) Antigenic location along the primary axis of variation (AG1) vs.\ year of virus isolation. The dashed lines show the relationship of between time and AG1 with a slope of *XXX* for H3N2 and *XXX* for H1N1.  (E) and (F) Antigenic location along the secondary axis of variation (AG2) vs.\ year of virus isolation. Antigenic units represent two-fold dilutions of the HI assay, and strains have been colored based on year of isolation.  *Decide whether to just show mean posterior or show distributions.*
+__Antigenic locations of influenza H3N2 and H1N1.__ 
+(A) and (B) Antigenic maps showing the mean posterior location of 338 strains of H3N2 influenza and 243 strains of H1N1 influenza.  
+The map has been oriented so that the primary axis of variation lies along the $x$-axis (AG1), with the $y$-axis (AG2) orthogonal to this axis.  
+(C) and (D) Antigenic location along the primary axis of variation (AG1) vs.\ year of virus isolation. 
+The dashed lines show the relationship of between time and AG1 with a slope of *XXX* for H3N2 and *XXX* for H1N1.  
+(E) and (F) Antigenic location along the secondary axis of variation (AG2) vs.\ year of virus isolation. 
+Antigenic units represent two-fold dilutions of the HI assay, and strains have been colored based on year of isolation.  
+*Decide whether to just show mean posterior or show distributions.*
 
 ## References ##
 
