@@ -84,47 +84,31 @@
 
 \tbc{Introduction focuses on vaccine selection to tie things together with the planned conclusion.}
 
-Seasonal influenza infects between 10\% and 20\% of the human population every year, causing 250,000 to
-500,000 deaths annually \cite{flufactsheet}. While individuals develop long-lasting immunity to particular
-influenza strains after infection, antigenic mutations to the influenza virus genome result in proteins that
-are recognized to a lesser degree by the human immune system, leaving individuals susceptible to future
-infection. The influenza virus population continually evolves in antigenic phenotype in a process known as
-antigenic drift. A large proportion of the disease burden of influenza stems from antigenic drift; it is why
-vaccines remain only transiently effective. A thorough understanding of the process of antigenic drift is
-essential to our efforts to control mortality and morbidity through the use of a seasonal influenza vaccine.
+Seasonal influenza infects between 10\% and 20\% of the human population every year, causing 250,000 to 500,000 deaths annually \cite{flufactsheet}. 
+While individuals develop long-lasting immunity to particular influenza strains after infection, antigenic mutations to the influenza virus genome result in proteins that are recognized to a lesser degree by the human immune system, leaving individuals susceptible to future infection. 
+The influenza virus population continually evolves in antigenic phenotype in a process known as antigenic drift. 
+A large proportion of the disease burden of influenza stems from antigenic drift; it is why vaccines remain only transiently effective. 
+A thorough understanding of the process of antigenic drift is essential to our efforts to control mortality and morbidity through the use of a seasonal influenza vaccine.
 
-There are currently three major clades of influenza circulating within the human population: influenza A
-subtype H3N2, influenza A subtype H1N1 and influenza B. Subtypes refer to the genes, hemagglutinin (H) and
-neuraminidase (N), that are primarily responsible for the antigenic character of a strain. Currently, seasonal
-influenza is treated with a trivalent vaccine containing one strain of H3N2, one strain of H1N1 and one strain
-of influenza B. The World Health Organization (WHO) Global Influenza Surveillance Network issues twice-yearly
-recommendations on which strains of influenza to use as vaccine strains in 9--12 month’s time, i.e.\ a
-February recommendation for the Northern Hemisphere flu season and an August recommendation for the Southern
-Hemisphere flu season. These recommendations are provided by a panel of experts after review of the available
-data.
+There are currently three major clades of influenza circulating within the human population: influenza A subtype H3N2, influenza A subtype H1N1 and influenza B. 
+Subtypes refer to the genes, hemagglutinin (H) and neuraminidase (N), that are primarily responsible for the antigenic character of a strain. 
+Currently, seasonal influenza is treated with a trivalent vaccine containing one strain of H3N2, one strain of H1N1 and one strain of influenza B. 
+The World Health Organization (WHO) Global Influenza Surveillance Network issues twice-yearly recommendations on which strains of influenza to use as vaccine strains in 9--12 month’s time, i.e.\ a February recommendation for the Northern Hemisphere flu season and an August recommendation for the Southern Hemisphere flu season. 
+These recommendations are provided by a panel of experts after review of the available data.
 
-Mutations to the HA1 region of the hemagglutinin (HA) protein are thought to drive the majority of antigenic
-drift in the influenza virus \cite{Nelson07NatRevGenet}. Experimental characterization of antigenic phenotype
-is possible through the hemagglutination inhibition (HI) assay \cite{Hirst43}, which measures the
-cross-reactivity of one virus strain to serum raised against another strain. Sera from older strains react
-poorly with more recent viruses resulting in new strains having a transmission advantage over established
-strains. The results of many HI assays across a multitude of virus strains can be combined to yield a
-two-dimensional map, representing antigenic similarity and distance as an easily visualized and quantified
-measure \cite{Smith04}. The antigenic map of influenza A (H3N2) has shown largely linear movement of the
-influenza virus population since its introduction in 1968. However, evolution of antigenic phenotype appears
-punctuated with periods of stasis interspersed by periods of more rapid innovation, while genetic evolution
-appears more continuous \cite{Smith04}, suggesting that a relatively small number of genetic changes or
-combinations of genetic changes may drive changes in antigenic phenotype. The process of antigenic drift
-results in the rapid turnover of the virus population. Although mutation occurs rapidly, standing genetic
-diversity is low and phylogenetic analysis shows a characteristically `spindly' tree with a single predominant
-trunk lineage and transitory side branches that persist for only 1--5 years \cite{Fitch97}.
+Mutations to the HA1 region of the hemagglutinin (HA) protein are thought to drive the majority of antigenic drift in the influenza virus \cite{Nelson07NatRevGenet}. 
+Experimental characterization of antigenic phenotype is possible through the hemagglutination inhibition (HI) assay \cite{Hirst43}, which measures the cross-reactivity of one virus strain to serum raised against another strain. 
+Sera from older strains react poorly with more recent viruses resulting in new strains having a transmission advantage over established strains. 
+The results of many HI assays across a multitude of virus strains can be combined to yield a two-dimensional map, representing antigenic similarity and distance as an easily visualized and quantified measure \cite{Smith04}. 
+The antigenic map of influenza A (H3N2) has shown largely linear movement of the influenza virus population since its introduction in 1968. However, evolution of antigenic phenotype appears punctuated with periods of stasis interspersed by periods of more rapid innovation, while genetic evolution appears more continuous \cite{Smith04}, suggesting that a relatively small number of genetic changes or combinations of genetic changes may drive changes in antigenic phenotype. 
+The process of antigenic drift results in the rapid turnover of the virus population. 
+Although mutation occurs rapidly, standing genetic diversity is low and phylogenetic analysis shows a characteristically `spindly' tree with a single predominant trunk lineage and transitory side branches that persist for only 1--5 years \cite{Fitch97}.
 
-Previously, the antigenic and genetic patterns of influenza evolution have been analyzed essentially in
-isolation. An antigenic map is constructed from a panel of HI measurements, and a phylogenetic tree is
-constructed from sequence data. However, the opportunity for a combined approach exists as both the antigenic
-map and the phylogenetic tree often contain many of the same isolates. Here, we implement a flexible Bayesian
-approach to jointly analyze the antigenic and genetic dynamics of the influenza virus population. We apply
-this approach to investigate the dynamics of influenza A (H3N2), influenza A (H1N1) and influenza B.
+Previously, the antigenic and genetic patterns of influenza evolution have been analyzed essentially in isolation. 
+An antigenic map is constructed from a panel of HI measurements, and a phylogenetic tree is constructed from sequence data. 
+However, the opportunity for a combined approach exists as both the antigenic map and the phylogenetic tree often contain many of the same isolates. 
+Here, we implement a flexible Bayesian approach to jointly analyze the antigenic and genetic dynamics of the influenza virus population. 
+We apply this approach to investigate the dynamics of influenza A (H3N2), influenza A (H1N1) and influenza B. 
 \tbc{Brief conclusions.}
 
 %%% RESULTS %%%
@@ -133,19 +117,16 @@ this approach to investigate the dynamics of influenza A (H3N2), influenza A (H1
 %%% Figure 1: mds %%%
 \begin{figure}[tb]
 	\centering		
-	\makebox[\textwidth]{	
-%		\includegraphics{figures/mds}
-	}
-	\caption{\textbf{Antigenic locations of influenza H3N2 and H1N1.} (A) and (B) Antigenic maps showing the
-mean posterior location of 338 strains of H3N2 influenza and 243 strains of H1N1 influenza.  The map has been
-oriented so that the primary axis of variation lies along the $x$-axis (AG1), with the $y$-axis (AG2)
-orthogonal to this axis.  (C) and (D) Antigenic location along the primary axis of variation (AG1) vs.\ year
-of virus isolation.  The dashed lines show the relationship of between time and AG1 with a slope of \tbc{XXX}
-for H3N2 and \tbc{XXX} for H1N1.  (E) and (F) Antigenic location along the secondary axis of variation (AG2)
-vs.\ year of virus isolation.  Antigenic units represent two-fold dilutions of the HI assay, and strains have
-been colored based on year of isolation.  \tbc{Decide whether to just show mean posterior or show
-distributions.}}
-	\label{mds}
+	\includegraphics[width=\textwidth]{figures/mds}
+	\caption{\textbf{Antigenic locations of influenza H3N2 and H1N1.} (A) and (B) Antigenic maps showing the mean posterior location of 338 strains of H3N2 influenza and 243 strains of H1N1 influenza.  
+	The map has been oriented so that the primary axis of variation lies along the $x$-axis (AG1), with the $y$-axis (AG2) orthogonal to this axis.  
+	(C) and (D) Antigenic location along the primary axis of variation (AG1) vs.\ year of virus isolation.  
+	The dashed lines show the relationship of between time and AG1 with a slope of \tbc{XXX} for H3N2 and \tbc{XXX} for H1N1.  
+	(E) and (F) Antigenic location along the secondary axis of variation (AG2) vs.\ year of virus isolation.  
+	Antigenic units represent two-fold dilutions of the HI assay, and strains have been colored based on year of isolation.  
+	\tbc{Decide whether to just show mean posterior or show distributions.}
+	} 
+	\label{mds} 
 \end{figure}
 
 %%% DISCUSSION %%%
@@ -156,36 +137,30 @@ distributions.}}
 
 \subsection*{Genetic and antigenic data}
 
-We compiled an antigenic dataset for hemagglutination inhibition (HI) measurements for influenza A (H3N2) by
-combining data used in Hay et al. \cite{Hay01}, Smith et al.\ \cite{Smith04}, Russell et al.\
-\cite{Russell08}, Barr et al.\ \cite{Barr10} and Cox et al.\ \tbc{WHO report}. This combined dataset had 1651
-influenza isolates (present as either virus or sera in HI comparisons) dating from 1968 to 2011. However, the
-majority of isolates date from 2002 to 2007. Because we are interested in longer-term antigenic evolution, we
-censored the data to have at most 20 strains per year, preferentially keeping those strains with more
-antigenic comparisons. This censoring left 338 strains present as 320 viruses and 438 sera (replicate sera are
-often constructed from the same strain). Across these viruses and sera, we observe 7240 HI measurements. We
-queried the IRD \cite{IRD} and GISAID \tbc{CITE} sequence databases for HA nucleotide sequences based on
-strain names, e.g.\ A/HongKong/1/1968, of these strains. If a strain had multiple sequences in the databases
-we preferentially kept the IRD sequence and preferentially kept the longest sequence in IRD. Sequences were
-aligned using MUSCLE v3.7 under default parameters \cite{MUSCLE}. 
+We compiled an antigenic dataset for hemagglutination inhibition (HI) measurements for influenza A (H3N2) by combining data used in Hay et al. \cite{Hay01}, Smith et al.\ \cite{Smith04}, Russell et al.\ \cite{Russell08}, Barr et al.\ \cite{Barr10} and Cox et al.\ \tbc{WHO report}. 
+This combined dataset had 1651 influenza isolates (present as either virus or sera in HI comparisons) dating from 1968 to 2011. 
+However, the majority of isolates date from 2002 to 2007. 
+Because we are interested in longer-term antigenic evolution, we censored the data to have at most 20 strains per year, preferentially keeping those strains with more antigenic comparisons. 
+This censoring left 338 strains present as 320 viruses and 438 sera (replicate sera are often constructed from the same strain). 
+Across these viruses and sera, we observe 7240 HI measurements. 
+We queried the IRD \cite{IRD} and GISAID \tbc{CITE} sequence databases for HA nucleotide sequences based on strain names, e.g.\ A/HongKong/1/1968, of these strains. 
+If a strain had multiple sequences in the databases we preferentially kept the IRD sequence and preferentially kept the longest sequence in IRD. 
+Sequences were aligned using MUSCLE v3.7 under default parameters \cite{MUSCLE}.
 
 Antigenic data for influenza A (H1N1) was collected from sources... \tbc{ask Gytis}.
 
 \subsection*{Bayesian multidimensional scaling}
 
-We follow Smith et al. \cite{Smith04} and represent antigenic locations on a 2D antigenic map. Through the
-hemagglutination inhibition (HI) assay, there exist measurements of the cross-reactivity of hemagglutinin (HA)
-from one virus strain to serum raised against another strain \cite{Hirst43}. Thus, antigenic phenotype is
-measured through a series a pairwise comparisons $H_{ij}$, comparing virus from strain $i$ to sera from strain
-$j$. Due to experimental constraints, the distance matrix $\mathbf{H}$ is sparse; most comparisons have not be
-made. Our goal is to find an optimal projection of the high-dimensional distance matrix into a lower number of
-dimensions. We conduct this projection using Bayesian multidimensional scaling (BMDS) \cite{Oh01} in which a
-probabilistic model is constructed to quantify the fit of a particular configuration of cartographic locations
-to the observed matrix HI measurements.
+We follow Smith et al. \cite{Smith04} and represent antigenic locations on a 2D antigenic map. 
+Through the hemagglutination inhibition (HI) assay, there exist measurements of the cross-reactivity of hemagglutinin (HA) from one virus strain to serum raised against another strain \cite{Hirst43}. 
+Thus, antigenic phenotype is measured through a series a pairwise comparisons $H_{ij}$, comparing virus from strain $i$ to sera from strain $j$. 
+Due to experimental constraints, the distance matrix $\mathbf{H}$ is sparse; most comparisons have not be made. 
+Our goal is to find an optimal projection of the high-dimensional distance matrix into a lower number of dimensions. 
+We conduct this projection using Bayesian multidimensional scaling (BMDS) \cite{Oh01} in which a probabilistic model is constructed to quantify the fit of a particular configuration of cartographic locations to the observed matrix HI measurements.
 
 Let $\mathbf{X}_i \in \Re^{P}$ represent the cartographic location of strain $i$ for $i = 1,\ldots, N$.
-Typically, $P = 2$, but higher or lower dimensions may better reflect the data.  This gives set of distances
-between cartographic locations 
+Typically, $P = 2$, but higher or lower dimensions may better reflect the data.  
+This gives set of distances between cartographic locations 
 \begin{equation}
 	\delta_{ij} =  || \mathbf{X}_i - \mathbf{X}_i ||_2.
 \end{equation}
@@ -209,15 +184,15 @@ A probabilistic interpretation reformulates the optimization as
 \begin{equation} 
 d_{ij} \sim \mbox{Normal}( \delta_{ij}, \omega ) \times 1( d_{ij} > 0 ) \mbox{ for all } (i,j) \in \cal I
 \end{equation}
-where $1 ( \cdot )$ is the indicator function for truncation. The likelihood of the antigenic distance
-measures is proportional to
+where $1 ( \cdot )$ is the indicator function for truncation. 
+The likelihood of the antigenic distance measures is proportional to
 \begin{equation}
 \omega^{m/2} \mbox{exp} \left[
 - \frac{\omega \times SSR}{2} - \sum_{(i,j) \in \cal I} \log \Phi (\omega \times \delta_{ij})
 \right],
 \end{equation}
-where $m$ is the cardinality of $\cal I$, $SSR$ is the sum of the squared residuals and $\Phi(\cdot)$ is the
-standard normal CDF. We consider the conjugate prior $\omega \sim \mbox{Gamma}(a, b)$, and assume a uniform
+where $m$ is the cardinality of $\cal I$, $SSR$ is the sum of the squared residuals and $\Phi(\cdot)$ is the standard normal CDF. 
+We consider the conjugate prior $\omega \sim \mbox{Gamma}(a, b)$, and assume a uniform
 prior over $\mathbf{X}$.
 
 %%% ACKNOWLEDGMENTS %%%
