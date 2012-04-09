@@ -114,64 +114,78 @@ We apply this approach to investigate the dynamics of influenza A (H3N2), influe
 %%% RESULTS %%%
 \section*{Results}
 
+% Antigenic drift with 95% CI
+% H3N2: 1.159 ()
+% H1N1: 0.643 ()
+% Vic:  0.445 ()
+% Yam:  0.203 (0.150-0.260)
+
+
 \subsection*{Bayesian multidimensional scaling}
 
 In order to assess patterns of antigenic evolution among influenza strains, we implemented a Bayesian probabilistic analog of multidimensional scaling, referred to here as BMDS.
-In this model, each virus strain is given a $N$ dimensional antigenic location, and the distance between strains in this antigenic space is proportional to their level of cross-reactivity, as measured by the hemagglutination inhibition (HI) assay.
-The BMDS model provides an expectation for HI titers, such that a map distance of one antigenic unit between strains translates to a 2-fold drop in HI titer.
-A map that produces pairwise distances congruent with the observed titers will have a high likelihood and will be favored by the BMDS model.
-We integrate over sources of uncertainty, such as strain location, in flexible Bayesian fashion.
+In this model, each virus strain is given an $N$ dimensional location, thus specifying an `antigenic map', and the distance between strains in this space is inversely proportional to their level of cross-reactivity.
+In the BMDS model, a map distance of one antigenic unit translates to an expectation of a 2-fold drop in HI titer between virus and sera.
+Maps that produce pairwise distances most congruent with the observed titers will have a high likelihood and will be favored by the BMDS model.
+We integrate over sources of uncertainty, such as strain location, in a flexible Bayesian fashion.
 
-We started with a BMDS implementation of antigenic model used by Smith et al. \cite{Smith04}, where each ferret sera and each virus isolate receive a unique location in a 2D antigenic landscape, and map distance is proportional to drop in HI titer relative to the maximum for a particular ferret sera.
-This model performed well, yielding an average absolute predictive error of 0.71 $\mathrm{log}_2$ HI titers on the 6545 training measurements used to build the model, and an average absolute error of 1.23 on 723 test measurements (Table \ref{errortable}).
-We extended this model by forcing sera and virus from the same influenza strain to share an antigenic location, reducing the number of required parameters and decreasing test error to 1.05.
-We further extended this model by sampling the expected titer for the homologous comparison to the sera strain (column effects) and the expected titer for the homologous comparison to the virus strain (row effects).
-We found that adding these column and row effects, decreased training error to 0.67 and test error to 0.87.
-We experimented with increasing the number of dimensions beyond two, but found that further increases in dimensionality did not significantly improve test error (Table \ref{errortable}).
+We began with a BMDS analog of the MDS model used by Smith et al. \cite{Smith04}, where viruses and sera are represented as 2D locations and HI expectation is relative to the maximum titer of a particular ferret sera.
+This model performed well, yielding an average absolute predictive error of 0.66 log$_2$ HI titers on the 6545 training measurements used to build the model, and an average error of 0.86 on an additional 723 test measurements (Table \ref{errortable}).
+We find that a model with two dimensional antigenic locations better predicts additional HI titers than models with higher (or lower) dimensionality (Table \ref{errortable}), and thus specify a two dimensional model in all subsequent analyses.
+We extend this model by estimating the expected homologous titer of the sera rather than fixing this at its maximum titer, and additionally, by including the expected homologous titer of the virus in calculating an expectated HI titer.
+We refer to these estimates as column effects and row effects, respectively.
+We found that including these effects decreased training error to 0.50 and test error to 0.75 log$_2$ HI titers.
 
-\subsection*{Antigenic drift in across influenza types and subtypes}
+%%% Table 1: errortable %%%
+\begin{table}[tb]
+	\centering
+	\caption{\textbf{Absolute prediction error of log$_2$ HI titer for training and test data across models.}}
+	\label{errortable}
+	\begin{tabular}{ c c c c c } 
+	\hline
+	MDS 	& 	Column effects 	&	Row effects	& 	Training error	& 	Test error	\\
+	\hline	
+	1D 		&	Fixed 			&	None		& 	0.91			&	1.03		\\	
+	2D 		&	Fixed 			&	None		& 	0.66			&	0.86		\\
+	3D 		&	Fixed 			&	None		& 	0.65			&	0.88		\\
+	4D 		&	Fixed 			&	None		& 	0.71			&	0.96		\\
+	5D 		&	Fixed 			&	None		& 	0.71			&	1.06		\\	
+	2D 		&	Estimated 		&	None		& 	0.55			&	0.77		\\	
+	2D 		&	Estimated 		&	Estimated	& 	0.50			&	0.75		\\		
+	\hline
+	\end{tabular}
+\end{table}
+
+\subsection*{Antigenic drift across influenza types and subtypes}
 
 Through this analysis we find that the antigenic phenotype of influenza A (H3N2) underwent rapid turnover from 1968 to 2011 (Figure~\ref{fluAGrid}A).  
 Here, cross-reactive measurements only exist betwen strains sampled at most 11 years apart, leaving only threshold titers, e.g.\ `$<$40', in more temporally distant comparisons.  
 Because of the threshold of sensitivity of the HI assay, it's impossible to distinguish a linear trajectory in 2D antigenic space, from a curved trajectory, so long as the curve does not bring antigenic phenotype full circle to have cross-reactive measurements between temporally distant strains.
-To solve this problem of identifiability, we enforced a weak prior that favors linear movement in the 2D antigen space.
-We find that influenza A (H3N2) moved XXX antigenic units per year (XXX--XXX 95\% credible interval) from 1968 to 2011 (Figure~\ref{fluAGrid}C).
-However, the rate of antigenic drift was not constant, with year-to-year movement of the mean antigenic phenotype averaging XXX units, but showing an interquartile range of XXX--XXX.
+To solve this problem of identifiability, we assumed a weak prior that favors linear movement in the 2D antigenic space, with the slope of the linear relationship and the precision of the relationship incorporated into the Bayesian model.
 
+We find that influenza A (H3N2) evolved XXX antigenic units per year (XXX--XXX 95\% credible interval) from 1968 to 2011 (Figure~\ref{fluAGrid}C).
+However, the rate of antigenic drift was not constant, with year-to-year movement of the mean antigenic phenotype averaging XXX units, but showing an interquartile range of XXX--XXX.  
+Large jumps in antigenic phenotype (Figure~\ref{fluAGrid}C) correspond to cluster transitions identified by Smith et al. \cite{Smith04}.  
+Most variation is contained within the first antigenic dimension, but dimension 2 ocassionally shows variation when two antigenically distinct lineages emerge and transiently coexist (Figure~\ref{fluAGrid}E), as is the case with the previously identified Beijing 1989 and Beijing 1992 clusters.
 
-%%% Figure 1: mds %%%
+We find that influenza A (H1N1) evolved in antigenic phenotype substantially slower than H3N2, with an average rate of XXX antigenic units per year (XXX--XXX 95\% credible interval).  
+Year-to-year antigenic drift in H1N1 influenza averages XXX units, buts shows an interquartile range of XXX--XXX.
+H1N1 influenza shows a similar pattern of punctuated antigenic evolution with occasional larger jumps in phenotype, such as the emergence of the Solomon Islands 2006 cluster.  
+It is unclear whether H1N1 undergoes fewer antigenic transitions of comparable magnitude to H3N2, or whether antigenic transitions in H1N1 are of smaller scale.
+
+%%% Figure 1: fluAGrid %%%
 \begin{figure}[tb]
 	\centering		
 	\includegraphics[width=\textwidth]{figures/fluAGrid}
 	\caption{\textbf{Antigenic locations of influenza H3N2 and H1N1.} (A) and (B) Antigenic maps showing the mean posterior location of 338 strains of H3N2 influenza and 243 strains of H1N1 influenza.  
-	The map has been oriented so that the primary axis of variation lies along the $x$-axis (AG1), with the $y$-axis (AG2) orthogonal to this axis.  
+	The model has been constructed so that the primary axis of variation lies along the $x$-axis (AG1), with the $y$-axis (AG2) orthogonal to this axis.  
 	(C) and (D) Antigenic location along the primary axis of variation (AG1) vs.\ year of virus isolation.  
 	The dashed lines show the relationship of between time and AG1 with a slope of \tbc{XXX} for H3N2 and \tbc{XXX} for H1N1.  
 	(E) and (F) Antigenic location along the secondary axis of variation (AG2) vs.\ year of virus isolation.  
-	Antigenic units represent two-fold dilutions of the HI assay, and strains have been colored based on year of isolation.  
-	\tbc{Decide whether to just show mean posterior or show distributions.}
-	} 
+	Points represent median strain locations and translucent areas represent 50\% highest density regions.
+	Antigenic units represent two-fold dilutions of the HI assay, and strains have been colored based on year of isolation.} 
 	\label{fluAGrid} 
 \end{figure}
-
-\begin{table}[tb]
-	\centering
-	\caption{\textbf{MDS precision and absolute error of $\mathrm{log}_2$ HI titer prediction for training and test data across models.}}
-	\label{errortable}
-	\begin{tabular*}{1.0\textwidth}{ c c c c c c c } 
-	\hline
-	Locations 	& 	Column effects 	&	Row effects	&	MDS		&	Precision	& 	Training error	& 	Test error	\\
-	\hline				
-	Unique 		&	Fixed 			&	None		&	2D		&	0.79		& 	0.71			&	1.23		\\
-	Shared		&	Fixed			&	None		&	2D		&	0.52		&	0.91			&	1.20		\\
-	Shared		&	Sampled			&	None		&	2D		&	0.62		&	0.88			&	1.05		\\
-	Shared		&	Sampled			&	Sampled		&	2D		&	0.87		&	0.72			&	0.88		\\
-	Shared		&	Sampled			&	Sampled		&	3D		&	0.92		&	0.67			&	0.87		\\
-	Shared		&	Sampled			&	Sampled		&	4D		&	XXX			&	XXX				&	XXX			\\
-	Shared		&	Sampled			&	Sampled		&	5D		&	XXX			&	XXX				&	XXX			\\	
-	\hline
-	\end{tabular*}
-\end{table}
 
 %%% DISCUSSION %%%
 \section*{Discussion}
