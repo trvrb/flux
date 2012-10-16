@@ -78,16 +78,17 @@ A large proportion of the disease burden of influenza stems from antigenic drift
 A thorough understanding of the process of antigenic drift is essential to our efforts to control mortality and morbidity through the use of a seasonal influenza vaccine.
 
 There are currently three major clades of influenza circulating within the human population: influenza A subtype H3N2, influenza A subtype H1N1 and influenza B. 
-Subtypes refer to the genes, hemagglutinin (H) and neuraminidase (N), that are primarily responsible for the antigenic character of a strain. 
+Subtypes refer to the genes, hemagglutinin (H or HA) and neuraminidase (N or NA), that are primarily responsible for the antigenic character of a strain. 
 Currently, seasonal influenza is treated with a trivalent vaccine containing one strain of H3N2, one strain of H1N1 and one strain of influenza B. 
 The World Health Organization (WHO) Global Influenza Surveillance Network issues twice-yearly recommendations on which strains of influenza to use as vaccine strains in 9--12 month’s time, i.e.\ a February recommendation for the Northern Hemisphere flu season and an August recommendation for the Southern Hemisphere flu season. 
 These recommendations are provided by a panel of experts after review of the available data.
 
-Mutations to the HA1 region of the hemagglutinin (HA) protein are thought to drive the majority of antigenic drift in the influenza virus \cite{Nelson07NatRevGenet}. 
+Mutations to the HA1 region of the hemagglutinin protein are thought to drive the majority of antigenic drift in the influenza virus \cite{Nelson07NatRevGenet}. 
 Experimental characterization of antigenic phenotype is possible through the hemagglutination inhibition (HI) assay \cite{Hirst43}, which measures the cross-reactivity of one virus strain to serum raised against another strain. 
-Sera from older strains react poorly with more recent viruses resulting in new strains having a transmission advantage over established strains. 
-The results of many HI assays across a multitude of virus strains can be combined to yield a two-dimensional map, representing antigenic similarity and distance as an easily visualized and quantified measure \cite{Smith04}. 
-The antigenic map of influenza A (H3N2) has shown largely linear movement of the influenza virus population since its introduction in 1968. However, evolution of antigenic phenotype appears punctuated with periods of stasis interspersed by periods of more rapid innovation, while genetic evolution appears more continuous \cite{Smith04}, suggesting that a relatively small number of genetic changes or combinations of genetic changes may drive changes in antigenic phenotype. 
+Sera from older strains react poorly with more evolved viruses resulting in new strains having a transmission advantage over established strains. 
+The results of many HI assays across a multitude of virus strains can be combined to yield a two-dimensional map, quantifying antigenic similarity and distance \cite{Smith04}. 
+The antigenic map of influenza A (H3N2) has shown largely linear movement of the influenza virus population since its introduction in 1968. 
+Evolution of antigenic phenotype appears punctuated with periods of stasis interspersed by periods of more rapid innovation, while genetic evolution appears more continuous \cite{Smith04}, suggesting that a relatively small number of genetic changes or combinations of genetic changes may drive changes in antigenic phenotype. 
 The process of antigenic drift results in the rapid turnover of the virus population. 
 Although mutation occurs rapidly, standing genetic diversity is low and phylogenetic analysis shows a characteristically `spindly' tree with a single predominant trunk lineage and transitory side branches that persist for only 1--5 years \cite{Fitch97}.
 
@@ -95,7 +96,7 @@ Previously, the antigenic and genetic patterns of influenza evolution have been 
 An antigenic map is constructed from a panel of HI measurements, and a phylogenetic tree is constructed from sequence data. 
 However, the opportunity for a combined approach exists as both the antigenic map and the phylogenetic tree often contain many of the same isolates. 
 Here, we implement a flexible Bayesian approach to jointly analyze the antigenic and genetic dynamics of the influenza virus population. 
-We apply this approach to investigate the dynamics of influenza A (H3N2), influenza A (H1N1) and influenza B. 
+We apply this approach to investigate the dynamics of influenza lineages A/H3N2,  A/H1N1, B/Victoria and B/Yamagata. 
 
 %%% RESULTS %%%
 \section*{Results}
@@ -103,15 +104,15 @@ We apply this approach to investigate the dynamics of influenza A (H3N2), influe
 \subsection*{Bayesian multidimensional scaling}
 
 In order to assess patterns of antigenic evolution among influenza strains, we implemented a Bayesian probabilistic analog of multidimensional scaling, referred to here as BMDS.
-In this model, each virus strain is given an $N$ dimensional location, thus specifying an `antigenic map', and the distance between strains in this space is inversely proportional to their level of cross-reactivity.
+In this model, viruses and sera are given $N$ dimensional locations, thus specifying an `antigenic map', such that distances between viruses and sera in this space are inversely proportional to cross-reactivity.
 In the BMDS model, a map distance of one antigenic unit translates to an expectation of a 2-fold drop in HI titer between virus and sera.
 Maps that produce pairwise distances most congruent with the observed titers will have a high likelihood and will be favored by the BMDS model.
-We integrate over sources of uncertainty, such as strain location, in a flexible Bayesian fashion.
+We integrate over sources of uncertainty, such as antigenic locations, in a flexible Bayesian fashion.
 
 We began with a BMDS analog of the MDS model used by Smith et al. \cite{Smith04}, where viruses and sera are represented as 2D locations and HI expectation is relative to the maximum titer of a particular ferret sera.
 This model performed well, yielding an average absolute predictive error of 0.66 log$_2$ HI titers on the 6545 training measurements used to build the model, and an average error of 0.86 on an additional 723 test measurements (Table \ref{errortable}).
-We find that a model with two dimensional antigenic locations better predicts additional HI titers than models with higher (or lower) dimensionality (Table \ref{errortable}), and thus specify a two dimensional model in all subsequent analyses.
-We extend this model by estimating the expected homologous titer of the sera rather than fixing this at its maximum titer, and additionally, by including the expected homologous titer of the virus in calculating an expectated HI titer.
+We find that a model with two dimensional antigenic locations better predicts test data than models with higher (or lower) dimensionality (Table \ref{errortable}), and thus specify a two dimensional model in all subsequent analyses.
+We extend this model by estimating the strength of overall reactivity of each sera rather than fixing this at the maximum titer, and additionally, by estimating the strength of reactivity of each virus in calculating an expectated HI titer.
 We refer to these estimates as column effects and row effects, respectively.
 We found that including these effects decreased training error to 0.50 and test error to 0.75 log$_2$ HI titers.
 
