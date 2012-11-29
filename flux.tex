@@ -353,6 +353,28 @@ We assume that the prior precision $1/\mdssd^2$ follows a diffuse $\mbox{Gamma}(
 We integrate over uncertainty using the Markov chain Monte Carlo (MCMC) procedures implemented in the phylogenetic package BEAST \cite{BEAST}.
 Metropolis-Hastings proposals include moves to individual virus and serum locations $X_i$ and $Y_j$, scaling of the entire set of virus and serum locations $\mathbf{X}$ and $\mathbf{Y}$ and scaling $\mdssd$.
 
+\subsection*{Incorporating virus and serum effects}
+
+The preceding model represents immunological distance as a drop in titer against the most reactive comparison for a particular antiserum.  
+Here, we relax this assumption and treat the maximum reactivity of a sera as a random variable.
+In this case, $H_{ij}$ still follows
+\begin{equation} 
+	H_{ij} \sim \mbox{Normal}( S_j - \delta_{ij}, \mdssd^2 ),
+\end{equation}
+but the vector of `serum effects' $\mathbf{S}$ is estimated rather than fixed.
+We assume that $S_j$ values are hierarchically distributed according to a normal distribution.
+The mean and variance of this distribution is taken from the empirical mean and empirical variance of the set of maximum titers across sera $\{ \max ( H_{1j},\ldots,H_{\vn j} ) : j = 1,\ldots,\sn \}$.
+This formulation assumes that particular sera are more reactive in general than other sera.
+
+Additionally, we follow the same logic and assume that particular virus isolates are more reactive in general than other virus isolates.
+With virus reactivity included, $H_{ij}$ follows
+\begin{equation} 
+	H_{ij} \sim \mbox{Normal}\left(  \frac{V_i+S_j}{2} - \delta_{ij}, \mdssd^2 \right),
+\end{equation}
+and the vector of `virus effects' $V_i$ for $i = 1,\ldots, \vn$ is estimated in an analogous hierarchical fashion, with $\mathbf{V}$ normally distributed with mean and variance equal to the empirical mean and variance of the set of maximum titers across viruses $\{ \max ( H_{i1},\ldots,H_{i \sn} ) : i = 1,\ldots,\vn \}$.
+
+With these effects included, Metropolis-Hastings proposals additionally incorporate moves to individual serum effects $S_j$ and virus effects $V_i$.
+
 %%% ACKNOWLEDGMENTS %%%
 \subsection*{Acknowledgments} 
 
