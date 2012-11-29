@@ -226,7 +226,7 @@ These proportions are significantly similar to one another (randomization test $
 
 \subsection*{Genetic and antigenic data}
 
-We compiled an antigenic dataset of hemagglutination inhibition (HI) measurements for influenza A (H3N2) by collecting data from previous publications \cite{Hay01,Smith04,Russell08,Barr10}, NIMR vaccine strain selection reports for 2002 and 2008--2012 \cite{NIMR2002,NIMRMarch08,NIMRFeb09,NIMRFeb10,NIMRSep10,NIMRSep11,NIMRFeb12} and the Feb 2011 VRBPAC report \cite{Cox11FDA}.
+We compiled an antigenic dataset of hemagglutination inhibition (HI) measurements for influenza A (H3N2) by collecting data from previous publications \cite{Hay01,Smith04,Russell08,Barr10}, NIMR vaccine strain selection reports for 2002 and 2008--2012 \cite{NIMR02,NIMRMarch08,NIMRFeb09,NIMRFeb10,NIMRSep10,NIMRSep11,NIMRFeb12} and the Feb 2011 VRBPAC report \cite{Cox11FDA}.
 We queried the Influenza Research Database \cite{IRD} and the EpiFlu Database \cite{GISAID} for HA nucleotide sequences by matching strain names, e.g.\ A/HongKong/1/1968, and only strains for which sequence was present was retained.
 If a strain had multiple sequences in the databases we preferentially kept the IRD sequence and preferentially kept the longest sequence in IRD. 
 This dataset had 2051 influenza isolates (present as either virus or serum in HI comparisons) dating from 1968 to 2011. 
@@ -235,7 +235,9 @@ Because we are interested in longer-term antigenic evolution, we censored the da
 We then kept only those serum isolates that are relatively informative to the antigenic placement of viruses, dropping serum isolates that are compared to 4 or fewer different virus isolates.
 This censoring left 429 virus isolates, 519 serum isolates and 10,097 HI measurements. 
 
-Antigenic data for influenza A (H1N1) was collected from \cite{Faress05,Chakraverty82,Chakraverty86,Cox83,Daniels85,Daum02,Donatelli93,Kendal78,McDonald07,Nakajima79,Nakajima81,Pereira82,Stevens87,Webster79,Raymond86}.
+Antigenic data for influenza A (H1N1) was collected from previous publications \cite{Kendal78,Webster79,Nakajima79,Nakajima81,Chakraverty82,Pereira82,Chakraverty86,Cox83,Daniels85,Raymond86,Stevens87,Donatelli93,Hay01,Daum02,McDonald07,Barr10} and NIMR vaccine strain selection reports for 2002--2010 \cite{NIMR02,NIMR03,NIMR04,NIMRFeb05,NIMRSep05,NIMRMarch06,NIMRSep06,NIMRMarch07,NIMRSep07,NIMRMarch08,NIMRSep08,NIMRFeb09,NIMRFeb10}.
+The same procedure was followed as was followed for H3N2 to match sequence data and to censor antigenic comparisons.
+This procedure yielded 124 virus isolates, 77 serum isolates and 1882 HI measurements over the course of 1977 to 2009.
 
 Sequences were aligned using MUSCLE v3.7 under default parameters \cite{MUSCLE}.
 
