@@ -51,6 +51,7 @@
 \newcommand{\interval}{f_{\sqcup}}					% interval likelihood
 \newcommand{\mdssd}{\varphi}						% MDS standard deviation
 \newcommand{\diffusionsd}{\sigma}					% Diffusion standard deviation
+\newcommand{\driftsd}{\vartheta}					% Drift prior standard deviation
 \newcommand{\tree}{\tau}							% Phylogeny
 \newcommand{\vn}{n}									% Number of viruses
 \newcommand{\sn}{k}									% Number of sera
@@ -374,6 +375,37 @@ With virus reactivity included, $H_{ij}$ follows
 and the vector of `virus effects' $V_i$ for $i = 1,\ldots, \vn$ is estimated in an analogous hierarchical fashion, with $\mathbf{V}$ normally distributed with mean and variance equal to the empirical mean and variance of the set of maximum titers across viruses $\{ \max ( H_{i1},\ldots,H_{i \sn} ) : i = 1,\ldots,\vn \}$.
 
 With these effects included, Metropolis-Hastings proposals additionally incorporate moves to individual serum effects $S_j$ and virus effects $V_i$.
+
+\subsection*{Antigenic drift prior}
+
+As presented, virus and serum locations $\mathbf{X}$ and $\mathbf{Y}$ accurately characterize antigenic distances between virus strains based on titers from pairwise HI assays.
+However, these distances represent only a local description of antigenic space and do not provide a global picture.
+An example of this phenomena is shown in Figure \ref{schematic_map}.
+In this case it is impossible to determine from the HI data at hand whether the blue and yellow viruses are antigenically similar or antigenically divergent. 
+This presents an issue of model identifiability; multiple antigenic maps give the same likelihood of observing the serological data.
+In order to achieve more interpretable antigenic locations we impose a weak prior on global locations.
+In influenza, it's clear that antigenic distance between strains increases with time \cite{Smith04,Cai10}, and so we impose a prior in which virus locations are distributed according to a multivariate normal distribution in which the expectation of the first antigenic dimension increases according to date of virus sampling
+\begin{equation} 
+	X_{i} \sim \mbox{Normal}( \{\beta \, y_i, 0\}, \Sigma )
+\end{equation}
+for $P=2$, where $y_i$ is the difference in time between virus $i$ and the earliest sampled virus and covariance matrix $\Sigma$ is equal to $\driftsd^2$ along diagonal entries and equal to zero along off-diagonal entries.
+Thus, this model assumes that the virus population drifts in a line across the antigenic map at rate $\beta$.
+The parameter $\driftsd$ determines the breadth of the virus population at each point in time.
+We assume that both the prior slope $\beta$ and the prior precision $1/\driftsd^2$ follow a diffuse $\mbox{Gamma}(a, b)$ distribution with $a=0.001$ and $b=1000$.
+We further introduce Metropolis-Hastings proposals that scale $\beta$ and $\driftsd$.
+
+%%% schematic_map %%%
+\begin{figure}[tb]
+	\centering		
+	\includegraphics[width=0.95\textwidth]{figures/schematic_map}
+	\caption{\textbf{Schematic antigenic map with three viruses and two sera.} 
+	Virus 1 is shown in blue, virus 2 is shown in red and virus 3 is shown in yellow.
+	Virus isolates are represented by filled circles, sera raised against viruses are shown as open circles and map distances $\delta_{ij}$ are shown as solid lines connecting viruses and sera.
+	Sera from virus 1 is compared against viruses 1 and 2, while sera from virus 2 is compared against viruses 1 and 3.
+	Left and right panels represent cartographic models that would give equal likelihoods of a given set of serological data $\{H_{11},H_{21},H_{22},H_{32}\}$.
+	} 
+	\label{schematic_map} 
+\end{figure}
 
 %%% ACKNOWLEDGMENTS %%%
 \subsection*{Acknowledgments} 
