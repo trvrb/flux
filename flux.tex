@@ -44,11 +44,16 @@
 \renewcommand\Authfont{\normalsize \bf}
 \renewcommand\Affilfont{\small \normalfont}
 
-% math notation
+% notation
 \usepackage{amssymb}
-\newcommand{\point}{f_{\scriptscriptstyle \vert}}
-\newcommand{\threshold}{f_{\textstyle \lrcorner}}
-\newcommand{\interval}{f_{\sqcup}}
+\newcommand{\point}{f_{\scriptscriptstyle \vert}}	% point likelihood
+\newcommand{\threshold}{f_{\textstyle \lrcorner}}	% threshold likelihood
+\newcommand{\interval}{f_{\sqcup}}					% interval likelihood
+\newcommand{\mdssd}{\varphi}						% MDS standard deviation
+\newcommand{\diffusionsd}{\sigma}					% Diffusion standard deviation
+\newcommand{\tree}{\tau}							% Phylogeny
+\newcommand{\vn}{n}									% Number of viruses
+\newcommand{\sn}{k}									% Number of sera
 
 % comments
 \usepackage{ulem}
@@ -264,26 +269,35 @@ For B/Yamagata, the matching and censoring procedure resulted in 174 virus isola
 
 Sequences were aligned using MUSCLE v3.7 under default parameters \cite{MUSCLE}.
 
-\subsection*{Bayesian multidimensional scaling}
+\subsection*{Antigenic cartography and Bayesian multidimensional scaling}
 
-We follow Smith et al. \cite{Smith04} and represent antigenic locations on a 2D antigenic map. 
-Through the hemagglutination inhibition (HI) assay, there exist measurements of the cross-reactivity of hemagglutinin (HA) from one virus strain to serum raised against another strain \cite{Hirst43}. 
-Thus, antigenic phenotype is measured through a series a pairwise comparisons $H_{ij}$, comparing virus from strain $i$ to serum from strain $j$. 
-Due to experimental constraints, the distance matrix $\mathbf{H}$ is sparse; most comparisons have not be made. 
-Our goal is to find an optimal projection of the high-dimensional distance matrix into a lower number of dimensions. 
-We conduct this projection using Bayesian multidimensional scaling (BMDS) \cite{Oh01} in which a probabilistic model is constructed to quantify the fit of a particular configuration of cartographic locations to the observed matrix of HI measurements.
+Antigenic characteristics of viral strains are often assessed through immunological assays such as hemagglutination inhibition (HI) \cite{Hirst43}.  
+At heart, these assays compare the reactivity $H_{ij}$ of one virus strain $i$ to antibodies raised against another virus strain $j$ via challenge or vaccination.  
+In the case of HI, the measurement of cross-reactivity takes the form of a titer representing the dilution factor at which serum raised against virus $j$ ceases to be effective at inhibiting binding of virus $i$.  
+These factors are commonly assessed by serial dilution, so that HI titers will form a log series, 40, 80, 160, etc \dots.
+However, due to experimental constraints, most comparisons cannot be made, leading to a sparse observation matrix $\mathbf{H} = \{H_{ij}\}$.  
+Further, measurements are usually interval and truncated, e.g.\ inhibition or neutralization may cease somewhere between the serial titers of 160 and 320, or inhibition or neutralization may be absent at all titers assayed, suggesting a threshold somewhere between 0 and 40.  
 
-Let $X_i \in \Re^{P}$ represent the cartographic location of virus $i$ for $i = 1,\ldots, n$, and $Y_j$ represent the cartographic location of serum $j$ for $j = 1,\ldots, s$.
+Previous work \cite{Smith04, Cai10} has used multidimensional scaling to place viruses and sera on an `antigenic map'.  
+These methods heuristically optimize locations of viruses and sera by seeking to minimize the sum of squared errors between titers predicted by map locations and observed titers.  
+Antigenic maps produced by these methods have proved useful in categorizing virus phenotypes \cite{Smith04}, but the extension of these methods to integrate genetic data has not yet been attained.
+
+Here, we follow previous models in representing antigenic locations as points in an $N$-dimensional antigenic map. 
+Our goal is to find an optimal projection of the high-dimensional distance matrix $\mathbf{H}$ into a lower number of dimensions. 
+We conduct this projection using Bayesian multidimensional scaling (BMDS) \cite{Oh01} in which a probabilistic model is constructed to quantify the fit of a particular configuration of cartographic locations to the observed matrix of serological measurements.
+
+Let $X_i \in \Re^{P}$ represent the cartographic location of virus $i$ for $i = 1,\ldots,\vn$, and $Y_j$ represent the cartographic location of serum $j$ for $j = 1,\ldots,\sn$.
 Virus and antiserum may be isolated from / raised against the same strain and have different cartographic locations.
 Typically, $P = 2$, but higher or lower dimensions may better reflect the data.  
 This gives set of distances between virus and serum cartographic locations 
 \begin{equation}
 	\delta_{ij} =  || X_i - Y_j ||_2.
 \end{equation}
-Here, $H_{ij}$ represents the $\mathrm{log}_2$ HI titer of virus $i$ against serum $j$, and HI distance is defined as
+Here, $H_{ij}$ represents the log$_2$ titer of virus $i$ against serum $j$, and immunological distance can be defined as
 \begin{equation}
-	d_{ij} =  \max{ H_j } - H_{ij}.
+	d_{ij} =  S_j - H_{ij},
 \end{equation}
+where $S_j = \max ( H_{1j},\ldots,H_{\vn j} )$.
 Traditionally, the goal of multidimensional scaling (MDS) optimizes over $\mathbf{X}$ and $\mathbf{Y}$ such that
 \begin{equation}
 	\sum_{(i,j) \in \cal I} 
@@ -292,54 +306,52 @@ Traditionally, the goal of multidimensional scaling (MDS) optimizes over $\mathb
 	\right)^2
 \end{equation}
 is minimized, where $\cal I = \{ (i,j) : H_{ij} \mbox{ is measured} \}$. 
-Here, we instead assume a probabilistic interpretation in which a point estimate of HI distance is normally distributed 
+Here, we instead assume a probabilistic interpretation in which an observed titer is normally distributed around its cartographic expectation
 \begin{equation} 
-	d_{ij} \sim \mbox{Normal}( \delta_{ij}, \sigma^2 ),
+	H_{ij} \sim \mbox{Normal}( S_j - \delta_{ij}, \mdssd^2 ),
 \end{equation}
-and the likelihood of observing some HI distance given the placement of antigenic locations is 
+and the likelihood of observing a particular titer given the placement of antigenic locations is 
 \begin{equation} 
-	\point(d_{ij}) = \phi \left( \frac{x-\delta_{ij}}{\sigma} \right),
+	\point(H_{ij}) = \phi \left( \frac{ H_{ij} + \delta_{ij} - S_j }{ \mdssd } \right),
 \end{equation}
-where $\sigma^2$ represents variance and $\phi(\cdot)$ represents the standard normal PDF.
-However, HI assays sometimes show no inhibition of agglutination at all measured titrations, e.g.\ a measurement can be reported as `$<$40'.
-In this case, the likelihood of observing the threshold measurement follows the cumulative density of the upper tail of the normal distribution
+where $\mdssd^2$ represents variance and $\phi(\cdot)$ represents the standard normal PDF.
+HI assays sometimes show no inhibition at all measured titrations, e.g.\ a measurement can be reported as `$<$40'.
+In this case, the likelihood of observing the threshold measurement follows the cumulative density of the lower tail of the normal distribution
 \begin{equation} 
-	\threshold(d_{ij}) = 1 - \Phi \left( \frac{x-\delta_{ij}}{\sigma} \right),
+	\threshold(H_{ij}) = \Phi \left( \frac{ H_{ij} + \delta_{ij} - S_j }{ \mdssd } \right),
 \end{equation}
 where $\Phi(\cdot)$ represents the standard normal CDF.
-Although it is simplest to assume that HI measurements represent point estimates, it seems more natural to assume that the threshold for inhibition occurs between two titers, e.g.\ we observe inhibition at 1:40 dilution and no inhibition at 1:80.
-Rather taking the HI titer as 1:40, we can instead treat this as an interval measurement, assuming that the exact HI titer for this measurement would occur somewhere between 1:40 and 1:80.
-Assuming an HI distance represents an interval estimate, we calculcate its probability according to
+Although it is simplest to assume that immunological measurements represent point estimates, it seems more natural to assume that the threshold for inhibition occurs between two titers, e.g.\ we observe inhibition at 1:40 dilution and no inhibition at 1:80 dilution.
+Rather than taking the HI titer as 40, we can instead treat this as an interval measurement, assuming that the exact titer for inhibition would occur somewhere between 40 and 80.
+HI titers are usually reported as the highest titer that successfully inhibits virus binding or growth, so that in this case, we calculate the likelihood of an interval measurement as
 \begin{equation} 
-	\interval(d_{ij}) = \Phi \left( \frac{x-\delta_{ij}}{\sigma} \right) - \Phi \left( \frac{x-\delta_{ij}-1}{\sigma} \right).
+	\interval(H_{ij}) = \Phi \left( \frac{ H_{ij} + \delta_{ij} - S_j + 1 }{ \mdssd } \right) - \Phi \left( \frac{ H_{ij} + \delta_{ij} - S_j }{\mdssd} \right).
 \end{equation}
-Throughout the analysis, we use interval probabilities $\interval$ rather than point probabilities $\point$ unless otherwise noted.
+These likelihoods are illustrated in Figure \ref{hij_likelihood}.
+Throughout our analyses, we use interval likelihoods $\interval$ rather than point likelihoods $\point$ unless otherwise noted.
 
-We calculcate the likelihood of a set of antigenic locations by multiplying probabilities of individual measurements
+%%% hij_likelihood %%%
+\begin{figure}[tb]
+	\centering		
+	\includegraphics[width=0.6\textwidth]{figures/hij_likelihood}
+	\caption{\textbf{Likelihood of HI titers in the BMDS model.} 
+	Here we show the likelihoods of observing three different outcomes given $\delta_{ij} = 4$, $\mdssd = 0.95$ and $S_j = \mathrm{log}_2 1280 = 10.32$.  
+	The likelihood of observing a threshold titer of `$<$40' is equal to the lower tail of the probability density function $\threshold(5.32) = 0.146$.
+	The likelihood of observing a point measurement with an exact inhibiting titer of `90.5' is equal to the density function $\point(6.5) = 0.413$.
+	The likelihood of observing an interval measurement with an inhibiting titer somewhere between `160' and `320' is equal to $\interval(7.32) = 0.129.$
+	} 
+	\label{hij_likelihood} 
+\end{figure}
+
+We calculate the overall likelihood by multiplying probabilities of individual measurements
 \begin{equation} 
-	L(\mathbf{X}) = \prod_{(i,j) \in \cal I} f(d_{ij}),
+	L(\mathbf{X},\mathbf{Y}) = \prod_{(i,j) \in \cal I} f(H_{ij}),
 \end{equation}
 using probability functions $\point$, $\threshold$ and $\interval$ as appropriate.
-We assume that the prior precision $\omega = 1/\sigma^2$ follows a diffuse $\mbox{Gamma}(a, b)$ distribution with $a=0.001$ and $b=1000$, and we assume a uniform prior over $\mathbf{X}$ and $\mathbf{Y}$.
+We assume that the prior precision $1/\mdssd^2$ follows a diffuse $\mbox{Gamma}(a, b)$ distribution with $a=0.001$ and $b=1000$, and we start by assuming a uniform prior over virus and sera locations $\mathbf{X}$ and $\mathbf{Y}$.
 
-The preceding model represents HI distance as a drop in titer against the most reactive comparison for a particular antiserum.  
-Here, we relax this assumption and treat the expected homologous titer as a random variable.
-In this case, HI distance follows
-\begin{equation} 
-	d_{ij} =  C_j - H_{ij},
-\end{equation}
-with the set of column effects $C_j$ for $j = 1,\ldots, s$ estimated.
-We assume that $C_j$ values are hierarchically distributed according to a normal distribution.
-The mean value of this distribution is taken from the empirical mean across columns in the $\mathrm{log}_2$ HI matrix, and the variance across sera is estimated.
-This formulation assumes that particular sera are more reactive in general than other sera, we follow the same logic and by including an effective of a particular viruses being more reactive in general than other viruses.
-Here, HI distance follows
-\begin{equation} 
-	d_{ij} =  \frac{1}{2} (R_i+C_j) - H_{ij},
-\end{equation}
-and the set of row effects $R_i$ for $i = 1,\ldots, n$ is modeled in an analogous hierarchical fashion, with the variance across viruses estimated.
-We assume separate Gamma(0.001,1000) hyperpriors on the precisions of the $C$ and $R$ distributions.
-
-We integrate over uncertainty using the Markov chain Monto Carlo (MCMC) procedures implemented in the phylogenetic package BEAST. Metropolis-Hastings proposals include moves to individual virus and serum locations $X_i$ and $Y_j$, moves to MDS precision $\omega$ and moves to $C$ and $R$ precision.
+We integrate over uncertainty using the Markov chain Monte Carlo (MCMC) procedures implemented in the phylogenetic package BEAST \cite{BEAST}.
+Metropolis-Hastings proposals include moves to individual virus and serum locations $X_i$ and $Y_j$, scaling of the entire set of virus and serum locations $\mathbf{X}$ and $\mathbf{Y}$ and scaling $\mdssd$.
 
 %%% ACKNOWLEDGMENTS %%%
 \subsection*{Acknowledgments} 
