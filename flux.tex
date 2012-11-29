@@ -57,7 +57,7 @@
 \def\tbc#1{\textcolor{purple}{[#1]}}
 
 %%% TITLE %%%
-\title{\vspace{1.0cm} \LARGE \bf Integrating influenza antigenic dynamics with molecular evolution}
+\title{\vspace{1.0cm} \LARGE \bf Revealing the competitive dynamics of influenza viruses through evolutionary cartography}
 \author{}
 \date{}
 
@@ -66,6 +66,9 @@
 \maketitle
 
 %%% ABSTRACT %%%
+
+% Abstracts explain to the general reader why the research was done and why the results are important. They should start with some brief BACKGROUND information: a sentence giving a broad introduction to the field comprehensible to the general reader, and then a sentence of more detailed background specific to your study. This should be followed by the RESULTS, or if the paper is more methods/technique oriented an explanation of OBJECTIVES/METHODS and then the RESULTS. The final sentence should outline the main CONCLUSIONS of the study, in terms that will be comprehensible to all our readers. The abstract should be 125 words or less.
+
 \section*{Abstract}
 
 %%% INTRODUCTION %%%
@@ -138,11 +141,28 @@ We found that including these effects decreased training error to 0.50 and test 
 
 \subsection*{Antigenic drift across influenza lineages}
 
-% Antigenic drift with 95% CI
-% H3N2: 1.159 (1.126-1.203)
-% H1N1: 0.643 (0.585-0.703)
-% Vic:  0.449 (0.397-0.506)
-% Yam:  0.203 (0.150-0.260)
+%%% dynamicstable %%%
+\begin{table}[tb]
+	\centering
+	\caption{\textbf{Antigenic dynamics of influenza lineages.}}
+	\label{errortable}
+	\begin{tabular}{ l c c c c } 
+	\hline
+	 													&	A/H3N2	& 	A/H1N1 	& 	B/Vic	& 	B/Yam	\\
+	\hline	
+	Rate of population drift 							&	1.004	&	0.554	&	0.406	&	0.205	\\
+	Population standard deviation 						&	0.787	&	0.790	&	0.917	&	0.631	\\
+
+	Rate of drift on side branches						&	0.067	&	0.192	&	-0.024	&	0.025	\\	
+	Rate of drift on internal branches					&	0.172	&	0.017	&	0.035	&	0.009	\\
+	Rate of drift on trunk								&	1.011	&	0.465	&	0.015	&	0.417	\\
+
+	Coefficient of diffusion on side branches 			&	0.425	&	0.387	&	0.461	&	0.251	\\
+	Coefficient of diffusion on internal branches		&	0.290	&	0.161	&	0.259	&	0.154	\\
+	Coefficient of diffusion on trunk  					&	0.511	&	0.442 	&	1.098	&	0.260	\\	
+	\hline
+	\end{tabular}
+\end{table}
 
 Through this analysis we find that the antigenic phenotype of influenza A (H3N2) underwent rapid turnover from 1968 to 2011 (Figure~\ref{flu_grid}A).  
 Here, cross-reactive measurements only exist betwen strains sampled at most 11 years apart, leaving only threshold titers, e.g.\ `$<$40', in more temporally distant comparisons.  
@@ -206,17 +226,18 @@ These proportions are significantly similar to one another (randomization test $
 
 \subsection*{Genetic and antigenic data}
 
-We compiled an antigenic dataset for hemagglutination inhibition (HI) measurements for influenza A (H3N2) by combining data used in Hay et al. \cite{Hay01}, Smith et al.\ \cite{Smith04}, Russell et al.\ \cite{Russell08}, Barr et al.\ \cite{Barr10} and Cox et al.\ \tbc{WHO report}. 
-This combined dataset had 1651 influenza isolates (present as either virus or sera in HI comparisons) dating from 1968 to 2011. 
-However, the majority of isolates date from 2002 to 2007. 
-Because we are interested in longer-term antigenic evolution, we censored the data to have at most 20 strains per year, preferentially keeping those strains with more antigenic comparisons. 
-This censoring left 338 strains present as 320 viruses and 438 sera (replicate sera are often constructed from the same strain). 
-Across these viruses and sera, we observe 7240 HI measurements. 
-We queried the IRD \cite{IRD} and GISAID \tbc{CITE} sequence databases for HA nucleotide sequences based on strain names, e.g.\ A/HongKong/1/1968, of these strains. 
+We compiled an antigenic dataset of hemagglutination inhibition (HI) measurements for influenza A (H3N2) by collecting data from previous publications \cite{Hay01,Smith04,Russell08,Barr10}, NIMR vaccine strain selection reports for 2002 and 2008--2012 \cite{NIMR2002,NIMRMarch08,NIMRFeb09,NIMRFeb10,NIMRSep10,NIMRSep11,NIMRFeb12} and the Feb 2011 VRBPAC report \cite{Cox11FDA}.
+We queried the Influenza Research Database \cite{IRD} and the EpiFlu Database \cite{GISAID} for HA nucleotide sequences by matching strain names, e.g.\ A/HongKong/1/1968, and only strains for which sequence was present was retained.
 If a strain had multiple sequences in the databases we preferentially kept the IRD sequence and preferentially kept the longest sequence in IRD. 
-Sequences were aligned using MUSCLE v3.7 under default parameters \cite{MUSCLE}.
+This dataset had 2051 influenza isolates (present as either virus or serum in HI comparisons) dating from 1968 to 2011. 
+However, the majority of isolates were present from 2002 to 2007. 
+Because we are interested in longer-term antigenic evolution, we censored the data to have at most 20 virus isolates per year, preferentially keeping those isolates with more antigenic comparisons. 
+We then kept only those serum isolates that are relatively informative to the antigenic placement of viruses, dropping serum isolates that are compared to 4 or fewer different virus isolates.
+This censoring left 429 virus isolates, 519 serum isolates and 10,097 HI measurements. 
 
 Antigenic data for influenza A (H1N1) was collected from \cite{Faress05,Chakraverty82,Chakraverty86,Cox83,Daniels85,Daum02,Donatelli93,Kendal78,McDonald07,Nakajima79,Nakajima81,Pereira82,Stevens87,Webster79,Raymond86}.
+
+Sequences were aligned using MUSCLE v3.7 under default parameters \cite{MUSCLE}.
 
 \subsection*{Bayesian multidimensional scaling}
 
