@@ -1,10 +1,37 @@
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
 
-flux.log
+# LaTeX intermediaries #
+########################
+*.aux
+*.log
+*.bbl
+*.blg
 
-flux.aux
+# Packages #
+############
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
 
+# OS generated files #
+######################
 .DS_Store
-
-flux.blg
-
-flux.bbl
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
