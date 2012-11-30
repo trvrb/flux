@@ -89,10 +89,9 @@
 \maketitle
 
 %%% ABSTRACT %%%
+\section*{Abstract}
 
 % Abstracts explain to the general reader why the research was done and why the results are important. They should start with some brief BACKGROUND information: a sentence giving a broad introduction to the field comprehensible to the general reader, and then a sentence of more detailed background specific to your study. This should be followed by the RESULTS, or if the paper is more methods/technique oriented an explanation of OBJECTIVES/METHODS and then the RESULTS. The final sentence should outline the main CONCLUSIONS of the study, in terms that will be comprehensible to all our readers. The abstract should be 125 words or less.
-
-\section*{Abstract}
 
 %%% INTRODUCTION %%%
 \section*{Introduction}
@@ -103,7 +102,7 @@ The influenza virus population continually evolves in antigenic phenotype in a p
 A large proportion of the disease burden of influenza stems from antigenic drift; it is why vaccines remain only transiently effective. 
 A thorough understanding of the process of antigenic drift is essential to our efforts to control mortality and morbidity through the use of a seasonal influenza vaccine.
 
-There are currently three major clades of influenza circulating within the human population: influenza A subtype H3N2, influenza A subtype H1N1 and influenza B. 
+Before 2009, there were four major clades of influenza circulating within the human population: A/H3N2, A/H1N1, B/Victoria and B/Yamagata. 
 Subtypes refer to the genes, hemagglutinin (H or HA) and neuraminidase (N or NA), that are primarily responsible for the antigenic character of a strain. 
 Currently, seasonal influenza is treated with a trivalent vaccine containing one strain of H3N2, one strain of H1N1 and one strain of influenza B. 
 The World Health Organization (WHO) Global Influenza Surveillance Network issues twice-yearly recommendations on which strains of influenza to use as vaccine strains in 9--12 month’s time, i.e.\ a February recommendation for the Northern Hemisphere flu season and an August recommendation for the Southern Hemisphere flu season. 
@@ -270,7 +269,7 @@ For B/Yamagata, the matching and censoring procedure resulted in 174 virus isola
 
 Sequences were aligned using MUSCLE v3.7 under default parameters \cite{MUSCLE}.
 
-\subsection*{Antigenic cartography and Bayesian multidimensional scaling}
+\subsection*{Bayesian multidimensional scaling}
 
 Antigenic characteristics of viral strains are often assessed through immunological assays such as hemagglutination inhibition (HI) \cite{Hirst43}.  
 At heart, these assays compare the reactivity $H_{ij}$ of one virus strain $i$ to antibodies raised against another virus strain $j$ via challenge or vaccination.  
@@ -406,6 +405,30 @@ We further introduce Metropolis-Hastings proposals that scale $\beta$ and $\drif
 	} 
 	\label{schematic_map} 
 \end{figure}
+
+\subsection*{Diffusion model of antigenic evolution}
+
+Most previous work on virus antigenic and genetic evolution has reconstructed antigenic and genetic patterns in isolation, and then compared the results of each reconstruction to assess congruence of these two aspects of evolution \cite{Hay01,Smith04,Russell08}.  
+Here, we simultaneously model antigenic locations and genetic relatedness by assuming that viruses diffuse across the antigenic map according to a Brownian motion process \cite{Lemey10}.
+We assume a prior on virus locations according to the evolutionary process and leave a flat prior on serum locations
+\begin{eqnarray}
+	(X_1,\ldots,X_n) &\sim& \mbox{Evolutionary Brownian Process}(\tree, \diffusionsd) \nonumber \\
+	Y_j &\sim& \mathrm{Uniform}( -\infty, \infty ),
+\end{eqnarray}
+where $\tree$ is a phylogeny specifying tree topology and branch lengths and $\diffusionsd$ is the volatility parameter of the Brownian motion,  set to have equal variance in each antigenic dimension and no correlation across dimensions.
+Thus, viruses which are genetically similar are induced to have prior locations close to one another on the antigenic map.
+The phylogenetic tree $\tree$ is estimated using sequence data for viruses $1,\ldots,\vn$ according to well established methods implemented in the software package BEAST \cite{BEAST}.
+The volatility parameter $\diffusionsd$ is estimated jointly from the genetic and antigenic data.
+Parameter $\diffusionsd$ is assumed to follow a diffuse $\mbox{Gamma}(a, b)$ distribution with $a=0.001$ and $b=1000$.
+Metropolis-Hastings proposals scale $\diffusionsd$.
+The probability of observing virus locations $p(\mathbf{X}|\tree,\diffusionsd)$ is determined through analytical integration across internal states following the methods introduced in \cite{Lemey10}.
+Thus, under the full model, the posterior probability of observing virus and serum locations given immunological data and phylogeny is factored
+\begin{equation}
+	p(\mathbf{X},\mathbf{Y} | \mathbf{H},\tree) = \frac{ p(\mathbf{H}|\mathbf{X},\mathbf{Y},\mathbf{S},\mathbf{V}, \mdssd) \; 
+	p(\mathbf{X} | \beta, \vartheta) \;
+	p(\mathbf{X} | \tree, \diffusionsd) \; 
+	p(\mathbf{Y},\mathbf{S},\mathbf{V},\mdssd,\beta,\vartheta,\diffusionsd)}{ p(\mathbf{H}) }.
+\end{equation}
 
 %%% ACKNOWLEDGMENTS %%%
 \subsection*{Acknowledgments} 
