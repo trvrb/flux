@@ -93,7 +93,7 @@
 
 Influenza viruses undergo continual antigenic evolution allowing mutant viruses to evade immunity acquired by the host population to previous virus strains.
 However, the extent to which antigenic evolution determines competitive dynamics within and between virus clades A/H3N2, A/H1N1, B/Victoria and B/Yamagata has remained unclear.
-Here, we develope a novel cartographic approach to simultaneously characterize the genetic and antigenic evolution of viral lineages.
+Here, we develop a novel cartographic approach to simultaneously characterize the genetic and antigenic evolution of viral lineages.
 Through this approach, we determine historical rates and patterns of antigenic drift in all four viral clades and we show that antigenic drift influences year-to-year variability in clade dominance.
 We investigate the selective underpinnings for differing antigenic dynamics across clades and suggest that pleiotropic effects linked to antigenic mutation determine selective outcomes. 
 
@@ -177,6 +177,7 @@ We find similar levels of predictive accuracy when including the diffusion proce
 \subsection*{Antigenic evolution across influenza lineages}
 
 Through our modeling, we reveal the evolutionary basis for antigenic phenotype in influenza A/H3N2, A/H1N1, B/Vic and B/Yam (Figure~\ref{map}).
+Over the time period of 1968 to 2011, influenza A/H3N2 shows substantially more antigenic evolution than is exhibited by A/H1N1 over the course of 1977 to 2009 or B/Vic and B/Yam over the course of 1986 to 2011.
 We observe prominent antigenic clusters in A/H3N2 and A/H1N1 with less obvious clustering in B/Vic and B/Yam.
 Antigenic clusters show high genetic similarity, so that we only observe a single diffusion event leading to each cluster, rather than the repeated emergence of clusters.
 This analysis makes the fate of antigenic clusters obvious, with two clusters in A/H3N2 (Texas/77 and Beijing/89) appearing to be evolutionary dead-ends.
@@ -193,14 +194,16 @@ This analysis makes the fate of antigenic clusters obvious, with two clusters in
 	\label{map} 
 \end{figure}
 
-For A/H3N2, cross-reactive measurements only exist betwen strains sampled at most 11 years apart, leaving only threshold titers, e.g.\ `$<$40', in more temporally distant comparisons.  
+HI assays lack sensitivity beyond a certain point, so that for A/H3N2, cross-reactive measurements only exist between strains sampled at most 11 years apart, leaving only threshold titers, e.g.\ `$<$40', in more temporally distant comparisons.  
 Because of the threshold of sensitivity of the HI assay, it's impossible to distinguish a linear trajectory in 2D antigenic space, from a curved trajectory, so long as the curve does not bring antigenic phenotype full circle to have cross-reactive measurements between temporally distant strains.
 To solve this problem of identifiability, we assumed a weak prior that favors linear movement in the 2D antigenic space, with the slope of the linear relationship and the precision of the relationship incorporated into the Bayesian model (see Methods).
+Because of this, we interpret antigenic locations locally rather than globally.
+We can determine the rate of antigenic movement of virus lineages without knowing the larger configuration that the movement occurs under.
  
-We find that influenza A (H3N2) evolved 1.16 antigenic units per year from 1968 to 2011, with 95\% highest posterior density (HPD) interval 1.13--1.20 (Figure~\ref{drift}).
-However, the rate of antigenic drift was not constant, with year-to-year movement of mean antigenic phenotype showing an interquartile range of 0.40--1.79.  
+We find that influenza A/H3N2 evolved along antigenic dimension 1 at a rate of 1.00 antigenic units per year, with a 95\% highest posterior density (HPD) interval of 0.97--1.04 (Figure~\ref{drift}).
+However, the rate of antigenic drift was not constant, with year-to-year movement of mean antigenic phenotype showing an interquartile range of 0.00--1.57.  
 Large jumps in antigenic phenotype (Figure~\ref{drift}) correspond to cluster transitions identified by Smith et al. \cite{Smith04}.  
-Most variation is contained within the first antigenic dimension, but dimension 2 ocassionally shows variation when two antigenically distinct lineages emerge and transiently coexist (Figure~\ref{map}), as is the case with the previously identified Beijing 1989 and Beijing 1992 clusters.
+Most variation is contained within the first antigenic dimension, but dimension 2 occasionally shows variation when two antigenically distinct lineages emerge and transiently coexist (Figure~\ref{map}), as is the case with the previously identified Beijing/89 and Beijing/92 clusters.
 
 %%% drift %%%
 \begin{figure}[h]
@@ -215,14 +218,15 @@ Most variation is contained within the first antigenic dimension, but dimension 
 	\label{drift} 
 \end{figure}
 
-We find that other types and subtypes of influenza evolved in antigenic phenotype substantially slower than influenza A (H3N2).
-Influenza A (H1N1) evolved at an average rate of 0.64 antigenic units per year (HPD 0.59--0.70) since its reemergence in 1977 to 2009.  
-H1N1 influenza shows a similar pattern of punctuated antigenic evolution with occasional larger jumps in phenotype, such as the emergence of the Solomon Islands 2006 cluster.  
-It is unclear whether H1N1 undergoes fewer antigenic transitions of comparable magnitude to H3N2, or whether antigenic transitions in H1N1 are of smaller scale.  
-Both the Victoria and Yamagata lineages of influenza B also evolved relatively slowely, with average rates of 0.45 (HPD 0.40--0.51) and 0.20 (HPD 0.15--0.26) antigenic units per year, respectively.  
-From 2000 to 2011, both the Victoria and Yamagata lineages show slow antigenic movement, but no major antigenic transitions.
+We find that other clades of influenza evolved in antigenic phenotype substantially slower than A/H3N2 (Figure~\ref{drift}).
+Influenza A/H1N1 evolved at a rate of 0.55 antigenic units per year (HPD 0.49--0.62), but showing a similar pattern of punctuated antigenic evolution with occasional larger jumps in phenotype, such as the emergence of the Solomon Islands/06 cluster.  
+Influenza B/Victoria also evolved relatively slowly, with an average rates of 0.41 (HPD 0.29--0.55) antigenic units per year.
+Influenza B/Vic appears to show some degree of punctuated antigenic evolution with a recent transition creating the Brisbane/08 cluster.
+Interestingly, a minor lineage of B/Vic has persisted that rather than moving forward on antigenic dimension 1 has moved down on antigenic dimension 2 (Figure~\ref{map}, Figure~\ref{drift}).
+Influenza B/Yamagata evolves slower still, with an average rate of and 0.21 (HPD 0.10--0.28) antigenic units per year.
+Very little punctuated evolution is apparent in the evolution of B/Yam.
 
-\subsection*{Competition between influenza lineages}
+\subsection*{Competition between influenza clades}
 
 We investigated the relative rates of antigenic evolution in different influenza lineages from 1999 to 2009, finding a general correspondence between antigenic drift along antigenic dimension 1 and relative incidence between influenza A/H3N2, A/H1N1, B/Vic and B/Yam.
 From 1999 to 2009, influenza A (H3N2) accounted for the majority of antigenic evolution (51\%), while A/H1N1, B/Vic and B/Yam split the remainder, accounting for 17\%, 18\% and 14\%, respectively.
