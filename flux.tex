@@ -91,8 +91,6 @@
 %%% ABSTRACT %%%
 \section*{Abstract}
 
-% Abstracts explain to the general reader why the research was done and why the results are important. They should start with some brief BACKGROUND information: a sentence giving a broad introduction to the field comprehensible to the general reader, and then a sentence of more detailed background specific to your study. This should be followed by the RESULTS, or if the paper is more methods/technique oriented an explanation of OBJECTIVES/METHODS and then the RESULTS. The final sentence should outline the main CONCLUSIONS of the study, in terms that will be comprehensible to all our readers. The abstract should be 125 words or less.
-
 Influenza viruses undergo continual antigenic evolution allowing mutant viruses to evade immunity acquired by the host population to previous virus strains.
 However, the extent to which antigenic evolution determines competitive dynamics within and between virus clades A/H3N2, A/H1N1, B/Victoria and B/Yamagata has remained unclear.
 Here, we develope a novel cartographic approach to simultaneously characterize the genetic and antigenic evolution of viral lineages.
@@ -110,14 +108,12 @@ A thorough understanding of the process of antigenic drift is essential to our e
 
 Before 2009, there were four major clades of influenza circulating within the human population: A/H3N2, A/H1N1, B/Victoria and B/Yamagata. 
 In the case of influenza A, subtypes refer to the genes, hemagglutinin (H or HA) and neuraminidase (N or NA), that are primarily responsible for the antigenic character of a strain. 
-In the case of influenza B, lineages Victoria and Yamagata diverged from one another around 1980 \cite{Rota92}.
-Currently, seasonal influenza is treated with a trivalent vaccine containing one strain of H3N2, one strain of H1N1 and one strain of influenza B. 
-The World Health Organization (WHO) Global Influenza Surveillance Network issues twice-yearly recommendations on which strains of influenza to use as vaccine strains in 9--12 month’s time, i.e.\ a February recommendation for the Northern Hemisphere flu season and an August recommendation for the Southern Hemisphere flu season. 
-These recommendations are provided by a panel of experts after review of the available data.
-
+In the case of influenza B, lineages Victoria and Yamagata diverged from one prior to 1980 \cite{Rota92}.
 Mutations to the HA1 region of the hemagglutinin protein are thought to drive the majority of antigenic drift in the influenza virus \cite{Nelson07NatRevGenet}. 
-Experimental characterization of antigenic phenotype is possible through the hemagglutination inhibition (HI) assay \cite{Hirst43}, which measures the cross-reactivity of one virus strain to serum raised against another strain. 
-Sera from older strains react poorly with more evolved viruses resulting in new strains having a transmission advantage over established strains. 
+Experimental characterization of antigenic phenotype is possible through the hemagglutination inhibition (HI) assay \cite{Hirst43}, which measures the cross-reactivity of one virus strain to serum raised against another strain through challenge or vaccination. 
+Sera from older strains react poorly with more evolved viruses resulting in new strains having a transmission advantage over established strains.
+HI assays have shown there to be little to no cross-reactivity between influenza clades A/H3N2, A/H1N1, B/Victoria and B/Yamagata \cite{Hay01}.
+
 The results of many HI assays across a multitude of virus strains can be combined to yield a two-dimensional map, quantifying antigenic similarity and distance \cite{Smith04}. 
 The antigenic map of influenza A (H3N2) has shown largely linear movement of the influenza virus population since its introduction in 1968. 
 Evolution of antigenic phenotype appears punctuated with periods of stasis interspersed by periods of more rapid innovation, while genetic evolution appears more continuous \cite{Smith04}, suggesting that a relatively small number of genetic changes or combinations of genetic changes may drive changes in antigenic phenotype. 
@@ -127,43 +123,47 @@ Although mutation occurs rapidly, standing genetic diversity is low and phylogen
 Previously, the antigenic and genetic patterns of influenza evolution have been analyzed essentially in isolation. 
 An antigenic map is constructed from a panel of HI measurements, and a phylogenetic tree is constructed from sequence data. 
 However, the opportunity for a combined approach exists as both the antigenic map and the phylogenetic tree often contain many of the same isolates. 
-Here, we implement a flexible Bayesian approach to jointly analyze the antigenic and genetic dynamics of the influenza virus population. 
-We apply this approach to investigate the dynamics of influenza lineages A/H3N2,  A/H1N1, B/Victoria and B/Yamagata. 
+Here, we implement a flexible Bayesian approach to jointly characterize the antigenic and genetic evolution of the influenza virus population. 
+We apply this approach to investigate the dynamics of clades A/H3N2, A/H1N1, B/Victoria and B/Yamagata. 
 
 %%% RESULTS %%%
-\section*{Results}
+\section*{Results and Discussion}
 
-\subsection*{Bayesian multidimensional scaling}
+\subsection*{Antigenic cartography}
 
-In order to assess patterns of antigenic evolution among influenza strains, we implemented a Bayesian probabilistic analog of multidimensional scaling, referred to here as BMDS.
-In this model, viruses and sera are given $N$ dimensional locations, thus specifying an `antigenic map', such that distances between viruses and sera in this space are inversely proportional to cross-reactivity.
+In order to assess patterns of antigenic evolution among influenza strains, we implemented a Bayesian probabilistic analog of multidimensional scaling, referred to here as BMDS (see Methods).
+In this model, viruses and sera are given $N$-dimensional locations, thus specifying an `antigenic map', such that distances between viruses and sera in this space are inversely proportional to cross-reactivity.
 In the BMDS model, a map distance of one antigenic unit translates to an expectation of a 2-fold drop in HI titer between virus and sera.
 Maps that produce pairwise distances most congruent with the observed titers will have a high likelihood and will be favored by the BMDS model.
 We integrate over sources of uncertainty, such as antigenic locations, in a flexible Bayesian fashion.
+We apply this model to HI measurements of virus isolates against post-infection ferret sera for influenza A/H3N2, A/H1N1, B/Victoria and B/Yamagata (see Methods).
 
-We began with a BMDS analog of the MDS model used by Smith et al. \cite{Smith04}, where viruses and sera are represented as 2D locations and HI expectation is relative to the maximum titer of a particular ferret sera.
-This model performed well, yielding an average absolute predictive error of 0.66 log$_2$ HI titers on the 6545 training measurements used to build the model, and an average error of 0.86 on an additional 723 test measurements (Table \ref{errortable}).
-We find that a model with two dimensional antigenic locations better predicts test data than models with higher (or lower) dimensionality (Table \ref{errortable}), and thus specify a two dimensional model in all subsequent analyses.
-We extend this model by estimating the strength of overall reactivity of each sera rather than fixing this at the maximum titer, and additionally, by estimating the strength of reactivity of each virus in calculating an expectated HI titer.
-We refer to these estimates as column effects and row effects, respectively.
-We found that including these effects decreased training error to 0.50 and test error to 0.75 log$_2$ HI titers.
+We test model performance by constructing a training dataset representing 90\% of the HI measurements of the A/H3N2 dataset and a test dataset representing the remaining 10\% of the full dataset. 
+By fitting the BMDS model to the training dataset, we are able to predict HI titers in the test dataset and compare predicted titers to observed titers in the test dataset. 
+We find that a BMDS analog of the model used by Smith et al.\ \cite{Smith04}, in which viruses and sera are represented as 2D locations and expected titer is relative to the maximum titer of a particular ferret sera, performs well, yielding an average absolute predictive error of 0.87 log$_2$ HI titers (Table \ref{errortable}).
+We find that a model with two dimensional antigenic locations predicts test data to the same precision as a 3D model, but performs substantially better than a 1D model or models with four or more dimensions (Table \ref{errortable}), and thus specify a two dimensional model in all subsequent analyses.
+We extend this model by estimating the strength of overall reactivity of each serum rather than fixing this at the maximum titer, and additionally, by estimating the strength of reactivity of each virus isolate.
+We refer to these estimates as serum effects and virus effects, respectively.
+We found that including these effects decreased test error to 0.75 for influenza A/H3N2.
+We arrive at similar precisions when repeating this analysis for A/H1N1, B/Victoria and B/Yamagata.
+For the 2D model with serum and virus effects, A/H1N1 shows a test error of 0.64, B/Victoria shows a test error of 0.74 and B/Yamagata shows a test error of 0.80.
 
 %%% errortable %%%
-\begin{table}[tb]
+\begin{table}[h]
 	\centering
-	\caption{\textbf{Absolute prediction error of log$_2$ HI titer for training and test data across models.}}
-	\label{errortable}
+	\caption{\textbf{Absolute prediction error of log$_2$ HI titer against A/H3N2 test data across models.}}
+	\label{errortable}		
 	\begin{tabular}{ c c c c c } 
 	\hline
-	MDS 	& 	Column effects 	&	Row effects	& 	Training error	& 	Test error	\\
+	BMDS dimension 	& 	Serum effects 	&	Virus effects	& 	Test error	\\
 	\hline	
-	1D 		&	Fixed 			&	None		& 	0.91			&	1.03		\\	
-	2D 		&	Fixed 			&	None		& 	0.66			&	0.86		\\
-	3D 		&	Fixed 			&	None		& 	0.65			&	0.88		\\
-	4D 		&	Fixed 			&	None		& 	0.71			&	0.96		\\
-	5D 		&	Fixed 			&	None		& 	0.71			&	1.06		\\	
-	2D 		&	Estimated 		&	None		& 	0.55			&	0.77		\\	
-	2D 		&	Estimated 		&	Estimated	& 	0.50			&	0.75		\\		
+	1D 				&	Fixed 			&	None			&	1.05		\\	
+	2D 				&	Fixed 			&	None			&	0.87 		\\
+	3D 				&	Fixed 			&	None			&	0.87		\\
+	4D 				&	Fixed 			&	None			&	0.91		\\
+	5D 				&	Fixed 			&	None			&	0.97		\\	
+	2D 				&	Estimated 		&	None			&	0.78		\\	
+	2D 				&	Estimated 		&	Estimated		&	0.75		\\		
 	\hline
 	\end{tabular}
 \end{table}
@@ -174,7 +174,7 @@ We found that including these effects decreased training error to 0.50 and test 
 \begin{table}[tb]
 	\centering
 	\caption{\textbf{Antigenic dynamics of influenza lineages.}}
-	\label{errortable}
+	\label{dynamicstable}
 	\begin{tabular}{ l c c c c } 
 	\hline
 	 													&	A/H3N2	& 	A/H1N1 	& 	B/Vic	& 	B/Yam	\\
@@ -252,29 +252,6 @@ These proportions are significantly similar to one another (randomization test $
 
 %%% METHODS %%%
 \section*{Methods}
-
-\subsection*{Genetic and antigenic data}
-
-We compiled an antigenic dataset of hemagglutination inhibition (HI) measurements for influenza A (H3N2) by collecting data from previous publications \cite{Hay01,Smith04,Russell08,Barr10}, NIMR vaccine strain selection reports for 2002 and 2008--2012 \cite{NIMR02,NIMRMarch08,NIMRFeb09,NIMRFeb10,NIMRSep10,NIMRSep11,NIMRFeb12} and the Feb 2011 VRBPAC report \cite{Cox11FDA}.
-We queried the Influenza Research Database \cite{IRD} and the EpiFlu Database \cite{GISAID} for HA nucleotide sequences by matching strain names, e.g.\ A/HongKong/1/1968, and only strains for which sequence was present was retained.
-If a strain had multiple sequences in the databases we preferentially kept the IRD sequence and preferentially kept the longest sequence in IRD. 
-This dataset had 2051 influenza isolates (present as either virus or serum in HI comparisons) dating from 1968 to 2011. 
-However, the majority of isolates were present from 2002 to 2007. 
-Because we are interested in longer-term antigenic evolution, we censored the data to have at most 20 virus isolates per year, preferentially keeping those isolates with more antigenic comparisons. 
-We then kept only those serum isolates that are relatively informative to the antigenic placement of viruses, dropping serum isolates that are compared to 4 or fewer different virus isolates.
-This censoring left 429 virus isolates, 519 serum isolates and 10,097 HI measurements. 
-
-Antigenic data for influenza A (H1N1) was collected from previous publications \cite{Kendal78,Webster79,Nakajima79,Nakajima81,Chakraverty82,Pereira82,Chakraverty86,Cox83,Daniels85,Raymond86,Stevens87,Donatelli93,Hay01,Daum02,McDonald07,Barr10} and NIMR vaccine strain selection reports for 2002--2010 \cite{NIMR02,NIMR03,NIMR04,NIMRFeb05,NIMRSep05,NIMRMarch06,NIMRSep06,NIMRMarch07,NIMRSep07,NIMRMarch08,NIMRSep08,NIMRFeb09,NIMRFeb10}.
-The same procedure was followed as was followed for H3N2 to match sequence data and to censor antigenic comparisons.
-This procedure yielded 124 virus isolates, 77 serum isolates and 1882 HI measurements over the course of 1977 to 2009.
-
-Antigenic comparisons for influenza B Victoria-lineage were collated from previous publications \cite{Hay01} \tbc{Include in BibTex: Ansaldi04, AusWHO06, Barr06, Daum06, Lin07, Muyanga01, Puzelli04, Rota90, Shaw02, Xu04} and NIMR vaccine strain selection reports for 2002--2012 \cite{NIMR02,NIMR03,NIMR04,NIMRFeb05,NIMRSep05,NIMRMarch06,NIMRSep06,NIMRMarch07,NIMRSep07,NIMRMarch08,NIMRFeb09,NIMRSep09,NIMRFeb10,NIMRSep10,NIMRFeb11,NIMRSep11,NIMRFeb12}.
-Here, the sequence matching and censoring procedure yielded 179 virus isolates, 70 serum isolates and 2003 HI measurements over the course of 1986 to 2011.
-
-Antigenic comparisons for influenza B Yamagata-lineage were collected from previous publications \cite{Hay01} \tbc{Include in BibTex: Abed03, Ansaldi03, Ansaldi04, AusWHO06, Barr06, Daum06, Kanegae90, Lin07, Matsuzaki04, Muyanga01, Nakagawa02, Nakajima92, Nerome98, Puzelli04, Rota90, Shaw02, Xu04} and NIMR vaccine strain selection reports for 2002--2012 \cite{NIMR02,NIMR03,NIMR04,NIMRFeb05,NIMRSep05,NIMRMarch06,NIMRSep06,NIMRMarch07,NIMRSep07,NIMRMarch08,NIMRFeb09,NIMRSep09,NIMRFeb10,NIMRSep10,NIMRFeb11,NIMRSep11,NIMRFeb12}.
-For B/Yamagata, the matching and censoring procedure resulted in 174 virus isolates, 69 serum isolates and 1962 HI measurements over the course of 1987 to 2011.
-
-Sequences were aligned using MUSCLE v3.7 under default parameters \cite{MUSCLE}.
 
 \subsection*{Bayesian multidimensional scaling}
 
@@ -436,6 +413,29 @@ Thus, under the full model, the posterior probability of observing virus and ser
 	p(\mathbf{X} | \tree, \diffusionsd) \; 
 	p(\mathbf{Y},\mathbf{S},\mathbf{V},\mdssd,\beta,\vartheta,\diffusionsd)}{ p(\mathbf{H}) }.
 \end{equation}
+
+\subsection*{Genetic and antigenic data}
+
+We compiled an antigenic dataset of hemagglutination inhibition (HI) measurements of virus isolates against post-infection ferret sera for influenza A (H3N2) by collecting data from previous publications \cite{Hay01,Smith04,Russell08,Barr10}, NIMR vaccine strain selection reports for 2002 and 2008--2012 \cite{NIMR02,NIMRMarch08,NIMRFeb09,NIMRFeb10,NIMRSep10,NIMRSep11,NIMRFeb12} and the Feb 2011 VRBPAC report \cite{Cox11FDA}.
+We queried the Influenza Research Database \cite{IRD} and the EpiFlu Database \cite{GISAID} for HA nucleotide sequences by matching strain names, e.g.\ A/HongKong/1/1968, and only strains for which sequence was present was retained.
+If a strain had multiple sequences in the databases we preferentially kept the IRD sequence and preferentially kept the longest sequence in IRD. 
+This dataset had 2051 influenza isolates (present as either virus or serum in HI comparisons) dating from 1968 to 2011. 
+However, the majority of isolates were present from 2002 to 2007. 
+Because we are interested in longer-term antigenic evolution, we censored the data to have at most 20 virus isolates per year, preferentially keeping those isolates with more antigenic comparisons. 
+We then kept only those serum isolates that are relatively informative to the antigenic placement of viruses, dropping serum isolates that are compared to 4 or fewer different virus isolates.
+This censoring left 429 virus isolates, 519 serum isolates and 10,097 HI measurements. 
+
+Antigenic data for influenza A (H1N1) was collected from previous publications \cite{Kendal78,Webster79,Nakajima79,Nakajima81,Chakraverty82,Pereira82,Chakraverty86,Cox83,Daniels85,Raymond86,Stevens87,Donatelli93,Hay01,Daum02,McDonald07,Barr10} and NIMR vaccine strain selection reports for 2002--2010 \cite{NIMR02,NIMR03,NIMR04,NIMRFeb05,NIMRSep05,NIMRMarch06,NIMRSep06,NIMRMarch07,NIMRSep07,NIMRMarch08,NIMRSep08,NIMRFeb09,NIMRFeb10}.
+The same procedure was followed as was followed for H3N2 to match sequence data and to censor antigenic comparisons.
+This procedure yielded 124 virus isolates, 77 serum isolates and 1882 HI measurements over the course of 1977 to 2009.
+
+Antigenic comparisons for influenza B Victoria-lineage were collated from previous publications \cite{Hay01} \tbc{Include in BibTex: Ansaldi04, AusWHO06, Barr06, Daum06, Lin07, Muyanga01, Puzelli04, Rota90, Shaw02, Xu04} and NIMR vaccine strain selection reports for 2002--2012 \cite{NIMR02,NIMR03,NIMR04,NIMRFeb05,NIMRSep05,NIMRMarch06,NIMRSep06,NIMRMarch07,NIMRSep07,NIMRMarch08,NIMRFeb09,NIMRSep09,NIMRFeb10,NIMRSep10,NIMRFeb11,NIMRSep11,NIMRFeb12}.
+Here, the sequence matching and censoring procedure yielded 179 virus isolates, 70 serum isolates and 2003 HI measurements over the course of 1986 to 2011.
+
+Antigenic comparisons for influenza B Yamagata-lineage were collected from previous publications \cite{Hay01} \tbc{Include in BibTex: Abed03, Ansaldi03, Ansaldi04, AusWHO06, Barr06, Daum06, Kanegae90, Lin07, Matsuzaki04, Muyanga01, Nakagawa02, Nakajima92, Nerome98, Puzelli04, Rota90, Shaw02, Xu04} and NIMR vaccine strain selection reports for 2002--2012 \cite{NIMR02,NIMR03,NIMR04,NIMRFeb05,NIMRSep05,NIMRMarch06,NIMRSep06,NIMRMarch07,NIMRSep07,NIMRMarch08,NIMRFeb09,NIMRSep09,NIMRFeb10,NIMRSep10,NIMRFeb11,NIMRSep11,NIMRFeb12}.
+For B/Yamagata, the matching and censoring procedure resulted in 174 virus isolates, 69 serum isolates and 1962 HI measurements over the course of 1987 to 2011.
+
+Sequences were aligned using MUSCLE v3.7 under default parameters \cite{MUSCLE}.
 
 %%% ACKNOWLEDGMENTS %%%
 \subsection*{Acknowledgments} 
