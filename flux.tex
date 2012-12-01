@@ -333,7 +333,7 @@ We calculate the overall likelihood by multiplying probabilities of individual m
 using probability functions $\point$, $\threshold$ and $\interval$ as appropriate.
 We assume that the prior precision $1/\mdssd^2$ follows a diffuse $\mbox{Gamma}(a, b)$ distribution with $a=0.001$ and $b=1000$, and we start by assuming a diffuse normal prior $\mathrm{Normal}(\mu,\Sigma)$ over virus and sera locations $\mathbf{X}$ and $\mathbf{Y}$, where $\mu$ is equal to $\{0,0\}$ and $\Sigma$ is equal to 1000 along diagonal entries and equal to zero along off-diagonal entries.
 
-We integrate over uncertainty using the Markov chain Monte Carlo (MCMC) procedures implemented in the phylogenetic package BEAST \cite{BEAST}.
+We integrate over uncertainty using the Markov chain Monte Carlo (MCMC) procedures implemented in the phylogenetic package BEAST \cite{BEAST17}.
 Metropolis-Hastings proposals include moves to individual virus and serum locations $X_i$ and $Y_j$, scaling of the entire set of virus and serum locations $\mathbf{X}$ and $\mathbf{Y}$ and scaling $\mdssd$.
 
 \subsection*{Incorporating virus and serum effects}
@@ -399,7 +399,7 @@ To do this, we incorporate a prior on virus locations according to the evolution
 \end{equation}
 where $\tree$ is a phylogeny specifying tree topology and branch lengths and $\diffusionsd$ is the volatility parameter of the Brownian motion,  set to have equal variance in each antigenic dimension and no correlation across dimensions.
 Thus, viruses which are genetically similar are induced to have prior locations close to one another on the antigenic map.
-The phylogenetic tree $\tree$ is estimated using sequence data for viruses $1,\ldots,\vn$ according to well established methods implemented in the software package BEAST \cite{BEAST}.
+The phylogenetic tree $\tree$ is estimated using sequence data for viruses $1,\ldots,\vn$ according to well established methods implemented in the software package BEAST \cite{BEAST17}.
 The volatility parameter $\diffusionsd$ is estimated jointly from the genetic and antigenic data.
 Parameter $\diffusionsd$ is assumed to follow a diffuse $\mbox{Gamma}(a, b)$ distribution with $a=0.001$ and $b=1000$.
 Metropolis-Hastings proposals scale $\diffusionsd$.
