@@ -224,30 +224,44 @@ Influenza A/H1N1 evolved at a rate of 0.55 antigenic units per year (HPD 0.49--0
 Influenza B/Victoria also evolved relatively slowly, with an average rates of 0.41 (HPD 0.29--0.55) antigenic units per year.
 Influenza B/Vic appears to show some degree of punctuated antigenic evolution with a recent transition creating the Brisbane/08 cluster.
 Interestingly, a minor lineage of B/Vic has persisted that rather than moving forward in antigenic dimension 1 has moved down in antigenic dimension 2 (Figure~\ref{map}, Figure~\ref{drift}).
-Influenza B/Yamagata evolves slower still, with an average rate of and 0.21 (HPD 0.10--0.28) antigenic units per year.
+Influenza B/Yamagata evolved slower still, with an average rate of and 0.21 (HPD 0.10--0.28) antigenic units per year.
 Very little punctuated evolution is apparent in the evolution of B/Yam.
 
 \subsection*{Competition between influenza lineages}
 
-We investigated the relative rates of antigenic evolution in different influenza lineages from 1999 to 2009, finding a general correspondence between antigenic drift along antigenic dimension 1 and relative incidence between influenza A/H3N2, A/H1N1, B/Vic and B/Yam.
-From 1999 to 2009, influenza A (H3N2) accounted for the majority of antigenic evolution (51\%), while A/H1N1, B/Vic and B/Yam split the remainder, accounting for 17\%, 18\% and 14\%, respectively.
-Similarly, influenza A (H3N2) was responsible for the majority of incidence (54\%) in the USA during this time period.
-Influenza A (H1N1) accounted for 23\% of incidence, B/Vic accounted for 12\% of incidence and B/Yam accounted for 10\% of incidence.
-These proportions are significantly similar to one another (randomization test $p = 0.010$).
-
+We investigated the relative rates of antigenic evolution in A/H3N2, A/H1N1, B/Vic and B/Yam from 1999 to 2008, finding a general correspondence between antigenic drift in dimension 1 and relative incidence within each influenza clade (Figure~\ref{incidence}).
+From 1999 to 2008, A/H3N2 accounted for the majority of antigenic drift (46\%), while A/H1N1, B/Vic and B/Yam split the remainder, accounting for 21\%, 17\% and 16\%, respectively.
+Similarly, A/H3N2 was responsible for the majority of incidence (54\%) in the USA during this time period.
+Influenza A/H1N1 accounted for 23\% of incidence, B/Vic accounted for 12\% of incidence and B/Yam accounted for 11\% of incidence.
+These proportions are significantly similar to one another (randomization test, $p = 0.015$).
 
 %%% incidence %%%
 \begin{figure}[tb]
 	\centering		
-	\includegraphics[width=\textwidth]{figures/incidence}
-	\caption{\textbf{Relative antigenic drift and incidence between lineages of influenza from 1999 to 2009.} 
-	(A) Relative antigenic drift of influenza A H3N2 and H1N1 and influenza B Victoria and Yamagata lineages.
-	Relative change in antigenic dimension 1 between year $i$ and year $i-1$ is shown for each of the 4 lineages.
-	(B) Relative incidence of influenza A H3N2 and H1N1 and influenza B Victoria and Yamagata lineages.
-	Relative isolation counts of each lineage in the USA for each winter influenza season.
+	\includegraphics[width=0.95\textwidth]{figures/incidence}
+	\caption{\textbf{Relative antigenic drift and relative incidence of A/H3N2, A/H1N1, B/Vic and B/Yam from 1999 to 2008.} 
+	(A) Relative antigenic drift of influenza clades.
+	Relative antigenic drift for A/H3N2 is measured as the drift of A/H3N2 viruses divided by the sum of drift for A/H3N2, A/H1N1, B/Vic and B/Yam.
+	Drift for a virus clade for year $i$ is measured as the mean of antigenic dimension 1 of viruses collected in year $i$ compared to the mean of antigenic dimensions 1 of viruses collected during the previous year $i-1$.
+	For example, `99' signifies difference in antigenic dimension 1 between 1998 and 1999.
+	(B) Relative incidence of influenza clades determined through relative isolation counts in the USA for winter influenza seasons.
+	Here, `99' refers to the 1999/2000 influenza season.
+	(C) Correlation of relative antigenic drift and relative incidence in each influenza clade.
+	Scatterplots represent drift from year $i-1$ to year $i$ compared to incidence in winter season beginning in year $i$, e.g. drift from 1998 to 1999 compared to incidence in the 1999/2000 influenza season.
 	} 
 	\label{incidence} 
 \end{figure}
+
+Additionally, year-to-year comparisons show a similar pattern (Figure~\ref{incidence}). 
+Here, we define antigenic drift from year $i-1$ to year $i$ as the difference between the average location in dimension 1 in viruses sampled in year $i-1$ and the average location in dimension 1 of viruses sampled in year $i$.
+For instance, we see that 97\% of the antigenic drift between 1998 and 1999 is attributable to A/H3N2 and subsequently the 1999/2000 winter influenza season is dominanated by A/H3N2.
+Similarly, between samples from 1999 and 2000, most antigenic drift is attributable to A/H1N1 and B/Yam, and the 2000/2001 season is dominated by these same two clades.
+Here, we find an overall correlation between clade-specific relative antigenic drift and clade-specific incidence of $r = 0.67$ (Pearson correlation, $p = 1.00 \times 10^{-6}$).
+Correlation is present to greater of lesser degrees for each of the four clades, with $r_\mathrm{H3} = 0.63$, $r_\mathrm{H1} = 0.29$, $r_\mathrm{Vic} = 0.75$ and $r_\mathrm{Yam} = 0.58$.
+
+These findings clearly demonstrate the epidemiological importance of antigenic drift and show that competition between influenza clades A/H3N2, A/H1N1, B/Vic and B/Yam is strongly impacted by levels of antigenic drift within each clade.
+Furthmore, these findings suggest that the composition of a particular influenza season could be estimated ahead of time by examining the degree of antigenic drift between influenza clades.
+
 
 %%% METHODS %%%
 \section*{Methods}
@@ -333,7 +347,7 @@ We calculate the overall likelihood by multiplying probabilities of individual m
 using probability functions $\point$, $\threshold$ and $\interval$ as appropriate.
 We assume that the prior precision $1/\mdssd^2$ follows a diffuse $\mbox{Gamma}(a, b)$ distribution with $a=0.001$ and $b=1000$, and we start by assuming a diffuse normal prior $\mathrm{Normal}(\mu,\Sigma)$ over virus and sera locations $\mathbf{X}$ and $\mathbf{Y}$, where $\mu$ is equal to $\{0,0\}$ and $\Sigma$ is equal to 1000 along diagonal entries and equal to zero along off-diagonal entries.
 
-We integrate over uncertainty using the Markov chain Monte Carlo (MCMC) procedures implemented in the phylogenetic package BEAST \cite{BEAST17}.
+We integrate over uncertainty using the Markov chain Monte Carlo (MCMC) procedures implemented in the phylogenetic package BEAST \cite{BEAST,BEAST17}.
 Metropolis-Hastings proposals include moves to individual virus and serum locations $X_i$ and $Y_j$, scaling of the entire set of virus and serum locations $\mathbf{X}$ and $\mathbf{Y}$ and scaling $\mdssd$.
 
 \subsection*{Incorporating virus and serum effects}
@@ -399,7 +413,7 @@ To do this, we incorporate a prior on virus locations according to the evolution
 \end{equation}
 where $\tree$ is a phylogeny specifying tree topology and branch lengths and $\diffusionsd$ is the volatility parameter of the Brownian motion,  set to have equal variance in each antigenic dimension and no correlation across dimensions.
 Thus, viruses which are genetically similar are induced to have prior locations close to one another on the antigenic map.
-The phylogenetic tree $\tree$ is estimated using sequence data for viruses $1,\ldots,\vn$ according to well established methods implemented in the software package BEAST \cite{BEAST17}.
+The phylogenetic tree $\tree$ is estimated using sequence data for viruses $1,\ldots,\vn$ according to well established methods implemented in the software package BEAST \cite{BEAST,BEAST17}.
 The volatility parameter $\diffusionsd$ is estimated jointly from the genetic and antigenic data.
 Parameter $\diffusionsd$ is assumed to follow a diffuse $\mbox{Gamma}(a, b)$ distribution with $a=0.001$ and $b=1000$.
 Metropolis-Hastings proposals scale $\diffusionsd$.
