@@ -227,7 +227,7 @@ Interestingly, a minor lineage of B/Vic has persisted that rather than moving fo
 Influenza B/Yamagata evolved slower still, with an average rate of and 0.21 (HPD 0.10--0.28) antigenic units per year.
 Very little punctuated evolution is apparent in the evolution of B/Yam.
 
-\subsection*{Competition between influenza lineages}
+\subsection*{Epidemiological consequences of antigenic drift}
 
 We investigated the relative rates of antigenic evolution in A/H3N2, A/H1N1, B/Vic and B/Yam from 1999 to 2008, finding a general correspondence between antigenic drift in dimension 1 and relative incidence within each influenza clade (Figure~\ref{incidence}).
 From 1999 to 2008, A/H3N2 accounted for the majority of antigenic drift (46\%), while A/H1N1, B/Vic and B/Yam split the remainder, accounting for 21\%, 17\% and 16\%, respectively.
@@ -254,14 +254,57 @@ These proportions are significantly similar to one another (randomization test, 
 
 Additionally, year-to-year comparisons show a similar pattern (Figure~\ref{incidence}). 
 Here, we define antigenic drift from year $i-1$ to year $i$ as the difference between the average location in dimension 1 in viruses sampled in year $i-1$ and the average location in dimension 1 of viruses sampled in year $i$.
-For instance, we see that 97\% of the antigenic drift between 1998 and 1999 is attributable to A/H3N2 and subsequently the 1999/2000 winter influenza season is dominanated by A/H3N2.
+For instance, we see that 97\% of the antigenic drift between 1998 and 1999 is attributable to A/H3N2 and subsequently the 1999/2000 winter influenza season is dominated by A/H3N2.
 Similarly, between samples from 1999 and 2000, most antigenic drift is attributable to A/H1N1 and B/Yam, and the 2000/2001 season is dominated by these same two clades.
 Here, we find an overall correlation between clade-specific relative antigenic drift and clade-specific incidence of $r = 0.67$ (Pearson correlation, $p = 1.00 \times 10^{-6}$).
 Correlation is present to greater of lesser degrees for each of the four clades, with $r_\mathrm{H3} = 0.63$, $r_\mathrm{H1} = 0.29$, $r_\mathrm{Vic} = 0.75$ and $r_\mathrm{Yam} = 0.58$.
 
 These findings clearly demonstrate the epidemiological importance of antigenic drift and show that competition between influenza clades A/H3N2, A/H1N1, B/Vic and B/Yam is strongly impacted by levels of antigenic drift within each clade.
-Furthmore, these findings suggest that the composition of a particular influenza season could be estimated ahead of time by examining the degree of antigenic drift between influenza clades.
+Furthermore, these findings suggest that the composition of a particular influenza season could be estimated ahead of time by examining the degree of antigenic drift between influenza clades.
 
+\subsection*{Conversion of antigenic mutation into fixed differences}
+
+We observe a faster rate of antigenic drift in influenza A/H3N2 than in A/H1N1 or influenza B.
+Previous work using general epidemiological models has suggested that a greater rate of antigenic drift may emerge from either a greater fundamental reproductive number $R_0$ or a faster rate of mutation decreasing cross-immunity \cite{Gog02,Lin03}.
+Owing to these and similar findings, subsequent work has ascribed differences in the evolution in A/H3N2 relative to A/H1N1 and influenza B to either greater $R_0$ or greater mutation rate \cite{Ferguson03,Bedford12}.
+
+Here, we examine the conversion of newly acquired antigenic mutation into fixed differences by comparing rates of antigenic diffusion to the degree of persistence on phylogeny branches from A/H3N2, A/H1N1, B/Vic and B/Yam (Figure~\ref{accumulation}A).
+Here, we observe that in all four clades new antigenic mutations, do not, on average, move antigenic dimension 1 forward or back, consistent with a model of antigenic mutations proceding in a random direction.
+However, successful mutations that have persisted in the influenza population, tend to move the antigenic phenotype forward along dimension 1.
+This result indicates that forward movement along antigenic dimension 1 is an advantageous trait and is promoted by natural selection \cite{Bedford12}.
+The rate of diffusion of persistent lineages is substantially greater in A/H3N2 than in A/H1N1, B/Vic or B/Yam.
+For A/H3N2 we see a two-year window during which mutations may be present on side branches of the phylogeny.
+After two years, mutations lie along the trunk of the phylogeny and the rate at which the trunk lineage drifts along antigenic dimension 1 is equal to the overall rate at which the population drift along dimension 1.
+
+%%% accumulation %%%
+\begin{figure}[tb]
+	\centering		
+	\includegraphics[width=0.95\textwidth]{figures/accumulation}
+	\caption{\textbf{Rate of antigenic diffusion of influenza lineages categorized by time back from sampling.}
+	(A) Rate of diffusion in terms of antigenic units per year only along antigenic dimension 1.
+	(B) Rate of diffusion in terms of antigenic units per year along both antigenic dimensions 1 and 2.
+	In the diffusion model, the antigenic location of each virus sample can be calculcated back through time.
+	Here, when the $x$-axis is 1, we show the rate of diffusion 1 year back from from the date of sampling averaged across all virus samples.
+	When the $x$-axis is close to 0, the $y$-axis shows the rate of diffusion near tips of the phylogeny, and when the $x$-axis is large, the $y$-axis shows the rate of diffusion along the trunk of the phylogeny.
+	} 
+	\label{accumulation} 
+\end{figure}
+
+If we examine the introduction of new mutations in two dimensions, we see that A/H3N2 appears to mutate in antigenic phenotype more rapidly than B/Vic, which mutates more rapidly still than A/H1N1 or B/Yam (Figure~\ref{accumulation}B).
+Thus, we have direct evidence that the rate of antigenic mutation is greater in A/H3N2 than in A/H1N1 or influenza B.
+However, we observe an interesting additional effect.
+The rate of diffusion of persistent lineages is greater than the rate of mutation in influenza A/H3N2, but smaller than the rate of mutation in A/H1N1, B/Vic and B/Yam.
+This yields the surprising conclusion that although antigenic mutation is favored in A/H3N2, it is deleterious and opposed by natural selection in A/H1N1 and B.
+
+We suggest that this effect could be due to the pleiotropic effects of antigenic mutations, in which antigenic mutations often result in other phenotypic effects, including decreased protein function \cite{Kaverin04,Rudneva12}.
+Thus, we expect that many antigenic variants may be at inherent disadvantage against other strains, even though they benefit from a transmission advantage mediated by host immunity.
+Because of this, some antigenic mutations, i.e.\ those that move forward along antigenic dimension 1, may be, on the whole, advantagous, while other antigenic mutations may be, on the whole, deleterious.
+In this context, it is especially interesting that antigenic mutations appear to be, on the whole, more advantagous in A/H3N2.
+It seems possibe that the H3 protein may have fewer pleiotropic constraints that the the H1 protein or B hemagglutinin protein.
+However, more work is necessary to investigate this hypothesis.
+
+%%% CONCLUSIONS %%%
+\section*{Conclusions}
 
 %%% METHODS %%%
 \section*{Methods}
@@ -456,8 +499,13 @@ Similar calculations were performed for A/H1N1, B/Vic and B/Yam.
 %%% ACKNOWLEDGMENTS %%%
 \subsection*{Acknowledgments} 
 
+%%% AUTHOR CONTRIBUTIONS %%%
+\subsection*{Author contributions} 
+
 %%% FUNDING %%%
 \subsection*{Funding} 
+
+TB is supported by the Royal Society.
 
 %%% REFERENCES %%%
 \bibliographystyle{plos}
