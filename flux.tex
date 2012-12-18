@@ -241,7 +241,7 @@ We find that the standard deviation across years in year-to-year drift is 0.74 a
 %%% jumps %%%
 \begin{figure}[h]
 	\centering		
-	\includegraphics[width=0.55\textwidth]{figures/jumps}
+	\includegraphics[width=0.5\textwidth]{figures/jumps}
 	\caption{\textbf{Year-to-year antigenic drift of A/H3N2, A/H1N1, B/Vic and B/Yam viruses.} 
 	Year-to-year antigenic drift for a virus clade for year $i$ is measured as the mean of antigenic dimension 1 of viruses collected in year $i$ compared to the mean of antigenic dimension 1 of viruses collected during the previous year $i-1$.
 	Bars represent interquartile range across MCMC samples.
@@ -252,10 +252,11 @@ We find that the standard deviation across years in year-to-year drift is 0.74 a
 \subsection*{Epidemiological consequences of antigenic drift}
 
 We investigated the relative rates of antigenic evolution in A/H3N2, A/H1N1, B/Vic and B/Yam from 1999 to 2008, finding a general correspondence between antigenic drift in dimension 1 and relative incidence within each influenza clade (Figure~\ref{incidence}).
-From 1999 to 2008, A/H3N2 accounted for the majority of antigenic drift (46\%), while A/H1N1, B/Vic and B/Yam split the remainder, accounting for 21\%, 17\% and 16\%, respectively.
+To rule out effects caused by the 2009 pandemic, incidence data were examined only until 2008.
+From 1999 to 2008, A/H3N2 accounted for the majority of antigenic drift (51\%), while A/H1N1, B/Vic and B/Yam split the remainder, accounting for 22\%, 15\% and 13\%, respectively.
 Similarly, A/H3N2 was responsible for the majority of incidence (54\%) in the USA during this time period.
 Influenza A/H1N1 accounted for 23\% of incidence, B/Vic accounted for 12\% of incidence and B/Yam accounted for 11\% of incidence.
-These proportions are significantly similar to one another (randomization test, $p = 0.015$).
+These proportions are significantly similar to one another (randomization test, $p = 0.001$).
 
 %%% incidence %%%
 \begin{figure}[tb]
@@ -266,10 +267,12 @@ These proportions are significantly similar to one another (randomization test, 
 	Relative antigenic drift for A/H3N2 is measured as the drift of A/H3N2 viruses divided by the sum of drift for A/H3N2, A/H1N1, B/Vic and B/Yam.
 	Drift for a virus clade for year $i$ is measured as the mean of antigenic dimension 1 of viruses collected in year $i$ compared to the mean of antigenic dimension 1 of viruses collected during the previous year $i-1$.
 	For example, `99' signifies difference in antigenic dimension 1 between 1998 and 1999.
+	Years with negative absolute drift were assigned a relative antigenic drift of 0.
 	(B) Relative incidence of influenza clades determined through relative isolation counts in the USA for winter influenza seasons.
 	Here, `99' refers to the 1999/2000 influenza season.
 	(C) Correlation of relative antigenic drift and relative incidence in each influenza clade.
 	Scatterplots represent drift from year $i-1$ to year $i$ compared to incidence in winter season beginning in year $i$, e.g. drift from 1998 to 1999 compared to incidence in the 1999/2000 influenza season.
+	Years lacking antigenic information (Figure~\ref{jumps}) were not included in the correlation.
 	} 
 	\label{incidence} 
 \end{figure}
@@ -278,11 +281,12 @@ Additionally, year-to-year comparisons show a similar pattern (Figure~\ref{incid
 Here, we define antigenic drift from year $i-1$ to year $i$ as the difference between the average location in dimension 1 of viruses sampled in year $i-1$ and the average location in dimension 1 of viruses sampled in year $i$.
 For instance, we see that 97\% of the antigenic drift between 1998 and 1999 is attributable to A/H3N2 and subsequently the 1999-2000 winter influenza season is dominated by A/H3N2.
 Similarly, between 1999 and 2000, most antigenic drift is attributable to A/H1N1 and B/Yam, and the 2000-2001 season is dominated by these same two clades.
-Here, we find an overall correlation between clade-specific relative antigenic drift and clade-specific incidence of $r = 0.67$ (Pearson correlation, $p = 1.00 \times 10^{-6}$).
-Correlation is present to greater of lesser degrees for each of the four clades, with $r_\mathrm{H3} = 0.63$, $r_\mathrm{H1} = 0.20$, $r_\mathrm{Vic} = 0.74$ and $r_\mathrm{Yam} = 0.58$.
+Here, we find an overall correlation between clade-specific relative antigenic drift and clade-specific incidence of $r = 0.74$ (Pearson correlation, $p = 2.43 \times 10^{-7}$).
+Correlation is present to greater of lesser degrees for each of the four clades, with $r_\mathrm{H3} = 0.61$, $r_\mathrm{H1} = 0.68$, $r_\mathrm{Vic} = 0.23$ and $r_\mathrm{Yam} = 0.56$.
 
-These findings clearly demonstrate the epidemiological importance of antigenic drift and show that competition between influenza clades A/H3N2, A/H1N1, B/Vic and B/Yam is strongly impacted by levels of antigenic drift within each clade.
+These findings clearly demonstrate the epidemiological importance of antigenic drift and show that incidence of influenza clades A/H3N2, A/H1N1, B/Vic and B/Yam is strongly impacted by levels of antigenic drift within each clade.
 Furthermore, these findings suggest that the composition of a particular influenza season could be estimated ahead of time by examining the degree of antigenic drift between influenza clades.
+However, these findings alone do not conclusively show interference between clades; more work needs to be done to establish whether antigenic drift within one influenza clades drives down incidence in other clades.
 
 \subsection*{Conversion of antigenic mutation into fixed differences}
 
@@ -500,7 +504,6 @@ Thus, under the full model, the posterior probability of observing virus and ser
 	p(\mathbf{X} | \tree, \diffusionsd) \; 
 	p(\mathbf{Y},\mathbf{S},\mathbf{V},\mdssd,\beta,\vartheta,\diffusionsd)}{ p(\mathbf{H}) }.
 \end{equation}
-Source code implementing these models has been made fully available as part of the software package BEAST \cite{BEAST, BEAST17}, and can be downloaded from its Google code repository (http://code.google.com/p/beast-mcmc/).
 
 \subsection*{Genetic, antigenic and surveillance data}
 
@@ -529,7 +532,15 @@ As an example, one report states ``collaborating laboratories in the United Stat
 In this case, we estimate the relative proportion of A/H3N2 of the four clades as $0.66 \times 0.13 = 0.09$.
 Similar calculations were performed for A/H1N1, B/Vic and B/Yam.
 
+\subsection*{Implemention details}
+
+\tbc{PREPARE}.
+
+\subsection*{Availability}
+
+Source code implementing the cartographic models has been made fully available as part of the software package BEAST \cite{BEAST, BEAST17}, and can be downloaded from its Google code repository (http://code.google.com/p/beast-mcmc/).
 Antigenic, genetic and surveillance data is available as supplemental information \tbc{PREPARE}.
+Also included as supplemental information are XML control files to load antigenic and phylogenetic data into BEAST and perform cartographic analyses \tbc{PREPARE}.
 
 %%% ACKNOWLEDGMENTS %%%
 \subsection*{Acknowledgments} 
