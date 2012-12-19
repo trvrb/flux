@@ -203,7 +203,7 @@ Because of this, we interpret antigenic locations locally rather than globally.
 We can determine the rate of antigenic movement of virus lineages without knowing the larger configuration that the movement occurs under.
  
 We find that influenza A/H3N2 evolved along antigenic dimension 1 at a rate of 1.00 antigenic units per year, with a 95\% highest posterior density (HPD) interval of 0.97--1.04 (Figure~\ref{drift}).
-However, we observe occassional large jumps in antigenic phenotype (Figure~\ref{drift}), corresponding to cluster transitions identified by Smith et al. \cite{Smith04}.  
+However, we observe occasional large jumps in antigenic phenotype (Figure~\ref{drift}), corresponding to cluster transitions identified by Smith et al. \cite{Smith04}.  
 Most variation is contained within the first antigenic dimension, but dimension 2 occasionally shows variation when two antigenically distinct lineages emerge and transiently coexist (Figure~\ref{map}), as is the case with the previously identified Beijing/89 and Beijing/92 clusters.
 
 %%% drift %%%
@@ -345,8 +345,8 @@ Correspondingly, we observe substantially greater levels of incidence in A/H3N2 
 We suggest that antigenic evolution strongly influences competitive dynamics both within and between influenza clades.
 
 The statistical framework presented here represents a baseline to which further advancements in modeling antigenic phenotype and evolution may be made.
-For example, our likelihood-based model faciliates the inclusion of possible covariates affecting immunological titer, which could include experimental factors such as red blood cell type is used in the HI assay \cite{Lin12} and whether oseltamivir is included in the HI reaction \cite{Lin10}.
-Additionally, this framework should be ideally suited to uncovering genetic determinates of antigenic change, as both the sequence state and antigenic location of internal nodes in the phylogeny may be estimated.
+For example, our likelihood-based model facilities the inclusion of possible covariates affecting immunological titer, which could include experimental factors such as red blood cell type is used in the HI assay \cite{Lin12} and whether oseltamivir is included in the HI reaction \cite{Lin10}.
+Additionally, this framework should be ideally suited to uncovering genetic determinants of antigenic change, as both the sequence state and antigenic location of internal nodes in the phylogeny may be estimated.
 In this fashion, it should be possible to correlate sequence substitutions directly to antigenic diffusion.
 
 Further work characterizing antigenic evolution in the human influenza virus may eventually prove to be crucial in improving vaccine strain selection.
@@ -509,9 +509,9 @@ The probability of observing virus locations $p(\mathbf{X}|\tree,\diffusionsd)$ 
 Thus, under the full model, the posterior probability of observing virus and serum locations given immunological data and phylogeny is factored
 \begin{equation}
 	p(\mathbf{X},\mathbf{Y} | \mathbf{H},\tree) = \frac{ p(\mathbf{H}|\mathbf{X},\mathbf{Y},\mathbf{S},\mathbf{V}, \mdssd) \; 
-	p(\mathbf{X} | \beta, \vartheta) \;
+	p(\mathbf{X} | \beta, \driftsd) \;
 	p(\mathbf{X} | \tree, \diffusionsd) \; 
-	p(\mathbf{Y},\mathbf{S},\mathbf{V},\mdssd,\beta,\vartheta,\diffusionsd)}{ p(\mathbf{H}) }.
+	p(\mathbf{Y},\mathbf{S},\mathbf{V},\mdssd,\beta,\driftsd,\diffusionsd)}{ p(\mathbf{H}) }.
 \end{equation}
 
 \subsection*{Genetic, antigenic and surveillance data}
@@ -541,9 +541,30 @@ As an example, one report states ``collaborating laboratories in the United Stat
 In this case, we estimate the relative proportion of A/H3N2 of the four clades as $0.66 \times 0.13 = 0.09$.
 Similar calculations were performed for A/H1N1, B/Vic and B/Yam.
 
-\subsection*{Implemention details}
+\subsection*{Implementation considerations}
 
-\tbc{PREPARE}.
+There were a couple of issues we encountered in applying the BMDS model to HI data from A/H3N2, A/H1N1, B/Vic and B/Yam.
+The first issue lay in summarizing the posterior distribution of virus and serum locations.
+Although our MCMC procedure samples from the posterior, sampled virus and serum locations represent only relative quantities, and because of this, over the course of the MCMC virus locations may shift dramatically.
+Our `antigenic drift prior' removes much of this issue, orienting the antigenic map along dimension 1 and fixing it to begin at $\{0,0\}$.
+However, local isometries are often still a problem.
+For example, in A/H3N2 the Beijing/89 cluster may shift back and forth from being above other viruses on dimension 2 to being below other viruses on dimension 2.
+These isometries may be local, i.e.\ Beijing/89 and Beijing/92 may flip while leaving Texas/77 in place.
+Consequently, it is difficult to fully align MCMC samples using Procrustes analysis.
+Here, we take a simple approach and sample a single MCMC step and visualize the antigenic locations at this state (Figures~\ref{map}, Figure~\ref{drift}).
+Then, for quantities of interest, like rate of antigenic drift and rate of diffusion at different points along the phylogeny, we calculate this quantity across MCMC samples to yield an expectation and a credible interval.
+
+Running the fully parameterized model including the phylogenetic diffusion prior resulted a pathological outcome in which all virus and serum locations are compressed into a single point, diffusion volatility $\diffusionsd$ is tends toward zero and MDS variance $\mdssd^2$ tends towards infinity.
+In this case, $p(\mathbf{H}|\mathbf{X},\mathbf{Y},\mathbf{S},\mathbf{V}, \mdssd)$ is reduced, but $p(\mathbf{X} | \tree, \diffusionsd)$ becomes very large, yielding a greater overall posterior probability.
+To avoid this problematic outcome we conducted a two stage analysis.
+We first estimated values of $\mdssd$, $\beta$ and $\driftsd$ using HI data alone, and then held these values constant in a subsequent analysis that included the phylogenetic diffusion prior.
+
+Phylogenetic trees were sampled for A/H3N2, A/H1N1, B/Vic and B/Yam using BEAST \cite{BEAST} and incorporated the SRD06 nucleotide substitution model \cite{Shapiro06}, a coalescent demographic model with constant effective population size and a strict molecular clock across branches.
+MCMC was run for 60 million steps and trees were sampled every 50,000 steps after allowing a burn-in of 10 million steps, yielding a total sample of 2000 trees.
+These trees were treated as a discrete set of possibilities when subsequently sampled in the BMDS analysis.
+
+MCMC was used to sample virus locations $\mathbf{X}$, serum locations $\mathbf{Y}$, virus effects $\mathbf{V}$, serum effects $\mathbf{S}$, MDS precision $1/\mdssd^2$, antigenic drift rate $\beta$, population variance $\driftsd^2$, diffusion volatility $\diffusionsd$ and phylogenetic tree $\tree$.
+MCMC chains were run for 500 million steps and parameter values sampled every 200,000 steps after a burn-in of 100 million steps, yielding a total of 2000 MCMC samples.
 
 \subsection*{Availability}
 
