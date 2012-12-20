@@ -56,6 +56,9 @@
 \newcommand{\tree}{\tau}							% Phylogeny
 \newcommand{\vn}{n}									% Number of viruses
 \newcommand{\sn}{k}									% Number of sera
+\setlength{\arraycolsep}{2pt}
+\newcommand{\twomatrix}[2]{\scriptsize \Big( \begin{matrix} #1 \\ #2 \end{matrix} \Big)}				% pretty inline matrix 
+\newcommand{\fourmatrix}[4]{\scriptsize \Big( \begin{matrix} #1 & #2 \\ #3 & #4 \end{matrix} \Big)}		% pretty inline matrix 
 
 % comments
 \usepackage{ulem}
@@ -392,8 +395,8 @@ Traditionally, the goal of multidimensional scaling (MDS) optimizes over $\mathb
 \end{equation}
 is minimized, where $\cal I = \{ (i,j) : H_{ij} \mbox{ is measured} \}$. 
 Here, we instead assume a probabilistic interpretation in which an observed titer is normally distributed around its cartographic expectation
-\begin{equation} 
-	H_{ij} \sim \mbox{Normal}( S_j - \delta_{ij}, \mdssd^2 ),
+\begin{equation} \label{hij}
+	H_{ij} \sim \mbox{TruncatedNormal}( S_j - \delta_{ij}, \mdssd^2 ),
 \end{equation}
 and the likelihood of observing a particular titer given the placement of antigenic locations is 
 \begin{equation} 
@@ -433,7 +436,7 @@ We calculate the overall likelihood by multiplying probabilities of individual m
 	L(\mathbf{X},\mathbf{Y}) = \prod_{(i,j) \in \cal I} f(H_{ij}),
 \end{equation}
 using probability functions $\point$, $\threshold$ and $\interval$ as appropriate.
-We assume that the prior precision $1/\mdssd^2$ follows a diffuse $\mbox{Gamma}(a, b)$ distribution with $a=0.001$ and $b=1000$, and we start by assuming a diffuse normal prior $\mathrm{Normal}(\mu,\Sigma)$ over virus and sera locations $\mathbf{X}$ and $\mathbf{Y}$, where $\mu$ is equal to $\{0,0\}$ and $\Sigma$ is equal to 10,000 along diagonal entries and equal to zero along off-diagonal entries.
+We assume that the prior precision $1/\mdssd^2$ follows a diffuse $\mbox{Gamma}(a, b)$ distribution with $a=0.001$ and $b=0.001$, and we start by assuming a diffuse normal prior $\mathrm{Normal}(\mu,\Sigma)$ over virus and sera locations $\mathbf{X}$ and $\mathbf{Y}$, with $\mu = \twomatrix{0}{0}$ and $\Sigma = \fourmatrix{10,000}{0}{0}{10,000}$ for $P=2$.
 
 We integrate over uncertainty using the Markov chain Monte Carlo (MCMC) procedures implemented in the phylogenetic package BEAST \cite{BEAST,BEAST17}.
 Metropolis-Hastings proposals include moves to individual virus and serum locations $X_i$ and $Y_j$, scaling of the entire set of virus and serum locations $\mathbf{X}$ and $\mathbf{Y}$ and scaling $\mdssd$.
@@ -442,21 +445,13 @@ Metropolis-Hastings proposals include moves to individual virus and serum locati
 
 The preceding model represents immunological distance as a drop in titer against the most reactive comparison for a particular serum.  
 Here, we relax this assumption and treat the maximum reactivity of a sera as a random variable.
-In this case, $H_{ij}$ still follows
-\begin{equation} 
-	H_{ij} \sim \mbox{Normal}( S_j - \delta_{ij}, \mdssd^2 ),
-\end{equation}
-but the vector of `serum effects' $\mathbf{S}$ is estimated rather than fixed.
+In this case, $H_{ij}$ still follows equation \ref{hij} with expectation $S_j - \delta_{ij}$, but the vector of `serum effects' $\mathbf{S}$ is estimated rather than fixed.
 We assume that $S_j$ values are hierarchically distributed according to a normal distribution.
 The mean and variance of this distribution is taken from the empirical mean and empirical variance of the set of maximum titers across sera $\{ \max ( H_{1j},\ldots,H_{\vn j} ) : j = 1,\ldots,\sn \}$.
 This formulation assumes that particular sera are more reactive in general than other sera.
 
 Additionally, we follow the same logic and assume that particular virus isolates are more reactive in general than other virus isolates.
-With virus reactivity included, $H_{ij}$ follows
-\begin{equation} 
-	H_{ij} \sim \mbox{Normal}\left(  \frac{V_i+S_j}{2} - \delta_{ij}, \mdssd^2 \right),
-\end{equation}
-and the vector of `virus effects' $V_i$ for $i = 1,\ldots, \vn$ is estimated in an analogous hierarchical fashion, with $\mathbf{V}$ normally distributed with mean and variance equal to the empirical mean and variance of the set of maximum titers across viruses $\{ \max ( H_{i1},\ldots,H_{i \sn} ) : i = 1,\ldots,\vn \}$.
+With virus reactivity included, the expectation of $H_{ij}$ becomes $(V_i+S_j)/2 - \delta_{ij}$ and the vector of `virus effects' $V_i$ for $i = 1,\ldots, \vn$ is estimated in an analogous hierarchical fashion, with $\mathbf{V}$ normally distributed with mean and variance equal to the empirical mean and variance of the set of maximum titers across viruses $\{ \max ( H_{i1},\ldots,H_{i \sn} ) : i = 1,\ldots,\vn \}$.
 
 With these effects included, Metropolis-Hastings proposals additionally incorporate moves to individual serum effects $S_j$ and virus effects $V_i$.
 
@@ -469,14 +464,11 @@ In this case it is impossible to determine from the HI data at hand whether the 
 This presents an issue of model identifiability; multiple antigenic maps give the same likelihood of observing the serological data.
 In order to achieve more interpretable antigenic locations we impose a weak prior on global locations.
 In influenza, it's clear that antigenic distance between strains increases with time \cite{Smith04,Cai10}.
-To capture this, we replace the diffuse normal prior on virus locations with a prior where virus locations follow a multivariate normal distribution in which the expectation of the first antigenic dimension increases with date of virus sampling
-\begin{equation} 
-	X_{i} \sim \mbox{Normal}( \{\beta \, y_i, 0\}, \Sigma )
-\end{equation}
-for $P=2$, where $y_i$ is the difference in time between virus $i$ and the earliest sampled virus and covariance matrix $\Sigma$ is equal to $\driftsd^2$ along diagonal entries and equal to zero along off-diagonal entries.
+To capture this, we replace the diffuse normal prior on virus locations with a prior where virus locations follow a normal distribution $\mathrm{Normal}(\mu,\Sigma)$ in which the expectation of the first antigenic dimension increases with date of virus sampling.
+Here, $\mu = \twomatrix{\beta \, y_i}{0}$ and $\Sigma = \fourmatrix{\driftsd^2}{0}{0}{\driftsd^2}$ for $P=2$, where $y_i$ is the difference in time between virus $i$ and the earliest sampled virus.
 Thus, this model assumes that the virus population drifts in a line across the antigenic map at rate $\beta$.
 The parameter $\driftsd$ determines the breadth of the virus population cloud at each point in time.
-We assume that both the prior slope $\beta$ and the prior precision $1/\driftsd^2$ follow a diffuse $\mbox{Gamma}(a, b)$ distribution with $a=0.001$ and $b=1000$.
+We assume that both the prior slope $\beta$ and the prior precision $1/\driftsd^2$ follow a diffuse $\mbox{Gamma}(a, b)$ distribution with $a=0.001$ and $b=0.001$.
 We further introduce Metropolis-Hastings proposals that scale $\beta$ and $\driftsd$.
 
 %%% schematic_map %%%
@@ -503,7 +495,7 @@ where $\tree$ is a phylogeny specifying tree topology and branch lengths and $\d
 Thus, viruses which are genetically similar are induced to have prior locations close to one another on the antigenic map.
 The phylogenetic tree $\tree$ is estimated using sequence data for viruses $1,\ldots,\vn$ according to well established methods implemented in the software package BEAST \cite{BEAST, BEAST17}.
 The volatility parameter $\diffusionsd$ is estimated jointly from the genetic and antigenic data.
-Parameter $\diffusionsd$ is assumed to follow a diffuse $\mbox{Gamma}(a, b)$ distribution with $a=0.001$ and $b=1000$.
+Parameter $\diffusionsd$ is assumed to follow a diffuse $\mbox{Gamma}(a, b)$ distribution with $a=0.001$ and $b=0.001$.
 Metropolis-Hastings proposals scale $\diffusionsd$.
 The probability of observing virus locations $p(\mathbf{X}|\tree,\diffusionsd)$ is determined through analytical integration across internal states following the methods introduced in \cite{Lemey10}.
 Thus, under the full model, the posterior probability of observing virus and serum locations given immunological data and phylogeny is factored
