@@ -88,7 +88,7 @@
 \affil[1]{Institute of Evolutionary Biology, University of Edinburgh, Edinburgh, UK}
 \affil[2]{Department of Biomathematics, David Geffen School of Medicine at UCLA, University of California, Los Angeles CA, USA}
 \affil[3]{Department of Human Genetics, David Geffen School of Medicine at UCLA, University of California, Los Angeles CA, USA}
-\affil[4]{Department of Biostatistics, UCLA School of Public Health, University of California, Los Angeles CA, USA}
+\affil[4]{Department of Biostatistics, UCLA Fielding School of Public Health, University of California, Los Angeles CA, USA}
 \affil[5]{Department of Microbiology and Immunology, Katholieke Universiteit Leuven, Leuven, Belgium}
 \affil[6]{Department of Zoology, University of Cambridge, Cambridge, UK.}
 \affil[7]{Department of Virology, Erasmus Medical Centre, Rotterdam, Netherlands.}
@@ -377,28 +377,35 @@ Further, measurements are usually interval and truncated, e.g.\ inhibition may c
 
 Previous work \cite{Smith04, Cai10} has used multidimensional scaling to place viruses and sera on an `antigenic map'.  
 These methods heuristically optimize locations of viruses and sera by seeking to minimize the sum of squared errors between titers predicted by map locations and observed titers.  
-Antigenic maps produced by these methods have proved useful in categorizing virus phenotypes \cite{Smith04}, but the extension of these methods to integrate genetic data has not yet been attained.
+Antigenic maps produced by these methods have proved useful in categorizing virus phenotypes \cite{Smith04}, but the extension of these methods to integrate genetic data %has not yet been attained.
+remains notably lacking.
 
-Here, we follow previous models in representing antigenic locations as points in an $N$-dimensional antigenic map. 
-Our goal is to find an optimal projection of the high-dimensional distance matrix $\mathbf{H}$ into a lower number of dimensions $P$. 
-We conduct this projection using Bayesian multidimensional scaling (BMDS) \cite{Oh01} in which a probabilistic model is constructed to quantify the fit of a particular configuration of cartographic locations to the observed matrix of serological measurements.
+Here, we follow previous models in representing antigenic locations as points in a low $P$-dimensional antigenic map. 
+One of our initial goals is to find an optimal projection of the high-dimensional distance matrix $\mathbf{H}$ into this lower dimensional space. 
+We conduct this projection using Bayesian multidimensional scaling (BMDS) \cite{Oh01} in which we construct a probabilistic model to quantify the fit of a particular configuration of cartographic locations to the observed matrix of serological measurements.
 Typically, $P = 2$, but higher or lower dimensions may better reflect the data. 
 
-Let $\virus_i \in \Re^{P}$ represent the cartographic location of virus $i$ for $i = 1,\ldots,\vn$, so that $\virus_i = \twomatrix{x_{i1}}{x_{i2}}$ for $P=2$. 
-Similarly, let $\serum_j$ represent the cartographic location of serum $j$ for $j = 1,\ldots,\sn$, so that $\serum_j = \twomatrix{y_{j1}}{y_{j2}}$ for $P=2$.
-This yields an $\vn \times P$ matrix $\viruses$ of virus coordinates and an $\sn \times P$ matrix $\sera$ of serum coordinates.
+Let $\virus_i \in \mathbb{R}^{P}$ represent the cartographic location of virus $i$ for $i = 1,\ldots,\vn$, so that $\virus_i = (x_{i1}, x_{i2})^{\prime}
+%\twomatrix{x_{i1}}{x_{i2}}
+$ for $P=2$. 
+Similarly, let $\serum_j$ represent the cartographic location of serum $j$ for $j = 1,\ldots,\sn$, so that $\serum_j = (y_{j1},y_{j2})^{\prime}
+%\twomatrix{y_{j1}}{y_{j2}}
+$ for $P=2$.
+For notational compactness, we collect together all virus coordinates into an $\vn \times P$ matrix  $\viruses = (\virus_1, \ldots, \virus_{\vn})^{\prime}$ and all serum coordinates into an $\sn \times P$ matrix $\sera = (\serum_{1},\ldots,\serum_{\sn})^{\prime}$.
+%This yields an $\vn \times P$ matrix $\viruses$ of virus coordinates and an $\sn \times P$ matrix $\sera$ of serum coordinates.
 Virus and serum may be isolated from / raised against the same strain and have different cartographic locations. 
 This gives a set of distances between virus and serum cartographic locations 
 \begin{equation}
-	\delta_{ij} =  || \virus_i - \serum_j ||_2.
+	\delta_{ij} =  || \virus_i - \serum_j ||_2,
 \end{equation}
+where $|| \cdot ||_2$ is an $L_2$ norm.
 
 Traditional approaches to antigenic cartography \cite{Smith04} begin by defining immunological distance as
 \begin{equation}
 	d_{ij} =  \se_j - H_{ij},
 \end{equation}
-where $H_{ij}$ is the log$_2$ titer of virus $i$ against serum $j$ and $\se_j = \max ( H_{1j},\ldots,H_{\vn j} )$.
-In following multidimensional scaling (MDS), these approaches attempt to optimize over $\viruses$ and $\sera$ such that
+where $H_{ij}$ is the log$_2$ titer of virus $i$ against serum $j$ and serum effect $\se_j = \max ( H_{1j},\ldots,H_{\vn j} )$ is fixed.
+In following multidimensional scaling (MDS), these approaches attempt to optimize over unknown $\viruses$ and $\sera$ such that
 \begin{equation}
 	\sum_{(i,j) \in \cal I} 
 	\left(
@@ -407,23 +414,27 @@ In following multidimensional scaling (MDS), these approaches attempt to optimiz
 \end{equation}
 is minimized, where $\mathcal{I} = \{ (i,j) : H_{ij} \mbox{ is measured} \}$.
 
-Here, we instead assume a probabilistic interpretation in which an observed titer is normally distributed around its cartographic expectation
+Here, we instead assume a probabilistic interpretation in which an observed titer is normally distributed around its cartographic expectation with variance $\mdssd^2$,
 \begin{equation} \label{hij}
-	H_{ij} \sim \mbox{Normal}( \se_j - \delta_{ij}, \mdssd^2 ),
+	H_{ij} \sim \mbox{Normal}( \se_j - \delta_{ij}, \mdssd^2 ).
 \end{equation}
-and the likelihood of observing an exact titer given the placement of antigenic locations is 
+Consequentially, the likelihood of observing an exact titer given the placement of antigenic locations is 
 \begin{equation} 
 	\point(H_{ij}) = \phi \left( \frac{ H_{ij} + \delta_{ij} - \se_j }{ \mdssd } \right),
 \end{equation}
-where $\mdssd^2$ represents variance and $\phi(\cdot)$ represents the standard normal PDF.
-The `serum effect' $\se_j$ represents the expected log$_2$ titer between virus $i$ and serum $j$ when $\delta_{ij}=0$ and is initially fixed such that $\se_j = \max ( H_{1j},\ldots,H_{\vn j} )$.
+where 
+%$\mdssd^2$ represents variance and 
+$\phi(\cdot)$ represents the standard normal probability density function (PDF).
+%The `serum effect' $\se_j$ represents the expected log$_2$ titer between virus $i$ and serum $j$ when $\delta_{ij}=0$. and is initially fixed such that $\se_j = \max ( H_{1j},\ldots,H_{\vn j} )$. %% MAS: Repeated material from above.
+Previous BMDS has employed a sampling density truncated to strictly positive quantities since $d_{ij}$ are directly observed, non-negative quantities.  
+In the antigenic setting, these remain random and can be negative (I still don't really believe this) since neither $\se_j$ is known nor is $H_{ij}$ observed with much precision. 
 
 HI assays sometimes show no inhibition at all measured titrations, e.g.\ a measurement can be reported as `$<$40'.
 In this case, the likelihood of observing the threshold measurement follows the cumulative density of the lower tail of the normal distribution
 \begin{equation} 
 	\threshold(H_{ij}) = \Phi \left( \frac{ H_{ij} + \delta_{ij} - \se_j }{ \mdssd } \right),
 \end{equation}
-where $\Phi(\cdot)$ represents the standard normal CDF.
+where $\Phi(\cdot)$ represents the standard normal cummulative distribution fucntion (CDF).
 Although it is simplest to assume that immunological measurements represent point estimates, it seems more natural to assume that the threshold for inhibition occurs between two titers, e.g.\ we observe inhibition at 1:40 dilution and no inhibition at 1:80 dilution.
 Rather than taking the HI titer as 40, we can instead treat this as an interval measurement, assuming that the exact titer for inhibition would occur somewhere between 40 and 80.
 HI titers are usually reported as the highest titer that successfully inhibits virus binding, so that in this case, we calculate the likelihood of an interval measurement as
@@ -451,31 +462,37 @@ We calculate the overall likelihood by multiplying probabilities of individual m
 	L(\viruses,\sera) = \prod_{(i,j) \in \cal I} f(H_{ij}),
 \end{equation}
 using probability functions $\point$, $\threshold$ and $\interval$ as appropriate.
-We assume that the prior precision $1/\mdssd^2$ follows a diffuse $\mbox{Gamma}(a, b)$ distribution with $a=0.001$ and $b=0.001$, and we start by assuming a diffuse normal prior on virus and serum locations
+We assume that the prior precision $1/\mdssd^2$ follows a diffuse $\mbox{Gamma}(a, b)$ distribution with $a=0.001$ and $b=0.001$, and we start by assuming independent, diffuse normal prior on virus and serum locations
 \begin{eqnarray}
-	\virus_i &\sim& \mathrm{Normal}(\mu,\Sigma) \nonumber \\
-	\serum_j &\sim& \mathrm{Normal}(\mu,\Sigma),
+	\virus_i &\sim& \mathrm{Normal}(\boldsymbol{\mu},\boldsymbol{\Sigma}) \nonumber \\
+	\serum_j &\sim& \mathrm{Normal}(\boldsymbol{\mu},\boldsymbol{\Sigma}),
 \end{eqnarray}
-with $\mu = \twomatrix{0}{0}$ and $\Sigma = \fourmatrix{10,000}{0}{0}{10,000}$ for $P=2$.
+with $\boldsymbol{\mu} = (0,\ldots,0)^{\prime} 
+%\twomatrix{0}{0}
+$ and $\boldsymbol{\Sigma}
+%\fourmatrix{10,000}{0}{0}{10,000}
+$ is a diagonal matrix with diagonal elements all equalling $10000$.
+%for $P=2$.
 
 We integrate over uncertainty using the Markov chain Monte Carlo (MCMC) procedures implemented in the phylogenetic package BEAST \cite{BEAST,BEAST17}.
-Metropolis-Hastings proposals include moves to individual virus and serum locations $\virus_i$ and $\serum_j$, scaling of the entire set of virus and serum locations $\viruses$ and $\sera$ and scaling $\mdssd$.
+Metropolis-Hastings proposals include transition kernels for individual virus and serum locations $\virus_i$ and $\serum_j$, scaling of the entire set of virus and serum locations $\viruses$ and $\sera$ and scaling $\mdssd^2$.
 
 \subsection*{Incorporating virus and serum effects}
 
 The preceding model represents immunological distance as a drop in titer against the most reactive comparison for a particular serum.
-However, this model may biased in some circumstances.
+However, this model may be biased in some circumstances.
 In one example, if a particular serum $j$ is only measured against distant viruses, its maximum titer will be artificially low and the likelihoods concerning this serum will appear poor. 
 To address this issue, we relax the assumption of fixed $\se_j$ values and treat the expected log$_2$ titer when $\delta_{ij}=0$ as a random variable.
-In this case, $H_{ij}$ still follows equation \ref{hij} with expectation $\se_j - \delta_{ij}$, but the vector of `serum effects' $\ses$ is estimated rather than fixed.
-We assume that $\se_j$ values are hierarchically distributed according to a normal distribution.
-The mean and variance of this distribution is taken from the empirical mean and empirical variance of the set of maximum titers across sera $\{ \max ( H_{1j},\ldots,H_{\vn j} ) : j = 1,\ldots,\sn \}$.
+In this case, $H_{ij}$ still follows equation \ref{hij} with expectation $\se_j - \delta_{ij}$, but the vector of `serum effects' $\ses = (\se_1,\ldots,\se_{\sn})$ is random and estimated rather than fixed.
+We assume that $\se_j$ values are hierarchically distributed according to a normal distribution.   
+We take an Empirical Bayesian approach is specifying the 
+mean and variance of this distribution, set to the empirical mean and empirical variance of the set of maximum titers across sera $\{ \max ( H_{1j},\ldots,H_{\vn j} ) : j = 1,\ldots,\sn \}$.
 This formulation assumes that particular sera are more reactive in general than other sera.
 
 Additionally, we follow the same logic and assume that some virus isolates are more reactive in general than other virus isolates.
 With virus reactivity included, the expectation of $H_{ij}$ becomes $(\ve_i+\se_j)/2 - \delta_{ij}$ and the vector of `virus effects' $\ve_i$ for $i = 1,\ldots, \vn$ is estimated in an analogous hierarchical fashion, with $\ves$ normally distributed with mean and variance equal to the empirical mean and variance of the set of maximum titers across viruses $\{ \max ( H_{i1},\ldots,H_{i \sn} ) : i = 1,\ldots,\vn \}$.
 
-With these effects included, Metropolis-Hastings proposals additionally incorporate moves to individual serum effects $\se_j$ and virus effects $\ve_i$.
+With these effects included, Metropolis-Hastings proposals additionally incorporate transition kernels for individual serum effects $\se_j$ and virus effects $\ve_i$. \textbf{What are $\ve_i$?  These have not been defined nor used.}
 
 \subsection*{Antigenic drift prior}
 
