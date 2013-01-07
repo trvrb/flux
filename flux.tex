@@ -78,9 +78,11 @@
 \def\msc#1{\textcolor{blue}{[#1]}}
 
 %%% TITLE %%%
-\title{\vspace{1.0cm} \LARGE \bf Revealing the competitive dynamics of influenza viruses through evolutionary cartography}
-
-% Antigenic drift determines evolutionary success of seasonal influenza lineages
+\title{\vspace{1.0cm} \LARGE \bf 
+Revealing the competitive dynamics of influenza viruses through evolutionary cartography \\
+or \\
+Charting antigenic drift and evolutionary success of seasonal influenza lineages
+}
 
 \author[1]{Trevor Bedford}
 \author[2,3,4]{Marc A. Suchard}
@@ -423,14 +425,14 @@ Consequently, the likelihood of observing an exact titer given the placement of 
 \end{equation}
 where $\phi(\cdot)$ represents the standard normal probability density function (PDF).
 Previous BMDS has employed a sampling density truncated to strictly positive quantities since $d_{ij}$ are directly observed, non-negative quantities.  
-In the antigenic setting, these remain random and can be negative \msc{I still don't really believe this} since neither $\se_j$ is known nor is $H_{ij}$ observed with much precision. 
+In the antigenic setting, these remain random and can be negative since neither $\se_j$ is known nor is $H_{ij}$ observed with much precision. 
 
 HI assays sometimes show no inhibition at all measured titrations, e.g.\ a measurement can be reported as `$<$40'.
 In this case, the likelihood of observing the threshold measurement follows the cumulative density of the lower tail of the normal distribution
 \begin{equation} 
 	\threshold(H_{ij}) = \Phi \left( \frac{ H_{ij} + \delta_{ij} - \se_j }{ \mdssd } \right),
 \end{equation}
-where $\Phi(\cdot)$ represents the standard normal cumulative distribution fucntion (CDF).
+where $\Phi(\cdot)$ represents the standard normal cumulative distribution function (CDF).
 Although it is simplest to assume that immunological measurements represent point estimates, it seems more natural to assume that the threshold for inhibition occurs between two titers, e.g.\ we observe inhibition at 1:40 dilution and no inhibition at 1:80 dilution.
 Rather than taking the HI titer as 40, we can instead treat this as an interval measurement, assuming that the exact titer for inhibition would occur somewhere between 40 and 80.
 HI titers are usually reported as the highest titer that successfully inhibits virus binding, so that in this case, we calculate the likelihood of an interval measurement as
@@ -463,7 +465,7 @@ We assume that the prior precision $1/\mdssd^2$ follows a diffuse $\mbox{Gamma}(
 	\virus_i &\sim& \mathrm{Normal}(\boldsymbol{\mu},\boldsymbol{\Sigma}) \nonumber \\
 	\serum_j &\sim& \mathrm{Normal}(\boldsymbol{\mu},\boldsymbol{\Sigma}),
 \end{eqnarray}
-with $\boldsymbol{\mu} = (0,\ldots,0)^{\prime} $ and $\boldsymbol{\Sigma}$ is a diagonal matrix with diagonal elements all equal to $10000$.
+with $\boldsymbol{\mu} = (0,\ldots,0)^{\prime}$ and $\boldsymbol{\Sigma}$ is a diagonal matrix with diagonal elements all equal to $10000$.
 
 We integrate over uncertainty using the Markov chain Monte Carlo (MCMC) procedures implemented in the phylogenetic package BEAST \cite{BEAST,BEAST17}.
 Metropolis-Hastings proposals include transition kernels for individual virus and serum locations $\virus_i$ and $\serum_j$, scaling of the entire set of virus and serum locations $\viruses$ and $\sera$ and scaling $\mdssd^2$.
@@ -476,13 +478,13 @@ In one example, if a particular serum $j$ is only measured against distant virus
 To address this issue, we relax the assumption of fixed $\se_j$ values and treat the expected log$_2$ titer when $\delta_{ij}=0$ as a random variable.
 In this case, $H_{ij}$ still follows equation \ref{hij} with expectation $\se_j - \delta_{ij}$, but the vector of `serum effects' $\ses = (\se_1,\ldots,\se_{\sn})$ is random and estimated rather than fixed.
 We assume that $\se_j$ values are hierarchically distributed according to a normal distribution.   
-We take an Empirical Bayesian approach is specifying the mean and variance of this distribution, set to the empirical mean and empirical variance of the set of maximum titers across sera $\{ \max ( H_{1j},\ldots,H_{\vn j} ) : j = 1,\ldots,\sn \}$.
+We take an Empirical Bayesian approach in specifying the mean and variance of this distribution, set to the empirical mean and empirical variance of the set of maximum titers across sera $\{ \max ( H_{1j},\ldots,H_{\vn j} ) : j = 1,\ldots,\sn \}$.
 This formulation assumes that particular sera are more reactive in general than other sera.
 
-Additionally, we follow the same logic and assume that some virus isolates are more reactive in general than other virus isolates.
-With virus reactivity included, the expectation of $H_{ij}$ becomes $(\ve_i+\se_j)/2 - \delta_{ij}$ and the vector of `virus effects' $\ve_i$ for $i = 1,\ldots, \vn$ is estimated in an analogous hierarchical fashion, with $\ves$ normally distributed with mean and variance equal to the empirical mean and variance of the set of maximum titers across viruses $\{ \max ( H_{i1},\ldots,H_{i \sn} ) : i = 1,\ldots,\vn \}$.
+Additionally, we follow the same logic and assume that some virus isolates are more reactive than other virus isolates and include a `virus effect' $\ve_i$ representing the general level of reactivity across HI assays. 
+With virus reactivity included, the expectation of $H_{ij}$ becomes $(\ve_i+\se_j)/2 - \delta_{ij}$ and the vector of virus effects $\ve_i$ for $i = 1,\ldots, \vn$ is estimated in an analogous hierarchical fashion, with $\ves$ normally distributed with mean and variance equal to the empirical mean and variance of the set of maximum titers across viruses $\{ \max ( H_{i1},\ldots,H_{i \sn} ) : i = 1,\ldots,\vn \}$.
 
-With these effects included, Metropolis-Hastings proposals additionally incorporate transition kernels for individual serum effects $\se_j$ and virus effects $\ve_i$. \msc{What are $\ve_i$?  These have not been defined nor used.}
+With these effects included, Metropolis-Hastings proposals additionally incorporate transition kernels for individual serum effects $\se_j$ and virus effects $\ve_i$.
 
 \subsection*{Antigenic drift prior}
 
@@ -495,9 +497,9 @@ In order to achieve more interpretable antigenic locations we impose a weak prio
 In influenza, it's clear that antigenic distance between strains increases with time \cite{Smith04,Cai10}.
 To capture this, we replace the diffuse normal prior on virus locations with a prior where virus locations follow a normal distribution in which the expectation of dimension 1 increases with date of virus sampling
 \begin{equation}
-	\virus_i \sim \mathrm{Normal}(\mu, \Sigma),
+	\virus_i \sim \mathrm{Normal}(\boldsymbol{\mu}, \boldsymbol{\Sigma}),
 \end{equation}
-where $\mu = \twomatrix{\beta \, t_i}{0}$ and $\Sigma = \fourmatrix{\driftsd^2}{0}{0}{\driftsd^2}$ for $P=2$, and $t_i$ is the difference in time between virus $i$ and the earliest sampled virus.
+where $\boldsymbol{\mu} = (\beta \, t_i, 0)^{\prime}$ and $\boldsymbol{\Sigma} = \fourmatrix{\driftsd^2}{0}{0}{\driftsd^2}$ for $P=2$, and $t_i$ is the difference in time between virus $i$ and the earliest sampled virus.
 Thus, this model assumes that the virus population drifts in a line across the antigenic map at rate $\beta$.
 The parameter $\driftsd$ determines the breadth of the virus population cloud at each point in time.
 We assume that both the prior slope $\beta$ and the prior precision $1/\driftsd^2$ follow a diffuse $\mbox{Gamma}(a, b)$ distribution with $a=0.001$ and $b=0.001$.
