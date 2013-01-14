@@ -59,14 +59,18 @@
 \newcommand{\threshold}{f_{\textstyle \lrcorner}}	% threshold likelihood
 \newcommand{\interval}{f_{\sqcup}}					% interval likelihood
 \newcommand{\mdssd}{\varphi}						% MDS standard deviation
-\newcommand{\diffusionsd}{\sigma}					% Diffusion standard deviation
-\newcommand{\driftsd}{\vartheta}					% Drift prior standard deviation
+\newcommand{\virussd}{\sigma}						% Virus / Diffusion standard deviation
+\newcommand{\serumsd}{\vartheta}					% Serum standard deviation
 \newcommand{\tree}{\tau}							% Phylogeny
 \newcommand{\vn}{n}									% Number of viruses
 \newcommand{\sn}{k}									% Number of sera
+\newcommand{\node}{\mathbf{z}}						% Internal node in phylogeny
+\newcommand{\normal}{\mathcal{N}}					% Normal distribution
 \setlength{\arraycolsep}{2pt}
-\newcommand{\twomatrix}[2]{\scriptsize \Big( \begin{matrix} #1 \\ #2 \end{matrix} \Big)}				% pretty inline matrix 
-\newcommand{\fourmatrix}[4]{\scriptsize \Big( \begin{matrix} #1 & #2 \\ #3 & #4 \end{matrix} \Big)}		% pretty inline matrix 
+\newcommand{\smalltwomatrix}[2]{\scriptsize \Big( \begin{matrix} #1 \\ #2 \end{matrix} \Big)}				% pretty inline matrix 
+\newcommand{\smallfourmatrix}[4]{\scriptsize \Big( \begin{matrix} #1 & #2 \\ #3 & #4 \end{matrix} \Big)}	% pretty inline matrix 
+\newcommand{\twomatrix}[2]{\left( \begin{matrix} #1 \\ #2 \end{matrix} \right)}								% pretty inline matrix 
+\newcommand{\fourmatrix}[4]{\left( \begin{matrix} #1 & #2 \\ #3 & #4 \end{matrix} \right)}					% pretty inline matrix 
 
 % comments
 \usepackage{ulem}
@@ -372,11 +376,11 @@ Further work characterizing antigenic evolution in the human influenza virus may
 %%% METHODS %%%
 \section*{Methods}
 
-\subsection*{Bayesian multidimensional scaling}
+\subsection*{Antigenic cartography}
 
 Antigenic characteristics of viral strains are often assessed through immunological assays such as the hemagglutination inhibition (HI) assay \cite{Hirst43}.  
 At heart, these assays compare the reactivity of one virus strain to antibodies raised against another virus strain via challenge or vaccination.  
-In the case of HI, the measurement of cross-reactivity takes the form of a titer representing the dilution factor at which serum raised against a particular virus ceases to be effective at inhibiting binding of another virus.  
+In the case of HI, the measurement of cross-reactivity takes the form of a titer representing the dilution factor at which serum raised against a particular virus ceases to be effective at inhibiting binding to red blood cells of another virus.  
 These factors are commonly assessed by serial dilution, so that HI titers will form a log series, 40, 80, 160, etc \dots.
 Because experimental HI titers typically differ by factors of two, we find it convenient to work in log$_2$ space and represent the titer of virus $i$ against serum $j$ as $H_{ij} = \mathrm{log}_2 \mbox{(HI titer)}$, i.e.\ a titer of 160 has $H_{ij} = 7.32$.
 Due to experimental constraints, most comparisons cannot be made, leading to a sparse observation matrix $\mathbf{H} = \{H_{ij}\}$.  
@@ -391,10 +395,12 @@ One of our initial goals is to find an optimal projection of the high-dimensiona
 We conduct this projection using Bayesian multidimensional scaling (BMDS) \cite{Oh01} in which we construct a probabilistic model to quantify the fit of a particular configuration of cartographic locations to the observed matrix of serological measurements.
 Typically, $P = 2$, but higher or lower dimensions may better reflect the data. 
 
+\subsection*{Likelihood functions}
+
 Let $\virus_i \in \mathbb{R}^{P}$ represent the cartographic location of virus $i$ for $i = 1,\ldots,\vn$, so that $\virus_i = (x_{i1}, x_{i2})^{\prime}$ for $P=2$. 
 Similarly, let $\serum_j$ represent the cartographic location of serum $j$ for $j = 1,\ldots,\sn$, so that $\serum_j = (y_{j1},y_{j2})^{\prime}$ for $P=2$.
 For notational compactness, we collect together all virus coordinates into an $\vn \times P$ matrix  $\viruses = (\virus_1, \ldots, \virus_{\vn})^{\prime}$ and all serum coordinates into an $\sn \times P$ matrix $\sera = (\serum_{1},\ldots,\serum_{\sn})^{\prime}$.
-Virus and serum may be isolated from / raised against the same strain and have different cartographic locations. 
+Virus and serum may be isolated from / raised against the same strain and have different cartographic locations, and separate serum isolates raised against the same strain may also have different cartographic locations. 
 This gives a set of distances between virus and serum cartographic locations 
 \begin{equation}
 	\delta_{ij} =  || \virus_i - \serum_j ||_2,
@@ -417,7 +423,7 @@ is minimized, where $\mathcal{I} = \{ (i,j) : H_{ij} \mbox{ is measured} \}$.
 
 Here, we instead assume a probabilistic interpretation in which an observed titer is normally distributed around its cartographic expectation with variance $\mdssd^2$,
 \begin{equation} \label{hij}
-	H_{ij} \sim \mbox{Normal}( \se_j - \delta_{ij}, \mdssd^2 ).
+	H_{ij} \sim \normal( \se_j - \delta_{ij}, \, \mdssd^2 ).
 \end{equation}
 Consequently, the likelihood of observing an exact titer given the placement of antigenic locations is 
 \begin{equation} 
@@ -433,8 +439,8 @@ In this case, the likelihood of observing the threshold measurement follows the 
 	\threshold(H_{ij}) = \Phi \left( \frac{ H_{ij} + \delta_{ij} - \se_j }{ \mdssd } \right),
 \end{equation}
 where $\Phi(\cdot)$ represents the standard normal cumulative distribution function (CDF).
-Although it is simplest to assume that immunological measurements represent point estimates, it seems more natural to assume that the threshold for inhibition occurs between two titers, e.g.\ we observe inhibition at 1:40 dilution and no inhibition at 1:80 dilution.
-Rather than taking the HI titer as 40, we can instead treat this as an interval measurement, assuming that the exact titer for inhibition would occur somewhere between 40 and 80.
+Although it is simplest to assume that immunological measurements represent point estimates, it seems more natural to assume that the threshold for inhibition occurs between two titers, e.g.\ we observe inhibition at 1:160 dilution and no inhibition at 1:320 dilution.
+Rather than taking the HI titer as 160, we can instead treat this as an interval measurement, assuming that the exact titer for inhibition would occur somewhere between 160 and 320.
 HI titers are usually reported as the highest titer that successfully inhibits virus binding, so that in this case, we calculate the likelihood of an interval measurement as
 \begin{equation} 
 	\interval(H_{ij}) = \Phi \left( \frac{ H_{ij} + \delta_{ij} - \se_j + 1 }{ \mdssd } \right) - \Phi \left( \frac{ H_{ij} + \delta_{ij} - \se_j }{\mdssd} \right).
@@ -460,17 +466,8 @@ We calculate the overall likelihood by multiplying probabilities of individual m
 	L(\viruses,\sera) = \prod_{(i,j) \in \cal I} f(H_{ij}),
 \end{equation}
 using probability functions $\point$, $\threshold$ and $\interval$ as appropriate.
-We assume that the prior precision $1/\mdssd^2$ follows a diffuse $\mbox{Gamma}(a, b)$ distribution with $a=0.001$ and $b=0.001$, and we start by assuming independent, diffuse normal prior on virus and serum locations
-\begin{eqnarray}
-	\virus_i &\sim& \mathrm{Normal}(\boldsymbol{\mu},\boldsymbol{\Sigma}) \nonumber \\
-	\serum_j &\sim& \mathrm{Normal}(\boldsymbol{\mu},\boldsymbol{\Sigma}),
-\end{eqnarray}
-with $\boldsymbol{\mu} = (0,\ldots,0)^{\prime}$ and $\boldsymbol{\Sigma}$ is a diagonal matrix with diagonal elements all equal to $10000$.
 
-We integrate over uncertainty using the Markov chain Monte Carlo (MCMC) procedures implemented in the phylogenetic package BEAST \cite{BEAST,BEAST17}.
-Metropolis-Hastings proposals include transition kernels for individual virus and serum locations $\virus_i$ and $\serum_j$, scaling of the entire set of virus and serum locations $\viruses$ and $\sera$ and scaling $\mdssd^2$.
-
-\subsection*{Incorporating virus and serum effects}
+\subsection*{Virus and serum effects}
 
 The preceding model represents immunological distance as a drop in titer against the most reactive comparison for a particular serum.
 However, this model may be biased in some circumstances.
@@ -482,28 +479,29 @@ We take an Empirical Bayesian approach in specifying the mean and variance of th
 This formulation assumes that particular sera are more reactive in general than other sera.
 
 Additionally, we follow the same logic and assume that some virus isolates are more reactive than other virus isolates and include a `virus effect' $\ve_i$ representing the general level of reactivity across HI assays. 
-With virus reactivity included, the expectation of $H_{ij}$ becomes $(\ve_i+\se_j)/2 - \delta_{ij}$ and the vector of virus effects $\ve_i$ for $i = 1,\ldots, \vn$ is estimated in an analogous hierarchical fashion, with $\ves$ normally distributed with mean and variance equal to the empirical mean and variance of the set of maximum titers across viruses $\{ \max ( H_{i1},\ldots,H_{i \sn} ) : i = 1,\ldots,\vn \}$.
+With virus reactivity included, observed titers follow
+\begin{equation}
+	H_{ij} \sim \normal \left( \frac{\ve_i+\se_j}{2} - \delta_{ij}, \, \mdssd^2 \right),
+\end{equation}
+and the vector of virus effects $\ve_i$ for $i = 1,\ldots, \vn$ is estimated in an analogous hierarchical fashion, with $\ves$ normally distributed with mean and variance equal to the empirical mean and variance of the set of maximum titers across viruses $\{ \max ( H_{i1},\ldots,H_{i \sn} ) : i = 1,\ldots,\vn \}$.
 
-With these effects included, Metropolis-Hastings proposals additionally incorporate transition kernels for individual serum effects $\se_j$ and virus effects $\ve_i$.
+\subsection*{Location prior}
 
-\subsection*{Antigenic drift prior}
-
-As presented, virus and serum locations $\viruses$ and $\sera$ accurately characterize antigenic distances between virus strains based on titers from pairwise HI assays.
-However, these distances represent only a local description of antigenic space and do not provide a global picture.
-An example of this phenomena is shown in Figure~\ref{schematic_map}.
+As presented, virus and serum locations $\viruses$ and $\sera$ give a likelihood of observing the HI data $\mathbf{H}$.
+However, distances between viruses and sera represent only a local description of antigenic space and do not provide a global picture.
+An example of this phenomenon is shown in Figure~\ref{schematic_map}.
 In this case it is impossible to determine from the HI data at hand whether the blue and yellow viruses are antigenically similar or antigenically divergent. 
 This presents an issue of model identifiability; multiple antigenic maps give the same likelihood of observing the serological data.
 In order to achieve more interpretable antigenic locations we impose a weak prior on global locations.
 In influenza, it's clear that antigenic distance between strains increases with time \cite{Smith04,Cai10}.
-To capture this, we replace the diffuse normal prior on virus locations with a prior where virus locations follow a normal distribution in which the expectation of dimension 1 increases with date of virus sampling
-\begin{equation}
-	\virus_i \sim \mathrm{Normal}(\boldsymbol{\mu}, \boldsymbol{\Sigma}),
-\end{equation}
-where $\boldsymbol{\mu} = (\beta \, t_i, 0)^{\prime}$ and $\boldsymbol{\Sigma} = \fourmatrix{\driftsd^2}{0}{0}{\driftsd^2}$ for $P=2$, and $t_i$ is the difference in time between virus $i$ and the earliest sampled virus.
-Thus, this model assumes that the virus population drifts in a line across the antigenic map at rate $\beta$.
-The parameter $\driftsd$ determines the breadth of the virus population cloud at each point in time.
-We assume that both the prior slope $\beta$ and the prior precision $1/\driftsd^2$ follow a diffuse $\mbox{Gamma}(a, b)$ distribution with $a=0.001$ and $b=0.001$.
-We further introduce Metropolis-Hastings proposals that scale $\beta$ and $\driftsd$.
+To capture this, we assume that the expected location of viruses and sera increases with date of sampling along dimension one, and each virus and serum location follows an independent normal distribution centered around this temporal expectation, so that
+\begin{eqnarray}
+	x_{i1} &\sim& \beta \, t_i + \normal(0, \virussd^2) \nonumber \\
+	y_{j1} &\sim& \beta \, t_j + \normal(0, \serumsd^2),
+\end{eqnarray}
+where $t$ is the difference between the date of the indexed virus or serum and the date of the earliest sampled virus or serum, and other dimensions follow $x_{im} \sim \normal(0, \virussd^2)$ and $y_{jm} \sim \normal(0, \serumsd^2)$ for $m\ge2$.
+Thus, this model assumes that virus and serum locations drift in a line across the antigenic map at rate $\beta$.
+The parameter $\virussd$ determines the breadth of the cloud of virus locations at each point in time, while $\serumsd$ determines the breadth of the cloud of serum locations.
 
 %%% schematic_map %%%
 \begin{figure}[tb]
@@ -520,25 +518,35 @@ We further introduce Metropolis-Hastings proposals that scale $\beta$ and $\drif
 
 \subsection*{Diffusion model of antigenic evolution}
 
-We simultaneously model antigenic locations and genetic relatedness by assuming that viruses diffuse across the antigenic map according to a Brownian motion process \cite{Lemey10}.
-To do this, we incorporate a prior on virus locations according to the evolutionary process
+We simultaneously model antigenic locations and genetic relatedness by assuming that virus locations are influenced by evolution following a Brownian motion process \cite{Lemey10}.
+To do this, we replace the previous prior specifying independent virus locations with a prior that incorporates covariance based on shared evolutionary history
 \begin{equation}
-	(\virus_1,\ldots,\virus_n) \sim \mbox{Evolutionary Brownian Process}(\tree, \diffusionsd),
+	\virus_i \sim \twomatrix{\beta \, t_i}{0} + \mbox{Evolutionary Brownian Process}(\virussd, \tree)
 \end{equation}
-where $\tree$ is a phylogeny specifying tree topology and branch lengths and $\diffusionsd$ is the volatility parameter of the Brownian motion,  set to have equal variance in each antigenic dimension and no correlation across dimensions.
+for $P=2$, where $\virussd$ is the volatility parameter of the Brownian motion and $\tree$ is a phylogeny specifying tree topology and branch lengths.
 Thus, viruses which are genetically similar are induced to have prior locations close to one another on the antigenic map.
-The phylogenetic tree $\tree$ is estimated using sequence data for viruses $1,\ldots,\vn$ according to well established methods implemented in the software package BEAST \cite{BEAST, BEAST17}.
-The volatility parameter $\diffusionsd$ is estimated jointly from the genetic and antigenic data.
-Parameter $\diffusionsd$ is assumed to follow a diffuse $\mbox{Gamma}(a, b)$ distribution with $a=0.001$ and $b=0.001$.
-Metropolis-Hastings proposals scale $\diffusionsd$.
-The probability of observing virus locations $p(\viruses | \tree, \diffusionsd)$ is determined through analytical integration across internal states following the methods introduced in \cite{Lemey10}.
-Thus, under the full model, the posterior probability of observing virus and serum locations given immunological data and phylogeny is factored
+The evolutionary Brownian process assumes that the location $\node_i$ of node $i$ on the phylogeny follows from its parent node $p$, and with the addition of the drift along dimension 1, is distributed as
 \begin{equation}
-	p(\viruses,\sera | \mathbf{H},\tree) = \frac{ p(\mathbf{H} | \viruses, \sera, \ses, \ves, \mdssd) \; 
-	p(\viruses | \beta, \driftsd) \;
-	p(\viruses | \tree, \diffusionsd) \; 
-	p(\sera, \ses, \ves, \mdssd, \beta, \driftsd, \diffusionsd)}{ p(\mathbf{H}) }.
+	\node_i \sim \twomatrix{\beta \, t_i}{0} + \normal(\node_p, d \, \boldsymbol{\Sigma})
 \end{equation}
+for $P=2$, where $\node_p$ is the location of the parent node, $d$ is the length of the branch connecting nodes $i$ and $p$, and $\boldsymbol{\Sigma}$ is a diagonal matrix with diagonal elements all equal to $\virussd$.
+The root node $\node_0$ is assumed to follow a normal distribution with expectation $(0, 0)^{\prime}$ for $P=2$ and variance determined by the diffusion volatility $\virussd$ \cite{Lemey10}.
+The probability of virus locations $p(\viruses | \beta, \virussd, \tree)$ is determined through analytical integration across internal states following the methods introduced in \cite{Lemey10}.
+Here, the phylogenetic tree $\tree$ is estimated using sequence data for viruses $1,\ldots,\vn$ according to well established methods implemented in the software package BEAST \cite{BEAST, BEAST17}.
+
+\subsection*{Posterior samples}
+
+Top-level priors for $1/\mdssd^2$, $\beta$, $1/\virussd^2$, and $1/\serumsd^2$ are assumed to follow diffuse $\mbox{Gamma}(a, b)$ distributions  with $a=0.001$ and $b=0.001$.
+Under the full model, the posterior probability of observing virus and serum locations given immunological data is factored
+\begin{equation}
+	p(\viruses,\sera | \mathbf{H}) \propto p(\mathbf{H} | \viruses, \sera, \ses, \ves, \mdssd) \; 
+	p(\viruses | \beta, \virussd, \tree) \;
+	p(\sera | \beta, \serumsd) \; 
+	p(\ses, \ves, \mdssd, \beta, \virussd, \serumsd, \tree).
+\end{equation}
+We sample from this posterior distribution using the Markov chain Monte Carlo (MCMC) procedures implemented in the software package BEAST \cite{BEAST,BEAST17}.
+Metropolis-Hastings proposals include transition kernels that translate individual virus and serum locations $\virus_i$ and $\serum_j$ and individual virus effects $\ve_i$ and serum effects $\se_j$, and other transition kernels that scale the entire set of virus and serum locations $\viruses$ and $\sera$ and that scale parameters $\mdssd$, $\beta$, $\virussd$ and $\serumsd$.
+For the present analysis, a two-step approach was taken to sample phylogenies, where a posterior sample of phylogenies was gathered using sequence data and then, in the cartographic analysis, trees from this set were randomly proposed and accepted following the Metropolis-Hastings algorithm \cite{Pagel04}.
 
 \subsection*{Genetic, antigenic and surveillance data}
 
@@ -571,25 +579,21 @@ Similar calculations were performed for A/H1N1, B/Vic and B/Yam.
 
 There were a couple of issues we encountered in applying the BMDS model to HI data from A/H3N2, A/H1N1, B/Vic and B/Yam.
 The first issue lay in summarizing the posterior distribution of virus and serum locations.
-Although our MCMC procedure samples from the posterior, sampled virus and serum locations represent only relative quantities, and because of this, over the course of the MCMC virus locations may shift dramatically.
-Our `antigenic drift prior' removes much of this issue, orienting the antigenic map along dimension 1 and fixing it to begin at the origin.
+Although our MCMC procedure samples from the posterior, sampled virus and serum locations represent only relative quantities, and because of this, over the course of the MCMC virus locations may shift.
+Our prior on virus and serum locations removes much of this issue, orienting the antigenic map along dimension 1 and fixing it to begin at the origin.
 However, local isometries are often still a problem.
 For example, in A/H3N2 the Beijing/89 cluster may shift back and forth from being above other viruses on dimension 2 to being below other viruses on dimension 2.
 These isometries may be local, i.e.\ Beijing/89 and Beijing/92 may flip while leaving Texas/77 in place.
 Consequently, it is difficult to fully align MCMC samples using Procrustes analysis.
 Here, we take a simple approach and sample a single MCMC step and visualize the antigenic locations at this state (Figures~\ref{map}, Figure~\ref{drift}).
-Then, for quantities of interest, like rate of antigenic drift and rate of diffusion at different points along the phylogeny, we calculate this quantity across MCMC samples to yield an expectation and a credible interval.
-
-Running the fully parameterized model including the phylogenetic diffusion prior resulted a pathological outcome in which all virus and serum locations are compressed into a single point, diffusion volatility $\diffusionsd$ is tends toward zero and MDS variance $\mdssd^2$ tends towards infinity.
-In this case, $p(\mathbf{H}|\viruses,\sera,\ses,\ves, \mdssd)$ is reduced, but $p(\viruses | \tree, \diffusionsd)$ becomes very large, yielding a greater overall posterior probability.
-To avoid this problematic outcome we conducted a two stage analysis.
-We first estimated values of $\mdssd$, $\beta$ and $\driftsd$ using HI data alone, and then held these values constant in a subsequent analysis that included the phylogenetic diffusion prior.
+Then, for specific quantities of interest, like rate of antigenic drift and rate of diffusion at different points along the phylogeny, we calculate this quantity across MCMC samples to yield an expectation and a credible interval.
+This approach accurately characterizes uncertainty that may be hidden in an analysis of a single antigenic map.
 
 Phylogenetic trees were sampled for A/H3N2, A/H1N1, B/Vic and B/Yam using BEAST \cite{BEAST} and incorporated the SRD06 nucleotide substitution model \cite{Shapiro06}, a coalescent demographic model with constant effective population size and a strict molecular clock across branches.
 MCMC was run for 60 million steps and trees were sampled every 50,000 steps after allowing a burn-in of 10 million steps, yielding a total sample of 2000 trees.
-These trees were treated as a discrete set of possibilities when subsequently sampled in the BMDS analysis.
+These trees were treated as a discrete set of possibilities when subsequently sampled in the BMDS analysis \cite{Pagel04}.
 
-MCMC was used to sample virus locations $\viruses$, serum locations $\sera$, virus effects $\ves$, serum effects $\ses$, MDS precision $1/\mdssd^2$, antigenic drift rate $\beta$, population variance $\driftsd^2$, diffusion volatility $\diffusionsd$ and phylogenetic tree $\tree$.
+MCMC was used to sample virus locations $\viruses$, serum locations $\sera$, virus effects $\ves$, serum effects $\ses$, MDS precision $1/\mdssd^2$, antigenic drift rate $\beta$, virus location precision $1/\virussd^2$, serum location precision $1/\serumsd$ and phylogenetic tree $\tree$.
 MCMC chains were run for 500 million steps and parameter values sampled every 200,000 steps after a burn-in of 100 million steps, yielding a total of 2000 MCMC samples.
 
 \subsection*{Availability}
