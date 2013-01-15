@@ -59,8 +59,8 @@
 \newcommand{\threshold}{f_{\textstyle \lrcorner}}	% threshold likelihood
 \newcommand{\interval}{f_{\sqcup}}					% interval likelihood
 \newcommand{\mdssd}{\varphi}						% MDS standard deviation
-\newcommand{\virussd}{\sigma}						% Virus / Diffusion standard deviation
-\newcommand{\serumsd}{\vartheta}					% Serum standard deviation
+\newcommand{\virussd}{\sigma_x}						% Virus / Diffusion standard deviation
+\newcommand{\serumsd}{\sigma_y}						% Serum standard deviation
 \newcommand{\tree}{\tau}							% Phylogeny
 \newcommand{\vn}{n}									% Number of viruses
 \newcommand{\sn}{k}									% Number of sera
@@ -171,41 +171,42 @@ Maps that produce pairwise distances most congruent with the observed titers wil
 We integrate over sources of uncertainty, such as antigenic locations, in a flexible Bayesian fashion.
 We apply this model to HI measurements of virus isolates against post-infection ferret sera for influenza A/H3N2, A/H1N1, B/Vic and B/Yam (see Methods).
 
-We test model performance by constructing a training dataset representing 90\% of the HI measurements of the A/H3N2 dataset and a test dataset representing the remaining 10\% of the full dataset. 
+We test model performance by constructing training datasets representing 90\% of the HI measurements in each of the four datasets and test datasets representing the remaining 10\% of the measurements in each dataset. 
 By fitting the BMDS model to the training dataset, we are able to predict HI titers in the test dataset and compare these predicted titers to observed titers in the test dataset. 
-We find that a BMDS analog of the model used by Smith et al.\ \cite{Smith04}, in which viruses and sera are represented as 2D locations and expected titer is relative to the maximum titer of a particular ferret serum, performs well, yielding an average absolute predictive error of 0.87 log$_2$ HI titers (Table \ref{errortable}).
-We find that a model with two dimensional antigenic locations predicts test data to the same precision as a 3D model, but performs substantially better than a 1D model or models with four or more dimensions (Table \ref{errortable}), and thus specify a two dimensional model in all subsequent analyses.
-We extend this model by estimating the strength of overall reactivity of each serum rather than fixing this at the maximum titer, and additionally, by estimating the strength of reactivity of each virus isolate.
+We find that a BMDS analog of the model used by Smith et al.\ \cite{Smith04}, in which viruses and sera are represented as 2D locations and expected titer is relative to the maximum titer of a particular ferret serum, performs well, yielding an average absolute predictive error of 0.91 log$_2$ HI titers for A/H3N2 (Table \ref{errortable}).
+We find that model with two dimensional antigenic locations predict test data to the same precision or slightly better precision as 3D models, but perform substantially better than 1D models or models with four or more dimensions (Table \ref{errortable}), and thus specify a two dimensional model in all subsequent analyses.
+The finding of a low-dimensional map across influenza lineages extends previous studies in A/H3N2 \cite{Smith04} and remains an interesting empirical observation.
+We extend this 2D model by estimating the strength of overall reactivity of each serum rather than fixing this at its maximum titer, and additionally, by estimating the strength of reactivity of each virus isolate.
 We refer to these estimates as serum effects and virus effects, respectively.
-We find that including these effects decreases test error to 0.75 for influenza A/H3N2.
-We arrive at similar precisions when repeating this analysis for A/H1N1, B/Vic and B/Yam.
-For the 2D model with serum and virus effects, A/H1N1 shows a test error of 0.64, B/Vic shows a test error of 0.74 and B/Yam shows a test error of 0.80.
+We find that including these effects decreases test error further, ranging from an improvement of 0.03 in A/H1N1 to an improvement of 0.14 in A/H3N2 (Table \ref{errortable}).
 
 %%% errortable %%%
 \begin{table}[h]
 	\centering
-	\caption{\textbf{Absolute prediction error of log$_2$ HI titer against A/H3N2 test data across models.}}
+	\caption{\textbf{Absolute prediction error of log$_2$ HI titer for test data across models and datasets.}}
 	\label{errortable}		
-	\begin{tabular}{ c c c c c } 
+	\begin{tabular}{ c c c c c c c c } 
 	\hline
-	BMDS dimension 	& 	Serum effects 	&	Virus effects	& 	Test error	\\
+	\multicolumn{4}{c}{Model} 	&	\multicolumn{4}{c}{Test error}  \\
+	Dimen 	& 	Serum effects 	&	Virus effects	& Covariance	& 	A/H3N2	& 	A/H1N1	& 	B/Vic	& 	B/Yam	\\
 	\hline	
-	1D 				&	Fixed 			&	None			&	1.05		\\	
-	2D 				&	Fixed 			&	None			&	0.87 		\\
-	3D 				&	Fixed 			&	None			&	0.87		\\
-	4D 				&	Fixed 			&	None			&	0.91		\\
-	5D 				&	Fixed 			&	None			&	0.97		\\	
-	2D 				&	Estimated 		&	None			&	0.78		\\	
-	2D 				&	Estimated 		&	Estimated		&	0.75		\\		
+	1D 		&	Fixed 			&	None			& None			&	1.07	&	0.92	&	0.94	&	1.08	\\	
+	2D 		&	Fixed 			&	None			& None			&	0.91 	&	0.74 	&	0.77	&	0.83	\\
+	3D 		&	Fixed 			&	None			& None			&	0.91	&	0.74 	&	0.79	&	0.84	\\
+	4D 		&	Fixed 			&	None			& None			&	0.95	&	0.75 	&	0.81	&	0.86	\\
+	5D 		&	Fixed 			&	None			& None			&	0.99	&	0.76 	&	0.84	&	0.88	\\	
+	2D 		&	Estimated 		&	None			& None			&	0.79	&	0.74 	&	0.68	&	0.76	\\	
+	2D 		&	Estimated 		&	Estimated		& None			&	0.77	&	0.71 	&	0.65	&	0.73	\\	
+	2D 		&	Estimated 		&	Estimated		& Diffusion		&	0.76	&	0.71 	&	0.64	&	0.72	\\		
 	\hline
-	\end{tabular}
+	\end{tabular}	
 \end{table}
 
 Previous work on influenza antigenic and genetic evolution has examined antigenic and genetic patterns in isolation, and then compared the results to assess congruence of these two aspects of evolution \cite{Hay01,Smith04,Russell08}. 
-Here, we simultaneously model antigenic and genetic evolution by adopting an evolutionary diffusion process \cite{Lemey10}, wherein a virus's antigenic character state evolves along branches of phylogenetic tree according to Brownian motion process (see Methods).
-The diffusion process acts as a prior, so that genetically similar viruses are expected to have antigenic locations that lie close to one another, and thus we model the relationship between genetic change and accrual of antigenic distance.
-We include sequence data for A/H3N2, A/H1N1, B/Vic and B/Yam to estimate this diffusion process.
-We find similar levels of predictive accuracy when including the diffusion process with A/H3N2 showing a test error of 0.75, A/H1N1 showing a test error of 0.66, B/Vic showing a test error of 0.70 and B/Yam showing a test error of 0.78.
+Here, we simultaneously model antigenic and genetic evolution by adopting an evolutionary diffusion process \cite{Lemey10}, wherein a virus's antigenic character state evolves along branches of phylogenetic tree according to a Brownian motion process (see Methods).
+The diffusion process acts as a prior on virus locations, so that genetically similar viruses are expected to share similar antigenic locations.
+We include sequence data for A/H3N2, A/H1N1, B/Vic and B/Yam to estimate this diffusion process, and find a small increase in predictive accuracy when including covariance induced by the diffusion (Table \ref{errortable}).
+Additionally, modeling antigenic diffusion gives the advantage of directly correlating evolutionary outcomes with changes in antigenic phenotype.
 
 \subsection*{Antigenic evolution across influenza lineages}
 
@@ -531,16 +532,16 @@ The parameter $\virussd$ determines the breadth of the cloud of virus locations 
 We simultaneously model antigenic locations and genetic relatedness by assuming that virus locations are influenced by evolution following a Brownian motion process \cite{Lemey10}.
 To do this, we replace the previous prior specifying independent virus locations with a prior that incorporates covariance based on shared evolutionary history
 \begin{equation}
-	\virus_i \sim \twomatrix{\beta \, t_i}{0} + \mbox{Evolutionary Brownian Process}(\virussd, \tree)
+	\viruses \sim \left( \begin{matrix} \beta \, t_1 & 0 \\ \vdots & \vdots \\ \beta \, t_n & 0 \end{matrix} \right) + \, \mbox{Evolutionary Brownian Process}(\virussd, \tree)
 \end{equation}
 for $P=2$, where $\virussd$ is the volatility parameter of the Brownian motion and $\tree$ is a phylogeny specifying tree topology and branch lengths.
 Thus, viruses which are genetically similar are induced to have prior locations close to one another on the antigenic map.
 The evolutionary Brownian process assumes that the location $\node_i$ of node $i$ on the phylogeny follows from its parent node $p$, and with the addition of the drift along dimension 1, is distributed as
 \begin{equation}
-	\node_i \sim \twomatrix{\beta \, t_i}{0} + \normal(\node_p, d \, \boldsymbol{\Sigma})
+	\node_i \sim (\beta \, t_i, \, 0)^{\prime} + \normal(\node_p, d \, \boldsymbol{\Sigma})
 \end{equation}
 for $P=2$, where $\node_p$ is the location of the parent node, $d$ is the length of the branch connecting nodes $i$ and $p$, and $\boldsymbol{\Sigma}$ is a diagonal matrix with diagonal elements all equal to $\virussd$.
-The root node $\node_0$ is assumed to follow a normal distribution with expectation $(0, 0)^{\prime}$ for $P=2$ and variance determined by the diffusion volatility $\virussd$ \cite{Lemey10}.
+The root node $\node_0$ is assumed to follow a normal distribution with expectation $(\beta \, t_0, 0)^{\prime}$ for $P=2$ and variance determined by the diffusion volatility $\virussd$ \cite{Lemey10}.
 The probability of virus locations $p(\viruses | \beta, \virussd, \tree)$ is determined through analytical integration across internal states following the methods introduced in \cite{Lemey10}.
 Here, the phylogenetic tree $\tree$ is estimated using sequence data for viruses $1,\ldots,\vn$ according to well established methods implemented in the software package BEAST \cite{BEAST, BEAST17}.
 
@@ -603,7 +604,7 @@ Phylogenetic trees were sampled for A/H3N2, A/H1N1, B/Vic and B/Yam using BEAST 
 MCMC was run for 60 million steps and trees were sampled every 50,000 steps after allowing a burn-in of 10 million steps, yielding a total sample of 2000 trees.
 These trees were treated as a discrete set of possibilities when subsequently sampled in the BMDS analysis \cite{Pagel04}.
 
-MCMC was used to sample virus locations $\viruses$, serum locations $\sera$, virus effects $\ves$, serum effects $\ses$, MDS precision $1/\mdssd^2$, antigenic drift rate $\beta$, virus location precision $1/\virussd^2$, serum location precision $1/\serumsd$ and phylogenetic tree $\tree$.
+MCMC was used to sample virus locations $\viruses$, serum locations $\sera$, virus effects $\ves$, serum effects $\ses$, MDS precision $1/\mdssd^2$, antigenic drift rate $\beta$, virus location precision $1/\virussd^2$, serum location precision $1/\serumsd^2$ and phylogenetic tree $\tree$.
 MCMC chains were run for 500 million steps and parameter values sampled every 200,000 steps after a burn-in of 100 million steps, yielding a total of 2000 MCMC samples.
 
 \subsection*{Availability}
