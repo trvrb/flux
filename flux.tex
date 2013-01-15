@@ -171,42 +171,49 @@ Maps that produce pairwise distances most congruent with the observed titers wil
 We integrate over sources of uncertainty, such as antigenic locations, in a flexible Bayesian fashion.
 We apply this model to HI measurements of virus isolates against post-infection ferret sera for influenza A/H3N2, A/H1N1, B/Vic and B/Yam (see Methods).
 
-We test model performance by constructing training datasets representing 90\% of the HI measurements in each of the four datasets and test datasets representing the remaining 10\% of the measurements in each dataset. 
-By fitting the BMDS model to the training dataset, we are able to predict HI titers in the test dataset and compare these predicted titers to observed titers in the test dataset. 
-We find that a BMDS analog of the model used by Smith et al.\ \cite{Smith04}, in which viruses and sera are represented as 2D locations and expected titer is relative to the maximum titer of a particular ferret serum, performs well, yielding an average absolute predictive error of 0.91 log$_2$ HI titers for A/H3N2 (Table \ref{errortable}).
-We find that model with two dimensional antigenic locations predict test data to the same precision or slightly better precision as 3D models, but perform substantially better than 1D models or models with four or more dimensions (Table \ref{errortable}), and thus specify a two dimensional model in all subsequent analyses.
-The finding of a low-dimensional map across influenza lineages extends previous studies in A/H3N2 \cite{Smith04} and remains an interesting empirical observation.
-We extend this 2D model by estimating the strength of overall reactivity of each serum rather than fixing this at its maximum titer, and additionally, by estimating the strength of reactivity of each virus isolate.
-We refer to these estimates as serum effects and virus effects, respectively.
-We find that including these effects decreases test error further, ranging from an improvement of 0.03 in A/H1N1 to an improvement of 0.14 in A/H3N2 (Table \ref{errortable}).
+We test model performance by constructing training datasets representing 90\% of the HI measurements for each of the four influenza lineages and test datasets representing the remaining 10\% of the measurements for each lineage. 
+By fitting the BMDS model to the training dataset, we are able to predict HI titers in the test dataset and compare these predicted titers to observed titers. 
+We begin with a BMDS analog of the model used by Smith et al.\ \cite{Smith04}, in which viruses and sera are represented as 2D locations, expected titer is relative to the maximum titer of a particular ferret serum and virus and serum locations follow a flat prior.
+We find that this model performs well, yielding an average absolute predictive error of between 0.79 and 0.95 log$_2$ HI titers across influenza lineages (model 1; Table \ref{errortable}).
+We extend this model to include a prior on virus and serum locations that assumes antigenic location along dimension 1 increases in proportion to date of virus or serum sampling, resulting in a small improvement in predictive error (model 2; Table \ref{errortable}).
 
 %%% errortable %%%
 \begin{table}[h]
 	\centering
-	\caption{\textbf{Absolute prediction error of log$_2$ HI titer for test data across models and datasets.}}
-	\label{errortable}		
+	\caption{\textbf{Average absolute prediction error of log$_2$ HI titer for test data across models and datasets.}}
+	\label{errortable}	
+	\makebox[\textwidth][c]{
 	\begin{tabular}{ c c c c c c c c } 
 	\hline
-	\multicolumn{4}{c}{Model} 	&	\multicolumn{4}{c}{Test error}  \\
-	Dimen 	& 	Serum effects 	&	Virus effects	& Covariance	& 	A/H3N2	& 	A/H1N1	& 	B/Vic	& 	B/Yam	\\
-	\hline	
-	1D 		&	Fixed 			&	None			& None			&	1.07	&	0.92	&	0.94	&	1.08	\\	
-	2D 		&	Fixed 			&	None			& None			&	0.91 	&	0.74 	&	0.77	&	0.83	\\
-	3D 		&	Fixed 			&	None			& None			&	0.91	&	0.74 	&	0.79	&	0.84	\\
-	4D 		&	Fixed 			&	None			& None			&	0.95	&	0.75 	&	0.81	&	0.86	\\
-	5D 		&	Fixed 			&	None			& None			&	0.99	&	0.76 	&	0.84	&	0.88	\\	
-	2D 		&	Estimated 		&	None			& None			&	0.79	&	0.74 	&	0.68	&	0.76	\\	
-	2D 		&	Estimated 		&	Estimated		& None			&	0.77	&	0.71 	&	0.65	&	0.73	\\	
-	2D 		&	Estimated 		&	Estimated		& Diffusion		&	0.76	&	0.71 	&	0.64	&	0.72	\\		
+	\multicolumn{4}{c}{} 	&	\multicolumn{4}{c}{Test error}  \\
+	Model	&	Dimen 	& 	Serum/virus effects 	& Location Prior					& 	A/H3N2	& 	A/H1N1	& 	B/Vic	& 	B/Yam	\\
+	\hline		
+	1		&	2D 		&	Fixed $\ses$ 			& Flat								&	0.95 	&	0.79 	&	0.80	&	0.93	\\
+	2		&	2D 		&	Fixed $\ses$			& $\beta,\virussd,\serumsd$			&	0.91 	&	0.74 	&	0.77	&	0.83	\\	
+	3		&	1D 		&	Fixed $\ses$			& $\beta,\virussd,\serumsd$			&	1.07	&	0.92	&	0.94	&	1.08	\\		
+	4		&	3D 		&	Fixed $\ses$			& $\beta,\virussd,\serumsd$			&	0.91	&	0.74 	&	0.79	&	0.84	\\
+	5		&	4D 		&	Fixed $\ses$			& $\beta,\virussd,\serumsd$			&	0.95	&	0.75 	&	0.81	&	0.86	\\
+	6		&	5D 		&	Fixed $\ses$			& $\beta,\virussd,\serumsd$			&	0.99	&	0.76 	&	0.84	&	0.88	\\				
+	7		&	2D 		&	Estimated $\ses, \ves$	& $\beta,\virussd,\serumsd$			&	0.77	&	0.71 	&	0.65	&	0.73	\\	
+	8		&	2D 		&	Estimated $\ses, \ves$	& $\beta,\virussd,\serumsd,\tree$	&	0.76	&	0.71 	&	0.64	&	0.72	\\		
 	\hline
 	\end{tabular}	
+	}
 \end{table}
+
+We find that decreasing dimensionality to a single antigenic dimension results in a substantially less predictive model (model 3; Table \ref{errortable}), and that increasing dimensionality to three dimensions is equal or slightly worse in predictive power (model 4; Table \ref{errortable}).
+Increasing dimensionality further to four or five dimensions results in continued declines in test error (models 5 and 6; Table \ref{errortable}).
+Consequently, we specify a two dimensional model in all subsequent analyses.
+The finding of a low-dimensional map across influenza lineages extends previous studies in A/H3N2 \cite{Smith04} and remains an interesting empirical observation.
+We extend the 2D model by estimating the strength of overall reactivity of each serum rather than fixing this at its maximum titer, and additionally, by estimating the strength of reactivity of each virus isolate.
+We refer to these estimates as serum effects and virus effects, respectively.
+We find that including these effects decreases test error further, ranging from an improvement of 0.03 in A/H1N1 to an improvement of 0.14 in A/H3N2 (model 7; Table \ref{errortable}).
 
 Previous work on influenza antigenic and genetic evolution has examined antigenic and genetic patterns in isolation, and then compared the results to assess congruence of these two aspects of evolution \cite{Hay01,Smith04,Russell08}. 
 Here, we simultaneously model antigenic and genetic evolution by adopting an evolutionary diffusion process \cite{Lemey10}, wherein a virus's antigenic character state evolves along branches of phylogenetic tree according to a Brownian motion process (see Methods).
 The diffusion process acts as a prior on virus locations, so that genetically similar viruses are expected to share similar antigenic locations.
-We include sequence data for A/H3N2, A/H1N1, B/Vic and B/Yam to estimate this diffusion process, and find a small increase in predictive accuracy when including covariance induced by the diffusion (Table \ref{errortable}).
-Additionally, modeling antigenic diffusion gives the advantage of directly correlating evolutionary outcomes with changes in antigenic phenotype.
+We include sequence data for A/H3N2, A/H1N1, B/Vic and B/Yam to estimate this diffusion process, and find a small increase in predictive accuracy when including covariance induced by the diffusion (model 8; Table \ref{errortable}).
+Additionally, modeling antigenic diffusion has the advantage of allowing direct correlation of evolutionary outcomes with changes in antigenic phenotype.
 
 \subsection*{Antigenic evolution across influenza lineages}
 
@@ -545,7 +552,7 @@ The root node $\node_0$ is assumed to follow a normal distribution with expectat
 The probability of virus locations $p(\viruses | \beta, \virussd, \tree)$ is determined through analytical integration across internal states following the methods introduced in \cite{Lemey10}.
 Here, the phylogenetic tree $\tree$ is estimated using sequence data for viruses $1,\ldots,\vn$ according to well established methods implemented in the software package BEAST \cite{BEAST, BEAST17}.
 
-\subsection*{Posterior samples and summaries}
+\subsection*{Posterior samples}
 
 Top-level priors for $1/\mdssd^2$, $\beta$, $1/\virussd^2$, and $1/\serumsd^2$ are assumed to follow diffuse $\mbox{Gamma}(a, b)$ distributions  with $a=0.001$ and $b=0.001$.
 Under the full model, the posterior probability of observing virus and serum locations given immunological data is factored
@@ -558,16 +565,6 @@ Under the full model, the posterior probability of observing virus and serum loc
 We sample from this posterior distribution using the Markov chain Monte Carlo (MCMC) procedures implemented in the software package BEAST \cite{BEAST,BEAST17}.
 Metropolis-Hastings proposals include transition kernels that translate individual virus and serum locations $\virus_i$ and $\serum_j$ and individual virus effects $\ve_i$ and serum effects $\se_j$, and other transition kernels that scale the entire set of virus and serum locations $\viruses$ and $\sera$ and that scale parameters $\mdssd$, $\beta$, $\virussd$ and $\serumsd$.
 For the present analysis, a two-step approach was taken to sample phylogenies, where a posterior sample of phylogenies was gathered using sequence data and then, in the cartographic analysis, trees from this set were randomly proposed and accepted following the Metropolis-Hastings algorithm \cite{Pagel04}.
-
-There is some difficulty summarizing posterior cartographic samples, as sampled virus and serum locations represent only relative quantities, and because of this, over the course of the MCMC, virus locations may shift.
-Our prior on virus and serum locations removes much of this issue, orienting the antigenic map along dimension 1 and fixing it to begin at the origin.
-However, local isometries are often still a problem.
-For example, in A/H3N2 the Beijing/89 cluster may shift back and forth from being above other viruses on dimension 2 to being below other viruses on dimension 2.
-These isometries may be local, i.e.\ Beijing/89 and Beijing/92 may flip while leaving Texas/77 in place.
-Consequently, it is difficult to fully align MCMC samples using Procrustes analysis.
-For the present study, we take a simple approach and sample a single MCMC step and visualize the antigenic locations at this state (Figures~\ref{map}, Figure~\ref{drift}).
-Then, for specific quantities of interest, like rate of antigenic drift and rate of diffusion at different points along the phylogeny, we calculate this quantity across MCMC samples to yield an expectation and a credible interval.
-This approach accurately characterizes uncertainty that may be hidden in an analysis of a single antigenic map.
 
 \subsection*{Data and implementation}
 
@@ -583,6 +580,16 @@ These trees were treated as a discrete set of possibilities when subsequently sa
 
 MCMC was used to sample virus locations $\viruses$, serum locations $\sera$, virus effects $\ves$, serum effects $\ses$, MDS precision $1/\mdssd^2$, antigenic drift rate $\beta$, virus location precision $1/\virussd^2$, serum location precision $1/\serumsd^2$ and phylogenetic tree $\tree$.
 MCMC chains were run for 500 million steps and parameter values sampled every 200,000 steps after a burn-in of 100 million steps, yielding a total of 2000 MCMC samples.
+
+There is some difficulty summarizing posterior cartographic samples, as sampled virus and serum locations represent only relative quantities, and because of this, over the course of the MCMC, virus locations may shift.
+Our prior on virus and serum locations removes much of this issue, orienting the antigenic map along dimension 1 and fixing it to begin at the origin.
+However, local isometries are often still a problem.
+For example, in A/H3N2 the Beijing/89 cluster may shift back and forth from being above other viruses on dimension 2 to being below other viruses on dimension 2.
+These isometries may be local, i.e.\ Beijing/89 and Beijing/92 may flip while leaving Texas/77 in place.
+Consequently, it is difficult to fully align MCMC samples using Procrustes analysis.
+For the present study, we take a simple approach and sample a single MCMC step and visualize the antigenic locations at this state (Figures~\ref{map}, Figure~\ref{drift}).
+Then, for specific quantities of interest, like rate of antigenic drift and rate of diffusion at different points along the phylogeny, we calculate this quantity across MCMC samples to yield an expectation and a credible interval.
+This approach accurately characterizes uncertainty that may be hidden in an analysis of a single antigenic map.
 
 \subsection*{Availability}
 
