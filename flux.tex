@@ -188,7 +188,7 @@ We extend this model to include a prior on virus and serum locations that assume
 	\multicolumn{4}{c}{} 	&	\multicolumn{4}{c}{Test error}  \\
 	Model	&	Dimen 	& 	Serum/virus effects 	& Location Prior					& 	A/H3N2	& 	A/H1N1	& 	B/Vic	& 	B/Yam	\\
 	\hline		
-	1		&	2D 		&	Fixed $\ses$ 			& Flat								&	0.95 	&	0.79 	&	0.80	&	0.93	\\
+	1		&	2D 		&	Fixed $\ses$ 			& Flat								&	0.93 	&	0.79 	&	0.80	&	0.93	\\
 	2		&	2D 		&	Fixed $\ses$			& $\beta,\virussd,\serumsd$			&	0.91 	&	0.74 	&	0.77	&	0.83	\\	
 	3		&	1D 		&	Fixed $\ses$			& $\beta,\virussd,\serumsd$			&	1.07	&	0.92	&	0.94	&	1.08	\\		
 	4		&	3D 		&	Fixed $\ses$			& $\beta,\virussd,\serumsd$			&	0.91	&	0.74 	&	0.79	&	0.84	\\
@@ -228,7 +228,7 @@ This analysis makes the fate of antigenic clusters obvious, with two clusters in
 	\centering		
 	\includegraphics[width=0.95\textwidth]{figures/map}
 	\caption{\textbf{Antigenic locations of A/H3N2, A/H1N1, B/Vic and B/Yam viruses showing evolutionary relationships between virus samples.} 
-	Circles represent a posterior sample of virus locations and have been colored based on year of isolation in 4-year intervals.
+	Circles represent a posterior sample of virus locations and have been shaded based on year of isolation.
 	Antigenic units represent two-fold dilutions of the HI assay.
 	Distances between clades, e.g.\ A/H3N2 and A/H1N1, are arbitrary.
 	Lines represent mean posterior diffusion paths when virus locations are fixed.} 
@@ -237,8 +237,7 @@ This analysis makes the fate of antigenic clusters obvious, with two clusters in
 
 HI assays lack sensitivity beyond a certain point, so that for A/H3N2, cross-reactive measurements only exist between strains sampled at most 11 years apart, leaving only threshold titers, e.g.\ `$<$40', in more temporally distant comparisons.  
 Because of the threshold of sensitivity of the HI assay, it's impossible to distinguish a linear trajectory in 2D antigenic space, from a somewhat curved trajectory, so long as the curve does not bring antigenic phenotype full circle to have cross-reactive measurements between temporally distant strains.
-To solve this problem of identifiability, we assumed a weak prior that favors linear movement in the 2D antigenic space, with the slope of the linear relationship and the precision of the relationship incorporated into the Bayesian model (see Methods).
-Incorporating this prior made no difference in predictive ability of the model; test error for A/H3N2 was 0.75 log$_2$ HI titers whether the prior was included or excluded.
+To solve this problem of identifiability, we assumed a weak prior that favors linear movement in the 2D antigenic space (present in models 2 through 8; Table \ref{errortable}), with the slope of the linear relationship and the precision of the relationship incorporated into the Bayesian model (see Methods).
 Because of this, we interpret antigenic locations locally rather than globally.
 We can determine the rate of antigenic movement of virus lineages without knowing the larger configuration that the movement occurs under.
  
@@ -252,7 +251,7 @@ Most variation is contained within the first antigenic dimension, but dimension 
 	\includegraphics[width=0.75\textwidth]{figures/drift}
 	\caption{\textbf{Antigenic drift of A/H3N2, A/H1N1, B/Vic and B/Yam viruses showing evolutionary relationships between virus samples.} 
 	Antigenic drift is shown in terms of change of location in the first antigenic dimension through time.
-	Circles represent a posterior sample of virus locations and have been colored based on year of isolation in 4-year intervals.
+	Circles represent a posterior sample of virus locations and have been shaded based on year of isolation.
 	Antigenic units represent two-fold dilutions of the HI assay.
 	Distances between clades, e.g.\ A/H3N2 and A/H1N1, are arbitrary.
 	Lines represent mean posterior diffusion paths when virus locations are fixed.} 
@@ -263,10 +262,9 @@ We find that other clades of influenza evolved in antigenic phenotype substantia
 Influenza A/H1N1 evolved at a rate of 0.55 units per year (HPD 0.49--0.62), but showing a similar pattern of punctuated antigenic evolution with occasional larger jumps in phenotype, such as the emergence of the Solomon Islands/06 cluster.  
 Influenza B/Victoria also evolved relatively slowly, with an average rates of 0.41 (HPD 0.29--0.55) units per year.
 Influenza B/Vic appears to show some degree of punctuated antigenic evolution with a recent transition creating the Brisbane/08 cluster.
-Interestingly, a minor lineage of B/Vic has persisted, which rather than moving forward in antigenic dimension 1 has moved down in antigenic dimension 2 (Figure~\ref{map}, Figure~\ref{drift}).
-The eventual fate of this lineage has yet to be determined.
+Interestingly, a minor lineage of B/Vic has persisted, appearing antigenically distinct from 2011 viruses (Figure~\ref{drift}), though the eventual fate of this lineage has yet to be determined.
 Influenza B/Yamagata evolved slower still, with an average rate of and 0.21 (HPD 0.10--0.28) units per year.
-Very little punctuated evolution is apparent in the evolution of B/Yam.
+Little punctuated evolution is apparent in the evolution of B/Yam.
 
 Interestingly, although antigenic clusters seem to emerge in a punctuated fashion in influenza A/H3N2, year-to-year antigenic drift relatively constant through time with most years exhibiting an intermediate level of drift (Figure~\ref{jumps}).
 We calculate year-to-year antigenic drift for years 1992 to 2011 by calculating the average location along dimension 1 of phylogenetic lineages present at year $i$ and comparing this location to the average location of phylogenetic lineages present at year $i-1$.
@@ -296,8 +294,8 @@ We find that the standard deviation in year-to-year drift is 0.80 antigenic unit
 
 We investigated the relative rates of antigenic evolution in A/H3N2, A/H1N1, B/Vic and B/Yam from 1998 to 2010, finding a general correspondence between antigenic drift in dimension 1 and relative incidence within each influenza clade (Figure~\ref{incidence}).
 Here, we take the measurements of year-to-year antigenic drift from the preceding section (Figure~\ref{jumps}) and calculate the relative contribution to total antigenic drift for each clade in each year.
-We compare these measurements of relative antigenic drift to relative isolations of viruses form each clade in the USA from 1998 to 2011 (see Methods).
-From 1998 to 2010, A/H3N2 accounted for the majority of antigenic drift (56\%), while A/H1N1, B/Vic and B/Yam split the remainder, accounting for 15\%, 21\% and 7\%, respectively.
+We compare these measurements of relative antigenic drift to relative isolations of viruses from each clade in the USA from 1998 to 2011 (see Methods).
+From 1998 to 2011, A/H3N2 accounted for the majority of antigenic drift (56\%), while A/H1N1, B/Vic and B/Yam split the remainder, accounting for 15\%, 21\% and 7\%, respectively.
 Similarly, A/H3N2 was responsible for the majority of incidence (56\%) during this time period.
 Influenza A/H1N1 accounted for 20\% of incidence, B/Vic accounted for 13\% of incidence and B/Yam accounted for 11\% of incidence.
 These proportions are significantly similar to one another (randomization test, $p = 0.011$).
