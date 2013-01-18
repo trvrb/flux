@@ -173,9 +173,9 @@ We apply this model to HI measurements of virus isolates against post-infection 
 
 We test model performance by constructing training datasets representing 90\% of the HI measurements for each of the four influenza lineages and test datasets representing the remaining 10\% of the measurements for each lineage. 
 By fitting the BMDS model to the training dataset, we are able to predict HI titers in the test dataset and compare these predicted titers to observed titers. 
-We begin with a BMDS analog of the model used by Smith et al.\ \cite{Smith04}, in which viruses and sera are represented as 2D locations, expected titer is relative to the maximum titer of a particular ferret serum and virus and serum locations follow a flat prior.
+We begin with a BMDS analog of the model used by Smith et al.\ \cite{Smith04}, in which viruses and sera are represented as 2D locations, expected titer is relative to the maximum titer of a particular ferret serum and virus and serum locations follow a diffuse prior.
 We find that this model performs well, yielding an average absolute predictive error of between 0.79 and 0.95 log$_2$ HI titers across influenza lineages (model 1; Table \ref{errortable}).
-We extend this model to include a prior on virus and serum locations that assumes antigenic location along dimension 1 increases in proportion to date of virus or serum sampling, resulting in a small improvement in predictive error (model 2; Table \ref{errortable}).
+We extend this model to include a time-informed prior on virus and serum locations that assumes antigenic location along dimension 1 increases in proportion to date of virus or serum sampling, resulting in a small improvement in predictive error (model 2; Table \ref{errortable}).
 
 %%% errortable %%%
 \begin{table}[h]
@@ -202,7 +202,7 @@ We extend this model to include a prior on virus and serum locations that assume
 \end{table}
 
 We find that decreasing dimensionality to a single antigenic dimension results in a substantially less predictive model (model 3; Table \ref{errortable}), and that increasing dimensionality to three dimensions is equal or slightly worse in predictive power (model 4; Table \ref{errortable}).
-Increasing dimensionality further to four or five dimensions results in continued declines in test error (models 5 and 6; Table \ref{errortable}).
+Increasing dimensionality further to four or five dimensions results in continued declines in predictive power (models 5 and 6; Table \ref{errortable}).
 Consequently, we specify a two dimensional model in all subsequent analyses.
 The finding of a low-dimensional map across influenza lineages extends previous studies in A/H3N2 \cite{Smith04} and remains an interesting empirical observation.
 We extend the 2D model by estimating the strength of overall reactivity of each serum rather than fixing this at its maximum titer, and additionally, by estimating the strength of reactivity of each virus isolate.
@@ -212,8 +212,13 @@ We find that including these effects decreases test error further, ranging from 
 Previous work on influenza antigenic and genetic evolution has examined antigenic and genetic patterns in isolation, and then compared the results to assess congruence of these two aspects of evolution \cite{Hay01,Smith04,Russell08}. 
 Here, we simultaneously model antigenic and genetic evolution by adopting an evolutionary diffusion process \cite{Lemey10}, wherein a virus's antigenic character state evolves along branches of phylogenetic tree according to a Brownian motion process (see Methods).
 The diffusion process acts as a prior on virus locations, so that genetically similar viruses are expected to share similar antigenic locations.
-We include sequence data for A/H3N2, A/H1N1, B/Vic and B/Yam to estimate this diffusion process, and find a small increase in predictive accuracy when including covariance induced by the diffusion (model 8; Table \ref{errortable}).
+We include sequence data for A/H3N2, A/H1N1, B/Vic and B/Yam to estimate this diffusion process, and find a small increase in predictive accuracy when including covariance induced by the phylogenetic diffusion (model 8; Table \ref{errortable}).
 Additionally, modeling antigenic diffusion has the advantage of allowing direct correlation of evolutionary outcomes with changes in antigenic phenotype.
+
+We find that the average absolute error in predicted log$_2$ HI titer is nearly constant with antigenic distance (Figure~\ref{error_by_distance_and_year}A), thus supporting our model assumption that drop in log$_2$ titer is proportional to the Euclidean distance separating viruses and sera on the antigenic map.
+Additionally, we find that absolute error in predicted titer is nearly constant with time (Figure~\ref{error_by_distance_and_year}B).
+Antigenic locations inferred by the model are well resolved; estimates of antigenic distance between pairs of viruses show relatively little variation across the posterior.
+We estimate that virus distances have, on average, a 50\% credible interval of $\pm0.45$ antigenic units for A/H3N2, $\pm0.57$ units for A/H1N1, $\pm0.76$ units for B/Vic, and $\pm0.65$ units for B/Yam.
 
 \subsection*{Antigenic evolution across influenza lineages}
 
@@ -620,16 +625,30 @@ VG, AJH and JWM are funded by MRC reference no U117512723.
 \bibliographystyle{plos}
 \bibliography{flux}
 
-%\pagebreak
+\pagebreak
 
-%\setcounter{figure}{0}
-%\setcounter{table}{0}
+\setcounter{figure}{0}
+\setcounter{table}{0}
 %\setcounter{page}{1}
-%\renewcommand{\thefigure}{S\arabic{figure}}
-%\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\thetable}{S\arabic{table}}
 %\renewcommand{\thepage}{S\arabic{page}}
 
 %%% SUPPORTING INFORMATION %%%
-%\section*{Supporting Information}
+\section*{Supporting Information}
+
+%%% error_by_distance_and_year %%%
+\begin{figure}[H]
+	\centering		
+	\includegraphics[width=0.95\textwidth]{figures/error_by_distance_and_year}
+	\caption{\textbf{Absolute error in log$_2$ HI titer against antigenic distance and date of virus sampling in influenza A/H3N2.} 
+	(A) Points show the absolute deviation from the predicted log$_2$ HI titer of the antigenic model, computed from virus location $\virus_i$, serum location $\serum_j$, virus effect $\ve_i$ and serum effect $\se_j$, based upon antigenic distance between virus and serum $\delta_{ij}$.
+	The red line shows a LOESS regression curve of these points.
+	(B) Points show the absolute deviation from the predicted log$_2$ HI titers of the antigenic model, based upon the date of virus sampling.
+	The red line shows average deviations for each year.
+	Relationships for A/H1N1, B/Vic and B/Yam are similar.
+	} 
+	\label{error_by_distance_and_year} 
+\end{figure}
 
 \end{document}
