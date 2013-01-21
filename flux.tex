@@ -487,6 +487,12 @@ We calculate the overall likelihood by multiplying probabilities of individual m
 	L(\viruses,\sera) = \prod_{(i,j) \in \cal I} f(H_{ij}),
 \end{equation}
 using probability functions $\point$, $\threshold$ and $\interval$ as appropriate.
+We begin by assuming independent, diffuse normal prior on virus and serum locations
+\begin{eqnarray}
+	\virus_i &\sim& \mathrm{Normal}(\boldsymbol{\mu},\boldsymbol{\Sigma}) \nonumber \\
+	\serum_j &\sim& \mathrm{Normal}(\boldsymbol{\mu},\boldsymbol{\Sigma}),
+\end{eqnarray}
+with $\boldsymbol{\mu} = (0,\ldots,0)^{\prime}$ and $\boldsymbol{\Sigma}$ is a diagonal matrix with diagonal elements all equal to $10000$.
 
 \subsection*{Virus and serum effects}
 
@@ -515,7 +521,7 @@ In this case it is impossible to determine from the HI data at hand whether the 
 This presents an issue of model identifiability; multiple antigenic maps give the same likelihood of observing the serological data.
 In order to achieve more interpretable antigenic locations we impose a weak prior on global locations.
 In influenza, it's clear that antigenic distance between strains increases with time \cite{Smith04,Cai10}.
-To capture this, we assume that the expected location of viruses and sera increases with date of sampling along dimension one, and each virus and serum location follows an independent normal distribution centered around this temporal expectation, so that
+To capture this, we replace our previous diffuse prior with an informed prior in which the expected location of viruses and sera increases with date of sampling along dimension one, and each virus and serum location follows an independent normal distribution centered around this temporal expectation, so that
 \begin{eqnarray}
 	x_{i1} &\sim& \beta \, t_i + \normal(0, \virussd^2) \nonumber \\
 	y_{j1} &\sim& \beta \, t_j + \normal(0, \serumsd^2),
@@ -541,18 +547,21 @@ The parameter $\virussd$ determines the breadth of the cloud of virus locations 
 
 We simultaneously model antigenic locations and genetic relatedness by assuming that virus locations are influenced by evolution following a Brownian motion process \cite{Lemey10}.
 To do this, we replace the previous prior specifying independent virus locations with a prior that incorporates covariance based on shared evolutionary history
-\begin{equation}
+\begin{equation} \label{ebpprior}
 	\viruses \sim \left( \begin{matrix} \beta \, t_1 & 0 \\ \vdots & \vdots \\ \beta \, t_n & 0 \end{matrix} \right) + \, \mbox{Evolutionary Brownian Process}(\virussd, \tree)
 \end{equation}
 for $P=2$, where $\virussd$ is the volatility parameter of the Brownian motion and $\tree$ is a phylogeny specifying tree topology and branch lengths.
 Thus, viruses which are genetically similar are induced to have prior locations close to one another on the antigenic map.
 The evolutionary Brownian process assumes that the location $\node_i$ of node $i$ on the phylogeny follows from its parent node $p$, and with the addition of the drift along dimension 1, is distributed as
-\begin{equation}
-	\node_i \sim (\beta \, t_i, \, 0)^{\prime} + \normal(\node_p, d \, \boldsymbol{\Sigma})
+\begin{equation} 
+	\node_i \sim (\beta \, d, \, 0)^{\prime} + \normal(\node_p, d \, \boldsymbol{\Sigma})
 \end{equation}
 for $P=2$, where $\node_p$ is the location of the parent node, $d$ is the length of the branch connecting nodes $i$ and $p$, and $\boldsymbol{\Sigma}$ is a diagonal matrix with diagonal elements all equal to $\virussd$.
 The root node $\node_0$ is assumed to follow a normal distribution with expectation $(\beta \, t_0, 0)^{\prime}$ for $P=2$ and variance determined by the diffusion volatility $\virussd$ \cite{Lemey10}.
 The probability of virus locations $p(\viruses | \beta, \virussd, \tree)$ is determined through analytical integration across internal states following the methods introduced in \cite{Lemey10}.
+This formulation corresponds to a Weiner process with drift, in which the drift term $\beta$ only influences the expected states of nodes along the phylogeny, but does not influence the covariance structure among these nodes, which remains the same as it does in a standard Weiner process \tbc{CITE}.
+This allows the separation in equation \ref{ebpprior} between drift terms affecting only expectations and the evolutionary Brownian process that includes covariance among virus locations $\virus_1,\ldots,\virus_n$.
+
 Here, the phylogenetic tree $\tree$ is estimated using sequence data for viruses $1,\ldots,\vn$ according to well established methods implemented in the software package BEAST \cite{BEAST, BEAST17}.
 
 \subsection*{Posterior samples}
