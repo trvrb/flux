@@ -317,7 +317,7 @@ These proportions are significantly similar to one another (randomization test, 
 	(B) Relative incidence of influenza clades determined through relative isolation counts in the USA for winter influenza seasons.
 	Here, `01' refers to the 2001/2002 influenza season.
 	(C) Correlation of relative antigenic drift and relative incidence in each influenza clade.
-	Scatterplots represent drift from year $i-1$ to year $i$ compared to incidence in winter season beginning in year $i$, e.g. drift from 1998 to 1999 compared to incidence in the 1999/2000 influenza season.
+	Scatterplots represent drift from year $i-1$ to year $i$ compared to incidence in winter season beginning in year $i$, e.g. drift from 2000 to 2001 compared to incidence in the 2001/2002 influenza season.
 	} 
 	\label{incidence} 
 \end{figure}
@@ -333,47 +333,49 @@ However, these findings alone do not conclusively show interference between clad
 
 \subsection*{Conversion of antigenic mutation into fixed differences}
 
-We observe a faster rate of antigenic drift in influenza A/H3N2 than in A/H1N1 or influenza B.
-Previous work using general epidemiological models has suggested that a greater rate of antigenic drift may emerge from either a greater fundamental reproductive number $R_0$ or a faster rate of mutation decreasing cross-immunity \cite{Gog02,Lin03}.
-Owing to these and similar findings, subsequent work has ascribed differences in the evolution in A/H3N2 relative to A/H1N1 and influenza B to either greater $R_0$ or greater mutation rate \cite{Ferguson03,Bedford12}.
+We observe a faster rate of antigenic drift in influenza A/H3N2 than in A/H1N1 or in either lineage of influenza B.
+Previous work using general epidemiological models has suggested that rates of antigenic drift may be influenced by both fundamental reproductive number $R_0$ and rate cross-immunity decreasing mutation \cite{Gog02,Lin03}.
+Owing to these and similar findings, subsequent work ascribed differences in the evolution of A/H3N2 relative to A/H1N1 and influenza B to either greater $R_0$ or greater mutation rate \cite{Ferguson03,Bedford12}.
+Here, we examine the conversion of recently acquired antigenic mutation into fixed differences by comparing rates of antigenic diffusion to the degree of persistence on phylogeny branches in A/H3N2, A/H1N1, B/Vic and B/Yam (Table~\ref{diffusiontable}).
+To facilitate comparisons, we measure the diffusion coefficient $D$ characterizing the antigenic movement of each influenza lineage \cite{Pybus12}.
+This coefficient is measured in terms of units$^2$/year and can be used to determine the diffusion length scale, that is the expected relationship between time and distance traveled, which is $2 \sqrt{t D}$ for a two-dimensional diffusion.
+Higher diffusion coefficients mean a lineage is diffusing faster through antigenic space.
+We compare diffusion coefficients between trunk branches and side branches, where trunk branches are defined as branches ancestral to the most recent virus sample and side branches are defined as those branches not ancestral to the most recent virus sample.
 
-Here, we examine the conversion of newly acquired antigenic mutation into fixed differences by comparing rates of antigenic diffusion to the degree of persistence on phylogeny branches from A/H3N2, A/H1N1, B/Vic and B/Yam (Figure~\ref{accumulation}A).
-Here, we observe that in all four clades new antigenic mutations, do not, on average, move antigenic dimension 1 forward or back, consistent with a model of antigenic mutations progressing in a random direction.
-However, successful mutations that have persisted in the influenza population, tend to move the antigenic phenotype forward along dimension 1.
-This result indicates that forward movement along antigenic dimension 1 is an advantageous trait and is promoted by natural selection \cite{Bedford12}.
-The rate of diffusion of persistent lineages is substantially greater in A/H3N2 than in A/H1N1, B/Vic or B/Yam.
-For A/H3N2 we see a two-year window during which mutations may be present on side branches of the phylogeny.
-After two years, mutations lie along the trunk of the phylogeny and the rate at which the trunk lineage drifts along antigenic dimension 1 is equal to the overall rate at which the population drifts along dimension 1.
+%%% diffusiontable %%%
+\begin{table}[h]
+	\centering
+	\caption{\textbf{Estimates of fundamental diffusion coefficient $D$ across influenza lineages and phylogenetic branches, including 50\% highest posterior density intervals.}}
+	\label{diffusiontable}	
+	\begin{tabular}{ c c c c } 
+	\hline
+	Lineage	&	Trunk branch $D$ 	& 	Side branch $D$		& 	Ratio \\
+	\hline		
+	A/H3N2	&	0.90 (0.79--0.97)	&	0.62 (0.57--0.65)	&	1.45 (1.31--1.57) \\
+	A/H1N1	&	0.62 (0.50--0.71)	&	0.44 (0.38--0.48)	&	1.45 (1.18--1.70) \\
+	B/Vic	&	0.63 (0.51--0.71)	&	0.62 (0.54--0.68)	&	1.02 (0.87--1.14) \\
+	B/Yam	&	0.35 (0.29--0.40)	&	0.33 (0.28--0.36)	&	1.09 (0.93--1.23) \\
+	\hline
+	\end{tabular}	
+\end{table}
 
-%%% accumulation %%%
-\begin{figure}[tb]
-	\centering		
-	\includegraphics[width=0.95\textwidth]{figures/accumulation}
-	\caption{\textbf{Rate of antigenic diffusion of influenza lineages categorized by time back from sampling.}
-	(A) Rate of diffusion in terms of antigenic units per year only along antigenic dimension 1.
-	(B) Rate of diffusion in terms of antigenic units per year along both antigenic dimensions 1 and 2.
-	In the diffusion model, the antigenic location of each virus sample can be calculated back through time.
-	Here, when the $x$-axis is 1, we show the rate of diffusion 1 year back from from the date of sampling averaged across all virus samples.
-	When the $x$-axis is close to 0, the $y$-axis shows the rate of diffusion near tips of the phylogeny, and when the $x$-axis is large, the $y$-axis shows the rate of diffusion along the trunk of the phylogeny.
-	} 
-	\label{accumulation} 
-\end{figure}
+Mutations must proceed through the sieve of natural selection, first appearing as transient differences restricted to side branches, while advantageous mutations will preferentially fix in the virus population and thus accrue on the trunk of the phylogeny.
+We expect the diffusion coefficient on side branches to more closely resemble the raw rate of antigenic mutation.
+Here, we find that A/H3N2 and B/Vic have similar diffusion coefficients, which are larger than the diffusion coefficients of A/H1N1 and B/Yam (Table~\ref{diffusiontable}).
+Thus, we expect that new antigenic mutations may occur at a faster rate in A/H3N2 and B/Vic than in A/H1N1 or B/Yam.
+We find that trunk branches in both A/H3N2 and A/H1N1 evolve in antigenic phenotype faster than side branches (Table~\ref{diffusiontable}), suggesting that positive selection is promoting antigenic movement in these lineages.
+Interestingly, B/Vic and B/Yam show less of a signature of positive selection, with similar diffusion coefficients on trunk and side branches (Table~\ref{diffusiontable}).
+Thus, although drift forward along dimension 1 is promoted in all lineages (Figure~\ref{drift}), raw antigenic diffusion appears to be promoted more strongly in influenza A than in influenza B, giving an advantage to influenza A in terms of overall rate of antigenic drift.
+Additionally, it appears that A/H3N2 and B/Vic benefit from a greater influx of new antigenic mutations, giving them an advantage over their sister lineages A/H1N1 and B/Yam also in terms of overall rate of antigenic drift.
 
-If we examine the introduction of new mutations in two dimensions, we see that A/H3N2 appears to mutate in antigenic phenotype more rapidly than B/Vic, which mutates more rapidly still than A/H1N1 or B/Yam (Figure~\ref{accumulation}B).
-Thus, we have direct evidence that the rate of antigenic mutation is greater in A/H3N2 than in A/H1N1 or influenza B.
-However, we observe an interesting additional effect.
-The rate of diffusion of persistent lineages is greater than the rate of mutation in influenza A/H3N2, but smaller than the rate of mutation in A/H1N1, B/Vic and B/Yam.
-This yields the surprising conclusion that although antigenic mutation in general is favored in A/H3N2, it is deleterious and opposed by natural selection in A/H1N1 and B.
+In this context, it is especially interesting that adaptive evolution in the HA1 protein determined through analysis of nonsynonymous and synonymous substitutions is substantially stronger in A/H3N2 than in A/H1N1 \cite{Wolf06}; H3 appears to accumulate adaptive fixations at $\sim$150\% the rate of H1 \cite{Bhatt11}.
+Here, we observe that A/H3N2 has a diffusion coefficient $\sim$141\% greater than A/H1N1 along side branches of the phylogeny.
+These results suggest that the greater rate of adaptive fixation in A/H3N2 may be simply due to a greater abundance of new antigenic mutations to fix.
 
-We suggest that this finding could be due to the pleiotropic effects associated with antigenic change, in which antigenic mutations often result in other phenotypic effects, including decreased protein function \cite{Kaverin04,Rudneva12}.
-Thus, we expect that many antigenic variants may be at inherent disadvantage against other strains, even though they benefit from a transmission advantage mediated by host immunity.
-Because of this, some antigenic mutations, i.e.\ those that move forward along antigenic dimension 1, may be, on the whole, advantageous, while other antigenic mutations may be, on the whole, deleterious.
-In this context, it is especially interesting that antigenic mutations appear to be, on the whole, more advantageous in A/H3N2.
-It seems possible that the H3 protein may have fewer pleiotropic constraints that the the H1 protein or B hemagglutinin protein.
-However, more work is necessary to investigate this hypothesis.
-
-In this context, it is especially interesting that adaptive fixation in the HA1 protein determined through analysis of nonsynonymous and synonymous evolution is substantially greater in A/H3N2 than in A/H1N1 \cite{Wolf06, Bhatt11}.
-Thus, we conclude that additional adaptive fixations at the amino acid level translate to greater rates of adaptive antigenic change. 
+We suggest that the larger signal of positive selection for antigenic diffusion in influenza A relative to influenza B could be due to either a greater fundamental reproductive number $R_0$ or to pleiotropic effects associated with antigenic change.
+In the later case, we expect that many antigenic variants may be at inherent disadvantage against other strains from decreased protein function \cite{Kaverin04,Rudneva12} or other effects, even though they benefit from a transmission advantage mediated by host immunity.
+These mutations may not be promoted by natural selection to the same extent as antigenic variants that maintain functional equivalence.
+Still, it is clear that more work is necessarily to fully clarify the the mechanistic underpinnings of the relative evolutionary success of different influenza lineages.
 
 %%% CONCLUSIONS %%%
 \section*{Conclusions}
@@ -590,6 +592,8 @@ Consequently, it is difficult to fully align MCMC samples using Procrustes analy
 For the present study, we take a simple approach and sample a single MCMC step and visualize the antigenic locations at this state (Figures~\ref{map}, Figure~\ref{drift}).
 Then, for specific quantities of interest, like rate of antigenic drift and rate of diffusion at different points along the phylogeny, we calculate this quantity across MCMC samples to yield an expectation and a credible interval.
 This approach accurately characterizes uncertainty that may be hidden in an analysis of a single antigenic map.
+
+\tbc{Describe calculation of diffusion coefficient $D$.}
 
 \subsection*{Availability}
 
