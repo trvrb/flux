@@ -53,6 +53,14 @@
 \def\ms#1#2{\sout{#1} \textcolor{blue}{#2}} 
 \def\msc#1{\textcolor{blue}{[#1]}}
 
+% notation
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newcommand{\normal}{\mathcal{N}}					% Normal distribution
+\setlength{\arraycolsep}{2pt}
+\newcommand{\twomatrix}[2]{\left( \begin{matrix} #1 \\ #2 \end{matrix} \right)}								% pretty inline matrix 
+\newcommand{\fourmatrix}[4]{\left( \begin{matrix} #1 & #2 \\ #3 & #4 \end{matrix} \right)}					% pretty inline matrix 
+
 %%% TITLE %%%
 \title{\vspace{1.0cm} \LARGE \bf 
 Supporting Text: \\
@@ -115,6 +123,45 @@ Surveillance data was obtained from the Centers of Disease Control and Preventio
 As an example, one report states ``collaborating laboratories in the United States tested 195,744 respiratory specimens for influenza viruses, 27,682 (14\%) of which were positive. Of these, 18,175 (66\%) were positive for influenza A viruses, and 9,507 (34\%) were positive for influenza B viruses. Of the 18,175 specimens positive for influenza A viruses, 7,631 (42\%) were subtyped; 6,762 (87\%) of these were seasonal influenza A (H1N1) viruses, and 869 (13\%) were influenza A (H3N2) viruses.''
 In this case, we estimate the relative proportion of A/H3N2 of the four clades as $0.66 \times 0.13 = 0.09$.
 Similar calculations were performed for A/H1N1, B/Vic and B/Yam.
+
+\subsection*{Estimation of diffusion coefficient}
+
+The distance $d$ traveled by two-dimensional diffusion is not a linear function of time interval $t$, and thus the `rate' of diffusion cannot be calculated following $r=d/t$.
+Assume we have a one-dimensional diffusion starting from $x_0 = 0$, so that
+\begin{equation}
+	X_t \sim \normal(0, \sigma^2 t),
+\end{equation}
+where $\sigma$ represents the diffusion volatility, and in this case, the expected squared displacement follows
+\begin{equation}
+	\mathrm{E}[X_t^2] = \sigma^2 t.
+\end{equation}
+In moving to a two-dimensional diffusion
+\begin{equation}
+	(X_t, Y_t) \sim \normal \left( \twomatrix{0}{0}, \fourmatrix{\sigma^2 t}{0}{0}{\sigma^2 t} \right),
+\end{equation}
+a factor of 2 is included when calculating expected squared displacement
+\begin{equation}
+	\mathrm{E}[X_t^2 + Y_t^2] = 2 \sigma^2 t.
+\end{equation}
+Such diffusions are often parameterized with diffusion coefficient $D$ rather than volatility parameter $\sigma$, in this case $D=\sigma^2/2$ and 
+\begin{equation}
+	\mathrm{E}[X_t^2 + Y_t^2] = 4 D t.
+\end{equation}
+
+Owing to this relationship, Pybus et al.\ \cite{Pybus12} estimate $D$ from phylogenies in which internal nodes have inferred 2D locations via the formula
+\begin{equation} \label{pybusest}
+	\hat{D} = \frac{1}{n} \sum^n_{i=1} \frac{d_i^2}{4t_i},
+\end{equation}
+in which $d_i$ represents the displacement of a branch and $t_i$ represents the length of a branch.
+However, short branches along the phylogeny may cause $d_i^2/t_i$ to have high variance and lead to uncertainty in the resulting estimates of $D$.
+Consequently, we estimate $D$ by looking at the relationship between total squared displacement along branches of a phylogeny and total time along branches of a phylogeny
+\begin{eqnarray}
+	d_\mathrm{total} = \frac{1}{n} \sum^n_{i=1} d_i^2 \nonumber \\
+	t_\mathrm{total} = \frac{1}{n} \sum^n_{i=1} t_i^2 \nonumber \\
+	\hat{D} = \frac{ d_\mathrm{total} }{ 4 t_\mathrm{total} }.
+\end{eqnarray}
+This estimator showed less variance than the estimator in equation \ref{pybusest} when analyzing tree output from the BMDS model and was thus preferred.
+When estimating $D$ specific to trunk branches or side branches, we calculate $d_\mathrm{total}$ and $t_\mathrm{total}$ only from the subset of trunk branches or side branches as appropriate.
 
 %%% REFERENCES %%%
 \bibliographystyle{plos}

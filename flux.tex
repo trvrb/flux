@@ -342,7 +342,7 @@ We observe a faster rate of antigenic drift in influenza A/H3N2 than in A/H1N1 o
 Previous work using general epidemiological models has suggested that rates of antigenic drift may be influenced by both fundamental reproductive number $R_0$ and rate cross-immunity decreasing mutation \cite{Gog02,Lin03}.
 Owing to these and similar findings, subsequent work ascribed differences in the evolution of A/H3N2 relative to A/H1N1 and influenza B to either greater $R_0$ or greater mutation rate \cite{Ferguson03,Bedford12}.
 Here, we examine the conversion of recently acquired antigenic mutation into fixed differences by comparing rates of antigenic diffusion to the degree of persistence on phylogeny branches in A/H3N2, A/H1N1, B/Vic and B/Yam (Table~\ref{diffusiontable}).
-To facilitate comparisons, we measure the diffusion coefficient $D$ characterizing the antigenic movement of each influenza lineage \cite{Pybus12}.
+To facilitate comparisons, we measure the diffusion coefficient $D$ \cite{Pybus12} characterizing the antigenic movement of each influenza lineage (see Supp.\ Methods).
 This coefficient is measured in terms of units$^2$/year and can be used to determine the diffusion length scale, that is the expected relationship between time and distance traveled, which is $2 \sqrt{t D}$ for a two-dimensional diffusion.
 Higher diffusion coefficients mean a lineage is diffusing faster through antigenic space.
 We compare diffusion coefficients between trunk branches and side branches, where trunk branches are defined as branches ancestral to the most recent virus sample and side branches are defined as those branches not ancestral to the most recent virus sample.
@@ -350,7 +350,7 @@ We compare diffusion coefficients between trunk branches and side branches, wher
 %%% diffusiontable %%%
 \begin{table}[h]
 	\centering
-	\caption{\textbf{Estimates of fundamental diffusion coefficient $D$ across influenza lineages and phylogenetic branches, including 50\% highest posterior density intervals.}}
+	\caption{\textbf{Estimates of fundamental diffusion coefficient $D$ across influenza lineages and phylogenetic branches, including posterior means and 50\% highest posterior density intervals.}}
 	\label{diffusiontable}	
 	\begin{tabular}{ c c c c } 
 	\hline
@@ -564,7 +564,7 @@ The evolutionary Brownian process assumes that the location $\node_i$ of node $i
 for $P=2$, where $\node_p$ is the location of the parent node, $d$ is the length of the branch connecting nodes $i$ and $p$, and $\boldsymbol{\Sigma}$ is a diagonal matrix with diagonal elements all equal to $\virussd$.
 The root node $\node_0$ is assumed to follow a normal distribution with expectation $(\beta \, t_0, 0)^{\prime}$ for $P=2$ and variance determined by the diffusion volatility $\virussd$ \cite{Lemey10}.
 The probability of virus locations $p(\viruses | \beta, \virussd, \tree)$ is determined through analytical integration across internal states following the methods introduced in \cite{Lemey10}.
-This formulation corresponds to a Weiner process with drift, in which the drift term $\beta$ only influences the expected states of nodes along the phylogeny, but does not influence the covariance structure among these nodes, which remains the same as it does in a standard Weiner process \tbc{CITE}.
+This formulation corresponds to a Weiner process with drift, in which the drift term $\beta$ only influences the expected states of nodes along the phylogeny, but does not influence the covariance structure among these nodes, which remains the same as it does in a standard Weiner process \cite{BrownianMotionHandbook}.
 This allows the separation in equation \ref{ebpprior} between drift terms affecting only expectations and the evolutionary Brownian process that includes covariance among virus locations $\virus_1,\ldots,\virus_n$.
 
 Here, the phylogenetic tree $\tree$ is estimated using sequence data for viruses $1,\ldots,\vn$ according to well established methods implemented in the software package BEAST \cite{BEAST, BEAST17}.
@@ -608,13 +608,10 @@ For the present study, we take a simple approach and sample a single MCMC step a
 Then, for specific quantities of interest, like rate of antigenic drift and rate of diffusion at different points along the phylogeny, we calculate this quantity across MCMC samples to yield an expectation and a credible interval.
 This approach accurately characterizes uncertainty that may be hidden in an analysis of a single antigenic map.
 
-\tbc{Describe calculation of diffusion coefficient $D$.}
-
 \subsection*{Availability}
 
 Source code implementing the cartographic models has been made fully available as part of the software package BEAST \cite{BEAST, BEAST17}, and can be downloaded from its Google code repository (http://code.google.com/p/beast-mcmc/).
 Antigenic, genetic and surveillance data is available as supplemental information \tbc{PREPARE}.
-Also included as supplemental information are XML control files to load antigenic and phylogenetic data into BEAST and perform cartographic analyses \tbc{PREPARE}.
 
 %%% ACKNOWLEDGMENTS %%%
 \subsection*{Acknowledgments} 
