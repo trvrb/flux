@@ -567,7 +567,7 @@ The probability of virus locations $p(\viruses | \beta, \virussd, \tree)$ is det
 This formulation corresponds to a Weiner process with drift, in which the drift term $\beta$ only influences the expected states of nodes along the phylogeny, but does not influence the covariance structure among these nodes, which remains the same as it does in a standard Weiner process \cite{BrownianMotionHandbook}.
 This allows the separation in equation \ref{ebpprior} between drift terms affecting only expectations and the evolutionary Brownian process that includes covariance among virus locations $\virus_1,\ldots,\virus_n$.
 
-Here, the phylogenetic tree $\tree$ is estimated using sequence data for viruses $1,\ldots,\vn$ according to well established methods implemented in the software package BEAST \cite{BEAST, BEAST17}.
+Here, the phylogenetic tree $\tree$ is estimated using sequence data for viruses $1,\ldots,\vn$ according to well established methods implemented in the software package BEAST \cite{BEAST17}.
 
 \subsection*{Posterior samples}
 
@@ -579,7 +579,7 @@ Under the full model, the posterior probability of observing virus and serum loc
 	p(\sera | \beta, \serumsd) \; 
 	p(\ses, \ves, \mdssd, \beta, \virussd, \serumsd, \tree).
 \end{equation}
-We sample from this posterior distribution using the Markov chain Monte Carlo (MCMC) procedures implemented in the software package BEAST \cite{BEAST,BEAST17}.
+We sample from this posterior distribution using the Markov chain Monte Carlo (MCMC) procedures implemented in the software package BEAST \cite{BEAST17}.
 Metropolis-Hastings proposals include transition kernels that translate individual virus and serum locations $\virus_i$ and $\serum_j$ and individual virus effects $\ve_i$ and serum effects $\se_j$, and other transition kernels that scale the entire set of virus and serum locations $\viruses$ and $\sera$ and that scale parameters $\mdssd$, $\beta$, $\virussd$ and $\serumsd$.
 For the present analysis, a two-step approach was taken to sample phylogenies, where a posterior sample of phylogenies was gathered using sequence data and then, in the cartographic analysis, trees from this set were randomly proposed and accepted following the Metropolis-Hastings algorithm \cite{Pagel04}.
 
@@ -591,7 +591,7 @@ Antigenic and genetic data were subsampled to give similar quantities of data ac
 Data gathering procedures resulted in 402 virus strains A/H3N2, 115 virus strains for A/H1N1, 179 virus strains for B/Vic and 174 virus strains for B/Yam.
 Surveillance data was obtained from the Centers of Disease Control and Prevention FluView Influenza Reports from the yearly summaries of influenza seasons 1997--1998 to 2010--2011 \cite{CDCReports}.
 
-Phylogenetic trees were sampled for A/H3N2, A/H1N1, B/Vic and B/Yam using BEAST \cite{BEAST} and incorporated the SRD06 nucleotide substitution model \cite{Shapiro06}, a coalescent demographic model with constant effective population size and a strict molecular clock across branches.
+Phylogenetic trees were sampled for A/H3N2, A/H1N1, B/Vic and B/Yam using BEAST \cite{BEAST17} and incorporated the SRD06 nucleotide substitution model \cite{Shapiro06}, a coalescent demographic model with constant effective population size and a strict molecular clock across branches.
 MCMC was run for 60 million steps and trees were sampled every 50,000 steps after allowing a burn-in of 10 million steps, yielding a total sample of 2000 trees.
 These trees were treated as a discrete set of possibilities when subsequently sampled in the BMDS analysis \cite{Pagel04}.
 
@@ -610,7 +610,7 @@ This approach accurately characterizes uncertainty that may be hidden in an anal
 
 \subsection*{Availability}
 
-Source code implementing the cartographic models has been made fully available as part of the software package BEAST \cite{BEAST, BEAST17}, and can be downloaded from its Google code repository (http://code.google.com/p/beast-mcmc/).
+Source code implementing the cartographic models has been made fully available as part of the software package BEAST \cite{BEAST17}, and can be downloaded from its Google code repository (http://code.google.com/p/beast-mcmc/).
 Antigenic, genetic and surveillance data is available as supplemental information \tbc{PREPARE}.
 
 %%% ACKNOWLEDGMENTS %%%
