@@ -143,7 +143,8 @@ a factor of 2 is included when calculating expected squared displacement
 \begin{equation}
 	\mathrm{E}[X_t^2 + Y_t^2] = 2 \sigma^2 t.
 \end{equation}
-Such diffusions are often parameterized with diffusion coefficient $D$ rather than volatility parameter $\sigma$, in this case $D=\sigma^2/2$ and 
+Such diffusions are often parameterized with diffusion coefficient $D$ rather than volatility parameter $\sigma$.
+In this case $D=\sigma^2/2$ and 
 \begin{equation}
 	\mathrm{E}[X_t^2 + Y_t^2] = 4 D t.
 \end{equation}
@@ -153,15 +154,17 @@ Owing to this relationship, Pybus et al.\ \cite{Pybus12} estimate $D$ from phylo
 	\hat{D} = \frac{1}{n} \sum^n_{i=1} \frac{d_i^2}{4t_i},
 \end{equation}
 in which $d_i$ represents the displacement of a branch and $t_i$ represents the length of a branch.
-However, short branches along the phylogeny may cause $d_i^2/t_i$ to have high variance and lead to uncertainty in the resulting estimates of $D$.
-Consequently, we estimate $D$ by looking at the relationship between total squared displacement along branches of a phylogeny and total time along branches of a phylogeny
-\begin{eqnarray}
-	d^2_\mathrm{total} = \sum^n_{i=1} d^2_i \nonumber \\
-	t_\mathrm{total} = \sum^n_{i=1} t_i \nonumber \\
-	\hat{D} = \frac{ d^2_\mathrm{total} }{ 4 t_\mathrm{total} }.
+However, uncertainty in $d_i$ or $t_i$, especially along short branches of the phylogeny, may cause $d_i^2/4t_i$ to have high variance and increase uncertainty in the resulting estimates of $D$.
+Consequently, we estimate $D$ by looking at the relationship between total squared displacement and total time along branches of a phylogeny
+\begin{eqnarray} \label{ourest}
+	d^2_\Sigma &=& \sum^n_{i=1} d^2_i \nonumber \\
+	t_\Sigma &=& \sum^n_{i=1} t_i \nonumber \\
+	\hat{D} &=& \frac{ d^2_\Sigma }{ 4 t_\Sigma }.
 \end{eqnarray}
-This estimator showed less variance than the estimator in equation \ref{pybusest} when analyzing tree output from the BMDS model and was thus preferred.
-When estimating $D$ specific to trunk branches or side branches, we calculate $d^2_\mathrm{total}$ and $t_\mathrm{total}$ only from the subset of trunk branches or side branches as appropriate.
+This estimator showed less variance than equation \ref{pybusest} when analyzing tree output from the BMDS model and was thus preferred.
+Additionally, we confirmed through simple simulation that estimator \ref{ourest} shows lower mean squared error than estimator \ref{pybusest} in the presence of modest levels of noise on estimates of $d_i$ and $t_i$.
+When estimating $D$ specific to trunk branches or specific to side branches, we calculate $d^2_\Sigma$ and $t_\Sigma$ only from a subset of phylogeny branches as appropriate.
+
 
 %%% REFERENCES %%%
 \bibliographystyle{plos}
