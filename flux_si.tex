@@ -156,12 +156,12 @@ in which $d_i$ represents the displacement of a branch and $t_i$ represents the 
 However, short branches along the phylogeny may cause $d_i^2/t_i$ to have high variance and lead to uncertainty in the resulting estimates of $D$.
 Consequently, we estimate $D$ by looking at the relationship between total squared displacement along branches of a phylogeny and total time along branches of a phylogeny
 \begin{eqnarray}
-	d_\mathrm{total} = \frac{1}{n} \sum^n_{i=1} d_i^2 \nonumber \\
-	t_\mathrm{total} = \frac{1}{n} \sum^n_{i=1} t_i^2 \nonumber \\
-	\hat{D} = \frac{ d_\mathrm{total} }{ 4 t_\mathrm{total} }.
+	d^2_\mathrm{total} = \sum^n_{i=1} d^2_i \nonumber \\
+	t_\mathrm{total} = \sum^n_{i=1} t_i^2 \nonumber \\
+	\hat{D} = \frac{ d^2_\mathrm{total} }{ 4 t_\mathrm{total} }.
 \end{eqnarray}
 This estimator showed less variance than the estimator in equation \ref{pybusest} when analyzing tree output from the BMDS model and was thus preferred.
-When estimating $D$ specific to trunk branches or side branches, we calculate $d_\mathrm{total}$ and $t_\mathrm{total}$ only from the subset of trunk branches or side branches as appropriate.
+When estimating $D$ specific to trunk branches or side branches, we calculate $d^2_\mathrm{total}$ and $t_\mathrm{total}$ only from the subset of trunk branches or side branches as appropriate.
 
 %%% REFERENCES %%%
 \bibliographystyle{plos}
