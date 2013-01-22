@@ -111,9 +111,9 @@ Integrating antigenic cartography and molecular evolution to characterize predic
 \affil[4]{Department of Biostatistics, UCLA Fielding School of Public Health, University of California, Los Angeles CA, USA}
 \affil[5]{Department of Microbiology and Immunology, Katholieke Universiteit Leuven, Leuven, Belgium}
 \affil[6]{Division of Virology, MRC National Institute for Medical Research, Mill Hill, London, UK}
-\affil[7]{Department of Zoology, University of Cambridge, Cambridge, UK.}
-\affil[8]{Department of Virology, Erasmus Medical Centre, Rotterdam, Netherlands.}
-\affil[9]{Fogarty International Center, National Institutes of Health, Bethesda, MD, USA.}
+\affil[7]{Department of Zoology, University of Cambridge, Cambridge, UK}
+\affil[8]{Department of Virology, Erasmus Medical Centre, Rotterdam, Netherlands}
+\affil[9]{Fogarty International Center, National Institutes of Health, Bethesda, MD, USA}
 
 \date{}
 
@@ -125,10 +125,15 @@ Integrating antigenic cartography and molecular evolution to characterize predic
 \section*{Abstract}
 
 Influenza viruses undergo continual antigenic evolution allowing mutant viruses to evade immunity acquired by the host population to previous virus strains.
-However, the extent to which antigenic evolution determines competitive dynamics within and between virus clades A/H3N2, A/H1N1, B/Victoria and B/Yamagata has remained unclear.
-Here, we develop a novel cartographic approach to simultaneously characterize the genetic and antigenic evolution of viral lineages.
-Through this approach, we determine historical rates and patterns of antigenic drift in all four viral clades and we show that antigenic drift influences year-to-year variability in clade dominance.
-We investigate the selective underpinnings for differing antigenic dynamics across clades and suggest that pleiotropic effects linked to antigenic mutation determine selective outcomes. 
+Antigenic phenotype is often assessed through pairwise measurement of cross-reactivity between influenza strains using the hemagglutination inhibition (HI) assay.
+Here, we extend previous approaches to antigenic cartography, which seeks to place strains on an antigenic map, such that distances on this map best recapitulate titers observed across multiple HI assays.
+In our model, we simultaneously characterize antigenic and genetic evolution by including an evolutionary model in which antigenic location diffuses over a shared virus phylogeny.
+Using HI data for influenza lineages A/H3N2, A/H1N1, B/Victoria and B/Yamagata, we determine average rates of antigenic drift for each clade, as well as year-to-year variability in the rate of drift.
+Through comparison with epidemiological data, we show that antigenic drift influences overall incidence across clades, and demonstrate a year-to-year correlation between drift and incidence.
+We investigate the selective underpinnings for differing antigenic dynamics across clades and show that A/H3N2 benefits from both a higher influx of new antigenic mutations and also from more efficient conversion of antigenic variation into fixed differences relative to other influenza clades.
+This work does much to elucidate the competitive dynamics of influenza lineages, but also makes possible substantial future advances in influenza and other antigenically-variable pathogens by providing a model that intimately combines molecular and antigenic evolution.
+
+\pagebreak
 
 %%% INTRODUCTION %%%
 \section*{Introduction}
@@ -188,7 +193,7 @@ We extend this model to include a time-informed prior on virus and serum locatio
 	\multicolumn{4}{c}{} 	&	\multicolumn{4}{c}{Test error}  \\
 	Model	&	Dimen 	& 	Serum/virus effects 	& Location Prior					& 	A/H3N2	& 	A/H1N1	& 	B/Vic	& 	B/Yam	\\
 	\hline		
-	1		&	2D 		&	Fixed $\ses$ 			& Uninformed						&	0.93 	&	0.78 	&	0.80	&	0.93	\\
+	1		&	2D 		&	Fixed $\ses$ 			& Diffuse							&	0.93 	&	0.78 	&	0.80	&	0.93	\\
 	2		&	2D 		&	Fixed $\ses$			& $\beta,\virussd,\serumsd$			&	0.91 	&	0.74 	&	0.77	&	0.83	\\	
 	3		&	1D 		&	Fixed $\ses$			& $\beta,\virussd,\serumsd$			&	1.07	&	0.92	&	0.94	&	1.08	\\		
 	4		&	3D 		&	Fixed $\ses$			& $\beta,\virussd,\serumsd$			&	0.91	&	0.74 	&	0.79	&	0.84	\\
