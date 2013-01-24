@@ -180,7 +180,7 @@ We test model performance by constructing training datasets representing 90\% of
 By fitting the BMDS model to the training dataset, we are able to predict HI titers in the test dataset and compare these predicted titers to observed titers. 
 We begin with a BMDS analog of the model used by Smith et al.\ \cite{Smith04}, in which viruses and sera are represented as 2D locations, expected titer is relative to the maximum titer of a particular ferret serum and virus and serum locations follow a diffuse prior.
 We find that this model performs well, yielding an average absolute predictive error of between 0.79 and 0.95 log$_2$ HI titers across influenza lineages (model 1; Table \ref{errortable}).
-We extend this model to include a time-informed prior on virus and serum locations that assumes antigenic location along dimension 1 increases in proportion to date of virus or serum sampling, resulting in a small improvement in predictive error (model 2; Table \ref{errortable}).
+We extend this model to include a time-informed prior that models the process of antigenic drift, in which virus and serum locations  along dimension 1 increase with date of virus or serum sampling, resulting in a small improvement in predictive error (model 2; Table \ref{errortable}).
 
 %%% errortable %%%
 \begin{table}[h]
@@ -188,19 +188,19 @@ We extend this model to include a time-informed prior on virus and serum locatio
 	\caption{\textbf{Average absolute prediction error of log$_2$ HI titer for test data across models and datasets.}}
 	\label{errortable}	
 	\makebox[\textwidth][c]{
-	\begin{tabular}{ c c c c c c c c } 
+	\begin{tabular}{ c c c c c c c c c } 
 	\hline
-	\multicolumn{4}{c}{} 	&	\multicolumn{4}{c}{Test error}  \\
-	Model	&	Dimen 	& 	Serum/virus effects 	& Location Prior					& 	A/H3N2	& 	A/H1N1	& 	B/Vic	& 	B/Yam	\\
+	\multicolumn{5}{c}{} 	&	\multicolumn{4}{c}{Test error}  \\
+	Model	&	Dimen 	& 	Serum effects 	&	Virus effects	& Location Prior	& 	A/H3N2	& 	A/H1N1	& 	B/Vic	& 	B/Yam	\\
 	\hline		
-	1		&	2D 		&	Fixed $\ses$ 			& Diffuse							&	0.93 	&	0.78 	&	0.80	&	0.93	\\
-	2		&	2D 		&	Fixed $\ses$			& $\beta,\virussd,\serumsd$			&	0.91 	&	0.74 	&	0.77	&	0.83	\\	
-	3		&	1D 		&	Fixed $\ses$			& $\beta,\virussd,\serumsd$			&	1.07	&	0.92	&	0.94	&	1.08	\\		
-	4		&	3D 		&	Fixed $\ses$			& $\beta,\virussd,\serumsd$			&	0.91	&	0.74 	&	0.79	&	0.84	\\
-	5		&	4D 		&	Fixed $\ses$			& $\beta,\virussd,\serumsd$			&	0.95	&	0.75 	&	0.81	&	0.86	\\
-	6		&	5D 		&	Fixed $\ses$			& $\beta,\virussd,\serumsd$			&	0.99	&	0.76 	&	0.84	&	0.88	\\				
-	7		&	2D 		&	Estimated $\ses, \ves$	& $\beta,\virussd,\serumsd$			&	0.77	&	0.71 	&	0.65	&	0.73	\\	
-	8		&	2D 		&	Estimated $\ses, \ves$	& $\beta,\virussd,\serumsd,\tree$	&	0.76	&	0.71 	&	0.64	&	0.72	\\		
+	1		&	2D 		&	Fixed 			&	None			& Uninformed		&	0.93 	&	0.78 	&	0.80	&	0.93	\\
+	2		&	2D 		&	Fixed			&	None			& Drift				&	0.91 	&	0.74 	&	0.77	&	0.83	\\	
+	3		&	1D 		&	Fixed			&	None			& Drift				&	1.07	&	0.92	&	0.94	&	1.08	\\		
+	4		&	3D 		&	Fixed			&	None			& Drift				&	0.91	&	0.74 	&	0.79	&	0.84	\\
+	5		&	4D 		&	Fixed			&	None			& Drift				&	0.95	&	0.75 	&	0.81	&	0.86	\\
+	6		&	5D 		&	Fixed			&	None			& Drift				&	0.99	&	0.76 	&	0.84	&	0.88	\\				
+	7		&	2D 		&	Estimated		&	Estimated		& Drift				&	0.77	&	0.71 	&	0.65	&	0.73	\\	
+	8		&	2D 		&	Estimated		&	Estimated		& Diffusion/Drift	&	0.76	&	0.71 	&	0.64	&	0.72	\\		
 	\hline
 	\end{tabular}	
 	}
