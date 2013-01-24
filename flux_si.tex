@@ -126,7 +126,7 @@ Similar calculations were performed for A/H1N1, B/Vic and B/Yam.
 
 \subsection*{Estimation of diffusion coefficient}
 
-The distance $d$ traveled by two-dimensional diffusion is not a linear function of time interval $t$, and thus the `rate' of diffusion cannot be calculated following $r=d/t$.
+The distance $d$ traveled by a diffusion is not a linear function of time interval $t$, and thus the `rate' of diffusion cannot be calculated following $r=d/t$.
 Assume we have a one-dimensional diffusion starting from $x_0 = 0$, so that
 \begin{equation}
 	X_t \sim \normal(0, \sigma^2 t),
@@ -137,14 +137,18 @@ where $\sigma$ represents the diffusion volatility, and in this case, the expect
 \end{equation}
 In moving to a two-dimensional diffusion
 \begin{equation}
-	(X_t, Y_t) \sim \normal \left( \twomatrix{0}{0}, \fourmatrix{\sigma^2 t}{0}{0}{\sigma^2 t} \right),
+	(X_t, Y_t) \sim \normal \left( \twomatrix{0}{0}, \fourmatrix{\sigma_x^2 t}{\rho \sigma_x \sigma_y t}{\rho \sigma_x \sigma_y t}{\sigma_y^2 t} \right),
 \end{equation}
-a factor of 2 is included when calculating expected squared displacement
+where $\sigma_x$ represents volatility in dimension 1, $\sigma_y$ represents volatility in dimension 2 and $\rho$ represents correlation,   expected squared displacement is equal to the sum of squared displacements in each dimension
 \begin{equation}
-	\mathrm{E}[X_t^2 + Y_t^2] = 2 \sigma^2 t.
+	\mathrm{E}[X_t^2 + Y_t^2] = \sigma_x^2 t + \sigma_y^2 t.
 \end{equation}
-Such diffusions are often parameterized with diffusion coefficient $D$ rather than volatility parameter $\sigma$.
-In this case $D=\sigma^2/2$ and 
+Such diffusions are often characterized with diffusion coefficient $D$.
+In this case
+\begin{equation}
+	D = \frac{\sigma_x^2 + \sigma_y^2}{4},
+\end{equation}
+so that expected squared displacement follows from $D$ alone
 \begin{equation}
 	\mathrm{E}[X_t^2 + Y_t^2] = 4 D t.
 \end{equation}
