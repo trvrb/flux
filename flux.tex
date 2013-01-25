@@ -92,6 +92,9 @@ or \\
 Cartographic analysis of antigenic dynamics and evolutionary success of seasonal influenza lineages \\
 or \\
 Integrating antigenic cartography and molecular evolution to characterize predictors of evolutionary success of seasonal influenza lineages 
+or \\
+Predicting the evolutionary success of seasonal influenza lineages through the integration of antigenic cartography and molecular evolution   
+
 }
 
 \author[1]{Trevor Bedford}
@@ -124,7 +127,7 @@ Integrating antigenic cartography and molecular evolution to characterize predic
 %%% ABSTRACT %%%
 \section*{Abstract}
 
-Influenza viruses undergo continual antigenic evolution allowing mutant viruses to evade immunity acquired by the host population to previous virus strains.
+Influenza viruses undergo continual antigenic evolution allowing mutant viruses to evade immunity to previous virus strains acquired by the host population.
 Antigenic phenotype is often assessed through pairwise measurement of cross-reactivity between influenza strains using the hemagglutination inhibition (HI) assay.
 Here, we extend previous approaches to antigenic cartography, which seeks to place strains on an antigenic map, such that distances on this map best recapitulate titers observed across multiple HI assays.
 In our model, we simultaneously characterize antigenic and genetic evolution by including an evolutionary model in which antigenic location diffuses over a shared virus phylogeny.
@@ -146,7 +149,7 @@ A thorough understanding of the process of antigenic drift is essential to publi
 
 Before 2009, there were four major clades of influenza circulating within the human population: A/H3N2, A/H1N1, B/Victoria and B/Yamagata. 
 In the case of influenza A, subtypes A/H3N2 and A/H1N1 refer to the genes, hemagglutinin (H or HA) and neuraminidase (N or NA), that are primarily responsible for the antigenic character of a strain. 
-In the case of influenza B, B/Vic and B/Yam refer to antigenically distinct lineages which diverged from one prior to 1980 \cite{Rota92}.
+In the case of influenza B, B/Vic and B/Yam refer to antigenically distinct lineages which diverged from a single one prior to 1980 \cite{Rota92}.
 Mutations to the HA1 region of the hemagglutinin protein are thought to drive the majority of antigenic drift in the influenza virus \cite{Nelson07NatRevGenet}. 
 Experimental characterization of antigenic phenotype is possible through the hemagglutination inhibition (HI) assay \cite{Hirst43}, which measures the cross-reactivity of one virus strain to serum raised against another strain through challenge or vaccination. 
 Sera from older strains react poorly with more evolved viruses resulting in new strains having a transmission advantage over previously established strains.
@@ -154,7 +157,7 @@ HI assays have shown there to be little to no cross-reactivity between influenza
 
 The results of many HI assays across a multitude of virus strains can be combined to yield a two-dimensional map, quantifying antigenic similarity and distance \cite{Smith04}. 
 The antigenic map of influenza A/H3N2 has shown largely linear movement of the influenza virus population since its introduction in 1968. 
-Evolution of antigenic phenotype appears punctuated with periods of stasis interspersed by periods of more rapid innovation, while genetic evolution appears more continuous \cite{Smith04}, suggesting that a relatively small number of genetic changes or combinations of genetic changes may drive changes in antigenic phenotype. 
+Evolution of antigenic phenotype appears punctuated with episodes of more rapid innovation interspersed by periods of stasis, while genetic evolution appears more continuous \cite{Smith04}, suggesting that a relatively small number of genetic changes or combinations of genetic changes may drive changes in antigenic phenotype. 
 The process of antigenic drift results in the rapid turnover of the virus population. 
 Although mutation occurs rapidly, standing genetic diversity is low and phylogenetic analysis shows a characteristically `spindly' tree with a single predominant trunk lineage and transitory side branches that persist for only 1--5 years \cite{Fitch97}.
 
@@ -216,7 +219,7 @@ We find that including these effects decreases test error further, ranging from 
 
 Previous work on influenza antigenic and genetic evolution has examined antigenic and genetic patterns in isolation, and then compared the results to assess congruence of these two aspects of evolution \cite{Hay01,Smith04,Russell08}. 
 Here, we simultaneously model antigenic and genetic evolution by adopting an evolutionary diffusion process \cite{Lemey10}, wherein a virus's antigenic character state evolves along branches of phylogenetic tree according to a Brownian motion process (see Methods).
-The diffusion process acts as a prior on virus locations, so that genetically similar viruses are expected to share similar antigenic locations.
+The phylogenetic diffusion process acts as a prior on virus locations, so that genetically similar viruses are expected to share similar antigenic locations.
 We include sequence data for A/H3N2, A/H1N1, B/Vic and B/Yam to estimate this diffusion process, and find a small increase in predictive accuracy when including covariance induced by the phylogenetic diffusion (model 8; Table \ref{errortable}).
 Additionally, modeling antigenic diffusion has the advantage of allowing direct correlation of evolutionary outcomes with changes in antigenic phenotype.
 
@@ -234,13 +237,15 @@ Antigenic clusters show high genetic similarity, so that we observe very few mut
 This analysis makes the fate of antigenic clusters obvious, with two clusters in A/H3N2 (Texas/77 and Beijing/89) appearing to be evolutionary dead-ends.
 
 %%% map %%%
+
+%% AR - Figure improvements: Give proper axis labels. Label clusters (Texas/77, Beijing/89, Beijing/92, Wuhan/95, Sydney/97 that are referenced in the text)
 \begin{figure}[h]
 	\centering		
 	\includegraphics[width=1.0\textwidth]{figures/map}
 	\caption{\textbf{Antigenic locations of A/H3N2, A/H1N1, B/Vic and B/Yam viruses showing evolutionary relationships between virus samples.} 
 	Circles represent a posterior sample of virus locations and have been shaded based on year of isolation.
 	Antigenic units represent two-fold dilutions of the HI assay.
-	Distances between clades, e.g.\ A/H3N2 and A/H1N1, are arbitrary.
+	Positioning of lineages, e.g.\ A/H3N2 and A/H1N1, relative to each other is arbitrary.
 	Lines represent mean posterior diffusion paths when virus locations are fixed.} 
 	\label{map} 
 \end{figure}
@@ -251,11 +256,13 @@ To solve this problem of identifiability, we assumed a weak prior that favors li
 Because of this, we interpret antigenic locations locally rather than globally.
 We can determine the rate of antigenic movement of virus lineages without knowing the larger configuration that the movement occurs under.
  
-We find that influenza A/H3N2 evolved along antigenic dimension 1 at a rate of $\beta=1.01$ antigenic units per year, with a 95\% highest posterior density (HPD) interval of 0.98--1.04 (Figure~\ref{drift}).
+We find that influenza A/H3N2 evolved along antigenic dimension 1 at a rate of $\beta=1.01$ antigenic units per year, with a 95\% highest posterior density (HPD) interval of 0.98--1.04.
 However, we observe occasional large jumps in antigenic phenotype (Figure~\ref{drift}), corresponding to cluster transitions identified by Smith et al. \cite{Smith04}.  
 Most variation is contained within the first antigenic dimension, but dimension 2 occasionally shows variation when two antigenically distinct lineages emerge and transiently coexist (Figure~\ref{map}), as is the case with the previously identified Beijing/89 and Beijing/92 clusters.
 
 %%% drift %%%
+
+%% AR - Figure improvements: Give proper axis labels. Label clusters (Texas/77, Beijing/89, Beijing/92, Sydney/97 that are referenced in the text)
 \begin{figure}[h]
 	\centering		
 	\includegraphics[width=0.75\textwidth]{figures/drift}
@@ -263,7 +270,7 @@ Most variation is contained within the first antigenic dimension, but dimension 
 	Antigenic drift is shown in terms of change of location in the first antigenic dimension through time.
 	Circles represent a posterior sample of virus locations and have been shaded based on year of isolation.
 	Antigenic units represent two-fold dilutions of the HI assay.
-	Distances between clades, e.g.\ A/H3N2 and A/H1N1, are arbitrary.
+	Relative positioning of lineages, e.g.\ A/H3N2 and A/H1N1, in the vertical axis is arbitrary.
 	Lines represent mean posterior diffusion paths when virus locations are fixed.} 
 	\label{drift} 
 \end{figure}
@@ -276,7 +283,7 @@ Interestingly, a minor lineage of B/Vic has persisted through 2011, appearing an
 Influenza B/Yamagata evolved slower still, with an average rate of and 0.32 (HPD 0.25--0.39) units per year.
 Little punctuated evolution is obvious in the evolution of B/Yam.
 
-Interestingly, although antigenic clusters seem to emerge in a punctuated fashion in influenza A/H3N2, year-to-year antigenic drift relatively constant through time with most years exhibiting an intermediate level of drift (Figure~\ref{jumps}).
+Interestingly, although antigenic clusters seem to emerge in a punctuated fashion in influenza A/H3N2, year-to-year antigenic drift is relatively constant through time with most years exhibiting an intermediate level of drift (Figure~\ref{jumps}).
 We calculate year-to-year antigenic drift for years 1992 to 2011 by calculating the average location along dimension 1 of phylogenetic lineages present at year $i$ and comparing this location to the average location of phylogenetic lineages present at year $i-1$.
 For A/H3N2, the largest cluster transition we observe is the emergence of the Sydney/97 cluster, evident as the appearance in 1997 of a large gap in virus locations along antigenic dimension 1 (Figure~\ref{drift}).
 However, in 1997 only three of the nine viruses sampled show the Sydney/97 phenotype, while the remaining six viruses exhibit the old Wuhan/95 phenotype.
