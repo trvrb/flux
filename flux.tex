@@ -130,10 +130,10 @@ Influenza viruses undergo continual antigenic evolution allowing mutant viruses 
 Antigenic phenotype is often assessed through pairwise measurement of cross-reactivity between influenza strains using the hemagglutination inhibition (HI) assay.
 Here, we extend previous approaches to antigenic cartography, which seeks to place strains on an antigenic map, such that distances on this map best recapitulate titers observed across multiple HI assays.
 In our model, we simultaneously characterize antigenic and genetic evolution by including an evolutionary model in which antigenic location diffuses over a shared virus phylogeny.
-Using HI data for influenza lineages A/H3N2, A/H1N1, B/Victoria and B/Yamagata, we determine average rates of antigenic drift for each clade, as well as year-to-year variability in the rate of drift.
-Through comparison with epidemiological data, we show that antigenic drift influences overall incidence across clades, and demonstrate a year-to-year correlation between drift and incidence.
-We investigate the selective underpinnings for differing antigenic dynamics across clades and show that A/H3N2 benefits from both a higher influx of new antigenic mutations and also from more efficient conversion of antigenic variation into fixed differences relative to other influenza clades.
-This work does much to elucidate the competitive dynamics of influenza lineages, but also makes possible substantial future advances in influenza and other antigenically-variable pathogens by providing a model that intimately combines molecular and antigenic evolution.
+Using HI data for influenza A/H3N2, A/H1N1, B/Victoria and B/Yamagata, we determine average rates of antigenic drift for each lineage, as well as year-to-year variability in the rate of drift.
+Through comparison with epidemiological data, we show that antigenic drift influences overall incidence across lineages, and demonstrate a year-to-year correlation between drift and incidence.
+We investigate the selective underpinnings for differing antigenic dynamics across lineages and show that A/H3N2 benefits from both a higher influx of new antigenic mutations and also from more efficient conversion of antigenic variation into fixed differences relative to other influenza lineages.
+This work does much to elucidate the antigenic dynamics of influenza lineages, but also makes possible substantial future advances in influenza and other antigenically-variable pathogens by providing a model that intimately combines molecular and antigenic evolution.
 
 \pagebreak
 
@@ -148,23 +148,22 @@ A thorough understanding of the process of antigenic drift is essential to publi
 
 Before 2009, there were four major clades of influenza circulating within the human population: A/H3N2, A/H1N1, B/Victoria and B/Yamagata. 
 In the case of influenza A, subtypes A/H3N2 and A/H1N1 refer to the genes, hemagglutinin (H or HA) and neuraminidase (N or NA), that are primarily responsible for the antigenic character of a strain. 
-In the case of influenza B, B/Vic and B/Yam refer to antigenically distinct lineages which diverged from a single lineage prior to 1980 \cite{Rota92}.
-Mutations to the HA1 region of the hemagglutinin protein are thought to drive the majority of antigenic drift in the influenza virus \cite{Nelson07NatRevGenet}. 
+In the case of influenza B, B/Vic and B/Yam refer to antigenically distinct lineages which diverged from a single lineage prior to 1980 \cite{Rota90}.
+Mutations to the HA1 region of the hemagglutinin protein are thought to drive the majority of antigenic drift in the influenza virus \cite{Wiley81, Nelson07NatRevGenet}. 
 Experimental characterization of antigenic phenotype is possible through the hemagglutination inhibition (HI) assay \cite{Hirst43}, which measures the cross-reactivity of one virus strain to serum raised against another strain through challenge or vaccination. 
 Sera from older strains react poorly with more evolved viruses resulting in new strains having a transmission advantage over previously established strains.
-HI assays have shown there to be little to no cross-reactivity between influenza clades A/H3N2, A/H1N1, B/Vic and B/Yam \cite{Hay01}.
 
-The results of many HI assays across a multitude of virus strains can be combined to yield a two-dimensional map, quantifying antigenic similarity and distance \cite{Smith04}. 
+The results of many HI assays across a multitude of virus strains of a single subtype can be combined to yield a two-dimensional map, quantifying antigenic similarity and distance \cite{Smith04}. 
 The antigenic map of influenza A/H3N2 has shown largely linear movement of the influenza virus population since its introduction in 1968. 
 Evolution of antigenic phenotype appears punctuated with episodes of more rapid innovation interspersed by periods of stasis, while genetic evolution appears more continuous \cite{Smith04}, suggesting that a relatively small number of genetic changes or combinations of genetic changes may drive changes in antigenic phenotype. 
 The process of antigenic drift results in the rapid turnover of the virus population. 
-Although mutation occurs rapidly, standing genetic diversity is low and phylogenetic analysis shows a characteristically `spindly' tree with a single predominant trunk lineage and transitory side branches that persist for only 1--5 years \cite{Fitch97}.
+Although mutation occurs rapidly, genetic diversity among contemporaneous viruses is low and phylogenetic analysis shows a characteristically `spindly' tree with a single predominant trunk lineage and transitory side branches that persist for only 1--5 years \cite{Fitch97}.
 
 Previously, the antigenic and genetic patterns of influenza evolution have been analyzed essentially in isolation. 
 An antigenic map is constructed from a panel of HI measurements, and a phylogenetic tree is constructed from sequence data. 
 However, the opportunity for a combined approach exists as both the antigenic map and the phylogenetic tree often contain many of the same isolates. 
-Here, we implement a flexible Bayesian approach to jointly characterize the antigenic and genetic evolution of the influenza virus population. 
-We apply this approach to investigate the dynamics of clades A/H3N2, A/H1N1, B/Vic and B/Yam. 
+Here, we implement a flexible Bayesian approach to characterize jointly the antigenic and genetic evolution of the influenza virus population. 
+We apply this approach to investigate the dynamics of A/H3N2, A/H1N1, B/Vic and B/Yam viruses. 
 
 %%% RESULTS %%%
 \section*{Results and Discussion}
@@ -176,7 +175,7 @@ In this model, viruses and sera are given $N$-dimensional locations, thus specif
 In the BMDS model, a map distance of one antigenic unit translates to an expectation of a 2-fold drop in HI titer between virus and sera.
 Maps that produce pairwise distances most congruent with the observed titers will have a high likelihood and will be favored by the BMDS model.
 We integrate over sources of uncertainty, such as antigenic locations, in a flexible Bayesian fashion.
-We apply this model to HI measurements of virus isolates against post-infection ferret sera for influenza A/H3N2, A/H1N1, B/Vic and B/Yam (see Methods).
+We apply this model to HI measurements of virus isolates against post-infection ferret antisera for influenza A/H3N2, A/H1N1, B/Vic and B/Yam (see Methods).
 
 We test model performance by constructing training datasets representing 90\% of the HI measurements for each of the four influenza lineages and test datasets representing the remaining 10\% of the measurements for each lineage. 
 By fitting the BMDS model to the training dataset, we are able to predict HI titers in the test dataset and compare these predicted titers to observed titers. 
@@ -217,13 +216,13 @@ We refer to these estimates as serum effects and virus effects, respectively.
 We find that including these effects decreases test error further, ranging from an improvement of 0.03 in A/H1N1 to an improvement of 0.14 in A/H3N2 (model 7; Table \ref{errortable}).
 
 Previous work on influenza antigenic and genetic evolution has examined antigenic and genetic patterns in isolation, and then compared the results to assess congruence of these two aspects of evolution \cite{Hay01,Smith04,Russell08}. 
-Here, we simultaneously model antigenic and genetic evolution by adopting an evolutionary diffusion process \cite{Lemey10}, wherein a virus's antigenic character state evolves along branches of phylogenetic tree according to a Brownian motion process (see Methods).
+Here, we simultaneously model antigenic and genetic evolution by adopting an evolutionary diffusion process \cite{Lemey10}, wherein a virus's antigenic character state evolves along branches of the phylogenetic tree according to a Brownian motion process (see Methods).
 The phylogenetic diffusion process acts as a prior on virus locations, so that genetically similar viruses are expected to share similar antigenic locations.
 We include sequence data for A/H3N2, A/H1N1, B/Vic and B/Yam to estimate this diffusion process, and find a small increase in predictive accuracy when including covariance induced by the phylogenetic diffusion (model 8; Table \ref{errortable}).
 Additionally, modeling antigenic diffusion has the advantage of allowing direct correlation of evolutionary outcomes with changes in antigenic phenotype.
 
-We find that the average absolute error in predicted log$_2$ HI titer is nearly constant with antigenic distance (Figure~\ref{error_by_distance_and_year}A), thus supporting our model assumption that drop in log$_2$ titer is proportional to the Euclidean distance separating viruses and sera on the antigenic map.
-Additionally, we find that absolute error in predicted titer is nearly constant with time (Figure~\ref{error_by_distance_and_year}B).
+We find that the average absolute error in predicted log$_2$ HI titer is nearly constant with antigenic distance (Figure~\ref{error_by_distance_and_year}A), thus supporting our model assumption that the drop in log$_2$ titer is proportional to the Euclidean distance separating viruses and sera on the antigenic map.
+Additionally, we find that the absolute error in predicted titer is nearly constant with time (Figure~\ref{error_by_distance_and_year}B).
 Antigenic locations inferred by the model are well resolved; estimates of antigenic distance between pairs of viruses show relatively little variation across the posterior.
 We estimate that virus distances have, on average, a 50\% credible interval of $\pm0.45$ antigenic units for A/H3N2, $\pm0.57$ units for A/H1N1, $\pm0.76$ units for B/Vic, and $\pm0.65$ units for B/Yam.
 
@@ -250,10 +249,10 @@ This analysis makes the fate of antigenic clusters obvious, with two clusters in
 \end{figure}
 
 HI assays lack sensitivity beyond a certain point, so that for A/H3N2, cross-reactive measurements only exist between strains sampled at most 11 years apart, leaving only threshold titers, e.g.\ `$<$40', in more temporally distant comparisons.  
-Because of the threshold of sensitivity of the HI assay, it's impossible to distinguish a linear trajectory in 2D antigenic space, from a slightly curved trajectory, so long as the curve does not bring antigenic phenotype full circle to have cross-reactive measurements between temporally distant strains.
+Because of the threshold of sensitivity of the HI assay, it's impossible to distinguish a linear trajectory in 2D antigenic space from a slightly curved trajectory, so long as the curve does not bring antigenic phenotype full circle to have cross-reactive measurements between temporally distant strains.
 To solve this problem of identifiability, we assumed a weak prior that favors linear movement in the 2D antigenic space (present in models 2 through 8; Table \ref{errortable}), with the slope of the linear relationship and the precision of the relationship incorporated into the Bayesian model (see Methods).
-Because of this, we interpret antigenic locations locally rather than globally.
-We can determine the rate of antigenic movement of virus lineages without knowing the larger configuration that the movement occurs under.
+Because of this, we interpret map locations locally rather than globally.
+We can determine the rate of antigenic movement of viruses withen each clade without knowing the larger configuration under which the movement occurs.
  
 We find that influenza A/H3N2 evolved along antigenic dimension 1 at a rate of $\beta=1.01$ antigenic units per year, with a 95\% highest posterior density (HPD) interval of 0.98--1.04.
 However, we observe occasional large jumps in antigenic phenotype (Figure~\ref{drift}), corresponding to cluster transitions identified by Smith et al. \cite{Smith04}.  
@@ -282,13 +281,13 @@ Interestingly, a minor lineage of B/Vic has persisted through 2011, appearing an
 Influenza B/Yamagata evolved slower still, with an average rate of and 0.32 (HPD 0.25--0.39) units per year.
 Little punctuated evolution is obvious in the evolution of B/Yam.
 
-Interestingly, although antigenic clusters seem to emerge in a punctuated fashion in influenza A/H3N2, year-to-year antigenic drift is relatively constant through time with most years exhibiting an intermediate level of drift (Figure~\ref{jumps}).
+Interestingly, although antigenic clusters seem to emerge in a punctuated fashion in influenza A/H3N2, year-to-year antigenic drift in the mean antigenic phenotype of the virus population is relatively constant through time with most years exhibiting an intermediate level of drift (Figure~\ref{jumps}).
 We calculate year-to-year antigenic drift for years 1992 to 2011 by calculating the average location along dimension 1 of phylogenetic lineages present at year $i$ and comparing this location to the average location of phylogenetic lineages present at year $i-1$.
 For A/H3N2, the largest cluster transition we observe is the emergence of the Sydney/97 cluster, evident as the appearance in 1997 of a large gap in virus locations along antigenic dimension 1 (Figure~\ref{drift}).
 However, in 1997 only three of the nine viruses sampled show the Sydney/97 phenotype, while the remaining six viruses exhibit the old Wuhan/95 phenotype.
 In 1998, three of the four viruses sampled show the Sydney/97 phenotype, with the remaining virus still showing the Wuhan/95 phenotype.
 In 1999, all sampled viruses exhibit the Sydney/97 phenotype.
-Thus, we observe fairly equal rates of year-to-year antigenic drift in mean phenotype in going from 1996 to 1997, from 1997 to 1998 and from 1998 to 1999, rather than all drift in mean antigenic phenotype attributable to a shift in 1997 (Figure~\ref{jumps}).
+Thus, we observe fairly equal rates of year-to-year drift in mean antigenic phenotype in going from 1996 to 1997, from 1997 to 1998 and from 1998 to 1999, rather than all drift in mean antigenic phenotype attributable to a shift in 1997 (Figure~\ref{jumps}).
 In addition to showing greater overall rates of antigenic drift, A/H3N2 shows greater variation in year-to-year drift than seen in A/H1N1 or influenza B (Figure~\ref{jumps}).
 We find that the standard deviation in year-to-year drift is 0.88 antigenic units for A/H3N2, 0.51 units for A/H1N1, 0.54 units for B/Vic and 0.27 units for B/Yam.
 
@@ -297,7 +296,7 @@ We find that the standard deviation in year-to-year drift is 0.88 antigenic unit
 	\centering		
 	\includegraphics[width=0.95\textwidth]{figures/jumps}
 	\caption{\textbf{Year-to-year antigenic drift between 1992 and 2011 in A/H3N2, A/H1N1, B/Vic and B/Yam viruses.} 
-	(A) Timeseries of year-to-year antigenic drift across influenza clades from 1992 to 2011.
+	(A) Time series of year-to-year antigenic drift across influenza clades from 1992 to 2011.
 	Year-to-year antigenic drift for a virus clade for year $i$ is measured as the mean of antigenic dimension 1 of phylogenetic lineages in year $i$ compared to the mean of antigenic dimension 1 of phylogenetic lineages from the previous year $i-1$.
 	For example, 2000 represents difference in antigenic dimension 1 between 1999 and 2000.
 	Error bars represent 50\% credible intervals across posterior samples of year-to-year drift.
@@ -308,7 +307,8 @@ We find that the standard deviation in year-to-year drift is 0.88 antigenic unit
 
 \subsection*{Epidemiological consequences of antigenic drift}
 
-We investigated the relative rates of antigenic evolution in A/H3N2, A/H1N1, B/Vic and B/Yam from 2000 to 2011, finding a general correspondence between antigenic drift in dimension 1 and relative incidence within each influenza clade (Figure~\ref{incidence}).
+We investigated the relative rates of antigenic evolution in A/H3N2, A/H1N1, B/Vic and B/Yam from 2000 to 2011, finding a general correspondence between antigenic drift in dimension 1 and relative incidence within the USA for each influenza clade (Figure~\ref{incidence}).
+Here, we take incidence to be equivalent to frequency of isolations of a particular clade relative to all virus isolations. 
 Here, we take the measurements of year-to-year antigenic drift from the preceding section (Figure~\ref{jumps}) and calculate the relative contribution to total antigenic drift for each clade in each year.
 We compare these measurements of relative antigenic drift to relative isolations of viruses from each clade in the USA from the 2001--2002 to the 2011--2012 influenza seasons (see Methods).
 From 2000 to 2011, A/H3N2 accounted for the majority of antigenic drift (46\%), while A/H1N1, B/Vic and B/Yam split the remainder, accounting for 18\%, 21\% and 15\%, respectively.
@@ -335,17 +335,17 @@ These proportions are significantly similar to one another (randomization test, 
 
 Additionally, year-to-year comparisons show a similar pattern, in which years with high levels of antigenic drift coming into an influenza season, e.g.\ drift from 2000 to 2001, show high levels of relative incidence in that season, e.g.\ incidence in the 2001/2002 season (Figure~\ref{incidence}). 
 We find an overall correlation between clade-specific relative antigenic drift and clade-specific incidence of $r = 0.71$ (Pearson correlation, $p = 6.43 \times 10^{-8}$).
-Correlation is present to greater of lesser degrees for each of the four clades, with $r_\mathrm{H3} = 0.56$, $r_\mathrm{H1} = 0.46$, $r_\mathrm{Vic} = 0.49$ and $r_\mathrm{Yam} = 0.23$.
+Correlation is present to greater or lesser degrees for each of the four clades, with $r_\mathrm{H3} = 0.56$, $r_\mathrm{H1} = 0.46$, $r_\mathrm{Vic} = 0.49$ and $r_\mathrm{Yam} = 0.23$.
 Pandemic H1N1 is present in the incidence data in 2009 and afterwards, however, our estimates of relative incidence only include isolations of seasonal A/H3N2, A/H1N1, B/Vic and B/Yam.
 
 These findings clearly demonstrate the epidemiological importance of antigenic drift and show that incidence of influenza clades A/H3N2, A/H1N1, B/Vic and B/Yam is strongly impacted by levels of antigenic drift within each clade.
-Furthermore, these findings suggest that the composition of a particular influenza season could be estimated ahead of time by examining the degree of antigenic drift between influenza clades.
+Furthermore, these findings suggest that the predominate clade of a particular influenza season could be estimated ahead of time by examining the degree of antigenic drift between influenza clades.
 However, these findings alone do not conclusively show interference between clades; more work needs to be done to establish whether antigenic drift within one influenza clades drives down incidence in other clades.
 
 \subsection*{Conversion of antigenic mutation into fixed differences}
 
 We observe a faster rate of antigenic drift in influenza A/H3N2 than in A/H1N1 or in either lineage of influenza B.
-Previous work using general epidemiological models has suggested that rates of antigenic drift may be influenced by both fundamental reproductive number $R_0$ and rate cross-immunity decreasing mutation \cite{Gog02,Lin03}.
+Previous work using general epidemiological models has suggested that rates of antigenic drift may be influenced by both the fundamental reproductive number $R_0$ and the rate at which mutation decreases cross-immunity \cite{Gog02,Lin03}.
 Owing to these and similar findings, subsequent work ascribed differences in the evolution of A/H3N2 relative to A/H1N1 and influenza B to either greater $R_0$ or greater mutation rate \cite{Ferguson03,Bedford12}.
 Here, we examine the conversion of recently acquired antigenic mutation into fixed differences by comparing rates of antigenic diffusion to the degree of persistence on phylogeny branches in A/H3N2, A/H1N1, B/Vic and B/Yam (Table~\ref{diffusiontable}).
 To facilitate comparisons, we measure the diffusion coefficient $D$ \cite{Pybus12} characterizing the antigenic movement of each influenza lineage (see Supp.\ Methods).
@@ -371,12 +371,12 @@ We compare diffusion coefficients between trunk branches and side branches, wher
 \end{table}
 
 Mutations must proceed through the sieve of natural selection, first appearing as transient differences restricted to side branches, while advantageous mutations will preferentially fix in the virus population and thus accrue on the trunk of the phylogeny.
-We expect the diffusion coefficient on side branches to more closely resemble the raw rate of antigenic mutation.
-Here, we find that A/H3N2 and B/Vic have similar diffusion coefficients, which are larger than the diffusion coefficients of A/H1N1 and B/Yam (Table~\ref{diffusiontable}).
+We expect the diffusion coefficient on side branches to more closely resemble the underlying rate of antigenic mutation, before selection can strongly influence observed rates.
+Here, we find that A/H3N2 and B/Vic have similar diffusion coefficients on side branches, which are larger than the diffusion coefficients of A/H1N1 and B/Yam (Table~\ref{diffusiontable}).
 Thus, we expect that new antigenic mutations may occur at a faster rate in A/H3N2 and B/Vic than in A/H1N1 or B/Yam.
 We find that trunk branches in both A/H3N2 and A/H1N1 evolve in antigenic phenotype faster than side branches (Table~\ref{diffusiontable}), suggesting that positive selection is promoting antigenic movement in these lineages.
 Interestingly, B/Vic and B/Yam show less of a signature of positive selection, with similar diffusion coefficients on trunk and side branches (Table~\ref{diffusiontable}).
-Thus, although drift forward along dimension 1 is promoted in all lineages (Figure~\ref{drift}), raw antigenic diffusion appears to be promoted more strongly in influenza A than in influenza B, giving an advantage to influenza A in terms of overall rate of antigenic drift.
+Thus, although drift forward along dimension 1 is driven by selection in all lineages (Figure~\ref{drift}), raw antigenic diffusion appears to be selected for more strongly in influenza A than in influenza B, giving an advantage to influenza A in terms of overall rate of antigenic drift.
 Additionally, it appears that A/H3N2 and B/Vic benefit from a greater influx of new antigenic mutations, giving them an advantage over their sister lineages A/H1N1 and B/Yam also in terms of overall rate of antigenic drift.
 
 In this context, it is especially interesting that adaptive evolution in the HA1 protein determined through analysis of nonsynonymous and synonymous substitutions is substantially stronger in A/H3N2 than in A/H1N1 \cite{Wolf06}; H3 appears to accumulate adaptive fixations at $\sim$150\% the rate of H1 \cite{Bhatt11}.
@@ -384,7 +384,7 @@ Here, we observe that A/H3N2 has a diffusion coefficient $\sim$141\% greater tha
 These results suggest that the greater rate of adaptive fixation in A/H3N2 may be simply due to a greater abundance of new antigenic mutations to fix.
 
 We suggest that the larger signal of positive selection for antigenic diffusion in influenza A relative to influenza B could be due to either a greater fundamental reproductive number $R_0$ or to pleiotropic effects associated with antigenic change.
-In the later case, we expect that many antigenic variants may be at inherent disadvantage against other strains from decreased protein function \cite{Kaverin04,Rudneva12} or other effects, even though they benefit from a transmission advantage mediated by host immunity.
+In the latter case, we expect that many antigenic variants may be at an inherent disadvantage against other strains from decreased protein function \cite{Kaverin04,Rudneva12} or other effects, even though they benefit from a transmission advantage mediated by host immunity.
 These mutations may not be promoted by natural selection to the same extent as antigenic variants that maintain functional equivalence.
 Still, it is clear that more work is necessary to fully clarify the the mechanistic underpinnings of the relative evolutionary success of different influenza lineages.
 
@@ -399,7 +399,7 @@ Correspondingly, we observe substantially greater levels of incidence in A/H3N2 
 We suggest that antigenic evolution strongly influences competitive dynamics both within and between influenza clades.
 
 The statistical framework presented here represents a baseline to which further advancements in modeling antigenic phenotype and evolution may be made.
-For example, our likelihood-based model facilities the inclusion of possible covariates affecting immunological titer, which could include experimental factors such as red blood cell type used in the HI assay \cite{Lin12} and whether oseltamivir is included in the HI reaction \cite{Lin10}.
+For example, our likelihood-based model facilitates the inclusion of possible covariates affecting immunological titer, which could include experimental factors such as red blood cell type used in the HI assay \cite{Lin12} and whether oseltamivir is included in the HI reaction \cite{Lin10}.
 Additionally, this framework should be ideally suited to uncovering genetic determinants of antigenic change, as both the sequence state and antigenic location of internal nodes in the phylogeny may be estimated.
 In this fashion, it should be possible to correlate sequence substitutions directly to antigenic diffusion.
 
@@ -412,7 +412,7 @@ Further work characterizing antigenic evolution in the human influenza virus may
 
 Antigenic characteristics of viral strains are often assessed through immunological assays such as the hemagglutination inhibition (HI) assay \cite{Hirst43}.  
 At heart, these assays compare the reactivity of one virus strain to antibodies raised against another virus strain via challenge or vaccination.  
-In the case of HI, the measurement of cross-reactivity takes the form of a titer representing the dilution factor at which serum raised against a particular virus ceases to be effective at inhibiting binding to red blood cells of another virus.  
+In the case of HI, the measurement of cross-reactivity takes the form of a titer representing the dilution factor at which serum raised against a particular virus ceases to be effective at inhibiting the binding of another virus to red blood cells.  
 These factors are commonly assessed by serial dilution, so that HI titers will form a log series, 40, 80, 160, etc \dots.
 Because experimental HI titers typically differ by factors of two, we find it convenient to work in log$_2$ space and represent the titer of virus $i$ against serum $j$ as $H_{ij} = \mathrm{log}_2 \mbox{(HI titer)}$, i.e.\ a titer of 160 has $H_{ij} = 7.32$.
 Due to experimental constraints, most comparisons cannot be made, leading to a sparse observation matrix $\mathbf{H} = \{H_{ij}\}$.  
@@ -548,8 +548,8 @@ The parameter $\virussd$ determines the breadth of the cloud of virus locations 
 	\caption{\textbf{Schematic antigenic map with three viruses and two sera.} 
 	Virus 1 is shown in blue, virus 2 is shown in red and virus 3 is shown in yellow.
 	Virus isolates are represented by filled circles, sera raised against viruses are shown as open circles and map distances $\delta_{ij}$ are shown as solid lines connecting viruses and sera.
-	Sera from virus 1 is compared against viruses 1 and 2, while sera from virus 2 is compared against viruses 1 and 3.
-	Left and right panels represent cartographic models that would give equal likelihoods of a given set of serological data $\{H_{11},H_{21},H_{22},H_{32}\}$.
+	Sera from virus 1 is compared against viruses 1 and 2, while sera from virus 2 is compared against viruses 2 and 3.
+	Left and right panels represent cartographic models that would give equal likelihoods to a set of serological data $\{H_{11},H_{21},H_{22},H_{32}\}$.
 	} 
 	\label{schematic_map} 
 \end{figure}
@@ -629,10 +629,10 @@ We acknowledge the laboratories that provided sequences to EpiFlu database: Cent
 \subsection*{Author contributions} 
 
 AR, MAS, TB and PL conceived the study.
-TB, GD, VG, AJH, JWM, CR, DS and AR gathered antigenic and genetic data.
+TB, GD, VG, JWM, AJH, CAR, DJS and AR gathered antigenic and genetic data.
 AR, MAS, TB and PL designed statistical phylogenetic procedures.
 TB performed the analysis.
-TB, MAS and AR wrote the paper.
+TB, MAS, AR, JWM, AJH wrote the paper.
 
 %%% FUNDING %%%
 \subsection*{Funding} 
