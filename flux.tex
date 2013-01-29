@@ -164,7 +164,7 @@ Previously, the antigenic and genetic patterns of influenza evolution have been 
 An antigenic map is constructed from a panel of HI measurements, and a phylogenetic tree is constructed from sequence data. 
 However, the opportunity for a combined approach exists as both the antigenic map and the phylogenetic tree often contain many of the same isolates. 
 Here, we implement a flexible Bayesian approach to characterize jointly the antigenic and genetic evolution of the influenza virus population. 
-We apply this approach to investigate the dynamics of A/H3N2, A/H1N1, B/Vic and B/Yam viruses. 
+We apply this approach to investigate the dynamics of A/H3N2, A/H1N1, B/Vic and B/Yam viruses, and, for the first time, present detailed reconstructions of the antigenic dynamics of all four circulating influenza clades.
 
 %%% RESULTS %%%
 \section*{Results and Discussion}
@@ -395,6 +395,7 @@ These results suggest that the greater rate of adaptive fixation in A/H3N2 may b
 We suggest that the larger signal of positive selection for antigenic diffusion in influenza A relative to influenza B could be due to either a greater fundamental reproductive number $R_0$ or to pleiotropic effects associated with antigenic change.
 In the latter case, we expect that many antigenic variants may be at an inherent disadvantage against other strains from decreased protein function \cite{Kaverin04,Rudneva12} or other effects, even though they benefit from a transmission advantage mediated by host immunity.
 These mutations may not be promoted by natural selection to the same extent as antigenic variants that maintain functional equivalence.
+Additionally, other work has shown strong pleiotropic constraints in the evolution of oseltamivir resistance in A/H1N1 \cite{Bloom10}.
 Still, it is clear that more work is necessary to fully clarify the the mechanistic underpinnings of the relative evolutionary success of different influenza lineages.
 
 %%% CONCLUSIONS %%%
@@ -411,6 +412,7 @@ The statistical framework presented here represents a baseline to which further 
 For example, our likelihood-based model facilitates the inclusion of possible covariates affecting immunological titer, which could include experimental factors such as red blood cell type used in the HI assay \cite{Lin12} and whether oseltamivir is included in the HI reaction \cite{Lin10}.
 Additionally, this framework should be ideally suited to uncovering genetic determinants of antigenic change, as both the sequence state and antigenic location of internal nodes in the phylogeny may be estimated.
 In this fashion, it should be possible to correlate sequence substitutions directly to antigenic diffusion.
+Here, methods to efficiently calculate branch- and site-specific codon substitutions may be necessary to easily correlate sequence substitutions with antigenic change \cite{Lemey12}.
 
 A deeper understanding of the process of antigenic evolution in the human influenza virus may eventually prove to be crucial in improving vaccine strain selection.
 
@@ -435,8 +437,6 @@ Here, we follow previous models in representing antigenic locations as points in
 One of our initial goals is to find an optimal projection of the high-dimensional distance matrix $\mathbf{H}$ into this lower dimensional space. 
 We conduct this projection using Bayesian multidimensional scaling (BMDS) \cite{Oh01} in which we construct a probabilistic model to quantify the fit of a particular configuration of cartographic locations to the observed matrix of serological measurements.
 Typically, $P = 2$, but higher or lower dimensions may better reflect the data. 
-
-\subsection*{Likelihood functions}
 
 Let $\virus_i \in \mathbb{R}^{P}$ represent the cartographic location of virus $i$ for $i = 1,\ldots,\vn$, so that $\virus_i = (x_{i1}, x_{i2})^{\prime}$ for $P=2$. 
 Similarly, let $\serum_j$ represent the cartographic location of serum $j$ for $j = 1,\ldots,\sn$, so that $\serum_j = (y_{j1},y_{j2})^{\prime}$ for $P=2$.
@@ -507,12 +507,12 @@ We calculate the overall likelihood by multiplying probabilities of individual m
 	L(\viruses,\sera) = \prod_{(i,j) \in \cal I} f(H_{ij}),
 \end{equation}
 using probability functions $\point$, $\threshold$ and $\interval$ as appropriate.
-We begin by assuming independent, diffuse normal prior on virus and serum locations
+We begin by assuming independent, diffuse normal priors on virus and serum locations
 \begin{eqnarray}
 	\virus_i &\sim& \mathrm{Normal}(\boldsymbol{\mu},\boldsymbol{\Sigma}) \nonumber \\
 	\serum_j &\sim& \mathrm{Normal}(\boldsymbol{\mu},\boldsymbol{\Sigma}),
 \end{eqnarray}
-with $\boldsymbol{\mu} = (0,\ldots,0)^{\prime}$ and $\boldsymbol{\Sigma}$ is a diagonal matrix with diagonal elements all equal to $10000$.
+where $\boldsymbol{\mu} = (0,\ldots,0)^{\prime}$ and $\boldsymbol{\Sigma}$ is a diagonal matrix with diagonal elements all equal to $10000$.
 
 \subsection*{Virus and serum effects}
 
@@ -532,14 +532,13 @@ With virus reactivity included, observed titers follow
 \end{equation}
 and the vector of virus effects $\ve_i$ for $i = 1,\ldots, \vn$ is estimated in an analogous hierarchical fashion, with $\ves$ normally distributed with mean and variance equal to the empirical mean and variance of the set of maximum titers across viruses $\{ \max ( H_{i1},\ldots,H_{i \sn} ) : i = 1,\ldots,\vn \}$.
 
-\subsection*{Location prior}
+\subsection*{Drift model of antigenic evolution}
 
-As presented, virus and serum locations $\viruses$ and $\sera$ give a likelihood of observing the HI data $\mathbf{H}$.
-However, distances between viruses and sera represent only a local description of antigenic space and do not provide a global picture.
+As presented, multiple configurations of virus and serum locations $\viruses$ and $\sera$ will give the same likelihood of an observed data matrix $\mathbf{H}$.
 An example of this phenomenon is shown in Figure~\ref{schematic_map}.
-In this case it is impossible to determine from the HI data at hand whether the blue and yellow viruses are antigenically similar or antigenically divergent. 
-This presents an issue of model identifiability; multiple antigenic maps give the same likelihood of observing the serological data.
-In order to achieve more interpretable antigenic locations we impose a weak prior on global locations.
+In this case, it is impossible to determine from the HI data at hand whether the blue and yellow viruses are antigenically similar (Figure~\ref{schematic_map}A) or antigenically divergent (Figure~\ref{schematic_map}B). 
+This presents an issue of model identifiability, where absolute, as opposed to relative, antigenic locations cannot be determined from the observing the serological data alone.
+Thus, in order to achieve more a interpretable model we impose a weak prior on global locations.
 In influenza, it's clear that antigenic distance between strains increases with time \cite{Smith04,Cai10}.
 To capture this, we replace our previous diffuse prior with an informed prior in which the expected location of viruses and sera increases with date of sampling along dimension one, and each virus and serum location follows an independent normal distribution centered around this temporal expectation, so that
 \begin{eqnarray}
@@ -554,16 +553,18 @@ The parameter $\virussd$ determines the breadth of the cloud of virus locations 
 \begin{figure}[tb]
 	\centering		
 	\includegraphics[width=0.95\textwidth]{figures/schematic_map}
-	\caption{\textbf{Schematic antigenic map with three viruses and two sera.} 
+	\caption{\textbf{Schematic antigenic map with three viruses and two sera.}
+	(A) Map with virus 1 and virus 3 antigenically similar.
+	(B) Map with virus 1 and virus 3 antigenically divergent.
 	Virus 1 is shown in blue, virus 2 is shown in red and virus 3 is shown in yellow.
 	Virus isolates are represented by filled circles, sera raised against viruses are shown as open circles and map distances $\delta_{ij}$ are shown as solid lines connecting viruses and sera.
 	Sera from virus 1 is compared against viruses 1 and 2, while sera from virus 2 is compared against viruses 2 and 3.
-	Left and right panels represent cartographic models that would give equal likelihoods to a set of serological data $\{H_{11},H_{21},H_{22},H_{32}\}$.
+	Configurations (A) and (B) represent cartographic models that would give equal likelihoods to a set of serological data $\{H_{11},H_{21},H_{22},H_{32}\}$.
 	} 
 	\label{schematic_map} 
 \end{figure}
 
-\subsection*{Diffusion model of antigenic evolution}
+\subsection*{Phylogenetic diffusion model of antigenic evolution}
 
 We simultaneously model antigenic locations and genetic relatedness by assuming that virus locations are influenced by evolution following a Brownian motion process \cite{Lemey10}.
 To do this, we replace the previous prior specifying independent virus locations with a prior that incorporates covariance based on shared evolutionary history
@@ -607,9 +608,10 @@ Antigenic and genetic data were subsampled to give similar quantities of data ac
 Data gathering procedures resulted in 402 virus strains A/H3N2, 115 virus strains for A/H1N1, 179 virus strains for B/Vic and 174 virus strains for B/Yam.
 Surveillance data was obtained from the Centers of Disease Control and Prevention FluView Influenza Reports from the yearly summaries of influenza seasons 1997--1998 to 2010--2011 \cite{CDCReports}.
 
-Phylogenetic trees were sampled for A/H3N2, A/H1N1, B/Vic and B/Yam using BEAST \cite{BEAST17} and incorporated the SRD06 nucleotide substitution model \cite{Shapiro06}, a coalescent demographic model with constant effective population size and a strict molecular clock across branches.
+Phylogenetic trees were estimated for A/H3N2, A/H1N1, B/Vic and B/Yam using BEAST \cite{BEAST17} and incorporated the SRD06 nucleotide substitution model \cite{Shapiro06}, a coalescent demographic model with constant effective population size and a strict molecular clock across branches.
 MCMC was run for 60 million steps and trees were sampled every 50,000 steps after allowing a burn-in of 10 million steps, yielding a total sample of 2000 trees.
 These trees were treated as a discrete set of possibilities when subsequently sampled in the BMDS analysis \cite{Pagel04}.
+However, it would be possible to jointly sample from sequence data and serological data using these methods.
 
 MCMC was used to sample virus locations $\viruses$, serum locations $\sera$, virus effects $\ves$, serum effects $\ses$, MDS precision $1/\mdssd^2$, antigenic drift rate $\beta$, virus location precision $1/\virussd^2$, serum location precision $1/\serumsd^2$ and phylogenetic tree $\tree$.
 MCMC chains were run for 500 million steps and parameter values sampled every 200,000 steps after a burn-in of 100 million steps, yielding a total of 2000 MCMC samples.
@@ -618,7 +620,7 @@ There is some difficulty summarizing posterior cartographic samples, as sampled 
 Our prior on virus and serum locations removes much of this issue, orienting the antigenic map along dimension 1 and fixing it to begin at the origin.
 However, local isometries are often still a problem.
 For example, in A/H3N2 the Beijing/89 cluster may shift back and forth from being above other viruses on dimension 2 to being below other viruses on dimension 2.
-These isometries may be local, i.e.\ Beijing/89 and Beijing/92 may flip while leaving Texas/77 in place.
+These isometries may be local, i.e.\ Beijing/89 and Beijing/92 may flip while leaving Victoria/75 in place.
 Consequently, it is difficult to fully align MCMC samples using Procrustes analysis.
 For the present study, we take a simple approach and sample a single MCMC step and visualize the antigenic locations at this state (Figures~\ref{map}, Figure~\ref{drift}).
 Then, for specific quantities of interest, like rate of antigenic drift and rate of diffusion at different points along the phylogeny, we calculate this quantity across MCMC samples to yield an expectation and a credible interval.
