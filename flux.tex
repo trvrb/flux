@@ -180,9 +180,12 @@ We apply this model to HI measurements of virus isolates against post-infection 
 
 We test model performance by constructing training datasets representing 90\% of the HI measurements for each of the four influenza lineages and test datasets representing the remaining 10\% of the measurements for each lineage. 
 By fitting the BMDS model to the training dataset, we are able to predict HI titers in the test dataset and compare these predicted titers to observed titers. 
-We begin with a BMDS analog of the model used by Smith et al.\ \cite{Smith04}, in which viruses and sera are represented as 2D locations, expected titer is relative to the maximum titer of a particular ferret serum and virus and serum locations follow a diffuse prior.
-We find that this model performs well, yielding an average absolute predictive error of between 0.79 and 0.95 log$_2$ HI titers across influenza lineages (model 1; Table \ref{errortable}).
-We extend this model to include a time-informed prior that models the process of antigenic drift, in which virus and serum locations  along dimension 1 increase with date of virus or serum sampling, resulting in a small improvement in predictive error (model 2; Table \ref{errortable}).
+We begin with Bayesian analogs of the models used by Smith et al.\ \cite{Smith04}, in which viruses and sera are represented as $N$-dimensional locations, expected titer is relative to the maximum titer of a particular ferret serum and virus and serum locations follow a diffuse prior.
+After comparing models of differing dimensions, Smith et al.\ \cite{Smith04} arrive at a 2D model as the preferred model for their data.
+We arrive at a similar conclusion, finding that a two dimensional model has better predictive power than models of lower of higher dimension in all four influenza lineages (models 1--5; Table \ref{errortable}).
+We find that this 2D model performs well, yielding an average absolute predictive error of between XXX and XXX log$_2$ HI titers across influenza lineages (model 2; Table \ref{errortable}).
+Consequently, we specify a two dimensional model in all subsequent analyses.
+The finding of a low-dimensional map across influenza lineages extends previous studies in A/H3N2 \cite{Smith04} and remains an interesting and fundamental empirical observation.
 
 %%% errortable %%%
 \begin{table}[h]
@@ -194,29 +197,26 @@ We extend this model to include a time-informed prior that models the process of
 	\hline
 	\multicolumn{5}{c}{} 	&	\multicolumn{4}{c}{Test error}  \\
 	Model	&	Dimen 	& 	Serum effects 	&	Virus effects	& Location Prior	& 	A/H3N2	& 	A/H1N1	& 	B/Vic	& 	B/Yam	\\
-	\hline		
-	1		&	2D 		&	Fixed 			&	None			& Uninformed		&	0.93 	&	0.78 	&	0.80	&	0.93	\\
-	2		&	2D 		&	Fixed			&	None			& Drift				&	0.91 	&	0.74 	&	0.77	&	0.83	\\	
-	3		&	1D 		&	Fixed			&	None			& Drift				&	1.07	&	0.92	&	0.94	&	1.08	\\		
-	4		&	3D 		&	Fixed			&	None			& Drift				&	0.91	&	0.74 	&	0.79	&	0.84	\\
-	5		&	4D 		&	Fixed			&	None			& Drift				&	0.95	&	0.75 	&	0.81	&	0.86	\\
-	6		&	5D 		&	Fixed			&	None			& Drift				&	0.99	&	0.76 	&	0.84	&	0.88	\\				
-	7		&	2D 		&	Estimated		&	Estimated		& Drift				&	0.77	&	0.71 	&	0.65	&	0.73	\\	
+	\hline	
+	1		&	1D 		&	Fixed 			&	None			& Uninformed		&	X 		&	0.94 	&	0.90	&	1.08	\\
+	2		&	2D 		&	Fixed 			&	None			& Uninformed		&	X 		&	0.78 	&	0.82	&	0.90	\\
+	3		&	3D 		&	Fixed 			&	None			& Uninformed		&	X 		&	0.80 	&	0.85	&	0.92	\\
+	4		&	4D 		&	Fixed 			&	None			& Uninformed		&	X 		&	0.84 	&	0.90	&	0.97	\\	
+	5		&	5D 		&	Fixed 			&	None			& Uninformed		&	X 		&	X 		&	0.98	&	1.04	\\	
+	6		&	2D 		&	Estimated 		&	Estimated		& Uninformed		&	X 		&	X 		&	X		&	X		\\
+	7		&	2D 		&	Estimated		&	Estimated		& Drift				&	0.77	&	0.71 	&	0.65	&	0.73	\\
 	8		&	2D 		&	Estimated		&	Estimated		& Diffusion/Drift	&	0.76	&	0.71 	&	0.64	&	0.72	\\		
 	\hline
 	\end{tabular}	
 	}
 \end{table}
 
-We find that decreasing dimensionality to a single antigenic dimension results in a substantially less predictive model (model 3; Table \ref{errortable}), and that increasing dimensionality to three dimensions is equal or slightly worse in predictive power (model 4; Table \ref{errortable}).
-Increasing dimensionality further to four or five dimensions results in continued declines in predictive power (models 5 and 6; Table \ref{errortable}).
-Consequently, we specify a two dimensional model in all subsequent analyses.
-The finding of a low-dimensional map across influenza lineages extends previous studies in A/H3N2 \cite{Smith04} and remains an interesting empirical observation.
 We extend the 2D model by estimating the strength of overall reactivity of each serum rather than fixing this at its maximum titer, and additionally, by estimating the strength of reactivity of each virus isolate.
 We refer to these estimates as serum effects and virus effects, respectively.
-We find that including these effects decreases test error further, ranging from an improvement of 0.03 in A/H1N1 to an improvement of 0.14 in A/H3N2 (model 7; Table \ref{errortable}).
+We find that including these effects decreases test error further, ranging in improvement from XXX to XXX (model 6; Table \ref{errortable}).
+We further extend this model to include a time-informed prior that models the process of antigenic drift, in which virus and serum locations along dimension 1 increase with date of virus or serum sampling, resulting in a small improvement in predictive error (model 7; Table \ref{errortable}).
 
-Previous work on influenza antigenic and genetic evolution has examined antigenic and genetic patterns in isolation, and then compared the results to assess congruence of these two aspects of evolution \cite{Hay01,Smith04,Russell08}. 
+Previous work on influenza antigenic and genetic evolution has examined antigenic and genetic patterns in isolation, and then compared the results to assess congruence of these two aspects of evolution \cite{Hay01, Smith04, Russell08}. 
 Here, we simultaneously model antigenic and genetic evolution by adopting an evolutionary diffusion process \cite{Lemey10}, wherein a virus's antigenic character state evolves along branches of the phylogenetic tree according to a Brownian motion process (see Methods).
 The phylogenetic diffusion process acts as a prior on virus locations, so that genetically similar viruses are expected to share similar antigenic locations.
 We include sequence data for A/H3N2, A/H1N1, B/Vic and B/Yam to estimate this diffusion process, and find a small increase in predictive accuracy when including covariance induced by the phylogenetic diffusion (model 8; Table \ref{errortable}).
