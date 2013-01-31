@@ -183,7 +183,7 @@ By fitting the BMDS model to the training dataset, we are able to predict HI tit
 We begin with Bayesian analogs of the models used by Smith et al.\ \cite{Smith04}, in which viruses and sera are represented as $N$-dimensional locations, expected titer is relative to the maximum titer of a particular ferret serum and virus and serum locations follow a diffuse prior.
 After comparing models of differing dimensions, Smith et al.\ \cite{Smith04} arrive at a 2D model as the preferred model for their data.
 We arrive at a similar conclusion, finding that a two dimensional model has better predictive power than models of lower of higher dimension in all four influenza lineages (models 1--5; Table \ref{errortable}).
-We find that this 2D model performs well, yielding an average absolute predictive error of between XXX and XXX log$_2$ HI titers across influenza lineages (model 2; Table \ref{errortable}).
+We find that this 2D model performs well, yielding an average absolute predictive error of between 0.78 and 0.91 log$_2$ HI titers across influenza lineages (model 2; Table \ref{errortable}).
 Consequently, we specify a two dimensional model in all subsequent analyses.
 The finding of a low-dimensional map across influenza lineages extends previous studies in A/H3N2 \cite{Smith04} and remains an interesting and fundamental empirical observation.
 
@@ -196,31 +196,30 @@ The finding of a low-dimensional map across influenza lineages extends previous 
 	\begin{tabular}{ c c c c c c c c c } 
 	\hline
 	\multicolumn{5}{c}{} 	&	\multicolumn{4}{c}{Test error}  \\
-	Model	&	Dimen 	& 	Serum effects 	&	Virus effects	& Location Prior	& 	A/H3N2	& 	A/H1N1	& 	B/Vic	& 	B/Yam	\\
+	Model	&	Dimen 	& Location prior	& 	Serum effects 	&	Virus effects	& 	A/H3N2	& 	A/H1N1	& 	B/Vic	& 	B/Yam	\\
 	\hline	
-	1		&	1D 		&	Fixed 			&	None			& Uninformed		&	X 		&	0.94 	&	0.90	&	1.08	\\
-	2		&	2D 		&	Fixed 			&	None			& Uninformed		&	X 		&	0.78 	&	0.82	&	0.90	\\
-	3		&	3D 		&	Fixed 			&	None			& Uninformed		&	X 		&	0.80 	&	0.85	&	0.92	\\
-	4		&	4D 		&	Fixed 			&	None			& Uninformed		&	X 		&	0.84 	&	0.90	&	0.97	\\	
-	5		&	5D 		&	Fixed 			&	None			& Uninformed		&	X 		&	X 		&	0.98	&	1.04	\\	
-	6		&	2D 		&	Estimated 		&	Estimated		& Uninformed		&	X 		&	X 		&	X		&	X		\\
-	7		&	2D 		&	Estimated		&	Estimated		& Drift				&	0.77	&	0.71 	&	0.65	&	0.73	\\
-	8		&	2D 		&	Estimated		&	Estimated		& Diffusion/Drift	&	0.76	&	0.71 	&	0.64	&	0.72	\\		
+	1		&	1D 		& Uninformed		&	Fixed 			&	None			&	1.35	&	0.94 	&	0.90	&	1.08	\\
+	2		&	2D 		& Uninformed		&	Fixed 			&	None			&	0.91 	&	0.78 	&	0.82	&	0.90	\\
+	3		&	3D 		& Uninformed		&	Fixed 			&	None			&	0.93 	&	0.80 	&	0.85	&	0.92	\\
+	4		&	4D 		& Uninformed		&	Fixed 			&	None			&	0.98 	&	0.84 	&	0.90	&	0.97	\\	
+	5		&	5D 		& Uninformed		&	Fixed 			&	None			&	1.04 	&	0.89 	&	0.98	&	1.04	\\	
+	6		&	2D 		& Diffusion/Drift	&	Fixed 			&	None			&	0.89	&	0.74	&	0.74	&	0.83	\\
+	7		&	2D 		& Diffusion/Drift	&	Estimated 		&	None			&	0.77	&	0.73	&	0.66	&	0.75	\\	
+	8		&	2D 		& Diffusion/Drift	&	Estimated		&	Estimated		&	0.76	&	0.71 	&	0.64	&	0.72	\\
 	\hline
 	\end{tabular}	
 	}
 \end{table}
 
-We extend the 2D model by estimating the strength of overall reactivity of each serum rather than fixing this at its maximum titer, and additionally, by estimating the strength of reactivity of each virus isolate.
-We refer to these estimates as serum effects and virus effects, respectively.
-We find that including these effects decreases test error further, ranging in improvement from XXX to XXX (model 6; Table \ref{errortable}).
-We further extend this model to include a time-informed prior that models the process of antigenic drift, in which virus and serum locations along dimension 1 increase with date of virus or serum sampling, resulting in a small improvement in predictive error (model 7; Table \ref{errortable}).
-
 Previous work on influenza antigenic and genetic evolution has examined antigenic and genetic patterns in isolation, and then compared the results to assess congruence of these two aspects of evolution \cite{Hay01, Smith04, Russell08}. 
 Here, we simultaneously model antigenic and genetic evolution by adopting an evolutionary diffusion process \cite{Lemey10}, wherein a virus's antigenic character state evolves along branches of the phylogenetic tree according to a Brownian motion process (see Methods).
 The phylogenetic diffusion process acts as a prior on virus locations, so that genetically similar viruses are expected to share similar antigenic locations.
-We include sequence data for A/H3N2, A/H1N1, B/Vic and B/Yam to estimate this diffusion process, and find a small increase in predictive accuracy when including covariance induced by the phylogenetic diffusion (model 8; Table \ref{errortable}).
-Additionally, modeling antigenic diffusion has the advantage of allowing direct correlation of evolutionary outcomes with changes in antigenic phenotype.
+The antigenic diffusion process includes both systematic drift along the tree and covariance induced by phylogenetic proximity.
+We include sequence data for A/H3N2, A/H1N1, B/Vic and B/Yam to estimate this diffusion process, and find a small increase in predictive accuracy of between 0.02 and 0.08 log$_2$ HI titers when including the phylogenetic diffusion (model 6; Table \ref{errortable}).
+
+We further extend the model by estimating the strength of overall reactivity of each serum rather than fixing this at its maximum titer, and additionally, by estimating the strength of reactivity of each virus isolate.
+We refer to these estimates as serum effects and virus effects, respectively.
+We find that including these effects decreases test error further, ranging in improvement from 0.03 to 0.13 log$_2$ HI titers (models 7 and 8; Table \ref{errortable}).
 
 We find that the average absolute error in predicted log$_2$ HI titer is nearly constant with antigenic distance (Figure~\ref{error_by_distance_and_year}A), thus supporting our model assumption that the drop in log$_2$ titer is proportional to the Euclidean distance separating viruses and sera on the antigenic map.
 Additionally, we find that the absolute error in predicted titer is nearly constant with time (Figure~\ref{error_by_distance_and_year}B).
