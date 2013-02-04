@@ -65,9 +65,9 @@
 \newcommand{\vn}{n}									% number of viruses
 \newcommand{\sn}{k}									% number of sera
 \newcommand{\normal}{\mathcal{N}}					% normal distribution
-\newcommand{\bwithin}{\beta_\mathrm{within}}		% within clade drift coefficient
-\newcommand{\bsister}{\beta_\mathrm{sister}}		% sister clade drift coefficient
-\newcommand{\bother}{\beta_\mathrm{other}}			% across clade drift coefficient
+\newcommand{\bwithin}{\beta_c}		% within clade drift coefficient
+\newcommand{\bsister}{\beta_s}		% sister clade drift coefficient
+\newcommand{\bother}{\beta_t}			% across clade drift coefficient
 \newcommand{\driftclade}[1]{x_\mathrm{#1}}
 \setlength{\arraycolsep}{2pt}
 \newcommand{\smalltwomatrix}[2]{\scriptsize \Big( \begin{matrix} #1 \\ #2 \end{matrix} \Big)}				% pretty inline matrix 
@@ -86,15 +86,9 @@
 
 %%% TITLE %%%
 \title{\vspace{1.0cm} \Large \bf 
-Charting antigenic drift and evolutionary success of seasonal influenza lineages \\
-or \\
 Integrating influenza antigenic dynamics with molecular evolution \\
 or \\
-Predicting the evolutionary success of seasonal influenza lineages through the integration of antigenic cartography and molecular evolution \\
-or \\
-Cartographic characterization of the antigenic, evolutionary and competitive dynamics of seasonal influenza viruses \\
-or \\
-Integrating antigenic dynamics with molecular evolution to characterize competition within and between seasonal influenza lineages \\
+Cartographic characterization of the antigenic, evolutionary and competitive dynamics of seasonal influenza viruses 
 }
 
 \author[1]{Trevor Bedford}
@@ -244,7 +238,7 @@ Labeling of prominent antigenic clusters in figures \ref{map} and \ref{drift} is
 	Antigenic units represent two-fold dilutions of the HI assay.
 	Absolute positioning of lineages, e.g.\ A/H3N2 and A/H1N1, is arbitrary.
 	Lines represent mean posterior diffusion paths when virus locations are fixed.
-	Prominent antigenic clusters are labeled after vaccine strains present within clusters, and are abbreviated from Hong Kong/68, England/72, Victoria/75, Bangkok/79, Sichuan/87, Beijing/89, Beijing/92, Wuhan/95, Sydney/97, Fujian/02, Wisconsin/05, Perth/09 (A/H3N2), USSR/77, Singapore/86, Beijing/95, New Caledonia/99, Solomon Islands/06 (H1N1), Victoria/87, Hong Kong/01, Brisbane/08 (Vic), Yamagata/88, Shanghai/02, Wisconsin/10 (Yam).} 
+	Prominent antigenic clusters are labeled after vaccine strains present within clusters, and are abbreviated from Hong Kong/68, England/72, Victoria/75, Bangkok/79, Sichuan/87, Beijing/89, Beijing/92, Wuhan/95, Sydney/97, Fujian/02, California/04, Wisconsin/05, Perth/09 (A/H3N2), USSR/77, Singapore/86, Beijing/95, New Caledonia/99, Solomon Islands/06 (H1N1), Victoria/87, Hong Kong/01, Malaysia/04, Brisbane/08 (Vic), Yamagata/88, Shanghai/02, Florida/06, Wisconsin/10 (Yam).} 
 	\label{map} 
 \end{figure}
 
@@ -252,7 +246,7 @@ HI assays lack sensitivity beyond a certain point, so that for A/H3N2, cross-rea
 Because of the threshold of sensitivity of the HI assay, it's impossible to distinguish a linear trajectory in 2D antigenic space from a slightly curved trajectory, so long as the curve does not bring antigenic phenotype full circle to have cross-reactive measurements between temporally distant strains.
 To solve this problem of identifiability, we assumed a weak prior that favors linear movement in the 2D antigenic space (present in models 2 through 8; Table \ref{errortable}), with the slope of the linear relationship and the precision of the relationship incorporated into the Bayesian model (see Methods).
 Because of this, we interpret map locations locally rather than globally.
-We can determine the rate of antigenic movement of viruses within each clade without knowing the larger configuration under which the movement occurs.
+We can determine rates of antigenic movement without knowing the larger configuration under which the movement occurs.
  
 We find that influenza A/H3N2 evolved along antigenic dimension 1 at a rate of 1.01 antigenic units per year, with a 95\% highest posterior density (HPD) interval of 0.98--1.04 (Figure~\ref{drift}).
 However, we observe occasional large jumps in antigenic phenotype (Figure~\ref{drift}), corresponding to cluster transitions identified by Smith et al. \cite{Smith04}.  
@@ -268,7 +262,7 @@ Most variation is contained within the first antigenic dimension, but dimension 
 	Antigenic units represent two-fold dilutions of the HI assay.
 	Relative positioning of lineages, e.g.\ A/H3N2 and A/H1N1, in the vertical axis is arbitrary.
 	Lines represent mean posterior diffusion paths when virus locations are fixed.
-	Prominent antigenic clusters are labeled after vaccine strains present within clusters, and are abbreviated from Hong Kong/68, England/72, Victoria/75, Bangkok/79, Sichuan/87, Beijing/89, Beijing/92, Wuhan/95, Sydney/97, Fujian/02, Wisconsin/05, Perth/09 (A/H3N2), USSR/77, Singapore/86, Beijing/95, New Caledonia/99, Solomon Islands/06 (H1N1), Victoria/87, Hong Kong/01, Brisbane/08 (Vic), Yamagata/88, Shanghai/02, Wisconsin/10 (Yam).} 
+	Prominent antigenic clusters are labeled after vaccine strains present within clusters, and are abbreviated from Hong Kong/68, England/72, Victoria/75, Bangkok/79, Sichuan/87, Beijing/89, Beijing/92, Wuhan/95, Sydney/97, Fujian/02, California/04, Wisconsin/05, Perth/09 (A/H3N2), USSR/77, Singapore/86, Beijing/95, New Caledonia/99, Solomon Islands/06 (H1N1), Victoria/87, Hong Kong/01, Malaysia/04, Brisbane/08 (Vic), Yamagata/88, Shanghai/02, Florida/06, Wisconsin/10 (Yam).} 
 	\label{drift} 
 \end{figure}
 
@@ -286,10 +280,9 @@ For A/H3N2, the largest cluster transition we observe is the emergence of the Sy
 However, in 1997 only three of the nine viruses sampled show the Sydney/97 phenotype, while the remaining six viruses exhibit the old Wuhan/95 phenotype.
 In 1998, three of the four viruses sampled show the Sydney/97 phenotype, with the remaining virus still showing the Wuhan/95 phenotype.
 In 1999, all sampled viruses exhibit the Sydney/97 phenotype.
-Thus, we observe fairly equal rates of year-to-year drift in mean antigenic phenotype in going from 1996 to 1997, from 1997 to 1998 and from 1998 to 1999, rather than all drift in mean antigenic phenotype attributable to a shift in 1997 (Figure~\ref{jumps}).
-This observation remains despite the fact that antigenic drift is accomplished, not by steady movement of the entire virus population, but by the successive emergence of drifted variants that come to take over the virus population.
-In addition to showing greater overall rates of antigenic drift, A/H3N2 shows greater variation in year-to-year drift than seen in A/H1N1 or influenza B (Figure~\ref{jumps}).
-We find that the standard deviation in year-to-year drift is 0.88 antigenic units for A/H3N2, 0.51 units for A/H1N1, 0.54 units for B/Vic and 0.27 units for B/Yam.
+Thus, we observe fairly equal rates of year-to-year drift in mean antigenic phenotype between 1996 and 1999, rather than all drift in mean antigenic phenotype coinciding with the appearence of a new antigenic variant in 1997 (Figure~\ref{jumps}).
+It is interesting that this phenomenon occurs despite the fact that antigenic drift is accomplished, not by steady movement of the entire virus population, but by the successive emergence of drifted variants that each come to take over the virus population.
+Because drifted variants require, on average, 2--3 years to take over the virus population, rates of year-to-year drift do not always spike heavily at the appearance of a new variant.
 
 %%% jumps %%%
 \begin{figure}[h]
@@ -322,15 +315,15 @@ Here, within-clade drift explains 35\% of the variance in standardized incidence
 
 We further show that incidence within a clade decreases with antigenic drift in other clades, e.g.\ drift in A/H1N1, B/Vic and B/Yam from 2000 to 2001 decrease incidence of A/H3N2 in the 2001/2002 season (Figure~\ref{incidence}B).
 This also represents a significant relationship (Pearson correlation, $r=-0.20$, $p=0.024$).
-We fit a linear model that predicts standardized incidence based upon drift within clades, drift in sister clades, and drift in other clades (Table~\ref{interferencetable}).
-For example, standardized incidence in A/H3N2 would be explained by drift within A/H3N2, drift in sister clade A/H1N1 and by drift in other clades B/Vic and B/Yam.
+We fit a linear model that predicts standardized incidence based upon drift within a clade, drift in other clades of same type, and drift in clades of differing type (Table~\ref{interferencetable}).
+For example, standardized incidence in A/H3N2 would be explained by drift within A/H3N2, drift in A/H1N1 and by drift across types in B/Vic and B/Yam.
 We compared adjusted $R^2$ across models with different regression coefficients included, and arrived at a best-fitting model that explains 46\% of the variance in standardized incidence and includes the terms $\bwithin$, $\bsister$ and $\bother$, but does not include an intercept term.
-We find that 1 unit of antigenic drift within a clade increases incidence by 1.26 standard deviations, while 1 unit of antigenic drift in a sister clade decreases incidence by 0.61 standard deviations and 1 unit of antigenic drift in other clades decreases incidence by 0.32 standard deviations.
+We find that 1 unit of antigenic drift within a clade increases incidence by 1.26 standard deviations, while 1 unit of drift in a clade of the same type decreases incidence by 0.61 standard deviations and 1 unit of drift in clades of differing type decreases incidence by 0.32 standard deviations.
 
 %%% interferencetable %%%
 \begin{table}[h]
 	\centering
-	\caption{\textbf{Estimates of regression coefficients for the relationship of clade-specific USA incidence to antigenic drift within and across clades, where standardized incidence in A/H3N2 is predicted by $\bwithin \times \driftclade{H3} + \bsister \times \driftclade{H1} + \bother \times \driftclade{Vic} + \bother \times \driftclade{Yam}$ and standardized incidence in other clades follows an analogous relationship.}}
+	\caption{\textbf{Estimates of regression coefficients for the relationship of clade-specific USA incidence to antigenic drift within and across clades, where standardized incidence in A/H3N2 is predicted by $\bwithin \, \driftclade{H3} + \bsister \, \driftclade{H1} + \bother \, \driftclade{Vic} + \bother \, \driftclade{Yam}$ and standardized incidence in other clades follows an analogous relationship.}}
 	\label{interferencetable}	
 	\begin{tabular}{ c c c c } 
 	\hline
@@ -343,7 +336,7 @@ We find that 1 unit of antigenic drift within a clade increases incidence by 1.2
 	\end{tabular}
 \end{table}
 
-These findings clearly demonstrate the epidemiological importance of antigenic drift and show that incidence across influenza clades A/H3N2, A/H1N1, B/Vic and B/Yam is strongly influenced by levels of antigenic drift within each clade, consistent with antigenic drift increasing the susceptible pool available to a clade.
+These findings clearly demonstrate the epidemiological importance of antigenic drift and show that incidence across  A/H3N2, A/H1N1, B/Vic and B/Yam is strongly influenced by levels of antigenic drift within each clade, consistent with antigenic drift increasing the susceptible pool available to a clade.
 The finding of a negative correlation between incidence within one clade and antigenic drift in other clades supports the hypothesis that epidemiological interference exists between clades \cite{Ferguson03, Goldstein11}.
 Interestingly, we find that interference between sister clades, e.g.\ B/Vic and B/Yam, appears stronger than interference between more divergent clades, e.g.\ B/Vic and A/H3N2.
 If interference is mediated by CTL epitopes, then we would expect interference to decrease with evolutionary distance \cite{Voeten00}.
