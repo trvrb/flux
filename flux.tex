@@ -43,6 +43,9 @@
 \renewcommand\Authands{ \& }
 \renewcommand\Authfont{\normalsize \bf}
 \renewcommand\Affilfont{\small \normalfont}
+\makeatletter
+\renewcommand\AB@affilsepx{, \protect\Affilfont}
+\makeatother
 
 % notation
 \usepackage{amsmath}
@@ -106,10 +109,9 @@ Integrating influenza antigenic dynamics with molecular evolution
 \begin{document}
 
 \maketitle
-\pagebreak
 
 %%% ABSTRACT %%%
-\section*{Abstract}
+\begin{abstract}
 
 Influenza viruses undergo continual antigenic evolution allowing mutant viruses to evade immunity acquired by the host population to previous virus strains.
 Antigenic phenotype is often assessed through pairwise measurement of cross-reactivity between influenza strains using the hemagglutination inhibition (HI) assay.
@@ -119,6 +121,8 @@ Using HI data for four lineages of influenza, encompassing influenza A subtypes 
 Through comparison with epidemiological data, we demonstrate a year-to-year correlation between drift and incidence and present evidence that antigenic drift mediates interference between influenza lineages.
 We investigate the selective underpinnings for differing antigenic dynamics across lineages and show that A/H3N2 benefits from both a higher influx of new antigenic mutations and also from more efficient conversion of antigenic variation into fixed differences.
 This work does much to elucidate the antigenic dynamics of influenza lineages, but also allows for substantial future advances in investigating the dynamics of influenza and other antigenically-variable pathogens by providing a model that intimately combines molecular and antigenic evolution.
+
+\end{abstract}
 
 \pagebreak
 
