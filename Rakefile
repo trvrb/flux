@@ -1,37 +1,51 @@
 prefix = "flux"
 
-#desc 'Full compile'
-#task :default => '#{prefix}.aux' do
-	# nothing left to do
-#end
+desc "Full compile"
+task :default => [:bibtex, :latex] do
+	# nothing else required
+end
 
-desc "Initial compile"
-file "#{prefix}.aux" => "#{prefix}.tex"  do
+desc "LaTeX log"
+file "#{prefix}.log" => "#{prefix}.tex" do
 	puts "1 pdflatex #{prefix}"
 	`pdflatex #{prefix}`
 end
 
-desc "Bib compile"
-file "#{prefix}.bbl" => ["#{prefix}.aux", "#{prefix}.tex"]  do
-	puts "1 bibtex #{prefix}"
-	`bibtex #{prefix}`
-end
-
-desc "Subsequent compiles"
-task :compile => ["#{prefix}.aux", "#{prefix}.bbl", "#{prefix}.tex"]  do
-	puts "2 pdflatex #{prefix}"
-	`pdflatex #{prefix}`
-	while dirty?(prefix) do 
-		puts "3+ pdflatex #{prefix}"	
+desc "LaTeX compile"
+# Require log file and proceed if references are incomplete
+task :latex => "#{prefix}.log"  do
+	while ref?(prefix) do
+		puts "2 pdflatex #{prefix}"
 		`pdflatex #{prefix}`
-	end	
+	end
 end
 
-desc "Look at log file and check if rerun is necessary"
-def dirty?(string)
+desc "BibTex compile"
+task :bibtex => "#{prefix}.log"  do
+	if cite?(prefix)
+		puts "1 bibtex #{prefix}"
+		`bibtex #{prefix}`
+	end
+end
+
+desc "Look at log file and check if references are complete"
+def ref?(string)
 	dirty = false
 	log = File.open("#{string}.log", "r")
-	m = log.read.match(/LaTeX Warning: There were undefined references|LaTeX Warning: Label(s) may have changed. Rerun to get/)
+	m = log.read.match(/LaTeX Warning: There were undefined references|LaTeX Warning: Label(s) may have changed. Rerun to get|^LaTeX Warning: Reference/)
+	log.close
+	if m != nil
+		puts m
+		dirty = true
+	end	
+	return dirty
+end
+
+desc "Look at log file and check if citations are complete"
+def cite?(string)
+	dirty = false
+	log = File.open("#{string}.log", "r")
+	m = log.read.match(/^LaTeX Warning: Citation/)
 	log.close
 	if m != nil
 		puts m
