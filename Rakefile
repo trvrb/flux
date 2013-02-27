@@ -1,13 +1,11 @@
 prefix = "flux"
 
 desc "Full compile"
-task :default => [:bibtex, :latex] do
-	# nothing else required
-end
+task :default => [:bibtex, :latex] 
 
 desc "LaTeX log"
 file "#{prefix}.log" => "#{prefix}.tex" do
-	puts "1 pdflatex #{prefix}"
+	puts "pdflatex #{prefix}"
 	`pdflatex #{prefix}`
 end
 
@@ -15,7 +13,7 @@ desc "LaTeX compile"
 # Require log file and proceed if references are incomplete
 task :latex => "#{prefix}.log"  do
 	while ref?(prefix) do
-		puts "2 pdflatex #{prefix}"
+		puts "pdflatex #{prefix}"
 		`pdflatex #{prefix}`
 	end
 end
@@ -23,7 +21,7 @@ end
 desc "BibTex compile"
 task :bibtex => "#{prefix}.log"  do
 	if cite?(prefix)
-		puts "1 bibtex #{prefix}"
+		puts "bibtex #{prefix}"
 		`bibtex #{prefix}`
 	end
 end
