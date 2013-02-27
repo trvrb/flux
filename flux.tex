@@ -171,7 +171,7 @@ By fitting the BMDS model to the training dataset, we are able to predict HI tit
 We begin with Bayesian analogs of the models used by Smith et al.\ \cite{Smith04}, in which viruses and sera are represented as $N$-dimensional locations, expected titer is relative to the maximum titer of a particular ferret serum and virus and serum locations follow a diffuse prior.
 After comparing models of differing dimensions, Smith et al.\ \cite{Smith04} arrive at a 2D model as the preferred model for their data.
 We arrive at a similar conclusion, finding that a two dimensional model has better predictive power than models of lower of higher dimension in all four influenza lineages (models 1--5; Table \ref{errortable}).
-We find that this 2D model performs well, yielding an average absolute predictive error of between 0.78 and 0.91 log$_2$ HI titers across influenza lineages (model 2; Table \ref{errortable}).
+We find that this 2D model performs well, yielding an average absolute predictive error of between 0.78 and 0.91 log$_2$ HI titers across influenza lineages (model 2; Table \ref{errortable}), in line with the results of Smith et al.\ \cite{Smith04}.
 Consequently, we specify a two dimensional model in all subsequent analyses.
 The finding of a low-dimensional map across influenza lineages extends previous studies in A/H3N2 \cite{Smith04} and remains an interesting and fundamental empirical observation.
 
@@ -237,10 +237,9 @@ Labeling of prominent antigenic clusters in figures \ref{map} and \ref{drift} is
 \end{figure}
 
 HI assays lack sensitivity beyond a certain point, so that for A/H3N2, cross-reactive measurements only exist between strains sampled at most 11 years apart, leaving only threshold titers, e.g.\ `$<$40', in more temporally distant comparisons.  
-Because of the threshold of sensitivity of the HI assay, it's impossible to distinguish a linear trajectory in 2D antigenic space from a slightly curved trajectory, so long as the curve does not bring antigenic phenotype full circle to have cross-reactive measurements between temporally distant strains.
+Because of the threshold of sensitivity of the HI assay, it's difficult to distinguish a linear trajectory in 2D antigenic space from a slightly curved trajectory, so long as the curve does not bring antigenic phenotype full circle to have cross-reactive measurements between temporally distant strains.
 To solve this problem of identifiability, we assumed a weak prior that favors linear movement in the 2D antigenic space (present in models 2 through 8; Table \ref{errortable}), with the slope of the linear relationship and the precision of the relationship incorporated into the Bayesian model (see Methods).
-Because of this, we interpret map locations locally rather than globally.
-We can determine rates of antigenic movement without knowing the larger configuration under which the movement occurs.
+Because of this, we interpret map locations locally rather than globally, and assess rates of antigenic movement without knowing the larger configuration under which the movement occurs.
  
 We find that influenza A/H3N2 evolved along antigenic dimension 1 at a rate of 1.01 antigenic units per year, with a 95\% highest posterior density (HPD) interval of 0.98--1.04 (Figure~\ref{drift}).
 However, we observe occasional large jumps in antigenic phenotype (Figure~\ref{drift}), corresponding to cluster transitions identified by Smith et al. \cite{Smith04}.  
@@ -266,7 +265,7 @@ Influenza B/Victoria also evolved relatively slowly, with an average rates of 0.
 Influenza B/Vic appears to show some degree of punctuated antigenic evolution with a recent transition creating the Brisbane/08 cluster.
 Interestingly, a minor lineage of B/Vic has persisted through 2011, appearing antigenically distinct from other 2011 viruses (Figure~\ref{drift}), though the eventual fate of this lineage has yet to be determined.
 Influenza B/Yamagata evolved slower still, with an average rate of 0.32 (HPD 0.25--0.39) units per year.
-Little punctuated evolution is obvious in the evolution of B/Yam.
+Although less punctuated evolution is apparent in B/Yam, we still observe three distinct clusters in the last decade, comprising the Shanghai/02, Florida/06 and Wisconsin/10 antigenic clusters (Figure~\ref{drift}).
 
 We sought to summarize year-to-year patterns of antigenic drift by calculating the difference in mean location between consecutive years (Figure~\ref{jumps}).
 We estimate year-to-year antigenic drift for years 1992 to 2011 by calculating the average location along dimension 1 of phylogenetic lineages present in the tree at year $i$ and comparing this location to the average location of phylogenetic lineages present in the tree at year $i-1$.
