@@ -1,3 +1,11 @@
+# Rakefile to collect all .tex files in a directory and run `pdflatex` and `bibtex` as needed to 
+# produce PDF output.  If a .tex file is updated `pdflatex -draftmode` will be run to produce new 
+# .aux and .log files.  These are used to determine whether `bibtex` needs to be run.  If so `bibtex` 
+# will always need to be followed by `pdflatex -draftmode`.  With fully updated .aux and .bbl in 
+# hand, a final `pdflatex` is run.  The only hole in the logic I've found is that, when making a 
+# small revision, this will run `pdflatex -draftmode` then `pdflatex` when only `pdflatex` is 
+# required.
+
 TEX = FileList["*.tex"]
 PDF = TEX.ext("pdf")
 
