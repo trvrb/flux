@@ -1,40 +1,48 @@
-prefix = "flux"
+TEX = FileList["*.tex"]
+PDF = TEX.ext("pdf")
 
 desc "Full compile"
-task :default => [:bibtex, :latex] 
+task :default => PDF 
 
 desc "LaTeX aux"
-file "#{prefix}.aux" => "#{prefix}.tex" do
-	puts "pdflatex #{prefix}"
-	`pdflatex #{prefix}`
+rule ".aux" => ".tex" do |t|
+	prefix = get_prefix(t.name)
+	puts "pdflatex -draftmode #{prefix}"
+	`pdflatex -draftmode #{prefix}`
 end
 
 desc "LaTeX log"
-file "#{prefix}.log" => "#{prefix}.tex" do
-	puts "pdflatex #{prefix}"
-	`pdflatex #{prefix}`
+rule ".log" => ".tex" do |t|
+	prefix = get_prefix(t.name)
+	puts "pdflatex -draftmode #{prefix}"
+	`pdflatex -draftmode #{prefix}`
 end
 
 desc "LaTeX compile"
-# Require log file and proceed if references are incomplete
-task :latex => ["#{prefix}.aux", "#{prefix}.log"]  do
-	while ref?(prefix) do
+# require log file and proceed if references are incomplete
+rule ".pdf" => [".aux", ".bbl", ".log", ".tex"]  do |t|
+	prefix = get_prefix(t.name)
+#	while ref?(prefix) do
 		puts "pdflatex #{prefix}"
 		`pdflatex #{prefix}`
-	end
+#	end
 end
 
 desc "BibTex compile"
 # look for .bib file in top-level directory
-task :bibtex => ["#{prefix}.aux", "#{prefix}.log"]  do
-	if File.exists?("#{prefix}.bib")
-		if cite?(prefix)
-			puts "bibtex #{prefix}"
-			`bibtex #{prefix}`
-			puts "pdflatex #{prefix}"
-			`pdflatex #{prefix}`
-		end
+rule ".bbl" => [".aux", ".log", ".tex"]  do |t|
+	prefix = get_prefix(t.name)
+	if cite?(prefix)
+		puts "bibtex #{prefix}"
+		`bibtex #{prefix}`
+		puts "pdflatex -draftmode #{prefix}"
+		`pdflatex -draftmode #{prefix}`
 	end
+end
+
+desc "Get file prefix"
+def get_prefix(file)
+	return file.sub(/\.[^.]*$/, "")
 end
 
 desc "Look at log file and check if references are complete"
@@ -53,16 +61,20 @@ end
 desc "Are citations up to date?"
 def cite?(string)
 	dirty = false
-	if cite_missing(string) == true
-		dirty = true
-	else
-		aux_list = cite_aux(string)
-		bbl_list = cite_bbl(string)
-		extra = (aux_list - bbl_list).length
-		missing = (bbl_list - aux_list).length
-		if extra > 0 || missing > 0
+	if File.exists?("#{string}.bbl")
+		if cite_missing(string) == true
 			dirty = true
+		else
+			aux_list = cite_aux(string)
+			bbl_list = cite_bbl(string)
+			extra = (aux_list - bbl_list).length
+			missing = (bbl_list - aux_list).length
+			if extra > 0 || missing > 0
+				dirty = true
+			end
 		end
+	else
+		dirty = true
 	end
 	return dirty
 end
