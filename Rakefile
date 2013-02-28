@@ -17,7 +17,7 @@ end
 
 desc "LaTeX compile"
 # Require log file and proceed if references are incomplete
-task :latex => [:bibtex, "#{prefix}.aux", "#{prefix}.log"]  do
+task :latex => ["#{prefix}.aux", "#{prefix}.log"]  do
 	while ref?(prefix) do
 		puts "pdflatex #{prefix}"
 		`pdflatex #{prefix}`
@@ -25,12 +25,15 @@ task :latex => [:bibtex, "#{prefix}.aux", "#{prefix}.log"]  do
 end
 
 desc "BibTex compile"
+# look for .bib file in top-level directory
 task :bibtex => ["#{prefix}.aux", "#{prefix}.log"]  do
-	if cite?(prefix)
-		puts "bibtex #{prefix}"
-		`bibtex #{prefix}`
-		puts "pdflatex #{prefix}"
-		`pdflatex #{prefix}`
+	if File.exists?("#{prefix}.bib")
+		if cite?(prefix)
+			puts "bibtex #{prefix}"
+			`bibtex #{prefix}`
+			puts "pdflatex #{prefix}"
+			`pdflatex #{prefix}`
+		end
 	end
 end
 
