@@ -5,9 +5,21 @@
 # hand, a final `pdflatex` is run.  The only hole in the logic I've found is that, when making a 
 # small revision, this will run `pdflatex -draftmode` then `pdflatex` when only `pdflatex` is 
 # required.
+#
+# Run `rake` to compile PDFs and `rake clean` to remove the intermediary cruft
 
 TEX = FileList["*.tex"]
+AUX = TEX.ext("aux")
+BBL = TEX.ext("bbl")
+BLG = TEX.ext("blg")
+LOG = TEX.ext("log")
 PDF = TEX.ext("pdf")
+
+require 'rake/clean'
+CLEAN.include(AUX)
+CLEAN.include(BBL)
+CLEAN.include(BLG)
+CLEAN.include(LOG)
 
 desc "Full compile"
 task :default => PDF 
