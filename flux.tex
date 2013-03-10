@@ -166,12 +166,16 @@ In the BMDS model, a map distance of one antigenic unit translates to an expecta
 Maps that produce pairwise distances most congruent with the observed titers will have a high likelihood and will be favored by the BMDS model.
 We integrate over sources of uncertainty, such as antigenic locations, in a flexible Bayesian fashion.
 We apply this model to HI measurements of virus isolates against post-infection ferret antisera for influenza A/H3N2, A/H1N1, B/Vic and B/Yam (see Methods).
-
-We test model performance by constructing training datasets representing 90\% of the HI measurements for each of the four influenza lineages and test datasets representing the remaining 10\% of the measurements for each lineage. 
-By fitting the BMDS model to the training dataset, we are able to predict HI titers in the test dataset and compare these predicted titers to observed titers. 
+ 
 We begin with Bayesian analogs of the models used by Smith et al.\ \cite{Smith04}, in which viruses and sera are represented as $N$-dimensional locations, expected titer is relative to the maximum titer of a particular ferret serum and virus and serum locations follow a diffuse prior.
 After comparing models of differing dimensions, Smith et al.\ \cite{Smith04} arrive at a 2D model as the preferred model for their data.
-We arrive at a similar conclusion, finding that a two dimensional model has better predictive power than models of lower of higher dimension in all four influenza lineages (models 1--5; Table \ref{errortable}).
+Smith et al.\ \cite{Smith04} implement a form of MDS, seeking to optimize virus and serum locations such that the sum of squared errors between expected and observed titers is minimized (eq.\ \ref{mds} of Methods).
+Here, in implementing BMDS, we provide a likelihood function for the probability of observing HI data given virus and serum locations (eq.\ \ref{bmds} of Methods) and seek to estimate model parameters through Bayesian inference and Markov chain Monte Carlo (MCMC).
+However, the basic antigenic model describing drop in HI titer as proportional to Euclidean distance between virus and serum locations is identical between these methods.
+
+We test model performance by constructing training datasets representing 90\% of the HI measurements for each of the four influenza lineages and test datasets representing the remaining 10\% of the measurements for each lineage. 
+By fitting the BMDS model to the training dataset, we are able to predict HI titers in the test dataset and compare these predicted titers to observed titers.
+We find that a two dimensional model has better predictive power than models of lower of higher dimension in all four influenza lineages (models 1--5; Table \ref{errortable}).
 We find that this 2D model performs well, yielding an average absolute predictive error of between 0.78 and 0.91 log$_2$ HI titers across influenza lineages (model 2; Table \ref{errortable}), in line with the results of Smith et al.\ \cite{Smith04}.
 Consequently, we specify a two dimensional model in all subsequent analyses.
 The finding of a low-dimensional map across influenza lineages extends previous studies in A/H3N2 \cite{Smith04} and remains an interesting and fundamental empirical observation.
@@ -205,6 +209,8 @@ Here, we simultaneously model antigenic and genetic evolution by adopting an evo
 The phylogenetic diffusion process acts as a prior on virus locations, so that genetically similar viruses are expected to share similar antigenic locations.
 The antigenic diffusion process includes both systematic drift along the tree and covariance induced by phylogenetic proximity.
 We include sequence data for A/H3N2, A/H1N1, B/Vic and B/Yam to estimate this diffusion process, and find a small increase in predictive accuracy of between 0.02 and 0.08 log$_2$ HI titers when including the phylogenetic diffusion (model 6; Table \ref{errortable}).
+Thus, antigenic locations are inferred using both genetic sequences and HI data and will differ from locations inferred from HI data alone.
+If HI data is rich, then we expect minor differences in antigenic locations with the inclusion of genetic data (as may be the case for A/H3N2), while if HI data is spare, then we expect genetic data to play a larger role in influencing antigenic locations (as may be the case for B/Vic and B/Yam).
 
 We further extend the model by estimating the strength of overall reactivity of each serum rather than fixing this at its maximum titer, and additionally, by estimating the strength of reactivity of each virus isolate.
 We refer to these estimates as serum effects and virus effects, respectively.
@@ -311,6 +317,7 @@ We fit a linear model that predicts standardized incidence based upon drift with
 For example, standardized incidence in A/H3N2 would be explained by drift within A/H3N2, drift in A/H1N1 and by drift across types in B/Vic and B/Yam.
 We compared adjusted $R^2$ across models with different regression coefficients included, and arrived at a best-fitting model that explains 46\% of the variance in standardized incidence and includes the terms $\bwithin$, $\bsister$ and $\bother$, but does not include an intercept term.
 We find that 1 unit of antigenic drift within a clade increases incidence by 1.26 standard deviations, while 1 unit of drift in a clade of the same type decreases incidence by 0.61 standard deviations and 1 unit of drift in clades of differing type decreases incidence by 0.32 standard deviations.
+The term for across lineage interference $\bother$ is small in magnitude, but remains statistically significant (Table~\ref{interferencetable}).
 
 %%% interferencetable %%%
 \begin{table}[h]
@@ -440,7 +447,7 @@ Traditional approaches to antigenic cartography \cite{Smith04} begin by defining
 \end{equation}
 where $H_{ij}$ is the log$_2$ titer of virus $i$ against serum $j$ and serum effect $\se_j = \max ( H_{1j},\ldots,H_{\vn j} )$ is fixed.
 In following multidimensional scaling (MDS), these approaches attempt to optimize over unknown $\viruses$ and $\sera$ such that
-\begin{equation}
+\begin{equation} \label{mds}
 	\sum_{(i,j) \in \cal I} 
 	\left(
 		\delta_{ij} - d_{ij}
@@ -489,7 +496,7 @@ Throughout our analyses, we use interval likelihoods $\interval$ rather than poi
 \end{figure}
 
 We calculate the overall likelihood by multiplying probabilities of individual measurements
-\begin{equation} 
+\begin{equation}  \label{bmds}
 	L(\viruses,\sera) = \prod_{(i,j) \in \cal I} f(H_{ij}),
 \end{equation}
 using probability functions $\point$, $\threshold$ and $\interval$ as appropriate.
@@ -628,8 +635,8 @@ We acknowledge the laboratories that provided sequences to EpiFlu database: Cent
 
 AR, MAS, TB conceived the study.
 AR, MAS, TB, DJS, PL designed the antigenic model.
-TB, GD, VG, JWM, AJH, CAR, DJS and AR gathered antigenic and genetic data.
-AR, MAS, TB and PL implemented statistical phylogenetic procedures.
+TB, GD, VG, JWM, AJH, CAR, DJS, AR gathered antigenic and genetic data.
+AR, MAS, TB, PL implemented statistical phylogenetic procedures.
 TB performed the analysis.
 TB, AR, DJS, JWM, PL, CAR, AJH, GD, MAS interpreted the results.
 TB, MAS, AR, JWM, AJH wrote the paper.
