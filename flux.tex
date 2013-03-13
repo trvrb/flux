@@ -170,7 +170,7 @@ We apply this model to HI measurements of virus isolates against post-infection 
 We begin with Bayesian analogs of the models used by Smith et al.\ \cite{Smith04}, in which viruses and sera are represented as $N$-dimensional locations, expected titer is relative to the maximum titer of a particular ferret serum and virus and serum locations follow a diffuse prior.
 After comparing models of differing dimensions, Smith et al.\ \cite{Smith04} arrive at a 2D model as the preferred model for their data.
 Smith et al.\ \cite{Smith04} implement a form of MDS, seeking to optimize virus and serum locations such that the sum of squared errors between expected and observed titers is minimized (eq.\ \ref{mds} of Methods).
-Here, in implementing BMDS, we provide a likelihood function for the probability of observing HI data given virus and serum locations (eq.\ \ref{bmds} of Methods) and seek to estimate model parameters through Bayesian inference and Markov chain Monte Carlo (MCMC).
+Here, in implementing BMDS, we provide a likelihood function for the probability of observing HI data given virus and serum locations (eq.\ \ref{bmds} of Methods) and seek to estimate model parameters through Bayesian inference using Markov chain Monte Carlo (MCMC).
 However, the basic antigenic model describing drop in HI titer as proportional to Euclidean distance between virus and serum locations is identical between these methods.
 
 We test model performance by constructing training datasets representing 90\% of the HI measurements for each of the four influenza lineages and test datasets representing the remaining 10\% of the measurements for each lineage. 
@@ -589,7 +589,7 @@ Under the full model, the posterior probability of observing virus and serum loc
 	p(\sera | \beta, \serumsd) \; 
 	p(\ses, \ves, \mdssd, \beta, \virussd, \serumsd, \tree).
 \end{equation}
-We sample from this posterior distribution using the Markov chain Monte Carlo (MCMC) procedures implemented in the software package BEAST \cite{BEAST17}.
+We sample from this posterior distribution using the MCMC procedures implemented in the software package BEAST \cite{BEAST17}.
 Metropolis-Hastings proposals include transition kernels that translate individual virus and serum locations $\virus_i$ and $\serum_j$ and individual virus effects $\ve_i$ and serum effects $\se_j$, and other transition kernels that scale the entire set of virus and serum locations $\viruses$ and $\sera$ and that scale parameters $\mdssd$, $\beta$, $\virussd$ and $\serumsd$.
 For the present analysis, a two-step approach was taken to sample phylogenies, where a posterior sample of phylogenies was gathered using sequence data and then, in the cartographic analysis, trees from this set were randomly proposed and accepted following the Metropolis-Hastings algorithm \cite{Pagel04}.
 
