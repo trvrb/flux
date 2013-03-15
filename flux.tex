@@ -222,7 +222,10 @@ We find that the average absolute error in predicted log$_2$ HI titer is nearly 
 Additionally, we find that the absolute error in predicted titer is nearly constant with time (Figure~\ref{error_by_distance_and_year}B).
 Antigenic locations inferred by the model are well resolved; estimates of antigenic distance between pairs of viruses show relatively little variation across the posterior.
 We estimate that virus distances have, on average, a 50\% credible interval of $\pm0.45$ antigenic units for A/H3N2, $\pm0.57$ units for A/H1N1, $\pm0.76$ units for B/Vic, and $\pm0.65$ units for B/Yam.
+
 We find strong correspondence between our results and previous results by Smith et al.\ \cite{Smith04}, with equivalent models producing globally consistent antigenic maps and other models producing locally consistent maps with a small degree of global inconsistency (see Supp.\ Discussion).
+Differences in the MDS and BMDS approaches reflect greater philosophical differences between maximum-likelihood and Bayesian statistical approaches, with the former seeking the single most likely explanation for the data, and the latter seeking to fully characterize model uncertainty.
+If a single map is desired, then the MDS method may be preferred, while the BMDS method provides flexibility, allowing other sources of information, such as genetic data, to be more easily incorporated.
 
 \subsection*{Antigenic evolution across influenza lineages}
 
@@ -619,11 +622,10 @@ We favor models that include $\beta$, because its inclusion, in addition to corr
 There is some difficulty summarizing posterior cartographic samples, as sampled virus and serum locations represent only relative quantities, and because of this, over the course of the MCMC, virus locations may shift.
 Our prior on virus and serum locations removes much of this issue, orienting the antigenic map along dimension 1 and fixing it to begin at the origin.
 However, local isometries are often still a problem.
-For example, in A/H3N2 the Beijing/89 cluster may shift back and forth from being above other viruses on dimension 2 to being below other viruses on dimension 2.
-These isometries may be local, i.e.\ Beijing/89 and Beijing/92 may flip while leaving Victoria/75 in place.
-Consequently, it is difficult to fully align MCMC samples using Procrustes analysis.
+For example, in A/H3N2 the HK/68, EN/72 and VI/75 clusters may rotate in relation to other clusters (see Supp.\ Discussion).
+Consequently, it may be difficult to fully align MCMC samples using Procrustes analysis.
 For the present study, we take a simple approach and sample a single MCMC step and visualize the antigenic locations at this state (Figures~\ref{map}, Figure~\ref{drift}).
-Then, for specific quantities of interest, like rate of antigenic drift and rate of diffusion at different points along the phylogeny, we calculate this quantity across MCMC samples to yield an expectation and a credible interval.
+Then, for specific quantities of interest, like rate of antigenic drift and rate of diffusion at different points along the phylogeny, we calculate the quantity across MCMC samples to yield an expectation and a credible interval.
 This approach accurately characterizes uncertainty that may be hidden in an analysis of a single antigenic map.
 
 \subsection*{Availability}
