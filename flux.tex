@@ -615,7 +615,7 @@ However, it would be possible to jointly sample from sequence data and serologic
 
 MCMC was used to sample virus locations $\viruses$, serum locations $\sera$, virus effects $\ves$, serum effects $\ses$, MDS precision $1/\mdssd^2$, antigenic drift rate $\beta$, virus location precision $1/\virussd^2$, serum location precision $1/\serumsd^2$ and phylogenetic tree $\tree$.
 MCMC chains were run for 500 million steps and parameter values sampled every 200,000 steps after a burn-in of 100 million steps, yielding a total of 2000 MCMC samples.
-In all cases when drift parameter $\beta$ was included the MCMC chain mixed well and arrived at the same posterior distribution from different starting points.
+In all cases when drift parameter $\beta$ was included the MCMC chain mixed well and arrived at the same estimated posterior distribution from different starting points.
 However, without drift parameter $\beta$, maps for A/H3N2 showed some degree of metastability, where some chains would converge on one solution and other chains would converge on a different solution (see Supp.\ Discussion).
 We favor models that include $\beta$, because its inclusion, in addition to correcting most identifiability issues, yields much improved mixing of antigenic locations. 
 
