@@ -213,9 +213,9 @@ Credible intervals of antegenic distances for the BMDS model remain narrow acros
 	\label{smith_comparison} 
 \end{figure}
 
-Smith et al.\ \cite{Smith04} show that there exists two global solutions in their assignment of antigenic locations, involving the rotation of clusters HK/68, EN/72 and VI/75 (shown in Figure S2 of \cite{Smith04}).
+Smith et al.\ \cite{Smith04} show that there exist at least two solutions in their assignment of antigenic locations, involving the rotation of clusters HK/68, EN/72 and VI/75 (shown in Figure S2 of \cite{Smith04}).
 We observe the same metastable behavior in our analysis; some MCMC chains converge on the solution shown in Figure \ref{smith_comparison}B, while other MCMC chains converge on the alternative solution shown in Figure \ref{smith_comparison_rotation}B.
-The distribution of likelihood values appear highly similar between these two solutions.
+The distribution of likelihood values appear highly similar between these two solutions, suggesting that they represent global optima.
 The rotation of the HK/68, EN/72 and VI/75 clusters creates a map that bends slightly, so that temporally distant viruses appear closer in the rotated solution than in the original solution (Figure~\ref{smith_comparison_rotation}C--E).
 In this case, it is clear that the solutions are locally consistent between viruses up to $\sim$15 years divergent, even if there some degree of global flexibility.
 
@@ -223,7 +223,7 @@ In this case, it is clear that the solutions are locally consistent between viru
 \begin{figure}[H]
 	\centering		
 	\includegraphics[width=1.0\textwidth]{figures/smith_comparison_rotation}
-	\caption{\textbf{Comparison of A/H3N3 antigenic locations estimated by Smith et al.\ \cite{Smith04} using MDS and an equivalent BMDS model, showing an alternative solution found by MCMC.} 
+	\caption{\textbf{Comparison of A/H3N3 antigenic locations estimated by Smith et al.\ \cite{Smith04} using MDS and an equivalent BMDS model under an alternative solution.} 
 	(A) MDS antigenic locations, reorientated so that the primary dimension lies on the $x$-axis rather than on the $y$-axis as in Figure 1 of \cite{Smith04}.
 	(B) A posterior sample of antigenic locations from an equivalent BMDS model that has converged on the alternative solution.
 	In (A) and (B), viruses are shown as colored circles, with color denoting antigenic cluster inferred by \cite{Smith04}, and sera are shown as gray points.
@@ -236,8 +236,8 @@ In this case, it is clear that the solutions are locally consistent between viru
 	\label{smith_comparison_rotation} 
 \end{figure}
 
-As discussed in the main text, the presence of multiple solutions with different degrees of 2D curvature implies an issue of identifiability; the HI likelihood model alone cannot distinguish between these possibilities.
-Because of this issue, and to more easily estimate rates of antigenic drift, we included a model of systematic drift in antigenic location (discussed in Methods) that favors linear movement in the antigenic map.
+As discussed in the main text, the presence of multiple optima with different degrees of 2D curvature implies an issue of identifiability; the HI likelihood model alone cannot distinguish between these possibilities.
+Because of this issue, and to more easily estimate rates of antigenic drift, we include a model of systematic drift in antigenic location (discussed in Methods) that favors linear movement in the antigenic map.
 We find that including this drift prior on antigenic locations removes the problem of identifiability.
 Antigenic locations produced by this model remain locally consistent with MDS results between viruses $\sim$15 years divergent, but global comparisons show that this BMDS model has partitioned more variance to the first antigenic dimension (Figure~\ref{smith_comparison_drift}).
 We additionally find that including the drift prior on antigenic locations often results in greater predictive power, with a slight improvement of test error for the A/H1N1, B/Vic and B/Yam datasets (Table~1).
