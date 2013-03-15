@@ -210,8 +210,8 @@ Here, we simultaneously model antigenic and genetic evolution by adopting an evo
 The phylogenetic diffusion process acts as a prior on virus locations, so that genetically similar viruses are expected to share similar antigenic locations.
 The antigenic diffusion process includes both systematic drift with time and covariance induced by phylogenetic proximity.
 We examine the effects of including only systematic drift (model 6; Table \ref{errortable}) and systematic drift plus phylogenetic diffusion (model 7; Table \ref{errortable}), finding a small increase in predictive accuracy of between 0.02 and 0.08 log$_2$ HI titers when both processes are included.
-The phylogenetic diffusion requires genetic data for each virus isolate.
-Thus, in these models, antigenic locations are inferred using both genetic sequences and HI data and will differ from locations inferred from HI data alone.
+The systematic drift process informs virus and serum locations by dates of isolation and the phylogenetic diffusion process informs virus locations by genetic sequences.
+Thus, in these models, antigenic locations are inferred using both genetic data and HI data and will differ from locations inferred from HI data alone.
 If HI data is rich, then we expect minor differences in antigenic locations with the inclusion of genetic data (as may be the case for A/H3N2), while if HI data is spare, then we expect genetic data to play a larger role in determining antigenic locations (as may be the case for B/Vic and B/Yam).
 
 We further extend the model by estimating the strength of overall reactivity of each serum rather than fixing this at its maximum titer, and additionally, by estimating the strength of reactivity of each virus isolate.
@@ -222,6 +222,7 @@ We find that the average absolute error in predicted log$_2$ HI titer is nearly 
 Additionally, we find that the absolute error in predicted titer is nearly constant with time (Figure~\ref{error_by_distance_and_year}B).
 Antigenic locations inferred by the model are well resolved; estimates of antigenic distance between pairs of viruses show relatively little variation across the posterior.
 We estimate that virus distances have, on average, a 50\% credible interval of $\pm0.45$ antigenic units for A/H3N2, $\pm0.57$ units for A/H1N1, $\pm0.76$ units for B/Vic, and $\pm0.65$ units for B/Yam.
+We find strong correspondence between our results and previous results by Smith et al.\ \cite{Smith04}, with equivalent models producing globally consistent antigenic maps and other models producing locally consistent maps with a small degree of global inconsistency (see Supp.\ Discussion).
 
 \subsection*{Antigenic evolution across influenza lineages}
 
@@ -245,10 +246,10 @@ Labeling of prominent antigenic clusters in figures \ref{map} and \ref{drift} is
 	\label{map} 
 \end{figure}
 
-HI assays lack sensitivity beyond a certain point, so that for A/H3N2, cross-reactive measurements only exist between strains sampled at most 11 years apart, leaving only threshold titers, e.g.\ `$<$40', in more temporally distant comparisons.  
-Because of the threshold of sensitivity of the HI assay, it's difficult to distinguish a linear trajectory in 2D antigenic space from a slightly curved trajectory, so long as the curve does not bring antigenic phenotype full circle to have cross-reactive measurements between temporally distant strains.
-To solve this problem of identifiability, we assumed a weak prior that favors linear movement in the 2D antigenic space (present in models 2 through 8; Table \ref{errortable}), with the slope of the linear relationship and the precision of the relationship incorporated into the Bayesian model (see Methods).
-Because of this, we interpret map locations locally rather than globally, and assess rates of antigenic movement without knowing the larger configuration under which the movement occurs.
+HI assays lack sensitivity beyond a certain point, so that for A/H3N2, cross-reactive measurements only exist between strains sampled at most 14 years apart, leaving only threshold titers, e.g.\ `$<$40', in more temporally distant comparisons.  
+Because of the threshold of sensitivity of the HI assay, it's difficult to distinguish a linear trajectory in 2D antigenic space from a slightly curved trajectory (see Supp.\ Discussion).
+To solve this problem of identifiability, we assumed a weak prior that favors linear movement in the 2D antigenic space (present in models 6 through 9; Table \ref{errortable}), with the slope of the linear relationship and the precision of the relationship incorporated into the Bayesian model (see Methods).
+Because of this, we interpret map locations locally rather than globally, and assess rates of antigenic movement without making strong statements about the larger configuration under which the movement occurs.
  
 We find that influenza A/H3N2 evolved along antigenic dimension 1 at a rate of 1.01 antigenic units per year, with a 95\% highest posterior density (HPD) interval of 0.98--1.04 (Figure~\ref{drift}).
 However, we observe occasional large jumps in antigenic phenotype (Figure~\ref{drift}), corresponding to cluster transitions identified by Smith et al. \cite{Smith04}.  
@@ -456,6 +457,7 @@ In following multidimensional scaling (MDS), these approaches attempt to optimiz
 	\right)^2
 \end{equation}
 is minimized, where $\mathcal{I} = \{ (i,j) : H_{ij} \mbox{ is measured} \}$.
+In the case of threshold measurements, this error function is modified slightly; see \cite{Smith04} for further details.
 
 Here, we instead assume a probabilistic interpretation in which an observed titer is normally distributed around its cartographic expectation with variance $\mdssd^2$,
 \begin{equation} \label{hij}
@@ -597,7 +599,7 @@ For the present analysis, a two-step approach was taken to sample phylogenies, w
 
 \subsection*{Data and implementation}
 
-We compiled an antigenic dataset of hemagglutination inhibition (HI) measurements of virus isolates against post-infection ferret sera for influenza A/H3N2 by collecting data from previous publications and WHO vaccine strain selection reports (see Supp.\ Text).
+We compiled an antigenic dataset of hemagglutination inhibition (HI) measurements of virus isolates against post-infection ferret sera for influenza A/H3N2 by collecting data from previous publications and WHO vaccine strain selection reports (see Supp.\ Methods).
 Hemagglutinin sequences were compiled from the Influenza Research Database \cite{IRD} and the EpiFlu Database \cite{GISAID}.
 Antigenic and genetic data were subsampled to give similar quantities of data across years of the analysis.
 Data gathering procedures resulted in 402 virus strains A/H3N2, 115 virus strains for A/H1N1, 179 virus strains for B/Vic and 174 virus strains for B/Yam.
@@ -610,6 +612,9 @@ However, it would be possible to jointly sample from sequence data and serologic
 
 MCMC was used to sample virus locations $\viruses$, serum locations $\sera$, virus effects $\ves$, serum effects $\ses$, MDS precision $1/\mdssd^2$, antigenic drift rate $\beta$, virus location precision $1/\virussd^2$, serum location precision $1/\serumsd^2$ and phylogenetic tree $\tree$.
 MCMC chains were run for 500 million steps and parameter values sampled every 200,000 steps after a burn-in of 100 million steps, yielding a total of 2000 MCMC samples.
+In all cases when drift parameter $\beta$ was included the MCMC chain mixed well and arrived at the same posterior distribution from different starting points.
+However, without drift parameter $\beta$, maps for A/H3N2 showed some degree of metastability, where some chains would converge on one solution and other chains would converge on a different solution (see Supp.\ Discussion).
+We favor models that include $\beta$, because its inclusion, in addition to correcting most identifiability issues, yields much improved mixing of antigenic locations. 
 
 There is some difficulty summarizing posterior cartographic samples, as sampled virus and serum locations represent only relative quantities, and because of this, over the course of the MCMC, virus locations may shift.
 Our prior on virus and serum locations removes much of this issue, orienting the antigenic map along dimension 1 and fixing it to begin at the origin.

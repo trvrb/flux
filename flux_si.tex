@@ -43,6 +43,9 @@
 \renewcommand\Authands{ \& }
 \renewcommand\Authfont{\normalsize \bf}
 \renewcommand\Affilfont{\small \normalfont}
+\makeatletter
+\renewcommand\AB@affilsepx{, \protect\Affilfont}
+\makeatother
 
 % comments
 \usepackage{ulem}
@@ -60,6 +63,13 @@
 \setlength{\arraycolsep}{2pt}
 \newcommand{\twomatrix}[2]{\left( \begin{matrix} #1 \\ #2 \end{matrix} \right)}								% pretty inline matrix 
 \newcommand{\fourmatrix}[4]{\left( \begin{matrix} #1 & #2 \\ #3 & #4 \end{matrix} \right)}					% pretty inline matrix 
+
+\setcounter{figure}{2}
+\setcounter{table}{0}
+\setcounter{page}{1}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thepage}{S\arabic{page}}
 
 %%% TITLE %%%
 \title{\vspace{1.0cm} \LARGE \bf 
@@ -173,6 +183,109 @@ This estimator showed less variance than equation \ref{pybusest} when analyzing 
 Additionally, we confirmed through simple simulation that estimator \ref{ourest} shows lower mean squared error than estimator \ref{pybusest} in the presence of modest levels of noise on estimates of $d_i$ and $t_i$.
 When estimating $D$ specific to trunk branches or specific to side branches, we calculate $d^2_\Sigma$ and $t_\Sigma$ only from a subset of phylogeny branches as appropriate.
 
+%%% SUPPORTING DISCUSSION %%%
+\section*{Supporting Discussion}
+
+\subsection*{Comparison with previous results}
+
+Here, we attempt to compare antigenic locations inferred by our BMDS model to antigenic locations previously inferred by the error minimization methods of Smith et al.\ \cite{Smith04}, referred to here as antigenic cartography by MDS.
+For this comparison, we use exactly the same HI data used to produce the results in \cite{Smith04}, consisting of 273 virus isolates, 79 serum isolates and a total of 4252 HI measurements taken between 1968 and 2003.
+We begin with a BMDS analog of the antigenic model used in \cite{Smith04}, where serum effects are taken as the maximum titer of a particular ferret serum and the expected log$_2$ drop in HI titer is proportional to Euclidean distance between virus and serum locations.
+To bring models into further alignment, we use a Uniform$(-100,100)$ distribution over virus locations and serum locations.
+Unsurprisingly, we find that this BMDS model produces results that are strongly congruent with MDS results (Figure~\ref{smith_comparison}).
+Antigenic cluster locations are consistent between methods (Figure~\ref{smith_comparison}A--B) and antigenic distances between pairs of viruses are consistent between temporally similar and temporally divergent viruses (Figure~\ref{smith_comparison}C--E), suggesting that the resulting maps are consistent at both local and global scales.
+Credible intervals of antegenic distances for the BMDS model remain narrow across the temporal spectrum (Figure~\ref{smith_comparison}C--E), implying a fair degree of rigidity to the map.
+
+%%% smith_comparison %%%
+\begin{figure}[H]
+	\centering		
+	\includegraphics[width=1.0\textwidth]{figures/smith_comparison}
+	\caption{\textbf{Comparison of A/H3N3 antigenic locations estimated by Smith et al.\ \cite{Smith04} using MDS and an equivalent BMDS model.} 
+	(A) MDS antigenic locations, reorientated so that the primary dimension lies on the $x$-axis rather than on the $y$-axis as in Figure 1 of \cite{Smith04}.
+	(B) A posterior sample of antigenic locations from an equivalent BMDS model.
+	In (A) and (B), viruses are shown as colored circles, with color denoting antigenic cluster inferred by \cite{Smith04}, and sera are shown as gray points.
+	(C) Antigenic distances between A/Bilthoven/16190/1968 and all other viruses determined for both methods.
+	(D) Antigenic distances between A/Fujian/411/2002 and all other viruses determined for both methods.
+	(E) Antigenic distances between 750 random pairs of viruses determined for both methods.	
+	In (C), (D) and (E) red points show distances for the MDS model and gray bars show the 95\% credible interval of distances for the BMDS model, while the red dashed line shows a LOESS regression to MDS distances, and the black dashed line shows a LOESS regression to the BMDS distances.
+	The BMDS model has a Uniform$(-100,100)$ prior on antigenic locations and serum effects fixed at maximum titer values. 
+	} 
+	\label{smith_comparison} 
+\end{figure}
+
+Smith et al.\ \cite{Smith04} show that there exists two global solutions in their assignment of antigenic locations, involving the rotation of clusters HK/68, EN/72 and VI/75 (shown in Figure S2 of \cite{Smith04}).
+We observe the same metastable behavior in our analysis; some MCMC chains converge on the solution shown in Figure \ref{smith_comparison}B, while other MCMC chains converge on the alternative solution shown in Figure \ref{smith_comparison_rotation}B.
+The distribution of likelihood values appear highly similar between these two solutions.
+The rotation of the HK/68, EN/72 and VI/75 clusters creates a map that bends slightly, so that temporally distant viruses appear closer in the rotated solution than in the original solution (Figure~\ref{smith_comparison_rotation}C--E).
+In this case, it is clear that the solutions are locally consistent between viruses up to $\sim$15 years divergent, even if there some degree of global flexibility.
+
+%%% smith_comparison_rotation %%%
+\begin{figure}[H]
+	\centering		
+	\includegraphics[width=1.0\textwidth]{figures/smith_comparison_rotation}
+	\caption{\textbf{Comparison of A/H3N3 antigenic locations estimated by Smith et al.\ \cite{Smith04} using MDS and an equivalent BMDS model, showing an alternative solution found by MCMC.} 
+	(A) MDS antigenic locations, reorientated so that the primary dimension lies on the $x$-axis rather than on the $y$-axis as in Figure 1 of \cite{Smith04}.
+	(B) A posterior sample of antigenic locations from an equivalent BMDS model that has converged on the alternative solution.
+	In (A) and (B), viruses are shown as colored circles, with color denoting antigenic cluster inferred by \cite{Smith04}, and sera are shown as gray points.
+	(C) Antigenic distances between A/Bilthoven/16190/1968 and all other viruses determined for both methods.
+	(D) Antigenic distances between A/Fujian/411/2002 and all other viruses determined for both methods.
+	(E) Antigenic distances between 750 random pairs of viruses determined for both methods.	
+	In (C), (D) and (E) red points show distances for the MDS model and gray bars show the 95\% credible interval of distances for the BMDS model, while the red dashed line shows a LOESS regression to MDS distances, and the black dashed line shows a LOESS regression to the BMDS distances.
+	The BMDS model has a Uniform$(-100,100)$ prior on antigenic locations and serum effects fixed at maximum titer values. 	
+	} 
+	\label{smith_comparison_rotation} 
+\end{figure}
+
+As discussed in the main text, the presence of multiple solutions with different degrees of 2D curvature implies an issue of identifiability; the HI likelihood model alone cannot distinguish between these possibilities.
+Because of this issue, and to more easily estimate rates of antigenic drift, we included a model of systematic drift in antigenic location (discussed in Methods) that favors linear movement in the antigenic map.
+We find that including this drift prior on antigenic locations removes the problem of identifiability.
+Antigenic locations produced by this model remain locally consistent with MDS results between viruses $\sim$15 years divergent, but global comparisons show that this BMDS model has partitioned more variance to the first antigenic dimension (Figure~\ref{smith_comparison_drift}).
+We additionally find that including the drift prior on antigenic locations often results in greater predictive power, with a slight improvement of test error for the A/H1N1, B/Vic and B/Yam datasets (Table~1).
+
+%%% smith_comparison_drift %%%
+\begin{figure}[H]
+	\centering		
+	\includegraphics[width=1.0\textwidth]{figures/smith_comparison_drift}
+	\caption{\textbf{Comparison of A/H3N3 antigenic locations estimated by Smith et al.\ \cite{Smith04} using MDS and an extended BMDS model that includes date-informed priors on antigenic locations.} 
+	(A) MDS antigenic locations, reorientated so that the primary dimension lies on the $x$-axis rather than on the $y$-axis as in Figure 1 of \cite{Smith04}.
+	(B) A posterior sample of antigenic locations from a BMDS model that includes date-informed priors on antigenic locations.
+	In (A) and (B), viruses are shown as colored circles, with color denoting antigenic cluster inferred by \cite{Smith04}, and sera are shown as gray points.
+	(C) Antigenic distances between A/Bilthoven/16190/1968 and all other viruses determined for both methods.
+	(D) Antigenic distances between A/Fujian/411/2002 and all other viruses determined for both methods.
+	(E) Antigenic distances between 750 random pairs of viruses determined for both methods.	
+	In (C), (D) and (E) red points show distances for the MDS model and gray bars show the 95\% credible interval of distances for the BMDS model, while the red dashed line shows a LOESS regression to MDS distances, and the black dashed line shows a LOESS regression to the BMDS distances.
+	The BMDS model has a date-informed prior on antigenic locations and serum effects fixed at maximum titer values. 	
+	} 
+	\label{smith_comparison_drift} 
+\end{figure}
+
+Our final BMDS model (model 9, Table 1) differs from antigenic model used by Smith et al.\ \cite{Smith04} in including temporally- and phylogenetically-informed priors on antigenic locations and also in estimating serum and virus effects (discussed in Methods).
+Here, we investigate the impact on antigenic locations of estimating virus and serum effects in the BMDS model.
+To isolate this difference, we use a Uniform$(-100,100)$ prior on antigenic locations.
+Surprisingly, estimating virus and serum effects results in a more linear antigenic map (Figure~\ref{smith_comparison_effects}), resembling the appearance of the map incorporating the antigenic drift prior, while preserving local consistency.
+We generally observe congruence between MDS and BMDS antigenic locations for viruses less than $\sim$10 years divergent (Figure~\ref{smith_comparison_effects}E).
+However, specific viruses may be affected, for instance A/Bilthoven/16190/1968 (Figure~\ref{smith_comparison_effects}C), which appears more distant from all other viruses when serum and virus effects are included.
+
+%%% smith_comparison_effects %%%
+\begin{figure}[H]
+	\centering		
+	\includegraphics[width=1.0\textwidth]{figures/smith_comparison_effects}
+	\caption{\textbf{Comparison of A/H3N3 antigenic locations estimated by Smith et al.\ \cite{Smith04} using MDS and an extended BMDS model that estimates serum and virus effects.} 
+	(A) MDS antigenic locations, reorientated so that the primary dimension lies on the $x$-axis rather than on the $y$-axis as in Figure 1 of \cite{Smith04}.
+	(B) A posterior sample of antigenic locations from a BMDS model that estimates virus and serum effects.
+	In (A) and (B), viruses are shown as colored circles, with color denoting antigenic cluster inferred by \cite{Smith04}, and sera are shown as gray points.
+	(C) Antigenic distances between A/Bilthoven/16190/1968 and all other viruses determined for both methods.
+	(D) Antigenic distances between A/Fujian/411/2002 and all other viruses determined for both methods.
+	(E) Antigenic distances between 750 random pairs of viruses determined for both methods.	
+	In (C), (D) and (E) red points show distances for the MDS model and gray bars show the 95\% credible interval of distances for the BMDS model, while the red dashed line shows a LOESS regression to MDS distances, and the black dashed line shows a LOESS regression to the BMDS distances.
+	The BMDS model has a Uniform$(-100,100)$ prior on antigenic locations and virus and serum effects estimated in a hierarchical Bayesian fashion. 	
+	} 
+	\label{smith_comparison_effects} 
+\end{figure}
+
+In this dataset, viruses 15 or more years divergent always yield threshold titers, and hence, their relative locations must be indirectly inferred rather than through direct comparison.
+This may explain why we observe local consistency between models at scales less than $\sim$15 years, but some degree of global inconsistency.
+Still, these results suggest that, when making local comparisons, such as those used to calculcate year-to-year antigenic drift (Figure 3), outcomes are expected to be robust to  many model particulars.
 
 %%% REFERENCES %%%
 \bibliographystyle{plos}
