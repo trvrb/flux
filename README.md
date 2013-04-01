@@ -1,22 +1,22 @@
 # Integrating influenza antigenic dynamics with molecular evolution
 
-Trevor Bedford<sup>1</sup>, Marc A. Suchard<sup>2,3,4</sup>, Philippe Lemey<sup>5</sup>, 
-Gytis Dudas<sup>1</sup>, Victoria Gregory<sup>6</sup>, Alan J. Hay<sup>6</sup>, 
-John W. McCauley<sup>6</sup>, Colin A. Russell<sup>7,8</sup>, Derek J. Smith<sup>7,8,9</sup>, 
-Andrew Rambaut<sup>1,10</sup> 
+Trevor Bedford<sup>1</sup>, Marc A. Suchard<sup>2,3,4</sup>, Philippe Lemey<sup>5</sup>, Gytis
+Dudas<sup>1</sup>, Victoria Gregory<sup>6</sup>, Alan J. Hay<sup>6</sup>, John W.
+McCauley<sup>6</sup>, Colin A. Russell<sup>7,8</sup>, Derek J. Smith<sup>7,8,9</sup>, Andrew
+Rambaut<sup>1,10</sup>
 
-<sup>1</sup> Institute of Evolutionary Biology, University of Edinburgh, Edinburgh, UK, 
-<sup>2</sup> Department of Biomathematics, David Geffen School of Medicine at UCLA, University of 
-California, Los Angeles CA, USA, <sup>3</sup> Department of Human Genetics, David Geffen School of 
-Medicine at UCLA, University of California, Los Angeles CA, USA, <sup>4</sup> Department of 
-Biostatistics, UCLA Fielding School of Public Health, University of California, Los Angeles CA, 
-USA, <sup>5</sup> Department of Microbiology and Immunology, Katholieke Universiteit Leuven, Leuven, 
-Belgium, <sup>6</sup> Division of Virology, MRC National Institute for Medical Research, Mill Hill, 
-London, UK, <sup>7</sup> Centre for Pathogen Evolution, Department of Zoology, University of 
-Cambridge, Cambridge, UK, <sup>8</sup> WHO Collaborating Center for Modeling, Evolution, and Control 
-of Emerging Infectious Diseases, University of Cambridge, Cambridge, UK, <sup>9</sup> Department of 
-Virology, Erasmus Medical Centre, Rotterdam, Netherlands, <sup>10</sup> Fogarty International 
-Center, National Institutes of Health, Bethesda, MD, USA
+<sup>1</sup>Institute of Evolutionary Biology, University of Edinburgh, Edinburgh, UK,
+<sup>2</sup>Department of Biomathematics, David Geffen School of Medicine at UCLA, University of
+California, Los Angeles CA, USA, <sup>3</sup>Department of Human Genetics, David Geffen School of
+Medicine at UCLA, University of California, Los Angeles CA, USA, <sup>4</sup>Department of
+Biostatistics, UCLA Fielding School of Public Health, University of California, Los Angeles CA, USA,
+<sup>5</sup>Department of Microbiology and Immunology, Katholieke Universiteit Leuven, Leuven,
+Belgium, <sup>6</sup>Division of Virology, MRC National Institute for Medical Research, Mill Hill,
+London, UK, <sup>7</sup>Centre for Pathogen Evolution, Department of Zoology, University of
+Cambridge, Cambridge, UK, <sup>8</sup>WHO Collaborating Center for Modeling, Evolution, and Control
+of Emerging Infectious Diseases, University of Cambridge, Cambridge, UK, <sup>9</sup>Department of
+Virology, Erasmus Medical Centre, Rotterdam, Netherlands, <sup>10</sup>Fogarty International Center,
+National Institutes of Health, Bethesda, MD, USA
 
 ## Abstract
 
