@@ -127,15 +127,6 @@ This work does much to elucidate the antigenic dynamics of influenza lineages, b
 
 \pagebreak
 
-%%% SIGNIFICANCE %%%
-\section*{Significance}
-
-Influenza viruses continually evolve in antigenic phenotype to escape human immunity.
-In this study, we develop a new method to characterize influenza antigenic phenotype from immunological and genetic data.
-We use this method to assess patterns of antigenic evolution in four different influenza viruses and show that antigenic drift strongly influences viral success.
-Drifted viruses cause larger seasonal outbreaks and outcompete less evolved viruses.
-A more thorough understanding of the predictors of viral success may allow selection of vaccine strains better matched to the population of influenza viruses circulating when the vaccine is deployed.
-
 %%% INTRODUCTION %%%
 \section*{Introduction}
 
@@ -232,7 +223,21 @@ Additionally, we find that the absolute error in predicted titer is nearly const
 Antigenic locations inferred by the model are well resolved; estimates of antigenic distance between pairs of viruses show relatively little variation across the posterior.
 We estimate that virus distances have, on average, a 50\% credible interval of $\pm0.45$ antigenic units for A/H3N2, $\pm0.57$ units for A/H1N1, $\pm0.76$ units for B/Vic, and $\pm0.65$ units for B/Yam.
 
-We find strong correspondence between our results and previous results by Smith et al.\ \cite{Smith04}, with equivalent models producing globally consistent antigenic maps and other models producing locally consistent maps with a small degree of global inconsistency (see Supp.\ Discussion).
+%%% error_by_distance_and_year %%%
+\begin{figure}[h]
+	\centering		
+	\includegraphics[width=0.95\textwidth]{figures/error_by_distance_and_year}
+	\caption{\textbf{Absolute error in log$_2$ HI titer against antigenic distance and date of virus sampling in influenza A/H3N2.} 
+	(A) Points show the absolute deviation from the predicted log$_2$ HI titer of the antigenic model, computed from virus location $\virus_i$, serum location $\serum_j$, virus effect $\ve_i$ and serum effect $\se_j$, based upon antigenic distance between virus and serum $\delta_{ij}$.
+	The red line shows a LOESS regression curve of these points.
+	(B) Points show the absolute deviation from the predicted log$_2$ HI titers of the antigenic model, based upon the date of virus sampling.
+	The red line shows average deviations for each year.
+	Relationships for A/H1N1, B/Vic and B/Yam are similar.
+	} 
+	\label{error_by_distance_and_year} 
+\end{figure}
+
+We find strong correspondence between our results and previous results by Smith et al.\ \cite{Smith04}, with equivalent models producing globally consistent antigenic maps and other models producing locally consistent maps with a small degree of global inconsistency (Figures~\ref{smith_comparison}--\ref{smith_comparison_effects}).
 Differences in the MDS and BMDS approaches reflect greater philosophical differences between maximum-likelihood and Bayesian statistical approaches, with the former seeking the single most likely explanation for the data, and the latter seeking to fully characterize model uncertainty.
 If a single map is desired, then the MDS method may be preferred, while the BMDS method provides flexibility, allowing other sources of information, such as genetic data, to be more easily incorporated.
 
@@ -259,7 +264,7 @@ Labeling of prominent antigenic clusters in figures \ref{map} and \ref{drift} is
 \end{figure}
 
 HI assays lack sensitivity beyond a certain point, so that for A/H3N2, cross-reactive measurements only exist between strains sampled at most 14 years apart, leaving only threshold titers, e.g.\ `$<$40', in more temporally distant comparisons.  
-Because of the threshold of sensitivity of the HI assay, it's difficult to distinguish a linear trajectory in 2D antigenic space from a slightly curved trajectory (see Supp.\ Discussion).
+Because of the threshold of sensitivity of the HI assay, it's difficult to distinguish a linear trajectory in 2D antigenic space from a slightly curved trajectory.
 To solve this problem of identifiability, we assumed a weak prior that favors linear movement in the 2D antigenic space (present in models 6 through 9; Table \ref{errortable}), with the slope of the linear relationship and the precision of the relationship incorporated into the Bayesian model (see Methods).
 Because of this, we interpret map locations locally rather than globally, and assess rates of antigenic movement without making strong statements about the larger configuration under which the movement occurs.
  
@@ -325,6 +330,21 @@ In correlating antigenic drift to seasonal incidence we standardize this measure
 We find that years with high levels of antigenic drift coming into an influenza season, e.g.\ drift in A/H3N2 from 2000 to 2001, show high levels of incidence in that season, e.g.\ incidence of A/H3N2 in the 2001/2002 season (Figure~\ref{jumps}, Figure~\ref{incidence}A). 
 Here, within-clade drift explains 35\% of the variance in standardized incidence and represents a significant correlation (Pearson correlation, $r=0.60$, $p=1.6 \times 10^{-5}$).
 
+%%% incidence %%%
+\begin{figure}[h]
+	\centering		
+	\includegraphics[width=0.95\textwidth]{figures/incidence}
+	\caption{\textbf{Relationship between antigenic drift within and between clades and seasonal USA incidence for years 1998 to 2009.} 
+	(A) Standardized incidence within a clade compared to antigenic drift within the same clade.
+	For example, incidence of A/H3N2 in season 1998/1999 is measured against year-to-year antigenic drift of A/H3N2 from 1997 to 1998.
+	(B) Standardized incidence within a clade compared to antigenic drift in other clades.
+	For example, incidence of A/H3N2 in season 1998/1999 is measured against year-to-year antigenic drift of A/H1N1 from 1997 to 1998, as well as antigenic drift of B/Vic from 1997 to 1998.
+	Standardized incidence is measured as yearly ILI percentage multiplied by proportion of viruses identified in a particular clade, and then standardized so that mean and variance across seasons and clades is equal to 0 and 1 respectively.
+	Colors represent the clade in which incidence is measured; light blue for A/H3N2, purple for A/H1N1, orange for B/Vic and red for B/Yam.
+	} 
+	\label{incidence} 
+\end{figure}
+
 We further show that incidence within a clade decreases with antigenic drift in other clades, e.g.\ drift in A/H1N1, B/Vic and B/Yam from 2000 to 2001 decrease incidence of A/H3N2 in the 2001/2002 season (Figure~\ref{incidence}B).
 This also represents a significant relationship (Pearson correlation, $r=-0.20$, $p=0.024$).
 We fit a linear model that predicts standardized incidence based upon drift within a clade, drift in other clades of the same virus type, and drift in clades of differing type (Table~\ref{interferencetable}).
@@ -364,7 +384,7 @@ We observe a faster rate of antigenic drift in influenza A/H3N2 than in A/H1N1 o
 Previous work using general epidemiological models has suggested that rates of antigenic drift may be influenced by both the fundamental reproductive number $R_0$ and the rate at which mutation decreases cross-immunity \cite{Gog02,Lin03}.
 Owing to these and similar findings, subsequent work ascribed differences in the evolution of A/H3N2 relative to A/H1N1 and influenza B to either greater $R_0$ or greater mutation rate \cite{Ferguson03,Bedford12}.
 Here, we examine the conversion of recently acquired antigenic mutation into fixed differences by comparing rates of antigenic diffusion to the degree of persistence on phylogeny branches in A/H3N2, A/H1N1, B/Vic and B/Yam (Table~\ref{diffusiontable}).
-To facilitate comparisons, we measure the diffusion coefficient $D$ \cite{Pybus12} characterizing the antigenic movement of each influenza lineage (see Supp.\ Methods).
+To facilitate comparisons, we measure the diffusion coefficient $D$ \cite{Pybus12} characterizing the antigenic movement of each influenza lineage (see Methods).
 This coefficient is measured in terms of units$^2$/year and can be used to determine the diffusion length scale, that is the expected relationship between time and distance traveled, which is $2 \sqrt{t D}$ for a two-dimensional diffusion.
 Higher diffusion coefficients mean a lineage is diffusing faster through antigenic space.
 We compare diffusion coefficients between trunk branches and side branches, where trunk branches are defined as branches ancestral to the most recent virus sample and side branches are defined as those branches not ancestral to the most recent virus sample.
@@ -608,13 +628,38 @@ We sample from this posterior distribution using the MCMC procedures implemented
 Metropolis-Hastings proposals include transition kernels that translate individual virus and serum locations $\virus_i$ and $\serum_j$ and individual virus effects $\ve_i$ and serum effects $\se_j$, and other transition kernels that scale the entire set of virus and serum locations $\viruses$ and $\sera$ and that scale parameters $\mdssd$, $\beta$, $\virussd$ and $\serumsd$.
 For the present analysis, a two-step approach was taken to sample phylogenies, where a posterior sample of phylogenies was gathered using sequence data and then, in the cartographic analysis, trees from this set were randomly proposed and accepted following the Metropolis-Hastings algorithm \cite{Pagel04}.
 
-\subsection*{Data and implementation}
+\subsection*{Genetic, antigenic and surveillance data}
 
-We compiled an antigenic dataset of hemagglutination inhibition (HI) measurements of virus isolates against post-infection ferret sera for influenza A/H3N2 by collecting data from previous publications and WHO vaccine strain selection reports (see Supp.\ Methods).
-Hemagglutinin sequences were compiled from the Influenza Research Database \cite{IRD} and the EpiFlu Database \cite{GISAID}.
-Antigenic and genetic data were subsampled to give similar quantities of data across years of the analysis.
-Data gathering procedures resulted in 402 virus strains A/H3N2, 115 virus strains for A/H1N1, 179 virus strains for B/Vic and 174 virus strains for B/Yam.
+We compiled an antigenic dataset of hemagglutination inhibition (HI) measurements of virus isolates against post-infection ferret sera for influenza A/H3N2 by collecting data from previous publications \cite{Hay01,Smith04,Russell08,Barr10}, NIMR vaccine strain selection reports for 2002 and 2008--2012 \cite{NIMR02,NIMRMarch08,NIMRFeb09,NIMRFeb10,NIMRSep10,NIMRSep11,NIMRFeb12} and the Feb 2011 VRBPAC report \cite{Cox11FDA}.
+We queried the Influenza Research Database \cite{IRD} and the EpiFlu Database \cite{GISAID} for HA nucleotide sequences by matching strain names, e.g.\ A/HongKong/1/1968, and only strains for which sequence was present was retained.
+If a strain had multiple sequences in the databases we preferentially kept the IRD sequence and preferentially kept the longest sequence in IRD. 
+Sequences were aligned using MUSCLE v3.7 under default parameters \cite{MUSCLE}.
+This dataset had 2051 influenza isolates (present as either virus or serum in HI comparisons) dating from 1968 to 2011. 
+However, the majority of isolates were present from 2002 to 2007. 
+Because we are interested in longer-term antigenic evolution, we subsampled the data to have at most 20 virus isolates per year, preferentially keeping those isolates with more antigenic comparisons. 
+We then kept only those serum isolates that are relatively informative to the antigenic placement of viruses, dropping serum isolates that are compared to 4 or fewer different virus isolates.
+This censoring left 402 virus isolates, 519 serum isolates and 10,059 HI measurements. 
+Each virus isolate was compared to an average of 21.9 serum isolates, and each serum isolate was compared to an average of 18.0 virus isolates.
+
+Antigenic data for influenza A/H1N1 was collected from previous publications \cite{Kendal78,Webster79,Nakajima79,Nakajima81,Chakraverty82,Pereira82,Chakraverty86,Cox83,Daniels85,Raymond86,Stevens87,Donatelli93,Hay01,Daum02,McDonald07,Barr10} and NIMR vaccine strain selection reports for 2002--2010 \cite{NIMR02,NIMR03,NIMR04,NIMRFeb05,NIMRSep05,NIMRMarch06,NIMRSep06,NIMRMarch07,NIMRSep07,NIMRMarch08,NIMRSep08,NIMRFeb09,NIMRFeb10}.
+The same procedure was followed as was followed for H3N2 to match sequence data and to subsample antigenic comparisons.
+This procedure yielded 115 virus isolates, 77 serum isolates and 1882 HI measurements over the course of 1977 to 2009.
+Each virus isolate was compared to an average of 10.0 serum isolates, and each serum isolate was compared to an average of 16.2 virus isolates.
+
+Antigenic comparisons for influenza B/Victoria were collated from previous publications \cite{Rota90, Hay01, Muyanga01, Shaw02, Ansaldi04, Puzelli04, Xu04, Barr06, Daum06, Lin07} and vaccine strain selection reports for 2002--2012 \cite{AusWHO06, NIMR02, NIMR03, NIMR04, NIMRFeb05, NIMRSep05, NIMRMarch06, NIMRSep06, NIMRMarch07, NIMRSep07, NIMRMarch08, NIMRFeb09, NIMRSep09, NIMRFeb10, NIMRSep10, NIMRFeb11, NIMRSep11, NIMRFeb12}.
+Here, the sequence matching and subsampling procedure yielded 179 virus isolates, 70 serum isolates and 2003 HI measurements over the course of 1986 to 2011.
+Each virus isolate was compared to an average of 6.5 serum isolates, and each serum isolate was compared to an average of 16.7 virus isolates.
+
+Antigenic comparisons for influenza B/Yamagata were collected from previous publications \cite{Rota90, Kanegae90, Nakajima92, Nerome98, Hay01, Muyanga01, Nakagawa02, Abed03, Ansaldi03, Ansaldi04, Matsuzaki04, Puzelli04, Shaw02, Xu04, Barr06, Daum06, Lin07} and vaccine strain selection reports for 2002--2012 \cite{AusWHO06, NIMR02, NIMR03, NIMR04, NIMRFeb05, NIMRSep05, NIMRMarch06, NIMRSep06, NIMRMarch07, NIMRSep07, NIMRMarch08, NIMRFeb09, NIMRSep09, NIMRFeb10, NIMRSep10, NIMRFeb11, NIMRSep11, NIMRFeb12}.
+For B/Yamagata, the matching and subsampling procedure resulted in 174 virus isolates, 69 serum isolates and 1962 HI measurements over the course of 1987 to 2011.
+Each virus isolate was compared to an average of 6.9 serum isolates, and each serum isolate was compared to an average of 17.3 virus isolates.
+
 Surveillance data was obtained from the Centers of Disease Control and Prevention FluView Influenza Reports from the yearly summaries of influenza seasons 1997--1998 to 2010--2011 \cite{CDCReports}.
+As an example, one report states ``collaborating laboratories in the United States tested 195,744 respiratory specimens for influenza viruses, 27,682 (14\%) of which were positive. Of these, 18,175 (66\%) were positive for influenza A viruses, and 9,507 (34\%) were positive for influenza B viruses. Of the 18,175 specimens positive for influenza A viruses, 7,631 (42\%) were subtyped; 6,762 (87\%) of these were seasonal influenza A (H1N1) viruses, and 869 (13\%) were influenza A (H3N2) viruses.''
+In this case, we estimate the relative proportion of A/H3N2 of the four clades as $0.66 \times 0.13 = 0.09$.
+Similar calculations were performed for A/H1N1, B/Vic and B/Yam.
+
+\subsection*{Implementation}
 
 Phylogenetic trees were estimated for A/H3N2, A/H1N1, B/Vic and B/Yam using BEAST \cite{BEAST17} and incorporated the SRD06 nucleotide substitution model \cite{Shapiro06}, a coalescent demographic model with constant effective population size and a strict molecular clock across branches.
 MCMC was run for 60 million steps and trees were sampled every 50,000 steps after allowing a burn-in of 10 million steps, yielding a total sample of 2000 trees.
@@ -624,22 +669,167 @@ However, it would be possible to jointly sample from sequence data and serologic
 MCMC was used to sample virus locations $\viruses$, serum locations $\sera$, virus effects $\ves$, serum effects $\ses$, MDS precision $1/\mdssd^2$, antigenic drift rate $\beta$, virus location precision $1/\virussd^2$, serum location precision $1/\serumsd^2$ and phylogenetic tree $\tree$.
 MCMC chains were run for 500 million steps and parameter values sampled every 200,000 steps after a burn-in of 100 million steps, yielding a total of 2000 MCMC samples.
 In all cases when drift parameter $\beta$ was included the MCMC chain mixed well and arrived at the same estimated posterior distribution from different starting points.
-However, without drift parameter $\beta$, maps for A/H3N2 showed some degree of metastability, where some chains would converge on one solution and other chains would converge on a different solution (see Supp.\ Discussion).
+However, without drift parameter $\beta$, maps for A/H3N2 showed some degree of metastability, where some chains would converge on one solution and other chains would converge on a different solution.
 We favor models that include $\beta$, because its inclusion, in addition to correcting most identifiability issues, yields much improved mixing of antigenic locations. 
 
 There is some difficulty summarizing posterior cartographic samples, as sampled virus and serum locations represent only relative quantities, and because of this, over the course of the MCMC, virus locations may shift.
 Our prior on virus and serum locations removes much of this issue, orienting the antigenic map along dimension 1 and fixing it to begin at the origin.
 However, local isometries are often still a problem.
-For example, in A/H3N2 the HK/68, EN/72 and VI/75 clusters may rotate in relation to other clusters (see Supp.\ Discussion).
+For example, in A/H3N2 the HK/68, EN/72 and VI/75 clusters may rotate in relation to other clusters.
 Consequently, it may be difficult to fully align MCMC samples using Procrustes analysis.
 For the present study, we take a simple approach and sample a single MCMC step and visualize the antigenic locations at this state (Figures~\ref{map}, Figure~\ref{drift}).
 Then, for specific quantities of interest, like rate of antigenic drift and rate of diffusion at different points along the phylogeny, we calculate the quantity across MCMC samples to yield an expectation and a credible interval.
 This approach accurately characterizes uncertainty that may be hidden in an analysis of a single antigenic map.
 
+\subsection*{Estimation of diffusion coefficient}
+
+The distance $d$ traveled by a diffusion is not a linear function of time interval $t$, and thus the `rate' of diffusion cannot be calculated following $r=d/t$.
+Assume we have a one-dimensional diffusion starting from $x_0 = 0$, so that
+\begin{equation}
+	X_t \sim \normal(0, \sigma^2 t),
+\end{equation}
+where $\sigma$ represents the diffusion volatility, and in this case, the expected squared displacement follows
+\begin{equation}
+	\mathrm{E}[X_t^2] = \sigma^2 t.
+\end{equation}
+In moving to a two-dimensional diffusion
+\begin{equation}
+	(X_t, Y_t) \sim \normal \left( \twomatrix{0}{0}, \fourmatrix{\sigma_x^2 t}{\rho \sigma_x \sigma_y t}{\rho \sigma_x \sigma_y t}{\sigma_y^2 t} \right),
+\end{equation}
+where $\sigma_x$ represents volatility in dimension 1, $\sigma_y$ represents volatility in dimension 2 and $\rho$ represents correlation,   expected squared displacement is equal to the sum of squared displacements in each dimension
+\begin{equation}
+	\mathrm{E}[X_t^2 + Y_t^2] = \sigma_x^2 t + \sigma_y^2 t.
+\end{equation}
+Such diffusions are often characterized with diffusion coefficient $D$.
+In this case
+\begin{equation}
+	D = \frac{\sigma_x^2 + \sigma_y^2}{4},
+\end{equation}
+so that expected squared displacement follows from $D$ alone
+\begin{equation}
+	\mathrm{E}[X_t^2 + Y_t^2] = 4 D t.
+\end{equation}
+
+Owing to this relationship, Pybus et al.\ \cite{Pybus12} estimate $D$ from phylogenies in which internal nodes have inferred 2D locations via the formula
+\begin{equation} \label{pybusest}
+	\hat{D} = \frac{1}{n} \sum^n_{i=1} \frac{d_i^2}{4t_i},
+\end{equation}
+in which $d_i$ represents the displacement of a branch and $t_i$ represents the length of a branch.
+However, uncertainty in $d_i$ or $t_i$, especially along short branches of the phylogeny, may cause $d_i^2/4t_i$ to have high variance and increase uncertainty in the resulting estimates of $D$.
+Consequently, we estimate $D$ by looking at the relationship between total squared displacement and total time along branches of a phylogeny
+\begin{eqnarray} \label{ourest}
+	d^2_\Sigma &=& \sum^n_{i=1} d^2_i \nonumber \\
+	t_\Sigma &=& \sum^n_{i=1} t_i \nonumber \\
+	\hat{D} &=& \frac{ d^2_\Sigma }{ 4 t_\Sigma }.
+\end{eqnarray}
+This estimator showed less variance than equation \ref{pybusest} when analyzing tree output from the BMDS model and was thus preferred.
+Additionally, we confirmed through simple simulation that estimator \ref{ourest} shows lower mean squared error than estimator \ref{pybusest} in the presence of modest levels of noise on estimates of $d_i$ and $t_i$.
+When estimating $D$ specific to trunk branches or specific to side branches, we calculate $d^2_\Sigma$ and $t_\Sigma$ only from a subset of phylogeny branches as appropriate.
+
+\subsection*{Comparison with previous results}
+
+Here, we attempt to compare antigenic locations inferred by our BMDS model to antigenic locations previously inferred by the error minimization methods of Smith et al.\ \cite{Smith04}, referred to here as antigenic cartography by MDS.
+For this comparison, we use exactly the same HI data used to produce the results in \cite{Smith04}, consisting of 273 virus isolates, 79 serum isolates and a total of 4252 HI measurements taken between 1968 and 2003.
+We begin with a BMDS analog of the antigenic model used in \cite{Smith04}, where serum effects are taken as the maximum titer of a particular ferret serum and the expected log$_2$ drop in HI titer is proportional to Euclidean distance between virus and serum locations.
+To bring models into further alignment, we use a Uniform$(-100,100)$ distribution over virus locations and serum locations.
+Unsurprisingly, we find that this BMDS model produces results that are strongly congruent with MDS results (Figure~\ref{smith_comparison}).
+Antigenic cluster locations are consistent between methods (Figure~\ref{smith_comparison}A--B) and antigenic distances between pairs of viruses are consistent between temporally similar and temporally divergent viruses (Figure~\ref{smith_comparison}C--E), suggesting that the resulting maps are consistent at both local and global scales.
+Credible intervals of antegenic distances for the BMDS model remain narrow across the temporal spectrum (Figure~\ref{smith_comparison}C--E), implying a fair degree of rigidity to the map.
+
+%%% smith_comparison %%%
+\begin{figure}[h]
+	\centering		
+	\includegraphics[width=1.0\textwidth]{figures/smith_comparison}
+	\caption{\textbf{Comparison of A/H3N2 antigenic locations estimated by Smith et al.\ \cite{Smith04} using MDS and an equivalent BMDS model.} 
+	(A) MDS antigenic locations, reorientated so that the primary dimension lies on the $x$-axis rather than on the $y$-axis as in Figure 1 of \cite{Smith04}.
+	(B) A posterior sample of antigenic locations from an equivalent BMDS model.
+	In (A) and (B), viruses are shown as colored circles, with color denoting antigenic cluster inferred by \cite{Smith04}, and sera are shown as gray points.
+	(C) Antigenic distances between A/Bilthoven/16190/1968 and all other viruses determined for both methods.
+	(D) Antigenic distances between A/Fujian/411/2002 and all other viruses determined for both methods.
+	(E) Antigenic distances between 750 random pairs of viruses determined for both methods.	
+	In (C), (D) and (E) red points show distances for the MDS model and gray bars show the 95\% credible interval of distances for the BMDS model, while the red dashed line shows a LOESS regression to MDS distances, and the black dashed line shows a LOESS regression to the BMDS distances.
+	The BMDS model has a Uniform$(-100,100)$ prior on antigenic locations and serum effects fixed at maximum titer values. 
+	} 
+	\label{smith_comparison} 
+\end{figure}
+
+Smith et al.\ \cite{Smith04} show that there exist at least two solutions in their assignment of antigenic locations, involving the rotation of clusters HK/68, EN/72 and VI/75 (shown in Figure S2 of \cite{Smith04}).
+We observe the same metastable behavior in our analysis; some MCMC chains converge on the solution shown in Figure \ref{smith_comparison}B, while other MCMC chains converge on the alternative solution shown in Figure \ref{smith_comparison_rotation}B.
+The distribution of likelihood values appear highly similar between these two solutions, suggesting that they represent global optima.
+The rotation of the HK/68, EN/72 and VI/75 clusters creates a map that bends slightly, so that temporally distant viruses appear closer in the rotated solution than in the original solution (Figure~\ref{smith_comparison_rotation}C--E).
+In this case, it is clear that the solutions are locally consistent between viruses up to $\sim$15 years divergent, even if there some degree of global flexibility.
+
+%%% smith_comparison_rotation %%%
+\begin{figure}[h]
+	\centering		
+	\includegraphics[width=1.0\textwidth]{figures/smith_comparison_rotation}
+	\caption{\textbf{Comparison of A/H3N2 antigenic locations estimated by Smith et al.\ \cite{Smith04} using MDS and an equivalent BMDS model under an alternative solution.} 
+	(A) MDS antigenic locations, reorientated so that the primary dimension lies on the $x$-axis rather than on the $y$-axis as in Figure 1 of \cite{Smith04}.
+	(B) A posterior sample of antigenic locations from an equivalent BMDS model that has converged on the alternative solution.
+	In (A) and (B), viruses are shown as colored circles, with color denoting antigenic cluster inferred by \cite{Smith04}, and sera are shown as gray points.
+	(C) Antigenic distances between A/Bilthoven/16190/1968 and all other viruses determined for both methods.
+	(D) Antigenic distances between A/Fujian/411/2002 and all other viruses determined for both methods.
+	(E) Antigenic distances between 750 random pairs of viruses determined for both methods.	
+	In (C), (D) and (E) red points show distances for the MDS model and gray bars show the 95\% credible interval of distances for the BMDS model, while the red dashed line shows a LOESS regression to MDS distances, and the black dashed line shows a LOESS regression to the BMDS distances.
+	The BMDS model has a Uniform$(-100,100)$ prior on antigenic locations and serum effects fixed at maximum titer values. 	
+	} 
+	\label{smith_comparison_rotation} 
+\end{figure}
+
+As discussed in the main text, the presence of multiple optima with different degrees of 2D curvature implies an issue of identifiability; the HI likelihood model alone cannot distinguish between these possibilities.
+Because of this issue, and to more easily estimate rates of antigenic drift, we include a model of systematic drift in antigenic location (discussed in Methods) that favors linear movement in the antigenic map.
+We find that including this drift prior on antigenic locations removes the problem of identifiability.
+Antigenic locations produced by this model remain locally consistent with MDS results between viruses $\sim$15 years divergent, but global comparisons show that this BMDS model has partitioned more variance to the first antigenic dimension (Figure~\ref{smith_comparison_drift}).
+We additionally find that including the drift prior on antigenic locations often results in greater predictive power, with a slight improvement of test error for the A/H1N1, B/Vic and B/Yam datasets (Table~\ref{errortable}).
+
+%%% smith_comparison_drift %%%
+\begin{figure}[h]
+	\centering		
+	\includegraphics[width=1.0\textwidth]{figures/smith_comparison_drift}
+	\caption{\textbf{Comparison of A/H3N2 antigenic locations estimated by Smith et al.\ \cite{Smith04} using MDS and an extended BMDS model that includes date-informed priors on antigenic locations.} 
+	(A) MDS antigenic locations, reorientated so that the primary dimension lies on the $x$-axis rather than on the $y$-axis as in Figure 1 of \cite{Smith04}.
+	(B) A posterior sample of antigenic locations from a BMDS model that includes date-informed priors on antigenic locations.
+	In (A) and (B), viruses are shown as colored circles, with color denoting antigenic cluster inferred by \cite{Smith04}, and sera are shown as gray points.
+	(C) Antigenic distances between A/Bilthoven/16190/1968 and all other viruses determined for both methods.
+	(D) Antigenic distances between A/Fujian/411/2002 and all other viruses determined for both methods.
+	(E) Antigenic distances between 750 random pairs of viruses determined for both methods.	
+	In (C), (D) and (E) red points show distances for the MDS model and gray bars show the 95\% credible interval of distances for the BMDS model, while the red dashed line shows a LOESS regression to MDS distances, and the black dashed line shows a LOESS regression to the BMDS distances.
+	The BMDS model has a date-informed prior on antigenic locations and serum effects fixed at maximum titer values. 	
+	} 
+	\label{smith_comparison_drift} 
+\end{figure}
+
+Our final BMDS model (model 9, Table~\ref{errortable}) differs from antigenic model used by Smith et al.\ \cite{Smith04} in including temporally- and phylogenetically-informed priors on antigenic locations and also in estimating serum and virus effects (discussed in Methods).
+Here, we investigate the impact on antigenic locations of estimating virus and serum effects in the BMDS model.
+To isolate this difference, we use a Uniform$(-100,100)$ prior on antigenic locations.
+Surprisingly, estimating virus and serum effects results in a more linear antigenic map (Figure~\ref{smith_comparison_effects}), resembling the appearance of the map incorporating the antigenic drift prior, while preserving local consistency.
+We generally observe congruence between MDS and BMDS antigenic locations for viruses less than $\sim$10 years divergent (Figure~\ref{smith_comparison_effects}E).
+However, specific viruses may be affected, for instance A/Bilthoven/16190/1968 (Figure~\ref{smith_comparison_effects}C), which appears more distant from all other viruses when serum and virus effects are included.
+
+%%% smith_comparison_effects %%%
+\begin{figure}[h]
+	\centering		
+	\includegraphics[width=1.0\textwidth]{figures/smith_comparison_effects}
+	\caption{\textbf{Comparison of A/H3N2 antigenic locations estimated by Smith et al.\ \cite{Smith04} using MDS and an extended BMDS model that estimates serum and virus effects.} 
+	(A) MDS antigenic locations, reorientated so that the primary dimension lies on the $x$-axis rather than on the $y$-axis as in Figure 1 of \cite{Smith04}.
+	(B) A posterior sample of antigenic locations from a BMDS model that estimates virus and serum effects.
+	In (A) and (B), viruses are shown as colored circles, with color denoting antigenic cluster inferred by \cite{Smith04}, and sera are shown as gray points.
+	(C) Antigenic distances between A/Bilthoven/16190/1968 and all other viruses determined for both methods.
+	(D) Antigenic distances between A/Fujian/411/2002 and all other viruses determined for both methods.
+	(E) Antigenic distances between 750 random pairs of viruses determined for both methods.	
+	In (C), (D) and (E) red points show distances for the MDS model and gray bars show the 95\% credible interval of distances for the BMDS model, while the red dashed line shows a LOESS regression to MDS distances, and the black dashed line shows a LOESS regression to the BMDS distances.
+	The BMDS model has a Uniform$(-100,100)$ prior on antigenic locations and virus and serum effects estimated in a hierarchical Bayesian fashion. 	
+	} 
+	\label{smith_comparison_effects} 
+\end{figure}
+
+In this dataset, viruses 15 or more years divergent always yield threshold titers, and hence, their relative locations must be indirectly inferred rather than through direct comparison.
+This may explain why we observe local consistency between models at scales less than $\sim$15 years, but some degree of global inconsistency.
+Still, these results suggest that, when making local comparisons, such as those used to calculcate year-to-year antigenic drift (Figure~\ref{drift}), outcomes are expected to be robust to  many model particulars.
+
 \subsection*{Availability}
 
 Source code implementing the cartographic models has been made fully available as part of the software package BEAST \cite{BEAST17}, and can be downloaded from its Google code repository (http://code.google.com/p/beast-mcmc/).
-Antigenic, genetic and surveillance data is available as supplemental information.
 
 %%% ACKNOWLEDGMENTS %%%
 \subsection*{Acknowledgments} 
@@ -673,46 +863,5 @@ CAR was supported by a University Research Fellowship from the Royal Society.
 %%% REFERENCES %%%
 \bibliographystyle{plos}
 \bibliography{flux}
-
-\pagebreak
-
-\setcounter{figure}{0}
-\setcounter{table}{0}
-%\setcounter{page}{1}
-\renewcommand{\thefigure}{S\arabic{figure}}
-\renewcommand{\thetable}{S\arabic{table}}
-%\renewcommand{\thepage}{S\arabic{page}}
-
-%%% SUPPORTING INFORMATION %%%
-\section*{Supporting Information}
-
-%%% error_by_distance_and_year %%%
-\begin{figure}[H]
-	\centering		
-	\includegraphics[width=0.95\textwidth]{figures/error_by_distance_and_year}
-	\caption{\textbf{Absolute error in log$_2$ HI titer against antigenic distance and date of virus sampling in influenza A/H3N2.} 
-	(A) Points show the absolute deviation from the predicted log$_2$ HI titer of the antigenic model, computed from virus location $\virus_i$, serum location $\serum_j$, virus effect $\ve_i$ and serum effect $\se_j$, based upon antigenic distance between virus and serum $\delta_{ij}$.
-	The red line shows a LOESS regression curve of these points.
-	(B) Points show the absolute deviation from the predicted log$_2$ HI titers of the antigenic model, based upon the date of virus sampling.
-	The red line shows average deviations for each year.
-	Relationships for A/H1N1, B/Vic and B/Yam are similar.
-	} 
-	\label{error_by_distance_and_year} 
-\end{figure}
-
-%%% incidence %%%
-\begin{figure}[H]
-	\centering		
-	\includegraphics[width=0.95\textwidth]{figures/incidence}
-	\caption{\textbf{Relationship between antigenic drift within and between clades and seasonal USA incidence for years 1998 to 2009.} 
-	(A) Standardized incidence within a clade compared to antigenic drift within the same clade.
-	For example, incidence of A/H3N2 in season 1998/1999 is measured against year-to-year antigenic drift of A/H3N2 from 1997 to 1998.
-	(B) Standardized incidence within a clade compared to antigenic drift in other clades.
-	For example, incidence of A/H3N2 in season 1998/1999 is measured against year-to-year antigenic drift of A/H1N1 from 1997 to 1998, as well as antigenic drift of B/Vic from 1997 to 1998.
-	Standardized incidence is measured as yearly ILI percentage multiplied by proportion of viruses identified in a particular clade, and then standardized so that mean and variance across seasons and clades is equal to 0 and 1 respectively.
-	Colors represent the clade in which incidence is measured; light blue for A/H3N2, purple for A/H1N1, orange for B/Vic and red for B/Yam.
-	} 
-	\label{incidence} 
-\end{figure}
 
 \end{document}
