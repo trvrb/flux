@@ -156,21 +156,21 @@ Here, we implement a flexible Bayesian approach to characterize jointly the anti
 We apply this approach to investigate the dynamics of A/H3N2, A/H1N1, B/Vic and B/Yam viruses, and, for the first time, present detailed reconstructions of the antigenic dynamics of all four circulating influenza clades.
 
 %%% RESULTS %%%
-\section*{Results and Discussion}
+\section*{Results and discussion}
 
 \subsection*{Antigenic and evolutionary cartography}
 
-In order to assess patterns of antigenic evolution among influenza strains, we implemented a Bayesian probabilistic analog of multidimensional scaling (MDS), referred to here as BMDS (see Methods).
+In order to assess patterns of antigenic evolution among influenza strains, we implemented a Bayesian probabilistic analog of multidimensional scaling (MDS), referred to here as BMDS (see Materials and methods).
 In this model, viruses and sera are given $N$-dimensional locations, thus specifying an `antigenic map', such that distances between viruses and sera in this space are inversely proportional to cross-reactivity.
 In the BMDS model, a map distance of one antigenic unit translates to an expectation of a 2-fold drop in HI titer between virus and sera.
 Maps that produce pairwise distances most congruent with the observed titers will have a high likelihood and will be favored by the BMDS model.
 We integrate over sources of uncertainty, such as antigenic locations, in a flexible Bayesian fashion.
-We apply this model to HI measurements of virus isolates against post-infection ferret antisera for influenza A/H3N2, A/H1N1, B/Vic and B/Yam (see Methods).
+We apply this model to HI measurements of virus isolates against post-infection ferret antisera for influenza A/H3N2, A/H1N1, B/Vic and B/Yam (see Materials and methods).
  
 We begin with Bayesian analogs of the models used by Smith et al.\ \cite{Smith04}, in which viruses and sera are represented as $N$-dimensional locations, expected titer is relative to the maximum titer of a particular ferret serum and virus and serum locations follow a diffuse prior.
 After comparing models of differing dimensions, Smith et al.\ \cite{Smith04} arrive at a 2D model as the preferred model for their data.
-Smith et al.\ \cite{Smith04} implement a form of MDS, seeking to optimize virus and serum locations such that the sum of squared errors between expected and observed titers is minimized (eq.\ \ref{mds} of Methods).
-Here, in implementing BMDS, we provide a likelihood function for the probability of observing HI data given virus and serum locations (eq.\ \ref{bmds} of Methods) and seek to estimate model parameters through Bayesian inference using Markov chain Monte Carlo (MCMC).
+Smith et al.\ \cite{Smith04} implement a form of MDS, seeking to optimize virus and serum locations such that the sum of squared errors between expected and observed titers is minimized (eq.\ \ref{mds} of Materials and methods).
+Here, in implementing BMDS, we provide a likelihood function for the probability of observing HI data given virus and serum locations (eq.\ \ref{bmds} of Materials and methods) and seek to estimate model parameters through Bayesian inference using Markov chain Monte Carlo (MCMC).
 However, the basic antigenic model describing drop in HI titer as proportional to Euclidean distance between virus and serum locations is identical between these methods.
 
 We test model performance by constructing training datasets representing 90\% of the HI measurements for each of the four influenza lineages and test datasets representing the remaining 10\% of the measurements for each lineage. 
@@ -206,7 +206,7 @@ The finding of a low-dimensional map across influenza lineages extends previous 
 \end{table}
 
 Previous work on influenza antigenic and genetic evolution has examined antigenic and genetic patterns in isolation, and then compared the results to assess congruence of these two aspects of evolution \cite{Hay01, Smith04, Russell08}. 
-Here, we simultaneously model antigenic and genetic evolution by adopting an evolutionary diffusion process \cite{Lemey10}, wherein a virus's antigenic character state evolves along branches of the phylogenetic tree according to a Brownian motion process (see Methods).
+Here, we simultaneously model antigenic and genetic evolution by adopting an evolutionary diffusion process \cite{Lemey10}, wherein a virus's antigenic character state evolves along branches of the phylogenetic tree according to a Brownian motion process (see Materials and methods).
 The phylogenetic diffusion process acts as a prior on virus locations, so that genetically similar viruses are expected to share similar antigenic locations.
 The antigenic diffusion process includes both systematic drift with time and covariance induced by phylogenetic proximity.
 We examine the effects of including only systematic drift (model 6; Table \ref{errortable}) and systematic drift plus phylogenetic diffusion (model 7; Table \ref{errortable}), finding a small increase in predictive accuracy of between 0.02 and 0.08 log$_2$ HI titers when both processes are included.
@@ -265,7 +265,7 @@ Labeling of prominent antigenic clusters in figures \ref{map} and \ref{drift} is
 
 HI assays lack sensitivity beyond a certain point, so that for A/H3N2, cross-reactive measurements only exist between strains sampled at most 14 years apart, leaving only threshold titers, e.g.\ `$<$40', in more temporally distant comparisons.  
 Because of the threshold of sensitivity of the HI assay, it's difficult to distinguish a linear trajectory in 2D antigenic space from a slightly curved trajectory.
-To solve this problem of identifiability, we assumed a weak prior that favors linear movement in the 2D antigenic space (present in models 6 through 9; Table \ref{errortable}), with the slope of the linear relationship and the precision of the relationship incorporated into the Bayesian model (see Methods).
+To solve this problem of identifiability, we assumed a weak prior that favors linear movement in the 2D antigenic space (present in models 6 through 9; Table \ref{errortable}), with the slope of the linear relationship and the precision of the relationship incorporated into the Bayesian model (see Materials and methods).
 Because of this, we interpret map locations locally rather than globally, and assess rates of antigenic movement without making strong statements about the larger configuration under which the movement occurs.
  
 We find that influenza A/H3N2 evolved along antigenic dimension 1 at a rate of 1.01 antigenic units per year, with a 95\% highest posterior density (HPD) interval of 0.98--1.04 (Figure~\ref{drift}).
@@ -318,7 +318,7 @@ This analysis classifies drift only to the level of consecutive years; some coar
 \subsection*{Epidemiological consequences of antigenic drift}
 
 We investigate the relationship between rates of antigenic drift and USA incidence in A/H3N2, A/H1N1, B/Vic and B/Yam.
-We take estimates of the rate of antigenic drift from the preceding section and compare these rates to measurements of relative incidence for each influenza clade calculated from the proportion of influenza viruses attributable to each clade (see Methods).
+We take estimates of the rate of antigenic drift from the preceding section and compare these rates to measurements of relative incidence for each influenza clade calculated from the proportion of influenza viruses attributable to each clade (see Materials and methods).
 We analyze incidence from the 1998/1999 to the 2008/2009 seasons to avoid possible complications from the 2009 pandemic, finding that A/H3N2 accounted for 56\%, A/H1N1 for 20\%, B/Vic for 10\% and B/Yam for 14\% of viruses detected in the USA during this time period.
 We find a significant correlation between rate of antigenic drift and relative incidence across the four clades  (Pearson correlation, $r=0.96$, $p = 0.021$).
 
@@ -384,7 +384,7 @@ We observe a faster rate of antigenic drift in influenza A/H3N2 than in A/H1N1 o
 Previous work using general epidemiological models has suggested that rates of antigenic drift may be influenced by both the fundamental reproductive number $R_0$ and the rate at which mutation decreases cross-immunity \cite{Gog02,Lin03}.
 Owing to these and similar findings, subsequent work ascribed differences in the evolution of A/H3N2 relative to A/H1N1 and influenza B to either greater $R_0$ or greater mutation rate \cite{Ferguson03,Bedford12}.
 Here, we examine the conversion of recently acquired antigenic mutation into fixed differences by comparing rates of antigenic diffusion to the degree of persistence on phylogeny branches in A/H3N2, A/H1N1, B/Vic and B/Yam (Table~\ref{diffusiontable}).
-To facilitate comparisons, we measure the diffusion coefficient $D$ \cite{Pybus12} characterizing the antigenic movement of each influenza lineage (see Methods).
+To facilitate comparisons, we measure the diffusion coefficient $D$ \cite{Pybus12} characterizing the antigenic movement of each influenza lineage (see Materials and methods).
 This coefficient is measured in terms of units$^2$/year and can be used to determine the diffusion length scale, that is the expected relationship between time and distance traveled, which is $2 \sqrt{t D}$ for a two-dimensional diffusion.
 Higher diffusion coefficients mean a lineage is diffusing faster through antigenic space.
 We compare diffusion coefficients between trunk branches and side branches, where trunk branches are defined as branches ancestral to the most recent virus sample and side branches are defined as those branches not ancestral to the most recent virus sample.
@@ -444,7 +444,7 @@ Here, methods to efficiently calculate branch- and site-specific codon substitut
 A deeper understanding of the process of antigenic evolution in the human influenza virus may eventually prove to be crucial in improving vaccine strain selection.
 
 %%% METHODS %%%
-\section*{Methods}
+\section*{Materials and methods}
 
 \subsection*{Antigenic cartography}
 
@@ -777,7 +777,7 @@ In this case, it is clear that the solutions are locally consistent between viru
 \end{figure}
 
 As discussed in the main text, the presence of multiple optima with different degrees of 2D curvature implies an issue of identifiability; the HI likelihood model alone cannot distinguish between these possibilities.
-Because of this issue, and to more easily estimate rates of antigenic drift, we include a model of systematic drift in antigenic location (discussed in Methods) that favors linear movement in the antigenic map.
+Because of this issue, and to more easily estimate rates of antigenic drift, we include a model of systematic drift in antigenic location that favors linear movement in the antigenic map.
 We find that including this drift prior on antigenic locations removes the problem of identifiability.
 Antigenic locations produced by this model remain locally consistent with MDS results between viruses $\sim$15 years divergent, but global comparisons show that this BMDS model has partitioned more variance to the first antigenic dimension (Figure~\ref{smith_comparison_drift}).
 We additionally find that including the drift prior on antigenic locations often results in greater predictive power, with a slight improvement of test error for the A/H1N1, B/Vic and B/Yam datasets (Table~\ref{errortable}).
@@ -799,7 +799,7 @@ We additionally find that including the drift prior on antigenic locations often
 	\label{smith_comparison_drift} 
 \end{figure}
 
-Our final BMDS model (model 9, Table~\ref{errortable}) differs from antigenic model used by Smith et al.\ \cite{Smith04} in including temporally- and phylogenetically-informed priors on antigenic locations and also in estimating serum and virus effects (discussed in Methods).
+Our final BMDS model (model 9, Table~\ref{errortable}) differs from antigenic model used by Smith et al.\ \cite{Smith04} in including temporally- and phylogenetically-informed priors on antigenic locations and also in estimating serum and virus effects.
 Here, we investigate the impact on antigenic locations of estimating virus and serum effects in the BMDS model.
 To isolate this difference, we use a Uniform$(-100,100)$ prior on antigenic locations.
 Surprisingly, estimating virus and serum effects results in a more linear antigenic map (Figure~\ref{smith_comparison_effects}), resembling the appearance of the map incorporating the antigenic drift prior, while preserving local consistency.
