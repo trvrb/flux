@@ -690,6 +690,13 @@ For the present study, we take a simple approach and sample a single MCMC step a
 Then, for specific quantities of interest, like rate of antigenic drift and rate of diffusion at different points along the phylogeny, we calculate the quantity across MCMC samples to yield an expectation and a credible interval.
 This approach accurately characterizes uncertainty that may be hidden in an analysis of a single antigenic map.
 
+We summarize diffusion paths of viral lineages (Figure~\ref{map}, Figure~\ref{drift}) by taking each virus and reconstructing $x$ and $y$ locations along antigenic dimensions 1 and 2 backward through time.
+In the course of the MCMC, we sample tip locations and internal node locations.
+At each MCMC step, we conduct a linear interpolation between these sampled locations to arrive at $x$ and $y$ values at intervals of 0.05 years for each virus.
+Then, these $x$ and $y$ values are analyzed across MCMC samples at each timepoint to arrive at a mean posterior location.
+We draw lines between these locations to show mean posterior diffusion paths.
+As virus lineages coalesce backwards through time down the phylogeny these diffusion paths will also coalesce.
+
 \subsection*{Estimation of diffusion coefficient}
 
 The distance $d$ traveled by a diffusion is not a linear function of time interval $t$, and thus the `rate' of diffusion cannot be calculated following $r=d/t$.
