@@ -68,9 +68,10 @@
 \newcommand{\vn}{n}									% number of viruses
 \newcommand{\sn}{k}									% number of sera
 \newcommand{\normal}{\mathcal{N}}					% normal distribution
-\newcommand{\bwithin}{\beta_c}		% within clade drift coefficient
+\newcommand{\bwithin}{\beta_w}		% within clade drift coefficient
 \newcommand{\bsister}{\beta_s}		% sister clade drift coefficient
 \newcommand{\bother}{\beta_t}			% across clade drift coefficient
+\newcommand{\incclade}[1]{y_\mathrm{#1}}
 \newcommand{\driftclade}[1]{x_\mathrm{#1}}
 \setlength{\arraycolsep}{2pt}
 \newcommand{\smalltwomatrix}[2]{\scriptsize \Big( \begin{matrix} #1 \\ #2 \end{matrix} \Big)}				% pretty inline matrix 
@@ -348,8 +349,15 @@ Here, within-clade drift explains 35\% of the variance in standardized incidence
 
 We further show that incidence within a clade decreases with antigenic drift in other clades, e.g.\ drift in A/H1N1, B/Vic and B/Yam from 2000 to 2001 decrease incidence of A/H3N2 in the 2001/2002 season (Figure~\ref{incidence}B).
 This also represents a significant relationship (Pearson correlation, $r=-0.20$, $p=0.024$).
-We fit a linear model that predicts standardized incidence based upon drift within a clade, drift in other clades of the same virus type, and drift in clades of differing type (Table~\ref{interferencetable}).
-For example, standardized incidence in A/H3N2 would be explained by drift within A/H3N2, drift in A/H1N1 and by drift across types in B/Vic and B/Yam.
+We fit a linear model that predicts standardized incidence based on drift within each of the four lineages, according to the following equations
+\begin{eqnarray}
+	\incclade{H3} &=& \bwithin \, \driftclade{H3} + \bsister \, \driftclade{H1} + \bother \, \driftclade{Vic} + \bother \, \driftclade{Yam} \nonumber \\
+	\incclade{H1} &=& \bsister \, \driftclade{H3} + \bwithin \, \driftclade{H1} + \bother \, \driftclade{Vic} + \bother \, \driftclade{Yam} \nonumber \\
+	\incclade{Vic} &=& \bother \, \driftclade{H3} + \bother \, \driftclade{H1} + \bwithin \, \driftclade{Vic} + \bsister \, \driftclade{Yam} \nonumber \\	
+	\incclade{Yam} &=& \bother \, \driftclade{H3} + \bother \, \driftclade{H1} + \bsister \, \driftclade{Vic} + \bwithin \, \driftclade{Yam},
+\end{eqnarray}
+where $y$ represents standardized incidence, $x$ represents drift in antigenic units, $\bwithin$ scales within-clade drift, $\bsister$ scales drift across sister viruses of the same type, and $\bother$ scales drift across viruses of differing type (Table~\ref{interferencetable}).
+For example, standardized incidence in A/H3N2 would be explained by drift within A/H3N2 scaled by $\bwithin$, drift in A/H1N1 scaled by $\bsister$ and by drift in B/Vic and B/Yam scaled by $\bother$.
 We compared adjusted $R^2$ across models with different regression coefficients included, and arrived at a best-fitting model that explains 46\% of the variance in standardized incidence and includes the terms $\bwithin$, $\bsister$ and $\bother$, but does not include an intercept term.
 We find that 1 unit of antigenic drift within a clade increases incidence by 1.26 standard deviations, while 1 unit of drift in a clade of the same type decreases incidence by 0.61 standard deviations and 1 unit of drift in clades of differing type decreases incidence by 0.32 standard deviations.
 The term for across lineage interference $\bother$ is small in magnitude, but remains statistically significant (Table~\ref{interferencetable}).
