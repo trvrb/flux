@@ -380,7 +380,7 @@ The term for across lineage interference $\bother$ is small in magnitude, but re
 
 These findings clearly demonstrate the epidemiological importance of antigenic drift and show that incidence across  A/H3N2, A/H1N1, B/Vic and B/Yam is strongly influenced by levels of antigenic drift within each clade, consistent with antigenic drift increasing the susceptible pool available to a clade.
 The finding of a negative correlation between incidence within one clade and antigenic drift in other clades supports the hypothesis that epidemiological interference exists between clades \cite{Ferguson03, Goldstein11}.
-The immunological basis of between-clade interference are not entirely clear, however cytotoxic T cells (CTLs) \cite{Voeten00}, antibodies that broadly neutralize HA \cite{Corti10} and antibodies to internal proteins \cite{Laidlaw13} have been hypothesized as possible mechansisms.
+The immunological basis of between-clade interference are not entirely clear, however cytotoxic T cells (CTLs) \cite{Voeten00}, antibodies that broadly neutralize HA \cite{Corti10} and antibodies to internal proteins \cite{Laidlaw13} have been hypothesized as possible mechanisms.
 Interestingly, we find that interference between sister clades, e.g.\ B/Vic and B/Yam, appears stronger than interference between more divergent clades, e.g.\ B/Vic and A/H3N2 (Table~\ref{interferencetable}, $\bsister = -0.61$ vs $\bother = -0.32$).
 If interference is mediated by CTLs or by antibodies to evolutionary conserved epitopes, then we would expect interference to decrease with evolutionary distance \cite{Voeten00}.
 
@@ -694,7 +694,7 @@ This approach accurately characterizes uncertainty that may be hidden in an anal
 We summarize diffusion paths of viral lineages (Figure~\ref{map}, Figure~\ref{drift}) by taking each virus and reconstructing $x$ and $y$ locations along antigenic dimensions 1 and 2 backward through time.
 In the course of the MCMC, we sample tip locations and internal node locations.
 At each MCMC step, we conduct a linear interpolation between these sampled locations to arrive at $x$ and $y$ values at intervals of 0.05 years for each virus.
-Then, these $x$ and $y$ values are analyzed across MCMC samples at each timepoint to arrive at a mean posterior location.
+Then, these $x$ and $y$ values are analyzed across MCMC samples at each time point to arrive at a mean posterior location.
 We draw lines between these locations to show mean posterior diffusion paths.
 As virus lineages coalesce backwards through time down the phylogeny these diffusion paths will also coalesce.
 
@@ -751,14 +751,14 @@ We begin with a BMDS analog of the antigenic model used in \cite{Smith04}, where
 To bring models into further alignment, we use a Uniform$(-100,100)$ distribution over virus locations and serum locations.
 Unsurprisingly, we find that this BMDS model produces results that are strongly congruent with MDS results (Figure~\ref{smith_comparison}).
 Antigenic cluster locations are consistent between methods (Figure~\ref{smith_comparison}A--B) and antigenic distances between pairs of viruses are consistent between temporally similar and temporally divergent viruses (Figure~\ref{smith_comparison}C--E), suggesting that the resulting maps are consistent at both local and global scales.
-Credible intervals of antegenic distances for the BMDS model remain narrow across the temporal spectrum (Figure~\ref{smith_comparison}C--E), implying a fair degree of rigidity to the map.
+Credible intervals of antigenic distances for the BMDS model remain narrow across the temporal spectrum (Figure~\ref{smith_comparison}C--E), implying a fair degree of rigidity to the map.
 
 %%% smith_comparison %%%
 \begin{figure}[h]
 	\centering		
 	\includegraphics[width=1.0\textwidth]{figures/smith_comparison}
 	\caption{\textbf{Comparison of A/H3N2 antigenic locations estimated by Smith et al.\ \cite{Smith04} using MDS and an equivalent BMDS model.} 
-	(A) MDS antigenic locations, reorientated so that the primary dimension lies on the $x$-axis rather than on the $y$-axis as in Figure 1 of \cite{Smith04}.
+	(A) MDS antigenic locations, reoriented so that the primary dimension lies on the $x$-axis rather than on the $y$-axis as in Figure 1 of \cite{Smith04}.
 	(B) A posterior sample of antigenic locations from an equivalent BMDS model.
 	In (A) and (B), viruses are shown as colored circles, with color denoting antigenic cluster inferred by \cite{Smith04}, and sera are shown as gray points.
 	(C) Antigenic distances between A/Bilthoven/16190/1968 and all other viruses determined for both methods.
@@ -781,7 +781,7 @@ In this case, it is clear that the solutions are locally consistent between viru
 	\centering		
 	\includegraphics[width=1.0\textwidth]{figures/smith_comparison_rotation}
 	\caption{\textbf{Comparison of A/H3N2 antigenic locations estimated by Smith et al.\ \cite{Smith04} using MDS and an equivalent BMDS model under an alternative solution.} 
-	(A) MDS antigenic locations, reorientated so that the primary dimension lies on the $x$-axis rather than on the $y$-axis as in Figure 1 of \cite{Smith04}.
+	(A) MDS antigenic locations, reoriented so that the primary dimension lies on the $x$-axis rather than on the $y$-axis as in Figure 1 of \cite{Smith04}.
 	(B) A posterior sample of antigenic locations from an equivalent BMDS model that has converged on the alternative solution.
 	In (A) and (B), viruses are shown as colored circles, with color denoting antigenic cluster inferred by \cite{Smith04}, and sera are shown as gray points.
 	(C) Antigenic distances between A/Bilthoven/16190/1968 and all other viruses determined for both methods.
@@ -804,7 +804,7 @@ We additionally find that including the drift prior on antigenic locations often
 	\centering		
 	\includegraphics[width=1.0\textwidth]{figures/smith_comparison_drift}
 	\caption{\textbf{Comparison of A/H3N2 antigenic locations estimated by Smith et al.\ \cite{Smith04} using MDS and an extended BMDS model that includes date-informed priors on antigenic locations.} 
-	(A) MDS antigenic locations, reorientated so that the primary dimension lies on the $x$-axis rather than on the $y$-axis as in Figure 1 of \cite{Smith04}.
+	(A) MDS antigenic locations, reoriented so that the primary dimension lies on the $x$-axis rather than on the $y$-axis as in Figure 1 of \cite{Smith04}.
 	(B) A posterior sample of antigenic locations from a BMDS model that includes date-informed priors on antigenic locations.
 	In (A) and (B), viruses are shown as colored circles, with color denoting antigenic cluster inferred by \cite{Smith04}, and sera are shown as gray points.
 	(C) Antigenic distances between A/Bilthoven/16190/1968 and all other viruses determined for both methods.
@@ -828,7 +828,7 @@ However, specific viruses may be affected, for instance A/Bilthoven/16190/1968 (
 	\centering		
 	\includegraphics[width=1.0\textwidth]{figures/smith_comparison_effects}
 	\caption{\textbf{Comparison of A/H3N2 antigenic locations estimated by Smith et al.\ \cite{Smith04} using MDS and an extended BMDS model that estimates serum and virus effects.} 
-	(A) MDS antigenic locations, reorientated so that the primary dimension lies on the $x$-axis rather than on the $y$-axis as in Figure 1 of \cite{Smith04}.
+	(A) MDS antigenic locations, reoriented so that the primary dimension lies on the $x$-axis rather than on the $y$-axis as in Figure 1 of \cite{Smith04}.
 	(B) A posterior sample of antigenic locations from a BMDS model that estimates virus and serum effects.
 	In (A) and (B), viruses are shown as colored circles, with color denoting antigenic cluster inferred by \cite{Smith04}, and sera are shown as gray points.
 	(C) Antigenic distances between A/Bilthoven/16190/1968 and all other viruses determined for both methods.
@@ -842,7 +842,7 @@ However, specific viruses may be affected, for instance A/Bilthoven/16190/1968 (
 
 In this dataset, viruses 15 or more years divergent always yield threshold titers, and hence, their relative locations must be indirectly inferred rather than through direct comparison.
 This may explain why we observe local consistency between models at scales less than $\sim$15 years, but some degree of global inconsistency.
-Still, these results suggest that, when making local comparisons, such as those used to calculcate year-to-year antigenic drift (Figure~\ref{drift}), outcomes are expected to be robust to  many model particulars.
+Still, these results suggest that, when making local comparisons, such as those used to calculate year-to-year antigenic drift (Figure~\ref{drift}), outcomes are expected to be robust to  many model particulars.
 
 \subsection*{Availability}
 
