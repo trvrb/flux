@@ -600,7 +600,7 @@ To do this, we replace the previous prior specifying independent virus locations
 \begin{equation} \label{ebpprior}
 	\viruses \sim \left( \begin{matrix} \beta \, t_1 & 0 \\ \vdots & \vdots \\ \beta \, t_n & 0 \end{matrix} \right) + \, \mbox{Evolutionary Brownian Process}(\virussd, \tree)
 \end{equation}
-for $P=2$, where $\virussd$ is the volatility parameter of the Brownian motion and $\tree$ is a phylogeny specifying tree topology and branch lengths.
+for $P=2$, where $\virussd$ is the volatility parameter of the Brownian motion over virus locations and $\tree$ is a phylogeny specifying tree topology and branch lengths.
 Thus, viruses which are genetically similar are induced to have prior locations close to one another on the antigenic map.
 In the evolutionary Brownian process, the tips of the phylogeny $\tree$ correspond to the set of virus locations $(\virus_1, \ldots, \virus_\vn)$, and the probability of observing tip locations depends on the locations of internal nodes $(\virus_{n+1}, \ldots, \virus_{2\vn-2})$ and on the location of the root node $\virus_{2\vn-1}$.
 This process assumes that a virus location $\virus_i$ follows from the location of its parent virus $\virus_{f(i)}$, and with the addition of drift along dimension 1, is distributed as
