@@ -566,7 +566,7 @@ and the vector of virus effects $\ve_i$ for $i = 1,\ldots, \vn$ is estimated in 
 As presented, multiple configurations of virus and serum locations $\viruses$ and $\sera$ will give the same likelihood of an observed data matrix $\mathbf{H}$.
 An example of this phenomenon is shown in Figure~\ref{schematic_map}.
 In this case, it is impossible to determine from the HI data at hand whether the blue and yellow viruses are antigenically similar (Figure~\ref{schematic_map}A) or antigenically divergent (Figure~\ref{schematic_map}B). 
-This presents an issue of model identifiability, where absolute, as opposed to relative, antigenic locations cannot be determined from the observing the serological data alone.
+This presents an issue of model identifiability, where absolute, as opposed to relative, antigenic locations cannot be determined from observing the serological data alone.
 Thus, in order to achieve more a interpretable model we impose a weak prior on global locations.
 In influenza, it's clear that antigenic distance between strains increases with time \cite{Smith04,Cai10}.
 To capture this, we replace our previous diffuse prior with an informed prior in which the expected location of viruses and sera increases with date of sampling along dimension one, and each virus and serum location follows an independent normal distribution centered around this temporal expectation, so that
