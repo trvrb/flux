@@ -153,10 +153,11 @@ Could the authors elaborate in the Methods about the meaning of the lines connec
 \textbf{We apologize for the lack of clarity here.  We have included an additional paragraph in Methods under Implementation that describes the algorithm to estimate ``mean diffusion paths''.  This paragraph reads as follows:}
 
 \textbf{``We summarize diffusion paths of viral lineages (Figure~2, Figure~3) by taking each virus and reconstructing $x$ and $y$ locations along antigenic dimensions 1 and 2 backward through time.
-In the course of the MCMC, we sample tip locations and internal node locations. [THIS IS NOT TRUE]
-At each MCMC step, we conduct a linear interpolation between these sampled locations to arrive at $x$ and $y$ values at intervals of 0.05 years for each virus. [THIS IS NOT TRUE]
-Then, these $x$ and $y$ values are analyzed across MCMC samples at each time point to arrive at a mean posterior location. [analyzed -> summarized, location -> location estimate]
-We draw lines between these locations to show mean posterior diffusion paths. [show -> approximate?]
+We use MCMC to sample tip locations, but when outputting trees sample internal node locations using a peeling algorithm as described in [22].
+Thus, after the MCMC is finished we have a posterior sample of 2000 trees each tagged with estimated tip locations and internal node locations.
+We post-processed each posterior tree by conducting a linear interpolation between parent-child node locations to arrive at $x$ and $y$ values at intervals of 0.05 years for each virus.
+Then, for each interval, $x$ and $y$ values are averaged across the sample of posterior trees.
+We draw lines between these locations to approximate mean posterior diffusion paths.
 As virus lineages coalesce backwards through time down the phylogeny these diffusion paths will also coalesce.''}
 
 It would be helpful to have phylogenetic trees for the four clades as supporting figures, since as best I understand Figure 2 and 3 do not represent the phylogenetic relationships, but only show the influence of those relationships on the antigenic map. Also, are the phylogenetic trees built on just HA1 or the whole HA protein?

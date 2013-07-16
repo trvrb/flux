@@ -694,10 +694,11 @@ Then, for specific quantities of interest, like rate of antigenic drift and rate
 This approach accurately characterizes uncertainty that may be hidden in an analysis of a single antigenic map.
 
 We summarize diffusion paths of viral lineages (Figure~\ref{map}, Figure~\ref{drift}) by taking each virus and reconstructing $x$ and $y$ locations along antigenic dimensions 1 and 2 backward through time.
-In the course of the MCMC, we sample tip locations and internal node locations.
-At each MCMC step, we conduct a linear interpolation between these sampled locations to arrive at $x$ and $y$ values at intervals of 0.05 years for each virus.
-Then, these $x$ and $y$ values are analyzed across MCMC samples at each time point to arrive at a mean posterior location.
-We draw lines between these locations to show mean posterior diffusion paths.
+We use MCMC to sample tip locations, but when outputting trees sample internal node locations using a peeling algorithm as described in \cite{Pybus12}.
+Thus, after the MCMC is finished we have a posterior sample of 2000 trees each tagged with estimated tip locations and internal node locations.
+We post-processed each posterior tree by conducting a linear interpolation between parent-child node locations to arrive at $x$ and $y$ values at intervals of 0.05 years for each virus.
+Then, for each interval, $x$ and $y$ values are averaged across the sample of posterior trees.
+We draw lines between these locations to approximate mean posterior diffusion paths.
 As virus lineages coalesce backwards through time down the phylogeny these diffusion paths will also coalesce.
 
 \subsection*{Estimation of diffusion coefficient}
