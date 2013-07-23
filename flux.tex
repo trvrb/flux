@@ -221,24 +221,10 @@ We further extend the model by estimating the strength of overall reactivity of 
 We refer to these estimates as serum effects and virus effects, respectively.
 We find that including these effects decreases test error further, ranging in improvement from 0.03 to 0.13 log$_2$ HI titers (models 8 and 9; Table \ref{errortable}).
 
-We find that the average absolute error in predicted log$_2$ HI titer is nearly constant with antigenic distance (Figure~\ref{error_by_distance_and_year}A), thus supporting our model assumption that the drop in log$_2$ titer is proportional to the Euclidean distance separating viruses and sera on the antigenic map.
-Additionally, we find that the absolute error in predicted titer is nearly constant with time (Figure~\ref{error_by_distance_and_year}B).
+We find that the average absolute error in predicted log$_2$ HI titer is nearly constant with antigenic distance (Pearson correlation, $r = 0.098$), thus supporting our model assumption that the drop in log$_2$ titer is proportional to the Euclidean distance separating viruses and sera on the antigenic map.
+Additionally, we find that the absolute error in predicted titer is nearly constant with time (Pearson correlation, $r = -0.007$).
 Antigenic locations inferred by the model are well resolved; estimates of antigenic distance between pairs of viruses show relatively little variation across the posterior.
 We estimate that virus distances have, on average, a 50\% credible interval of $\pm0.45$ antigenic units for A/H3N2, $\pm0.57$ units for A/H1N1, $\pm0.76$ units for B/Vic, and $\pm0.65$ units for B/Yam.
-
-%%% error_by_distance_and_year %%%
-\begin{figure}[h]
-	\centering		
-	\includegraphics[width=0.95\textwidth]{figures/error_by_distance_and_year}
-	\caption{\textbf{Absolute error in log$_2$ HI titer against antigenic distance and date of virus sampling in influenza A/H3N2.} 
-	(A) Points show the absolute deviation from the predicted log$_2$ HI titer of the antigenic model, computed from virus location $\virus_i$, serum location $\serum_j$, virus effect $\ve_i$ and serum effect $\se_j$, based upon antigenic distance between virus and serum $\delta_{ij}$.
-	The red line shows a LOESS regression curve of these points.
-	(B) Points show the absolute deviation from the predicted log$_2$ HI titers of the antigenic model, based upon the date of virus sampling.
-	The red line shows average deviations for each year.
-	Relationships for A/H1N1, B/Vic and B/Yam are similar.
-	} 
-	\label{error_by_distance_and_year} 
-\end{figure}
 
 We find strong correspondence between our results and previous results by Smith et al.\ \cite{Smith04}, with equivalent models producing globally consistent antigenic maps and other models producing locally consistent maps with a small degree of global inconsistency (Figures~\ref{smith_comparison}--\ref{smith_comparison_effects}).
 When implementing the same underlying model, differences in the MDS and BMDS approaches reflect greater philosophical differences between maximum-likelihood and Bayesian statistical approaches, with the former seeking the single most likely explanation for the data, and the latter seeking to fully characterize model uncertainty.
