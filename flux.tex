@@ -208,8 +208,25 @@ The finding of a low-dimensional map across influenza lineages extends previous 
 	}
 \end{table}
 
-Previous work on influenza antigenic and genetic evolution has examined antigenic and genetic patterns in isolation, and then compared the results to assess congruence of these two aspects of evolution \cite{Hay01, Smith04, Russell08}. 
-Here, we simultaneously model antigenic and genetic evolution by adopting an evolutionary diffusion process \cite{Lemey10}, wherein a virus's antigenic character state evolves along branches of the phylogenetic tree according to a Brownian motion process (see Materials and methods).
+Previous work on influenza antigenic and genetic evolution has shown that antigenic distance accumulates with increasing genetic distance \cite{Hay01, Smith04, Russell08}.
+Here, we examine pairwise relationships between viruses and observe a correlation between amino acid mutations and antigenic distance (Figure~\ref{seq_grid}) and a similar correlation between phylogenetic distance and antigenic distance (Figure~\ref{seq_grid}).
+Thus, genetic relationships between viruses provide some predictive power to estimate antigenic distances in the absence of HI data.
+However, the magnitudes of the coefficients of determination $R^2$ are low (Figure~\ref{seq_grid}), suggesting that genetic relationships alone will not completely resolve antigenic distances.
+
+%%% map %%%
+\begin{figure}[h]
+	\centering		
+	\includegraphics[width=1.0\textwidth]{figures/seq_grid}
+	\caption{\textbf{Pairwise correlations between genetic distance, measured as amino acid mutations or as phylogenetic distance, and antigenic distance for influenza A/H3N2, A/H1N1, B/Vic and B/Yam.} 
+	The top row shows correlations between number of amino acid mutations and average antigenic distance between 10,000 random pairs of viruses.
+	The bottom row shows correlations between average phylogenetic distance, measured in terms of years, and average antigenic distance between 10,000 random pairs of viruses.
+	Dashed lines show linear model fits, with $R^2$ and slope noted, while solid lines show LOESS fits.
+	Antigenic distances derive from model 2 of Table \ref{errortable}.
+	} 
+	\label{seq_grid} 
+\end{figure}
+
+Consequently, we seek to flexibly incorporate genetic data by simultaneously modeling antigenic and genetic evolution through an evolutionary diffusion process \cite{Lemey10}, wherein a virus's antigenic character state evolves along branches of the phylogenetic tree according to a Brownian motion process (see Materials and methods).
 The phylogenetic diffusion process acts as a prior on virus locations, so that genetically similar viruses are expected to share similar antigenic locations.
 The antigenic diffusion process includes both systematic drift with time and covariance induced by phylogenetic proximity.
 We examine the effects of including only systematic drift (model 6; Table \ref{errortable}) and systematic drift plus phylogenetic diffusion (model 7; Table \ref{errortable}), finding a small increase in predictive accuracy of between 0.02 and 0.08 log$_2$ HI titers when both processes are included.
