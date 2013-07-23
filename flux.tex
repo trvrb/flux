@@ -549,10 +549,10 @@ We calculate the overall likelihood by multiplying probabilities of individual m
 using probability functions $\point$, $\threshold$ and $\interval$ as appropriate.
 We begin by assuming independent, diffuse normal priors on virus and serum locations
 \begin{eqnarray}
-	\virus_i &\sim& \mathrm{Normal}(\boldsymbol{\mu},\boldsymbol{\Sigma}) \nonumber \\
-	\serum_j &\sim& \mathrm{Normal}(\boldsymbol{\mu},\boldsymbol{\Sigma}),
+	\virus_i &\sim& \normal(\mathbf{m},\boldsymbol{\Sigma}) \nonumber \\
+	\serum_j &\sim& \normal(\mathbf{m},\boldsymbol{\Sigma}),
 \end{eqnarray}
-where $\boldsymbol{\mu} = (0,\ldots,0)^{\prime}$ and $\boldsymbol{\Sigma}$ is a diagonal matrix with diagonal elements all equal to $10000$.
+where $\mathbf{m} = (0,\ldots,0)^{\prime}$ and $\boldsymbol{\Sigma}$ is a diagonal matrix with diagonal elements all equal to $10000$.
 
 \subsection*{Virus and serum effects}
 
