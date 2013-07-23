@@ -203,7 +203,8 @@ The finding of a low-dimensional map across influenza lineages extends previous 
 	6		&	2D 		& Drift				&	Fixed 			&	None			&	0.91	&	0.75	&	0.77	&	0.83	\\
 	7		&	2D 		& Diffusion/Drift	&	Fixed 			&	None			&	0.89	&	0.74	&	0.74	&	0.83	\\
 	8		&	2D 		& Diffusion/Drift	&	Estimated 		&	None			&	0.77	&	0.73	&	0.66	&	0.75	\\	
-	9		&	2D 		& Diffusion/Drift	&	Estimated		&	Estimated		&	0.76	&	0.71 	&	0.64	&	0.72	\\
+	9		&	2D 		& Diffusion/Drift	&	Fixed 			&	Estimated		&	0.80	&	0.72	&	0.69	&	0.75	\\		
+	10		&	2D 		& Diffusion/Drift	&	Estimated		&	Estimated		&	0.76	&	0.71 	&	0.64	&	0.72	\\
 	\hline
 	\end{tabular}	
 	}
@@ -237,7 +238,7 @@ If HI data is rich, then we expect minor differences in antigenic locations with
 
 We further extend the model by estimating the strength of overall reactivity of each serum rather than fixing this at its maximum titer, and additionally, by estimating the strength of reactivity of each virus isolate.
 We refer to these estimates as serum effects and virus effects, respectively.
-We find that including these effects decreases test error further, ranging in improvement from 0.03 to 0.13 log$_2$ HI titers (models 8 and 9; Table \ref{errortable}).
+We find that including these effects decreases test error further, resulting in comparable improvements from estimating virus and serum effects individually and giving an improvement of between 0.03 to 0.13 log$_2$ HI titers when estimating both virus and serum effects together (models 8--10; Table \ref{errortable}).
 
 We find that the average absolute error in predicted log$_2$ HI titer is nearly constant with antigenic distance (Pearson correlation, $r = 0.098$), thus supporting our model assumption that the drop in log$_2$ titer is proportional to the Euclidean distance separating viruses and sera on the antigenic map.
 Additionally, we find that the absolute error in predicted titer is nearly constant with time (Pearson correlation, $r = -0.007$).
