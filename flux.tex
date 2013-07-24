@@ -171,8 +171,9 @@ Maps that produce pairwise distances most congruent with the observed titers wil
 We integrate over sources of uncertainty, such as antigenic locations, in a flexible Bayesian fashion.
 We apply this model to HI measurements of virus isolates against post-infection ferret antisera for influenza A/H3N2, A/H1N1, B/Vic and B/Yam (see Materials and methods).
  
-We begin with Bayesian analogs of the models used by Smith et al.\ \cite{Smith04}, in which viruses and sera are represented as $N$-dimensional locations.
-In this case, `serum effects' are fixed to the maximum titers exhibited by particular ferret sera, and virus and serum locations follow an uninformative diffuse normal prior as described in the `Antigenic cartography' section of Materials and methods.
+We begin with Bayesian analogs of the models used by Smith et al.\ \cite{Smith04}, in which viruses and sera are represented as $N$-dimensional locations as described in the `Antigenic cartography' section of Materials and methods.
+In this case, `serum effects' are fixed to the maximum titers exhibited by particular ferret sera and give the baseline expectation for titer when virus and serum are antigenically identical.
+Virus and serum locations follow an uninformative diffuse normal prior. 
 After comparing models of differing dimensions, Smith et al.\ \cite{Smith04} arrive at a 2D model as the preferred model for their data.
 Smith et al.\ \cite{Smith04} implement a form of MDS, seeking to optimize virus and serum locations such that the sum of squared errors between expected and observed titers is minimized (eq.\ \ref{mds} of Materials and methods).
 Here, in implementing BMDS, we provide a likelihood function for the probability of observing HI data given virus and serum locations (eq.\ \ref{bmds} of Materials and methods) and seek to estimate model parameters through Bayesian inference using Markov chain Monte Carlo (MCMC).
@@ -191,21 +192,22 @@ The finding of a low-dimensional map across influenza lineages extends previous 
 	\caption{\textbf{Average absolute prediction error of log$_2$ HI titer for test data across models and datasets.}}
 	\label{errortable}	
 	\makebox[\textwidth][c]{
-	\begin{tabular}{ c c c c c c c c c } 
+	\small
+	\begin{tabular}{ c c c c c c c c c c } 
 	\hline
-	\multicolumn{5}{c}{} 	&	\multicolumn{4}{c}{Test error}  \\
-	Model	&	Dimen 	& Location prior	& 	Serum effects 	&	Virus effects	& 	A/H3N2	& 	A/H1N1	& 	B/Vic	& 	B/Yam	\\
+	\multicolumn{6}{c}{} 	&	\multicolumn{4}{c}{Test error}  \\
+	Model	&	Data		&	Dimen 	& Location prior	& 	Serum effects 	&	Virus effects	& 	A/H3N2	& 	A/H1N1	& 	B/Vic	& 	B/Yam	\\
 	\hline	
-	1		&	1D 		& Uninformed		&	Fixed 			&	None			&	1.35	&	0.94 	&	0.90	&	1.08	\\
-	2		&	2D 		& Uninformed		&	Fixed 			&	None			&	0.91 	&	0.78 	&	0.82	&	0.90	\\
-	3		&	3D 		& Uninformed		&	Fixed 			&	None			&	0.93 	&	0.80 	&	0.85	&	0.92	\\
-	4		&	4D 		& Uninformed		&	Fixed 			&	None			&	0.98 	&	0.84 	&	0.90	&	0.97	\\	
-	5		&	5D 		& Uninformed		&	Fixed 			&	None			&	1.04 	&	0.89 	&	0.98	&	1.04	\\	
-	6		&	2D 		& Drift				&	Fixed 			&	None			&	0.91	&	0.75	&	0.77	&	0.83	\\
-	7		&	2D 		& Diffusion/Drift	&	Fixed 			&	None			&	0.89	&	0.74	&	0.74	&	0.83	\\
-	8		&	2D 		& Diffusion/Drift	&	Estimated 		&	None			&	0.77	&	0.73	&	0.66	&	0.75	\\	
-	9		&	2D 		& Diffusion/Drift	&	Fixed 			&	Estimated		&	0.80	&	0.72	&	0.69	&	0.75	\\		
-	10		&	2D 		& Diffusion/Drift	&	Estimated		&	Estimated		&	0.76	&	0.71 	&	0.64	&	0.72	\\
+	1		&	HI			&	1D 		& Uninformed		&	Fixed 			&	None			&	1.35	&	0.94 	&	0.90	&	1.08	\\
+	2		&	HI			&	2D 		& Uninformed		&	Fixed 			&	None			&	0.91 	&	0.78 	&	0.82	&	0.90	\\
+	3		&	HI			&	3D 		& Uninformed		&	Fixed 			&	None			&	0.93 	&	0.80 	&	0.85	&	0.92	\\
+	4		&	HI			&	4D 		& Uninformed		&	Fixed 			&	None			&	0.98 	&	0.84 	&	0.90	&	0.97	\\	
+	5		&	HI			&	5D 		& Uninformed		&	Fixed 			&	None			&	1.04 	&	0.89 	&	0.98	&	1.04	\\	
+	6		&	HI/year		&	2D 		& Drift				&	Fixed 			&	None			&	0.91	&	0.75	&	0.77	&	0.83	\\
+	7		&	HI/year/seq	&	2D 		& Diffusion/Drift	&	Fixed 			&	None			&	0.89	&	0.74	&	0.74	&	0.83	\\
+	8		&	HI/year/seq	&	2D 		& Diffusion/Drift	&	Estimated 		&	None			&	0.77	&	0.73	&	0.66	&	0.75	\\	
+	9		&	HI/year/seq	&	2D 		& Diffusion/Drift	&	Fixed 			&	Estimated		&	0.80	&	0.72	&	0.69	&	0.75	\\		
+	10		&	HI/year/seq	&	2D 		& Diffusion/Drift	&	Estimated		&	Estimated		&	0.76	&	0.71 	&	0.64	&	0.72	\\
 	\hline
 	\end{tabular}	
 	}
@@ -239,6 +241,7 @@ If HI data is rich, then we expect minor differences in antigenic locations with
 
 We further extend the model by estimating the strength of overall reactivity of each serum rather than fixing this at its maximum titer, and additionally, by estimating the strength of reactivity of each virus isolate.
 We refer to these estimates as serum effects and virus effects, respectively.
+These effects determine the baseline expectation of titer when virus and serum have identical antigenic locations.
 We find that including these effects decreases test error further, resulting in comparable improvements from estimating virus and serum effects individually and giving an improvement of between 0.03 to 0.13 log$_2$ HI titers when estimating both virus and serum effects together (models 8--10; Table \ref{errortable}).
 
 We find that the average absolute error in predicted log$_2$ HI titer is nearly constant with antigenic distance (Pearson correlation, $r = 0.098$), thus supporting our model assumption that the drop in log$_2$ titer is proportional to the Euclidean distance separating viruses and sera on the antigenic map.
