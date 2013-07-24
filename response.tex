@@ -207,6 +207,17 @@ What prior was used for the Bayesian MDS? How does this choice of prior influenc
 
 Would not BMDS provide an entire posterior distribution for location of each strain and sera in a 2-d projection? Are authors plotting the posterior mean? What about the confidence region?
 
+\textbf{The BMDS does give a posterior sample of virus locations.  However, summarizing this posterior distribution proved difficult.  We discussed these difficulties in Materials and Methods:}
+
+\textbf{``There is some difficulty summarizing posterior cartographic samples, as sampled virus and serum locations represent only relative quantities, and because of this, over the course of the MCMC, virus locations may shift.
+Our prior on virus and serum locations removes much of this issue, orienting the antigenic map along dimension 1 and fixing it to begin at the origin.
+However, local isometries are often still a problem.
+For example, in A/H3N2 the HK/68, EN/72 and VI/75 clusters may rotate in relation to other clusters.
+Consequently, it may be difficult to fully align MCMC samples using Procrustes analysis.
+For the present study, we take a simple approach and sample a single MCMC step and visualize the antigenic locations at this state (Figures~2, Figure~3).
+Then, for specific quantities of interest, like rate of antigenic drift and rate of diffusion at different points along the phylogeny, we calculate the quantity across MCMC samples to yield an expectation and a credible interval.
+This approach accurately characterizes uncertainty that may be hidden in an analysis of a single antigenic map.''}
+
 Does a similar correlation analysis to the one shown in Fig. 4 find a relationship between estimated within-clade antigenic drift and excess P \& I mortality attributed to influenza?
 
 \textbf{We have begun to extend the correlation analysis between within-clade antigenic drift and multiple measures of influenza incidence, including ILI, virus isolation, excess P\&I mortality and influenza-associated hospitalization rates. This analysis is also attempting to look at a finer temporal scale, rather than the course-grained 1-year bins in the current study and attempting to better match geographic bounds in antigenic and incidence data.  This said, we believe that further extending the incidence correlation requires a separate publication to  describe adequately, and is beyond the scope of the current analysis.}
