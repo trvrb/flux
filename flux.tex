@@ -239,10 +239,17 @@ The systematic drift process informs virus and serum locations by dates of isola
 Thus, in these models, antigenic locations are inferred using both genetic data and HI data and will differ from locations inferred from HI data alone.
 If HI data is rich, then we expect minor differences in antigenic locations with the inclusion of genetic data (as may be the case for A/H3N2), while if HI data is spare, then we expect genetic data to play a larger role in determining antigenic locations (as may be the case for B/Vic and B/Yam).
 
-We further extend the model by estimating the strength of overall reactivity of each serum rather than fixing this at its maximum titer, and additionally, by estimating the strength of reactivity of each virus isolate.
-We refer to these estimates as serum effects and virus effects, respectively.
-These effects determine the baseline expectation of titer when virus and serum have identical antigenic locations.
-We find that including these effects decreases test error further, resulting in comparable improvements from estimating virus and serum effects individually and giving an improvement of between 0.03 to 0.13 log$_2$ HI titers when estimating both virus and serum effects together (models 8--10; Table \ref{errortable}).
+We further extend the model by estimating `serum effects' to quantify the overall strength reactivity of each serum, rather than fixing serum effects at maximum titers.
+Serum effects likely derive from experimental variation in serum extraction and processing or from variation in immune responses between ferrets.
+Serum effects determine the baseline expectation of titer when virus and serum have identical antigenic locations.
+However, if serum effect is fixed to the serum's maximum titer, this will often not be the case, as the virus giving the maximum titer is likely to be antigenically distinct from the serum.
+Thus, fixing serum effects will tend to under-estimate effect size; we observe a mean effect of 10.42 log$_2$ HI titers for A/H3N2 when fixing serum effects and a mean of 10.94 when estimating serum effects.
+We find that estimating serum effects improves test error further (model 8, Table \ref{errortable}), with improvements of between 0.01 and 0.12 log$_2$ HI titers.
+
+Additionally, we include and estimate `virus effects' in an analogous fashion, which are intended to represent differences in overall reactivity between viruses.
+With virus effects included, baseline titer derives from both the virus and the serum used in the HI reaction.
+We find that including virus effects further improves test error, either alone with fixed serum effects (model 9, Table \ref{errortable}) or combined with estimating serum effects (model 10, Table \ref{errortable}).
+With fixed serum effects, the inclusion of virus effects results in improvements of between 0.02 and 0.09 log$_2$ HI titers and with estimated serum effects, the inclusion of virus effects results in improvements of between 0.01 and 0.05 log$_2$ HI titers.
 
 We find that the average absolute error in predicted log$_2$ HI titer is nearly constant with antigenic distance (Pearson correlation, $r = 0.098$), thus supporting our model assumption that the drop in log$_2$ titer is proportional to the Euclidean distance separating viruses and sera on the antigenic map.
 Additionally, we find that the absolute error in predicted titer is nearly constant with time (Pearson correlation, $r = -0.007$).
