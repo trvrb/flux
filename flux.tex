@@ -635,6 +635,7 @@ Here, the phylogenetic tree $\tree$ is estimated using sequence data for viruses
 \subsection*{Posterior inference}
 
 Top-level priors for $1/\mdssd^2$, $\drift$, $1/\virussd^2$, and $1/\serumsd^2$ are assumed to follow diffuse $\mbox{Gamma}(a, b)$ distributions  with $a=0.001$ and $b=0.001$.
+These diffuse priors were chosen to be non-informative and provide little-to-no weight on the resulting posterior distributions.
 Under the full model, the posterior probability of observing virus and serum locations given immunological data is factored
 \begin{equation}
 	p(\viruses,\sera | \mathbf{H}) \propto p(\mathbf{H} | \viruses, \sera, \ses, \ves, \mdssd) \; 

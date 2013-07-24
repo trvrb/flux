@@ -47,6 +47,40 @@
 \renewcommand\AB@affilsepx{, \protect\Affilfont}
 \makeatother
 
+% notation
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newcommand{\virus}{\mathbf{x}}						% virus coordinate
+\newcommand{\serum}{\mathbf{y}}						% serum coordinate
+\newcommand{\viruses}{\mathbf{X}}					% set of virus coordinates
+\newcommand{\sera}{\mathbf{Y}}						% set of serum coordinates
+\newcommand{\ve}{v}									% virus effect
+\newcommand{\se}{s}									% serum effect
+\newcommand{\ves}{\mathbf{v}}						% set of virus effects
+\newcommand{\ses}{\mathbf{s}}						% set of serum effects
+\newcommand{\point}{f_{\scriptscriptstyle \vert}}	% point likelihood
+\newcommand{\threshold}{f_{\textstyle \lrcorner}}	% threshold likelihood
+\newcommand{\interval}{f_{\sqcup}}					% interval likelihood
+\newcommand{\mdssd}{\varphi}						% MDS standard deviation
+\newcommand{\virussd}{\sigma_x}						% virus / diffusion standard deviation
+\newcommand{\serumsd}{\sigma_y}						% serum standard deviation
+\newcommand{\drift}{\mu}							% drift / advection
+\newcommand{\tree}{\tau}							% phylogeny
+\newcommand{\vn}{n}									% number of viruses
+\newcommand{\sn}{k}									% number of sera
+\newcommand{\normal}{\mathcal{N}}					% normal distribution
+\newcommand{\bwithin}{\beta_w}		% within clade drift coefficient
+\newcommand{\bsister}{\beta_s}		% sister clade drift coefficient
+\newcommand{\bother}{\beta_t}			% across clade drift coefficient
+\newcommand{\incclade}[1]{y_\mathrm{#1}}
+\newcommand{\driftclade}[1]{x_\mathrm{#1}}
+\setlength{\arraycolsep}{2pt}
+\newcommand{\smalltwomatrix}[2]{\scriptsize \Big( \begin{matrix} #1 \\ #2 \end{matrix} \Big)}				% pretty inline matrix 
+\newcommand{\smallfourmatrix}[4]{\scriptsize \Big( \begin{matrix} #1 & #2 \\ #3 & #4 \end{matrix} \Big)}	% pretty inline matrix 
+\newcommand{\twomatrix}[2]{\left( \begin{matrix} #1 \\ #2 \end{matrix} \right)}								% pretty inline matrix 
+\newcommand{\fourmatrix}[4]{\left( \begin{matrix} #1 & #2 \\ #3 & #4 \end{matrix} \right)}					% pretty inline matrix 
+
+
 %%% TITLE %%%
 \title{\vspace{1.0cm} \Large \bf
 Reviewer responses for\\
@@ -104,9 +138,9 @@ I have concerns about Figure 5, which the authors use to support their claim tha
 
 The incidence data are poorly explained. In the first paragraph of the Epidemiological consequences of antigenic drift section, the authors use relative incidence. In the next paragraph, are they switching to absolute incidence? This is not clear. If they are switching to absolute incidence, I don't think they ever explain in the Methods where that data comes from. In either case, what are the justifications for using absolute versus relative incidence? Also, why do they not analyze incidence prior to 1998/1999? Finally, because each influenza season spans two calendar years, why do they not break up the data by season rather than year?
 
-An interesting result is that estimating the serum effects improves the performance a great deal (more than including the phylogenetic data, in fact!). It suggests that there may be systematic differences between the sera. Can this be attributed to the serum itself (such as whether it is goat versus ferret), or to the particular lab or study? 
+An interesting result is that estimating the serum effects improves the performance a great deal (more than including the phylogenetic data, in fact!). It suggests that there may be systematic differences between the sera. Can this be attributed to the serum itself (such as whether it is goat versus ferret), or to the particular lab or study? Could the authors correlate the estimated serum effects back to the originating source for that serum to check? 
 
-Could the authors correlate the estimated serum effects back to the originating source for that serum to check? As a related point, I was surprised that inclusion of the virus effects led to only minor improvement, since prior work (http://www.ncbi.nlm.nih.gov/pubmed/19900932) suggests that some viruses are generally more resistant to HI than others. However, the virus effects are only included in a model (\#9 in Table 1) where the serum effects are already included, and it is possible to imagine that including just one of these terms somehow helps correct for both effects. Can the authors include a tenth model in Table 1 that includes the virus effects but not the serum effects? This would clarify if serum effects are actually more important than virus effects, or simply whether inclusion of either one individually is more helpful than both together.
+As a related point, I was surprised that inclusion of the virus effects led to only minor improvement, since prior work (http://www.ncbi.nlm.nih.gov/pubmed/19900932) suggests that some viruses are generally more resistant to HI than others. However, the virus effects are only included in a model (\#9 in Table 1) where the serum effects are already included, and it is possible to imagine that including just one of these terms somehow helps correct for both effects. Can the authors include a tenth model in Table 1 that includes the virus effects but not the serum effects? This would clarify if serum effects are actually more important than virus effects, or simply whether inclusion of either one individually is more helpful than both together.
 
 \textbf{The inclusion of `virus effects' was meant to capture exactly this observation, that some viruses may be generally more resistant to HI. To further assess their importance, we followed this suggestion and included test error for a model that estimates virus effects, but leaves serum effects fixed at maximum titers. In this case, we observe similar, but not quite as substantial, improvements to test error as the model that estimates serum effects, but does not include virus effects.  From this observation, we conclude that estimating either virus or serum effects both improve the model.}
 
@@ -204,6 +238,12 @@ How do the antigenic maps shown compare to BMDS applied to pairwise aa hamming d
 Minor questions:
 
 What prior was used for the Bayesian MDS? How does this choice of prior influence the resulting antigenic maps? How have the authors justified their choice of prior?
+
+\textbf{We assume priors on several BMDS parameters: MDS variance $\mdssd^2$, drift rate $\drift$, virus variance $\virussd^2$ and serum variance $\serumsd^2$.  We state in Materials and methods:}
+
+\textbf{``Top-level priors for $1/\mdssd^2$, $\drift$, $1/\virussd^2$, and $1/\serumsd^2$ are assumed to follow diffuse $\mbox{Gamma}(a, b)$ distributions  with $a=0.001$ and $b=0.001$.''}
+
+\textbf{These are extremely diffuse priors and should have very little impact on the resulting antigenic maps.  Running the analysis with improper uniform priors has almost no impact on the results.  We've made note of this in the text.}
 
 Would not BMDS provide an entire posterior distribution for location of each strain and sera in a 2-d projection? Are authors plotting the posterior mean? What about the confidence region?
 
