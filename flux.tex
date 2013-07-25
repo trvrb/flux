@@ -120,7 +120,7 @@ Influenza viruses undergo continual antigenic evolution allowing mutant viruses 
 Antigenic phenotype is often assessed through pairwise measurement of cross-reactivity between influenza strains using the hemagglutination inhibition (HI) assay.
 Here, we extend previous approaches to antigenic cartography, and simultaneously characterize antigenic and genetic evolution by modeling the diffusion of antigenic phenotype over a shared virus phylogeny.
 Using HI data from influenza A subtypes H3N2 and H1N1 and influenza B lineages Victoria and Yamagata, we determine patterns of antigenic drift across lineages and show that antigenic drift drives incidence rates and mediates interference between influenza lineages.
-Additionally, we describe the selective underpinnings of differences in antigenic drift across lineages.
+%Additionally, we describe the selective underpinnings of differences in antigenic drift across lineages.
 This work makes possible substantial future advances in investigating the dynamics of influenza and other antigenically-variable pathogens by providing a model that intimately combines molecular and antigenic evolution.
 
 \end{abstract}
@@ -287,7 +287,7 @@ Because of the threshold of sensitivity of the HI assay, it's difficult to disti
 To solve this problem of identifiability, we assumed a weak prior that favors linear movement in the 2D antigenic space (present in models 6 through 9; Table \ref{errortable}), with the slope of the linear relationship and the precision of the relationship incorporated into the Bayesian model (see Materials and methods).
 Because of this, we interpret map locations locally rather than globally, and assess rates of antigenic movement without making strong statements about the larger configuration under which the movement occurs.
  
-We find that influenza A/H3N2 evolved along antigenic dimension 1 at a rate of 1.01 antigenic units per year, with a 95\% highest posterior density (HPD) interval of 0.98--1.04 (Figure~\ref{drift}).
+We find that influenza A/H3N2 evolved along antigenic dimension 1 at an estimated rate of 1.01 antigenic units per year (Figure~\ref{drift}, Table~\ref{drifttable}).
 However, we observe occasional large jumps in antigenic phenotype (Figure~\ref{drift}), corresponding to cluster transitions identified by Smith et al. \cite{Smith04}.  
 Most variation is contained within the first antigenic dimension, but dimension 2 occasionally shows variation when two antigenically distinct lineages emerge and transiently coexist (Figure~\ref{map}), as is the case with the previously identified Beijing/89 and Beijing/92 clusters.
 
@@ -305,17 +305,35 @@ Most variation is contained within the first antigenic dimension, but dimension 
 	\label{drift} 
 \end{figure}
 
-We find that other clades of influenza evolved in antigenic phenotype substantially slower than A/H3N2 (Figure~\ref{drift}).
-Influenza A/H1N1 evolved at a rate of 0.62 units per year (HPD 0.56--0.67), but showing a similar pattern of punctuated antigenic evolution with occasional larger jumps in phenotype, such as the emergence of the Solomon Islands/06 cluster.  
-Influenza B/Victoria also evolved relatively slowly, with an average rates of 0.42 (HPD 0.32--0.51) units per year.
-Influenza B/Yamagata evolved slower still, with an average rate of 0.32 (HPD 0.25--0.39) units per year.
+We find that other clades of influenza evolved in antigenic phenotype substantially slower than A/H3N2 (Figure~\ref{drift}, Table~\ref{paramtable}).
+Influenza A/H1N1 evolved at a rate of 0.62 units per year, but showed a similar pattern of punctuated antigenic evolution with occasional larger jumps in phenotype, such as the emergence of the Solomon Islands/06 cluster.  
+Influenza B/Victoria and B/Yamagata evolved slower still, with mean estimated rates 0.42 units per year and 0.32 units per year, respectively.
 Punctuated evolution is less obvious in B/Yam and B/Vic compared to A/H3N2 and A/H1N1, but antigenic clusters are still apparent, with recent transitions to the Brisbane/08 cluster in B/Vic \cite{Barr10} and to the Wisconsin/10 cluster in B/Yam \cite{Klimov12}.
 Interestingly, a minor lineage of B/Vic, denoted B/Hubei-Songzi/51/2008 \cite{Barr10}, has persisted through 2011, while remaining antigenically distinct from B/Brisbane/60/2008 viruses (Figure~\ref{drift}).
+Interestingly, although we observe significantly different drift rates between lineages, we observe less variation in diffusion volatility (Table~\ref{paramtable}).
+This is reflected in Figure \ref{drift}, where all four lineages exhibit similar levels of standing antigenic variation, despite A/H3N2 drifting more quickly in antigenic phenotype.
+
+%%% paramtable %%%
+\begin{table}[h]
+	\centering
+	\caption{\textbf{Estimates of drift rate $\drift$ (in units per year), diffusion volatility $\virussd^2$ (in units$^2$ per year) and scaled effective population size $N_e\tau$ (in years) for influenza A/H3N2, A/H1N1, B/Vic and B/Yam including posterior means and 95\% highest posterior density intervals.}}
+	\label{paramtable}	
+	\begin{tabular}{ c c c c} 
+	\hline
+	Lineage	&	Drift $\drift$  	& 	Volatility $\virussd^2$	&	Effective pop size $N_e\tau$	\\
+	\hline		
+	A/H3N2	&	1.01 (0.98--1.04)	&	1.25 (0.98--2.35) 		&	5.03 (4.42--5.73)	\\
+	A/H1N1	&	0.62 (0.56--0.67)	&	0.92 (0.65--1.56) 		&	6.38 (4.99--8.12)	\\
+	B/Vic	&	0.42 (0.32--0.51)	&	1.22 (0.85--2.25) 		&	10.40 (8.42--12.80)	\\
+	B/Yam	&	0.32 (0.25--0.39)	&	0.71 (0.46--1.36) 		&	9.48 (7.76--11.50)	\\
+	\hline
+	\end{tabular}	
+\end{table}
 
 These patterns of antigenic drift are reflected in the virus phylogenies (Figure~\ref{trees}).
 Influenza A/H3N2 has characteristically spindly tree showing rapid turnover of the virus population, while A/H1N1 and B have trees that show greater degrees of viral coexistance (Figure~\ref{trees}).
 The scaled effective population size $N_e \tau$ measures the timescale of coalescence for a phylogeny and quantifies the visual distinction between a `spindly' tree and a `bushy' tree \cite{Bedford11}.
-Here, we see that $N_e \tau$ broadly correlates with the rate of antigenic drift with A/H3N2 showing fast drift and reduced effective population size (Figure~\ref{trees}), as expected from basic epidemiological models \cite{Bedford12}.
+Here, we see that $N_e \tau$ broadly correlates with the rate of antigenic drift (Table~\ref{paramtable}), with A/H3N2 showing fast drift and reduced effective population size as expected from basic epidemiological models \cite{Bedford12}.
 Antigenic drift results in the replacement of antigenically primitive lineages by antigenically advanced lineages, thereby reducing genealogical diversity.
 
 
@@ -423,52 +441,52 @@ Furthermore, these findings suggest that the predominant clade of a particular i
 However, this prediction would not be perfect, and 56\% of the variance in incidence remains unexplained by these estimates of antigenic drift.
 Some of this variance may be explained by incorporating geographic variation in year-to-year antigenic drift; although there exists significant geographic variation in clade-specific incidence \cite{Finkelman07}, we calculated antigenic drift from global samples, rather than USA-specific samples.
 
-\subsection*{Conversion of antigenic mutation into fixed differences}
+%\subsection*{Conversion of antigenic mutation into fixed differences}
 
-We observe a faster rate of antigenic drift in influenza A/H3N2 than in A/H1N1 or in either lineage of influenza B.
-Previous work using general epidemiological models has suggested that rates of antigenic drift may be influenced by both the fundamental reproductive number $R_0$ and the rate at which mutation decreases cross-immunity \cite{Gog02,Lin03}.
-Owing to these and similar findings, subsequent work ascribed differences in the evolution of A/H3N2 relative to A/H1N1 and influenza B to either greater $R_0$ or greater mutation rate \cite{Ferguson03,Bedford12}.
-Here, we examine the conversion of recently acquired antigenic mutation into fixed differences by comparing rates of antigenic diffusion to the degree of persistence on phylogeny branches in A/H3N2, A/H1N1, B/Vic and B/Yam (Table~\ref{diffusiontable}).
-To facilitate comparisons, we measure the diffusion coefficient $D$ \cite{Pybus12} characterizing the antigenic movement of each influenza lineage (see Materials and methods).
-This coefficient is measured in terms of units$^2$/year and can be used to determine the diffusion length scale, that is the expected relationship between time and distance traveled, which is $2 \sqrt{t D}$ for a two-dimensional diffusion.
-Higher diffusion coefficients mean a lineage is diffusing faster through antigenic space.
-We compare diffusion coefficients between trunk branches and side branches, where trunk branches are defined as branches ancestral to the most recent virus sample and side branches are defined as those branches not ancestral to the most recent virus sample.
+%We observe a faster rate of antigenic drift in influenza A/H3N2 than in A/H1N1 or in either lineage of influenza B.
+%Previous work using general epidemiological models has suggested that rates of antigenic drift may be influenced by both the fundamental reproductive number $R_0$ and the rate at which mutation decreases cross-immunity \cite{Gog02,Lin03}.
+%Owing to these and similar findings, subsequent work ascribed differences in the evolution of A/H3N2 relative to A/H1N1 and influenza B to either greater $R_0$ or greater mutation rate \cite{Ferguson03,Bedford12}.
+%Here, we examine the conversion of recently acquired antigenic mutation into fixed differences by comparing rates of antigenic diffusion to the degree of persistence on phylogeny branches in A/H3N2, A/H1N1, B/Vic and B/Yam (Table~\ref{diffusiontable}).
+%To facilitate comparisons, we measure the diffusion coefficient $D$ \cite{Pybus12} characterizing the antigenic movement of each influenza lineage (see Materials and methods).
+%This coefficient is measured in terms of units$^2$/year and can be used to determine the diffusion length scale, that is the expected relationship between time and distance traveled, which is $2 \sqrt{t D}$ for a two-dimensional diffusion.
+%Higher diffusion coefficients mean a lineage is diffusing faster through antigenic space.
+%We compare diffusion coefficients between trunk branches and side branches, where trunk branches are defined as branches ancestral to the most recent virus sample and side branches are defined as those branches not ancestral to the most recent virus sample.
 
 %%% diffusiontable %%%
-\begin{table}[h]
-	\centering
-	\caption{\textbf{Estimates of fundamental diffusion coefficient $D$ across influenza lineages and phylogenetic branches, including posterior means and 50\% highest posterior density intervals.}}
-	\label{diffusiontable}	
-	\begin{tabular}{ c c c c } 
-	\hline
-	Lineage	&	Trunk branch $D$ 	& 	Side branch $D$		& 	Ratio \\
-	\hline		
-	A/H3N2	&	0.90 (0.79--0.97)	&	0.62 (0.57--0.65)	&	1.45 (1.31--1.57) \\
-	A/H1N1	&	0.62 (0.50--0.71)	&	0.44 (0.38--0.48)	&	1.45 (1.18--1.70) \\
-	B/Vic	&	0.63 (0.51--0.71)	&	0.62 (0.54--0.68)	&	1.02 (0.87--1.14) \\
-	B/Yam	&	0.35 (0.29--0.40)	&	0.33 (0.28--0.36)	&	1.09 (0.93--1.23) \\
-	\hline
-	\end{tabular}	
-\end{table}
+%\begin{table}[h]
+%	\centering
+%	\caption{\textbf{Estimates of fundamental diffusion coefficient $D$ across influenza lineages and phylogenetic branches, including posterior means and 50\% highest posterior density intervals.}}
+%	\label{diffusiontable}	
+%	\begin{tabular}{ c c c c } 
+%	\hline
+%	Lineage	&	Trunk branch $D$ 	& 	Side branch $D$		& 	Ratio \\
+%	\hline		
+%	A/H3N2	&	0.90 (0.79--0.97)	&	0.62 (0.57--0.65)	&	1.45 (1.31--1.57) \\
+%	A/H1N1	&	0.62 (0.50--0.71)	&	0.44 (0.38--0.48)	&	1.45 (1.18--1.70) \\
+%	B/Vic	&	0.63 (0.51--0.71)	&	0.62 (0.54--0.68)	&	1.02 (0.87--1.14) \\
+%	B/Yam	&	0.35 (0.29--0.40)	&	0.33 (0.28--0.36)	&	1.09 (0.93--1.23) \\
+%	\hline
+%	\end{tabular}	
+%\end{table}
 
-Mutations must proceed through the sieve of natural selection, first appearing as transient differences restricted to side branches, while advantageous mutations will preferentially fix in the virus population and thus accrue on the trunk of the phylogeny.
-We expect the diffusion coefficient on side branches to more closely resemble the underlying rate of antigenic mutation, before selection can strongly influence observed rates.
-Here, we find that A/H3N2 and B/Vic have similar diffusion coefficients on side branches, which are larger than the diffusion coefficients of A/H1N1 and B/Yam (Table~\ref{diffusiontable}).
-Thus, we expect that new antigenic mutations may occur at a faster rate in A/H3N2 and B/Vic than in A/H1N1 or B/Yam.
-We find that trunk branches in both A/H3N2 and A/H1N1 evolve in antigenic phenotype faster than side branches (Table~\ref{diffusiontable}), suggesting that positive selection is promoting antigenic movement in these lineages.
-Interestingly, B/Vic and B/Yam show less of a signature of positive selection, with similar diffusion coefficients on trunk and side branches (Table~\ref{diffusiontable}).
-Thus, although drift forward along dimension 1 is driven by selection in all lineages (Figure~\ref{drift}), raw antigenic diffusion appears to be selected for more strongly in influenza A than in influenza B, giving influenza A an advantage in overall rate of antigenic drift.
-Additionally, it appears that A/H3N2 and B/Vic benefit from a greater influx of new antigenic mutations, giving them a similar advantage over their sister lineages A/H1N1 and B/Yam, respectively.
+%Mutations must proceed through the sieve of natural selection, first appearing as transient differences restricted to side branches, while advantageous mutations will preferentially fix in the virus population and thus accrue on the trunk of the phylogeny.
+%We expect the diffusion coefficient on side branches to more closely resemble the underlying rate of antigenic mutation, before selection can strongly influence observed rates.
+%Here, we find that A/H3N2 and B/Vic have similar diffusion coefficients on side branches, which are larger than the diffusion coefficients of A/H1N1 and B/Yam (Table~\ref{diffusiontable}).
+%Thus, we expect that new antigenic mutations may occur at a faster rate in A/H3N2 and B/Vic than in A/H1N1 or B/Yam.
+%We find that trunk branches in both A/H3N2 and A/H1N1 evolve in antigenic phenotype faster than side branches (Table~\ref{diffusiontable}), suggesting that positive selection is promoting antigenic movement in these lineages.
+%Interestingly, B/Vic and B/Yam show less of a signature of positive selection, with similar diffusion coefficients on trunk and side branches (Table~\ref{diffusiontable}).
+%Thus, although drift forward along dimension 1 is driven by selection in all lineages (Figure~\ref{drift}), raw antigenic diffusion appears to be selected for more strongly in influenza A than in influenza B, giving influenza A an advantage in overall rate of antigenic drift.
+%Additionally, it appears that A/H3N2 and B/Vic benefit from a greater influx of new antigenic mutations, giving them a similar advantage over their sister lineages A/H1N1 and B/Yam, respectively.
 
-In this context, it is especially interesting that adaptive evolution in the HA1 protein determined through analysis of nonsynonymous and synonymous substitutions is substantially stronger in A/H3N2 than in A/H1N1 \cite{Wolf06}; H3 appears to accumulate adaptive fixations at $\sim$150\% the rate of H1 \cite{Bhatt11}.
-Here, we observe that A/H3N2 has a diffusion coefficient $\sim$141\% greater than A/H1N1 along side branches of the phylogeny.
-These results suggest that the greater rate of adaptive fixation in A/H3N2 may be simply due to a greater abundance of new antigenic mutations to fix.
+%In this context, it is especially interesting that adaptive evolution in the HA1 protein determined through analysis of nonsynonymous and synonymous substitutions is substantially stronger in A/H3N2 than in A/H1N1 \cite{Wolf06}; H3 appears to accumulate adaptive fixations at $\sim$150\% the rate of H1 \cite{Bhatt11}.
+%Here, we observe that A/H3N2 has a diffusion coefficient $\sim$141\% greater than A/H1N1 along side branches of the phylogeny.
+%These results suggest that the greater rate of adaptive fixation in A/H3N2 may be simply due to a greater abundance of new antigenic mutations to fix.
 
-We suggest that the larger signal of positive selection for antigenic diffusion in influenza A relative to influenza B could be due to either a greater fundamental reproductive number $R_0$ or to pleiotropic effects associated with antigenic change.
-In the latter case, we expect that many antigenic variants may be at an inherent disadvantage against other strains from decreased protein function \cite{Kaverin04,Rudneva12} or other effects, even though they benefit from a transmission advantage mediated by host immunity.
-These mutations may not be promoted by natural selection to the same extent as antigenic variants that maintain functional equivalence.
-Additionally, other work has shown strong pleiotropic constraints in the evolution of oseltamivir resistance in A/H1N1 \cite{Bloom10}.
-Still, it is clear that more work is necessary to fully clarify the mechanistic underpinnings of the relative evolutionary success of different influenza lineages.
+%We suggest that the larger signal of positive selection for antigenic diffusion in influenza A relative to influenza B could be due to either a greater fundamental reproductive number $R_0$ or to pleiotropic effects associated with antigenic change.
+%In the latter case, we expect that many antigenic variants may be at an inherent disadvantage against other strains from decreased protein function \cite{Kaverin04,Rudneva12} or other effects, even though they benefit from a transmission advantage mediated by host immunity.
+%These mutations may not be promoted by natural selection to the same extent as antigenic variants that maintain functional equivalence.
+%Additionally, other work has shown strong pleiotropic constraints in the evolution of oseltamivir resistance in A/H1N1 \cite{Bloom10}.
+%Still, it is clear that more work is necessary to fully clarify the mechanistic underpinnings of the relative evolutionary success of different influenza lineages.
 
 %%% CONCLUSIONS %%%
 \section*{Conclusions}
@@ -738,50 +756,50 @@ Then, for each interval, $x$ and $y$ values are averaged across the sample of po
 We draw lines between these locations to approximate mean posterior diffusion paths.
 As virus lineages coalesce backwards through time down the phylogeny these diffusion paths will also coalesce.
 
-\subsection*{Estimation of diffusion coefficient}
+%\subsection*{Estimation of diffusion coefficient}
 
-The distance $d$ traveled by a diffusion is not a linear function of time interval $t$, and thus the `rate' of diffusion cannot be calculated following $r=d/t$.
-Assume we have a one-dimensional diffusion starting from $x_0 = 0$, so that
-\begin{equation}
-	X_t \sim \normal(0, \sigma^2 t),
-\end{equation}
-where $\sigma$ represents the diffusion volatility, and in this case, the expected squared displacement follows
-\begin{equation}
-	\mathrm{E}[X_t^2] = \sigma^2 t.
-\end{equation}
-In moving to a two-dimensional diffusion
-\begin{equation}
-	(X_t, Y_t) \sim \normal \left( \twomatrix{0}{0}, \fourmatrix{\sigma_x^2 t}{\rho \sigma_x \sigma_y t}{\rho \sigma_x \sigma_y t}{\sigma_y^2 t} \right),
-\end{equation}
-where $\sigma_x$ represents volatility in dimension 1, $\sigma_y$ represents volatility in dimension 2 and $\rho$ represents correlation,   expected squared displacement is equal to the sum of squared displacements in each dimension
-\begin{equation}
-	\mathrm{E}[X_t^2 + Y_t^2] = \sigma_x^2 t + \sigma_y^2 t.
-\end{equation}
-Such diffusions are often characterized with diffusion coefficient $D$.
-In this case
-\begin{equation}
-	D = \frac{\sigma_x^2 + \sigma_y^2}{4},
-\end{equation}
-so that expected squared displacement follows from $D$ alone
-\begin{equation}
-	\mathrm{E}[X_t^2 + Y_t^2] = 4 D t.
-\end{equation}
+%The distance $d$ traveled by a diffusion is not a linear function of time interval $t$, and thus the `rate' of diffusion cannot be calculated following $r=d/t$.
+%Assume we have a one-dimensional diffusion starting from $x_0 = 0$, so that
+%\begin{equation}
+%	X_t \sim \normal(0, \sigma^2 t),
+%\end{equation}
+%where $\sigma$ represents the diffusion volatility, and in this case, the expected squared displacement follows
+%\begin{equation}
+%	\mathrm{E}[X_t^2] = \sigma^2 t.
+%\end{equation}
+%In moving to a two-dimensional diffusion
+%\begin{equation}
+%	(X_t, Y_t) \sim \normal \left( \twomatrix{0}{0}, \fourmatrix{\sigma_x^2 t}{\rho \sigma_x \sigma_y t}{\rho \sigma_x \sigma_y t}{\sigma_y^2 t} \right),
+%\end{equation}
+%where $\sigma_x$ represents volatility in dimension 1, $\sigma_y$ represents volatility in dimension 2 and $\rho$ represents correlation,   expected squared displacement is equal to the sum of squared displacements in each dimension
+%\begin{equation}
+%	\mathrm{E}[X_t^2 + Y_t^2] = \sigma_x^2 t + \sigma_y^2 t.
+%\end{equation}
+%Such diffusions are often characterized with diffusion coefficient $D$.
+%In this case
+%\begin{equation}
+%	D = \frac{\sigma_x^2 + \sigma_y^2}{4},
+%\end{equation}
+%so that expected squared displacement follows from $D$ alone
+%\begin{equation}
+%	\mathrm{E}[X_t^2 + Y_t^2] = 4 D t.
+%\end{equation}
 
-Owing to this relationship, Pybus et al.\ \cite{Pybus12} estimate $D$ from phylogenies in which internal nodes have inferred 2D locations via the formula
-\begin{equation} \label{pybusest}
-	\hat{D} = \frac{1}{n} \sum^n_{i=1} \frac{d_i^2}{4t_i},
-\end{equation}
-in which $d_i$ represents the displacement of a branch and $t_i$ represents the length of a branch.
-However, uncertainty in $d_i$ or $t_i$, especially along short branches of the phylogeny, may cause $d_i^2/4t_i$ to have high variance and increase uncertainty in the resulting estimates of $D$.
-Consequently, we estimate $D$ by looking at the relationship between total squared displacement and total time along branches of a phylogeny
-\begin{eqnarray} \label{ourest}
-	d^2_\Sigma &=& \sum^n_{i=1} d^2_i \nonumber \\
-	t_\Sigma &=& \sum^n_{i=1} t_i \nonumber \\
-	\hat{D} &=& \frac{ d^2_\Sigma }{ 4 t_\Sigma }.
-\end{eqnarray}
-This estimator showed less variance than equation \ref{pybusest} when analyzing tree output from the BMDS model and was thus preferred.
-Additionally, we confirmed through simple simulation that estimator \ref{ourest} shows lower mean squared error than estimator \ref{pybusest} in the presence of modest levels of noise on estimates of $d_i$ and $t_i$.
-When estimating $D$ specific to trunk branches or specific to side branches, we calculate $d^2_\Sigma$ and $t_\Sigma$ only from a subset of phylogeny branches as appropriate.
+%Owing to this relationship, Pybus et al.\ \cite{Pybus12} estimate $D$ from phylogenies in which internal nodes have inferred 2D locations via the formula
+%\begin{equation} \label{pybusest}
+%	\hat{D} = \frac{1}{n} \sum^n_{i=1} \frac{d_i^2}{4t_i},
+%\end{equation}
+%in which $d_i$ represents the displacement of a branch and $t_i$ represents the length of a branch.
+%However, uncertainty in $d_i$ or $t_i$, especially along short branches of the phylogeny, may cause $d_i^2/4t_i$ to have high variance and increase uncertainty in the resulting estimates of $D$.
+%Consequently, we estimate $D$ by looking at the relationship between total squared displacement and total time along branches of a phylogeny
+%\begin{eqnarray} \label{ourest}
+%	d^2_\Sigma &=& \sum^n_{i=1} d^2_i \nonumber \\
+%	t_\Sigma &=& \sum^n_{i=1} t_i \nonumber \\
+%	\hat{D} &=& \frac{ d^2_\Sigma }{ 4 t_\Sigma }.
+%\end{eqnarray}
+%This estimator showed less variance than equation \ref{pybusest} when analyzing tree output from the BMDS model and was thus preferred.
+%Additionally, we confirmed through simple simulation that estimator \ref{ourest} shows lower mean squared error than estimator \ref{pybusest} in the presence of modest levels of noise on estimates of $d_i$ and $t_i$.
+%When estimating $D$ specific to trunk branches or specific to side branches, we calculate $d^2_\Sigma$ and $t_\Sigma$ only from a subset of phylogeny branches as appropriate.
 
 \subsection*{Comparison with previous results}
 
