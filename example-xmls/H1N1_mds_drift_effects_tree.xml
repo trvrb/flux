@@ -1,0 +1,740 @@
+<?xml version="1.0" standalone="yes"?>
+<beast>
+
+	<taxa id="taxa">
+		<taxon id="A/Annecy/2013/2009">
+			<date value="2009" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Arizona/14/1978">
+			<date value="1978" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Bangkok/1544/2004">
+			<date value="2004" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Bayern/7/1995">
+			<date value="1995" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Beijing/262/1995">
+			<date value="1995" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Berlin/59/2008">
+			<date value="2008" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Brazil/11/1978">
+			<date value="1978" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Brisbane/59/2007">
+			<date value="2007" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/California/45/1978">
+			<date value="1978" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Chile/1/1983">
+			<date value="1983" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Dakar/88/2003">
+			<date value="2003" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Denmark/22/2005">
+			<date value="2005" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Denmark/3/2005">
+			<date value="2005" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Denmark/56/2003">
+			<date value="2003" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Denmark/86/2003">
+			<date value="2003" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Egypt/10/2007">
+			<date value="2007" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Egypt/136/2005">
+			<date value="2005" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Egypt/96/2002">
+			<date value="2002" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/England/2/2002">
+			<date value="2002" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/England/333/1980">
+			<date value="1980" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Finland/4/2007">
+			<date value="2007" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Florida/4/2004">
+			<date value="2004" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Fukushima/141/2006">
+			<date value="2006" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Ghana/152/2008">
+			<date value="2008" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Ghana/163/2008">
+			<date value="2008" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Ghana/2/2008">
+			<date value="2008" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Ghana/9/2008">
+			<date value="2008" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Ghana/FS-09-718/2009">
+			<date value="2009" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Ghana/FS-09-791/2009">
+			<date value="2009" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Gyeonggibuk/4500/2008">
+			<date value="2008" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/HongKong/1252/2000">
+			<date value="2000" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/HongKong/18106/2009">
+			<date value="2009" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/HongKong/1856/2008">
+			<date value="2008" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/HongKong/1870/2008">
+			<date value="2008" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/HongKong/1988/2009">
+			<date value="2009" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/HongKong/2387/2007">
+			<date value="2007" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/HongKong/2613/2007">
+			<date value="2007" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/HongKong/2652/2006">
+			<date value="2006" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/HongKong/3176/2008">
+			<date value="2008" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/HongKong/33597/2009">
+			<date value="2009" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/HongKong/34079/2009">
+			<date value="2009" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/HongKong/35/2006">
+			<date value="2006" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/HongKong/4580/2004">
+			<date value="2004" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/HongKong/4596/2004">
+			<date value="2004" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/HongKong/4922/2005">
+			<date value="2005" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/HongKong/948/2006">
+			<date value="2006" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Hungary/2/2003">
+			<date value="2003" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Iceland/123/2003">
+			<date value="2003" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Iceland/8064/2009">
+			<date value="2009" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Iceland/8599/2009">
+			<date value="2009" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Incheon/2647/2007">
+			<date value="2007" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Incheon/4532/2008">
+			<date value="2008" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/India/6263/1980">
+			<date value="1980" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Johannesburg/141/2007">
+			<date value="2007" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Johannesburg/28/2005">
+			<date value="2005" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Johannesburg/452/2005">
+			<date value="2005" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Johannesburg/5/2002">
+			<date value="2002" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Johannesburg/67/2007">
+			<date value="2007" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Johannesburg/82/1996">
+			<date value="1996" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Lackland/3/1978">
+			<date value="1978" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Lackland/7/1978">
+			<date value="1978" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Latvia/686/2002">
+			<date value="2002" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Madagascar/2121/2007">
+			<date value="2007" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Madagascar/57794/2000">
+			<date value="2000" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Madagascar/6054/2009">
+			<date value="2009" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Madagascar/6081/2009">
+			<date value="2009" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Marrakech/510/2009">
+			<date value="2008" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Marseille/1148/2009">
+			<date value="2009" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Mauritius/403/2008">
+			<date value="2008" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Mauritius/543/2007">
+			<date value="2007" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Menya/1386/2009">
+			<date value="2009" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Minsk/179/2008">
+			<date value="2008" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Montpellier/2051/2009">
+			<date value="2009" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Morocco/275/2004">
+			<date value="2003" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Moscow/2/2009">
+			<date value="2009" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Netherlands/128/2004">
+			<date value="2004" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Netherlands/345/2007">
+			<date value="2007" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/NewCaledonia/20/1999">
+			<date value="1999" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Paraguay/61/2009">
+			<date value="2009" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Paris/577/2007">
+			<date value="2007" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Paris/781/2008">
+			<date value="2008" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Pennsylvania/1/2007">
+			<date value="2007" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Perth/200/2008">
+			<date value="2008" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Peru/1169/2007">
+			<date value="2007" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Peru/1621/1999">
+			<date value="1999" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Peru/1798/1999">
+			<date value="1999" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Poitiers/2168/2003">
+			<date value="2003" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Rabat/109/2009">
+			<date value="2008" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Reunion/1409/2003">
+			<date value="2003" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/RheinlandPfalz/34/2003">
+			<date value="2003" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Seychelles/2239/2008">
+			<date value="2008" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Shenzhen/227/1995">
+			<date value="1995" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Siena/10/1989">
+			<date value="1989" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Siena/9/1989">
+			<date value="1989" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Singapore/10/2009">
+			<date value="2009" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Singapore/6/1986">
+			<date value="1986" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/SolomonIslands/3/2006">
+			<date value="2006" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/SouthDakota/6/2007">
+			<date value="2007" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Stockholm/13/2002">
+			<date value="2002" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/StPetersburg/10/2007">
+			<date value="2007" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/StPetersburg/12/2008">
+			<date value="2008" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/StPetersburg/49/2003">
+			<date value="2003" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/StPetersburg/5/2008">
+			<date value="2008" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Switzerland/3100/2002">
+			<date value="2002" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Taiwan/1/1986">
+			<date value="1986" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Texas/36/1991">
+			<date value="1991" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Texas/5/2007">
+			<date value="2007" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Thessaloniki/24/2005">
+			<date value="2005" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Tula/5/2007">
+			<date value="2007" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Ulaanbaatar/116/2007">
+			<date value="2007" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Ulaanbaatar/2212/2007">
+			<date value="2007" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/USSR/90/1977">
+			<date value="1977" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/USSR/92/1977">
+			<date value="1977" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Wisconsin/13/2009">
+			<date value="2009" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+		<taxon id="A/Zagreb/1982/2008">
+			<date value="2008" direction="forwards" units="years"/>
+			<attr name="antigenic">1.0 1.0</attr>
+		</taxon>
+	</taxa>
+
+	<empiricalTreeDistributionModel id="treeModel" fileName="H1N1_sample.trees">
+		<taxa idref="taxa"/>
+	</empiricalTreeDistributionModel>
+	
+	<statistic id="treeModel.currentTree" name="Current Tree">
+		<empiricalTreeDistributionModel idref="treeModel"/>
+	</statistic>
+	
+	<multivariateDiffusionModel id="diffusionModel">
+		<precisionMatrix>
+			<matrixParameter id="precisionMatrix">
+				<compoundParameter>
+					<parameter id="diffusion.precision" value="1.0"/>
+					<parameter id="diffusion.corr" value="0.0"/>
+				</compoundParameter>	
+				<compoundParameter>
+					<parameter idref="diffusion.corr"/>
+					<parameter idref="diffusion.precision"/>	
+				</compoundParameter>	
+			</matrixParameter>	
+		</precisionMatrix>
+	</multivariateDiffusionModel>
+
+	<multivariateTraitLikelihood id="traitLikelihood" traitName="antigenic" 
+	 						     useTreeLength="true" scaleByTime="false" 
+                                 reportAsMultivariate="true" 
+                                 reciprocalRates="true" 
+                                 integrateInternalTraits="true"
+                                 cacheBranches="true">
+		<multivariateDiffusionModel idref="diffusionModel"/>
+		<treeModel idref="treeModel"/>
+		<traitParameter>
+			<parameter id="leaf.antigenic"/>
+		</traitParameter>
+        <conjugateRootPrior>
+            <meanParameter>
+                <parameter value="0.0 0.0"/>
+            </meanParameter>
+            <priorSampleSize>
+                <parameter value="1"/>
+            </priorSampleSize>
+        </conjugateRootPrior>
+    </multivariateTraitLikelihood>	
+
+	<antigenicLikelihood id="antigenicLikelihood" 
+								fileName="H1N1_HI_data.txt"
+								mdsDimension="2"
+								intervalWidth="1.0">
+		<locations>
+			<matrixParameter id="locations"/>
+		</locations>
+		<virusLocations>
+			<matrixParameter id="virusLocations"/>
+		</virusLocations>	
+		<serumLocations>
+			<matrixParameter id="serumLocations"/>
+		</serumLocations>			
+		<tipTrait>
+			<parameter idref="leaf.antigenic"/>
+		</tipTrait>			
+		<mdsPrecision>
+			<parameter id="mds.precision" value="1.0" lower="0.0"/>
+		</mdsPrecision>
+		<locationDrift>
+			<parameter id="location.drift" value="0.5" lower="0.0"/>
+		</locationDrift>
+		<virusEffects>
+			<parameter id="virusEffects"/>
+		</virusEffects>
+		<serumEffects>
+			<parameter id="serumEffects"/>
+		</serumEffects>	
+		<virusOffsets>
+			<parameter id="virusOffsets"/>
+		</virusOffsets>
+		<serumOffsets>
+			<parameter id="serumOffsets"/>
+		</serumOffsets>
+	</antigenicLikelihood>
+
+	<driftedLocationsStatistic id="driftedVirusLocations">
+		<locations>
+			<matrixParameter idref="virusLocations"/>
+		</locations>	
+		<offsets>
+			<parameter idref="virusOffsets"/>
+		</offsets>			
+		<locationDrift>
+			<parameter idref="location.drift"/>
+		</locationDrift>		
+	</driftedLocationsStatistic>
+		
+	<driftedLocationsStatistic id="driftedSerumLocations">
+		<locations>
+			<matrixParameter idref="serumLocations"/>
+		</locations>	
+		<offsets>
+			<parameter idref="serumOffsets"/>
+		</offsets>			
+		<locationDrift>
+			<parameter idref="location.drift"/>
+		</locationDrift>		
+	</driftedLocationsStatistic>	
+		
+	<distributionLikelihood id="serumLocations.hpm">
+		<data>
+			<parameter idref="serumLocations"/>
+		</data>
+		<distribution>
+			<normalDistributionModel>
+				<mean>
+					<parameter id="serum.mean" value="0.0" lower="-Infinity" upper="Infinity"/>
+				</mean>
+				<precision>
+					<parameter id="serum.precision" value="1.0" lower="0.0" upper="Infinity"/>
+				</precision>
+			</normalDistributionModel>
+		</distribution>
+	</distributionLikelihood>	
+		
+	<operators id="operators" optimizationSchedule="log">
+	
+		<empiricalTreeDistributionOperator weight="1">
+			<empiricalTreeDistributionModel idref="treeModel"/>
+		</empiricalTreeDistributionOperator>	
+			
+		<randomWalkOperator windowSize="1.0" weight="1000">
+			<parameter idref="locations"/>
+		</randomWalkOperator>
+
+		<scaleOperator scaleFactor="0.99" weight="1" scaleAll="true">
+			<parameter idref="locations"/>
+		</scaleOperator>	
+
+		<scaleOperator scaleFactor="0.99" weight="1">
+			<parameter idref="mds.precision"/>
+		</scaleOperator>	
+			
+		<scaleOperator scaleFactor="0.99" weight="1000">
+			<parameter idref="location.drift"/>
+		</scaleOperator>
+					
+		<scaleOperator scaleFactor="0.99" weight="100">
+			<parameter idref="virusEffects"/>
+		</scaleOperator>
+	
+		<scaleOperator scaleFactor="0.99" weight="100">
+			<parameter idref="serumEffects"/>
+		</scaleOperator>
+		
+		<scaleOperator scaleFactor="0.99" weight="10">
+			<parameter idref="diffusion.precision"/>
+		</scaleOperator>			
+
+		<scaleOperator scaleFactor="0.99" weight="10">
+			<parameter idref="serum.precision"/>
+		</scaleOperator>			
+		
+	</operators>
+	
+	<mcmc id="mcmc" chainLength="500000000" autoOptimize="true" fullEvaluation="1000">
+		<posterior id="posterior">
+			<prior id="prior">
+						
+				<gammaPrior shape="0.001" scale="1000.0" offset="0.0">
+					<parameter idref="mds.precision"/>
+				</gammaPrior>
+				
+				<gammaPrior shape="0.001" scale="1000.0" offset="0.0">
+					<parameter idref="location.drift"/>
+				</gammaPrior>
+												
+				<normalPrior mean="9.966" stdev="1.170">
+					<parameter idref="serumEffects"/>
+				</normalPrior>		
+				
+				<normalPrior mean="9.917" stdev="1.320">
+					<parameter idref="virusEffects"/>
+				</normalPrior>						
+
+				<gammaPrior shape="0.001" scale="1000.0" offset="0.0">
+					<parameter idref="diffusion.precision"/>
+				</gammaPrior>
+				
+				<multivariateTraitLikelihood idref="traitLikelihood"/>	
+						
+				<gammaPrior shape="0.001" scale="1000.0" offset="0.0">
+					<parameter idref="serum.precision"/>
+				</gammaPrior>			
+									
+				<distributionLikelihood idref="serumLocations.hpm"/>				
+				
+			</prior>
+			
+			<likelihood id="likelihood">	            	
+	            <antigenicLikelihood idref="antigenicLikelihood"/>
+			</likelihood>
+		</posterior>
+		
+		<operators idref="operators"/>
+		
+		<log id="screenLog" logEvery="20000">
+			<column label="Posterior" dp="4" width="12">
+				<posterior idref="posterior"/>
+			</column>
+			<column label="Prior" dp="4" width="12">
+				<prior idref="prior"/>
+			</column>
+			<column label="Likelihood" dp="4" width="12">
+				<likelihood idref="likelihood"/>
+			</column>
+
+			<column label="MDSPrecision" sf="6" width="12">
+				<parameter idref="mds.precision"/>
+			</column> 
+
+			<column label="LocationDrift" sf="6" width="12">
+				<parameter idref="location.drift"/>
+			</column> 
+			
+			<column label="DiffusionPrecision" sf="6" width="12">
+				<parameter idref="diffusion.precision"/>
+			</column> 		
+			
+			<column label="SerumPrecision" sf="6" width="12">
+				<parameter idref="serum.precision"/>
+			</column> 					
+		</log>
+		
+		<log id="fileLog1" logEvery="200000" fileName="H1N1_mds.log">
+			<posterior idref="posterior"/>
+			<prior idref="prior"/>
+			<likelihood idref="likelihood"/>
+			<antigenicLikelihood idref="antigenicLikelihood"/>
+            <multivariateTraitLikelihood idref="traitLikelihood"/>			
+			<parameter idref="mds.precision"/>		
+			<parameter idref="location.drift"/>
+			<parameter idref="diffusion.precision"/>
+			<parameter idref="serum.precision"/>
+		</log>
+
+		<log id="fileLog2" logEvery="200000" fileName="H1N1_mds.virusLocs.log">
+			<statistic idref="driftedVirusLocations"/>
+		</log>
+		
+		<log id="fileLog3" logEvery="200000" fileName="H1N1_mds.serumLocs.log">
+			<statistic idref="driftedSerumLocations"/>
+		</log>		
+
+		<log id="fileLog4" logEvery="200000" fileName="H1N1_mds.virusEffects.log">
+			<parameter idref="virusEffects"/>
+		</log>
+
+		<log id="fileLog5" logEvery="200000" fileName="H1N1_mds.serumEffects.log">
+			<parameter idref="serumEffects"/>
+		</log>
+		
+		<logTree id="treeFileLog" logEvery="200000" nexusFormat="true" fileName="H1N1_mds.trees" sortTranslationTable="true">
+			<treeModel idref="treeModel"/>
+			<posterior idref="posterior"/>
+			<driftedTraits>
+				<multivariateTraitLikelihood idref="traitLikelihood"/> 
+				<parameter idref="location.drift"
+			</driftedTraits>
+		</logTree>	
+	
+	</mcmc>
+	
+	<report>
+		<property name="timer">
+			<object idref="mcmc"/>
+		</property>
+	</report>
+</beast>
