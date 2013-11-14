@@ -350,96 +350,56 @@ Antigenic drift results in the replacement of antigenically primitive lineages b
 
 \subsection*{Punctuated evolution and its epidemiological consequences}
 
-We sought to summarize year-to-year patterns of antigenic drift by calculating the difference in mean location between consecutive years (Figure~\ref{jumps}).
+We sought to summarize year-to-year patterns of antigenic drift by calculating the difference in mean location between consecutive years (Figure~\ref{jumps}A).
 We estimate year-to-year antigenic drift for years 1992 to 2011 by calculating the average location along dimension 1 of phylogenetic lineages present in the tree at year $i$ and comparing this location to the average location of phylogenetic lineages present in the tree at year $i-1$.
 There may often be large discontinuities in virus locations across the population; our use of difference in mean location is meant to capture both the distance between antigenic clusters and also the change in cluster frequency over consecutive years.
-We observe greater heterogeneity in year-to-year antigenic drift in type A than in type B lineages (Figure~\ref{jumps}), with standard deviation of year-to-year antigenic drift equal to 0.97 units in A/H3N2, 0.66 units in A/H1N1, 0.46 units in B/Vic and 0.26 units in B/Yam.
+We observe greater heterogeneity in year-to-year antigenic drift in type A than in type B lineages (Figure~\ref{jumps}B), with standard deviation of year-to-year antigenic drift equal to 0.97 units in A/H3N2, 0.66 units in A/H1N1, 0.46 units in B/Vic and 0.26 units in B/Yam.
 This analysis classifies drift only to the level of consecutive years; some coarse-graining of the timings of transition events will necessarily occur.
 
 %%% jumps %%%
 \begin{figure}[h]
 	\centering		
 	\includegraphics[width=1.0\textwidth]{figures/jumps}
-	\caption{\textbf{Year-to-year antigenic drift between 1992 and 2009 in A/H3N2, A/H1N1, B/Vic and B/Yam viruses.} 
-	(A) Time series of year-to-year antigenic drift across influenza clades from 1992 to 2011 and seasonal incidence from 1998/1999 to 2008/2009.
-	Colored lines represent year-to-year antigenic drift, and drift for a virus clade for year $i$ is measured as the mean of antigenic dimension 1 of phylogenetic lineages in year $i$ compared to the mean of antigenic dimension 1 of phylogenetic lineages from the previous year $i-1$.
-	For example, 2000 represents difference in antigenic dimension 1 between 1999 and 2000.
+	\caption{\textbf{Year-to-year antigenic drift between 1992 and 2011 in A/H3N2, A/H1N1, B/Vic and B/Yam viruses.} 
+	(A) Timeseries of year-to-year antigenic drift between 1992 and 2011 in A/H3N2, A/H1N1, B/Vic and B/Yam viruses.
+	Colored lines represent year-to-year antigenic drift, where drift for year $i$ is measured as the mean of antigenic dimension 1 of phylogenetic lineages in year $i$ compared to the mean of antigenic dimension 1 of phylogenetic lineages from the previous year $i-1$.
+	For example, 2000 represents difference in antigenic dimension 1 between viruses from 1999 and 2000.
 	Error bars represent 50\% Bayesian credible intervals of year-to-year drift.
-	Gray dotted lines represent clade-specific USA incidence taken as average influenza-like illness (ILI) multiplied by proportion of viruses attributable to a clade for each season.
+	Gray dotted lines represent lineage-specific seasonal incidence in the USA taken as average influenza-like illness (ILI) multiplied by proportion of viruses attributable to a lineage for each season.
 	Here, 2000 represents the 2000/2001 influenza season.
-	(B) Histograms of year-to-year antigenic drift across influenza clades summarizing observations from 1992 to 2011.
+	(B) Distribution of year-to-year antigenic drift between 1992 and 2011 in A/H3N2, A/H1N1, B/Vic and B/Yam viruses.
 	} 
 	\label{jumps} 
 \end{figure}
 
-We investigate the relationship between rates of antigenic drift and USA incidence in A/H3N2, A/H1N1, B/Vic and B/Yam.
-We take estimates of the rate of antigenic drift from the preceding section and compare these rates to measurements of relative incidence for each influenza clade calculated from the proportion of influenza viruses attributable to each clade (see Materials and methods).
-We analyze incidence from the 1998/1999 to the 2008/2009 seasons to avoid possible complications from the 2009 pandemic, finding that A/H3N2 accounted for 56\%, A/H1N1 for 20\%, B/Vic for 10\% and B/Yam for 14\% of viruses detected in the USA during this time period.
-We find a significant correlation between rate of antigenic drift and relative incidence across the four clades  (Pearson correlation, $r=0.96$, $p = 0.021$).
-
-We follow-up this analysis with a more detailed analysis of year-to-year variation in antigenic drift and clade-specific incidence in the USA.
-We measure year-to-year antigenic drift within each clade as described in the previous section and shown in Figure \ref{jumps}.
-We measure seasonal incidence of each clade by taking average influenza-like illness (ILI) percentage and multiplying this by the proportion of viruses attributable to a clade for each season.
+We investigate the relationship between rates of antigenic drift and seasonal incidence in the USA in A/H3N2, A/H1N1, B/Vic and B/Yam.
+We measure seasonal incidence from USA CDC data for each virus lineage (A/H3N2, A/H1N1, B/Vic, B/Yam) by taking the average influenza-like (ILI) percentage in a season and multiplying this by the relative proportion of virus isolations attributable to a particular influenza lineage in a season (see Materials and methods).
 This measure of incidence has previously been shown to have have predictive power in the analysis of seasonal influenza trends \cite{Goldstein11}.
-In correlating antigenic drift to seasonal incidence we standardize this measure of incidence across seasons and across clades to measure effects in terms of standard deviations of incidence.
-We find that years with high levels of antigenic drift coming into an influenza season, e.g.\ drift in A/H3N2 from 2000 to 2001, show high levels of incidence in that season, e.g.\ incidence of A/H3N2 in the 2001/2002 season (Figure~\ref{jumps}, Figure~\ref{incidence}A). 
-Here, within-clade drift explains 35\% of the variance in standardized incidence and represents a significant correlation (Pearson correlation, $r=0.60$, $p=1.6 \times 10^{-5}$).
+We analyze incidence from the 1998/1999 to the 2008/2009 seasons to avoid possible complications from the 2009 pandemic.
+We begin by comparing overall rates of antigenic drift (Figure~\ref{drift}, Table~\ref{paramtable}) to overall levels of seasonal incidence across influenza lineages, finding a significant correlation between rate of antigenic drift and relative incidence across the four lineages (Pearson correlation, $r=0.97$, $p = 0.041$).
 
-%%% incidence %%%
+We follow-up this analysis with a more detailed analysis of year-to-year variation in antigenic drift and lineage-specific incidence, comparing incidence in a seasonal to antigenic drift of viruses coming into this season (Figure~\ref{jumps}A).
+For example, we compare antigenic drift of viruses from 2000 to 2001 to incidence in the 2001/2002 season.
+Within each virus lineage, we find that years with pronounced antigenic drift tend to show increased incidence (Figure~\ref{corr}), finding Pearson correlation coefficients of 0.51, 0.29, 0.44 and 0.14 for A/H3N2, A/H1N1, B/Vic and B/Yam respectively.
+We calculated significance using bootstrap permutation tests finding $p$-values of 0.056, 0.201, 0.097 and 0.341 respectively.
+We applied a similar bootstrap permutation test to calculate the significance of finding the observed levels of correlation across all four lineages, arriving at a $p$-value of 0.018.
+
+%%% corr %%%
 \begin{figure}[h]
 	\centering		
-	\includegraphics[width=0.95\textwidth]{figures/incidence}
-	\caption{\textbf{Relationship between antigenic drift within and between clades and seasonal USA incidence for years 1998 to 2009.} 
-	(A) Standardized incidence within a clade compared to antigenic drift within the same clade.
-	For example, incidence of A/H3N2 in season 1998/1999 is measured against year-to-year antigenic drift of A/H3N2 from 1997 to 1998.
-	(B) Standardized incidence within a clade compared to antigenic drift in other clades.
-	For example, incidence of A/H3N2 in season 1998/1999 is measured against year-to-year antigenic drift of A/H1N1 from 1997 to 1998, as well as antigenic drift of B/Vic from 1997 to 1998.
-	Standardized incidence is measured as yearly ILI percentage multiplied by proportion of viruses identified in a particular clade, and then standardized so that mean and variance across seasons and clades is equal to 0 and 1 respectively.
-	Colors represent the clade in which incidence is measured; light blue for A/H3N2, purple for A/H1N1, orange for B/Vic and red for B/Yam.
+	\includegraphics[width=0.7\textwidth]{figures/corr}
+	\caption{\textbf{Relationship between antigenic drift and seasonal incidence for years 1998 to 2009 in influenza A/H3N2, A/H1N1, B/Vic and B/Yam.}
+	Antigenic drift from year $i-1$ to year $i$ is compared to incidence in the season $i$ / $i+1$.
+	For example, year-to-year antigenic drift from 2000 to 2001 is measured against incidence in the 2001/2002 season. 
 	} 
-	\label{incidence} 
+	\label{corr} 
 \end{figure}
 
-We further show that incidence within a clade decreases with antigenic drift in other clades, e.g.\ drift in A/H1N1, B/Vic and B/Yam from 2000 to 2001 decrease incidence of A/H3N2 in the 2001/2002 season (Figure~\ref{incidence}B).
-This also represents a significant relationship (Pearson correlation, $r=-0.20$, $p=0.024$).
-We fit a linear model that predicts standardized incidence based on drift within each of the four lineages, according to the following equations
-\begin{eqnarray}
-	\incclade{H3} &=& \bwithin \, \driftclade{H3} + \bsister \, \driftclade{H1} + \bother \, \driftclade{Vic} + \bother \, \driftclade{Yam} \nonumber \\
-	\incclade{H1} &=& \bsister \, \driftclade{H3} + \bwithin \, \driftclade{H1} + \bother \, \driftclade{Vic} + \bother \, \driftclade{Yam} \nonumber \\
-	\incclade{Vic} &=& \bother \, \driftclade{H3} + \bother \, \driftclade{H1} + \bwithin \, \driftclade{Vic} + \bsister \, \driftclade{Yam} \nonumber \\	
-	\incclade{Yam} &=& \bother \, \driftclade{H3} + \bother \, \driftclade{H1} + \bsister \, \driftclade{Vic} + \bwithin \, \driftclade{Yam},
-\end{eqnarray}
-where $y$ represents standardized incidence, $x$ represents drift in antigenic units, $\bwithin$ scales within-clade drift, $\bsister$ scales drift across sister viruses of the same type, and $\bother$ scales drift across viruses of differing type (Table~\ref{interferencetable}).
-For example, standardized incidence in A/H3N2 would be explained by drift within A/H3N2 scaled by $\bwithin$, drift in A/H1N1 scaled by $\bsister$ and by drift in B/Vic and B/Yam scaled by $\bother$.
-We compared adjusted $R^2$ across models with different regression coefficients included, and arrived at a best-fitting model that explains 46\% of the variance in standardized incidence and includes the terms $\bwithin$, $\bsister$ and $\bother$, but does not include an intercept term.
-We find that 1 unit of antigenic drift within a clade increases incidence by 1.26 standard deviations, while 1 unit of drift in a clade of the same type decreases incidence by 0.61 standard deviations and 1 unit of drift in clades of differing type decreases incidence by 0.32 standard deviations.
-The term for across lineage interference $\bother$ is small in magnitude, but remains statistically significant (Table~\ref{interferencetable}).
+Combining observations of year-to-year drift vs seasonal incidence across all four lineages, yields a simple linear model where one unit of antigenic drift results in an increase of 0.8\% in lineage-specific ILI.
 
-%%% interferencetable %%%
-\begin{table}[h]
-	\centering
-	\caption{\textbf{Estimates of regression coefficients for the relationship of clade-specific USA incidence to antigenic drift within and across clades, where standardized incidence in A/H3N2 is predicted by $\bwithin \, \driftclade{H3} + \bsister \, \driftclade{H1} + \bother \, \driftclade{Vic} + \bother \, \driftclade{Yam}$ and standardized incidence in other clades follows an analogous relationship.}}
-	\label{interferencetable}	
-	\begin{tabular}{ c c c c } 
-	\hline
-	Parameter	&	Estimate	&	Standard error 	& 	$p$-value \\
-	\hline		
-	$\bwithin$	&	$1.26$		&	0.22			&	$1.1 \times 10^{-6}$ \\
-	$\bsister$	&	$-0.61$		&	0.22			&	$0.008$ \\
-	$\bother$	&	$-0.32$		&	0.11			&	$0.005$ \\
-	\hline
-	\end{tabular}
-\end{table}
-
-These findings clearly demonstrate the epidemiological importance of antigenic drift and show that incidence across  A/H3N2, A/H1N1, B/Vic and B/Yam is strongly influenced by levels of antigenic drift within each clade, consistent with antigenic drift increasing the susceptible pool available to a clade.
-The finding of a negative correlation between incidence within one clade and antigenic drift in other clades supports the hypothesis that epidemiological interference exists between clades \cite{Ferguson03, Goldstein11}.
-The immunological basis of between-clade interference are not entirely clear, however cytotoxic T cells (CTLs) \cite{Voeten00}, antibodies that broadly neutralize HA \cite{Corti10} and antibodies to internal proteins \cite{Laidlaw13} have been hypothesized as possible mechanisms.
-Interestingly, we find that interference between sister clades, e.g.\ B/Vic and B/Yam, appears stronger than interference between more divergent clades, e.g.\ B/Vic and A/H3N2 (Table~\ref{interferencetable}, $\bsister = -0.61$ vs $\bother = -0.32$).
-If interference is mediated by CTLs or by antibodies to evolutionary conserved epitopes, then we would expect interference to decrease with evolutionary distance \cite{Voeten00}.
-
-Furthermore, these findings suggest that the predominant clade of a particular influenza season could be estimated ahead of time by examining the degree of variation in antigenic drift between influenza clades.
-However, this prediction would not be perfect, and 56\% of the variance in incidence remains unexplained by these estimates of antigenic drift.
-Some of this variance may be explained by incorporating geographic variation in year-to-year antigenic drift; although there exists significant geographic variation in clade-specific incidence \cite{Finkelman07}, we calculated antigenic drift from global samples, rather than USA-specific samples.
+%Furthermore, these findings suggest that the predominant clade of a particular influenza season could be estimated ahead of time by examining the degree of variation in antigenic drift between influenza clades.
+%However, this prediction would not be perfect, and 56\% of the variance in incidence remains unexplained by these estimates of antigenic drift.
+%Some of this variance may be explained by incorporating geographic variation in year-to-year antigenic drift; although there exists significant geographic variation in clade-specific incidence \cite{Finkelman07}, we calculated antigenic drift from global samples, rather than USA-specific samples.
 
 %\subsection*{Conversion of antigenic mutation into fixed differences}
 
