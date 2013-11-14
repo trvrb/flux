@@ -8,6 +8,7 @@
 \usepackage{color} 
 \usepackage{parskip}
 \usepackage{float}
+\usepackage{hyperref}
 
 % text layout
 \usepackage{geometry}
@@ -114,6 +115,8 @@ Integrating influenza antigenic dynamics with molecular evolution
 \begin{document}
 
 \maketitle
+
+Original reviewer criticisms are in plain text.  Our responses follow in \textbf{bold}.  A detailed list of every criticism and exactly what was revised in the manuscript in response to this criticism is available at \url{https://github.com/trvrb/flux/issues?state=closed}.
 
 %%% REVIEWER 1 %%%
 \section*{Reviewer 1}
@@ -255,7 +258,11 @@ Understanding antigenic drift of influenza in quantitative terms is clearly of g
 
 The authors do not seem to discuss this a problematic aspect of their results relating inferred drift to influenza disease incidence -- namely that biased sampling of clades, in each season, could cause the observed correlations. If clades were sampled for HI assays unequally in each season, as I suspect, then this fact alone might cause the trend towards apparently more drift in the clade that was sampled most intensively in each season (and to which most ILI was attributed). This is an obvious possible confound for the analysis presented in Fig. 4, and it should be ruled out by simulation of constant true rates of antigenic drift, variable sampling proportions in each season, and reconstructed drift using BMDS.
 
+\textbf{We tested to see if there might be an bias in the estimates of year-to-year antigenic drift based on number of virus isolates collected by correlating correlating drift between years $i$ and $i-1$ against the ratio of the number of isolates from year $i$ to the number of isolates from year $i-1$.  We found no significant correlation (Pearson's $r = -0.01$, $p = 0.411$), suggesting our results to be unbiased with regard to sample count.  We have included this analysis in the manuscript.}
+
 Likewise, in Fig. 5, the negative correlation between drift in different clades in each season could, again, be driven by variation in the number of strains per clade that were subjected to HI each season. The authors could rule this out either by simulation or, more simply, be repeating their analysis after subsampling an equal number of isolates per clade each season for inclusion into the BMDS.
+
+\textbf{The above analysis applies to this correlation as well.}
 
 I found the section fitting diffusion coefficients (in different branches) to the antigenic maps confusing -- if only because strict diffusion (in one or two dimensions) has no advection term and therefore no tendency to move in one direction or another; whereas the data clearly show an advective tendency (moving to the ``right'' over time in antigenic dimension 1). I presume the authors attempt to deal with this by imposing a prior (eq 12) for the location of a virus based on its location in a molecular phylogeny. But this would seem to conflate antigenic drift, which the authors wish to quantify using a diffusion coefficient, with genetic mutations (many of which are driven by selection for antigenic escape). In other words, this hybrid approach of assuming a prior based on a strain's genotype, and then fitting a diffusion coefficient to summarize strength of drift, does not seem to to be a pure measure of drift. What exactly the fitted diffusion coefficient means is extremely unclear to me, in any formal sense, as the procedure is so ad-hoc.
 
