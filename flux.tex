@@ -119,7 +119,7 @@ Integrating influenza antigenic dynamics with molecular evolution
 Influenza viruses undergo continual antigenic evolution allowing mutant viruses to evade host immunity acquired to previous virus strains.
 Antigenic phenotype is often assessed through pairwise measurement of cross-reactivity between influenza strains using the hemagglutination inhibition (HI) assay.
 Here, we extend previous approaches to antigenic cartography, and simultaneously characterize antigenic and genetic evolution by modeling the diffusion of antigenic phenotype over a shared virus phylogeny.
-Using HI data from influenza A subtypes H3N2 and H1N1 and influenza B lineages Victoria and Yamagata, we determine patterns of antigenic drift across viral lineages, showing that A/H3N2 evolves faster and in a more punctuated fashion than other influenza lineages.
+Using HI data from influenza lineages A/H3N2, A/H1N1, B/Victoria and B/Yamagata, we determine patterns of antigenic drift across viral lineages, showing that A/H3N2 evolves faster and in a more punctuated fashion than other influenza lineages.
 We also show that year-to-year antigenic drift appears to drive incidence patterns within each influenza lineage.
 This work makes possible substantial future advances in investigating the dynamics of influenza and other antigenically-variable pathogens by providing a model that intimately combines molecular and antigenic evolution.
 
@@ -140,7 +140,7 @@ A large proportion of the disease burden of influenza stems from antigenic drift
 Although influenza vaccines may lack efficacy for a variety of reasons \cite{Osterholm12}, antigenic drift causes efficacy against a fixed vaccine formulation to decline over time.
 A thorough understanding of the process of antigenic drift is essential to public health efforts to control mortality and morbidity through the use of a seasonal influenza vaccine.
 
-Before 2009, there were four major clades or lineages of influenza circulating within the human population: the H3N2 and H1N1 subtypes of influenza A, and the Victoria and Yamagata lineages of influenza B. 
+Before 2009, there were four major lineages of influenza circulating within the human population: the H3N2 and H1N1 subtypes of influenza A, and the Victoria and Yamagata lineages of influenza B. 
 In the case of influenza A, subtypes A/H3N2 and A/H1N1 refer to the genes, hemagglutinin (H or HA) and neuraminidase (N or NA), that are primarily responsible for the antigenic character of a strain. 
 In the case of influenza B, Victoria (B/Vic) and Yamagata (B/Yam) refer to antigenically distinct lineages which diverged from a single lineage prior to 1980 \cite{Rota90}.
 Mutations to the HA1 region of the hemagglutinin protein are thought to drive the majority of antigenic drift in the influenza virus \cite{Wiley81, Nelson07NatRevGenet}. 
@@ -157,7 +157,7 @@ Previously, the antigenic and genetic patterns of influenza evolution have been 
 An antigenic map is constructed from a panel of HI measurements, and a phylogenetic tree is constructed from sequence data. 
 However, the opportunity for a combined approach exists as both the antigenic map and the phylogenetic tree often contain many of the same isolates. 
 Here, we implement a flexible Bayesian approach to characterize jointly the antigenic and genetic evolution of the influenza virus population. 
-We apply this approach to investigate the dynamics of A/H3N2, A/H1N1, B/Vic and B/Yam viruses, and, for the first time, present detailed reconstructions of the antigenic dynamics of all four circulating influenza clades.
+We apply this approach to investigate the dynamics of A/H3N2, A/H1N1, B/Vic and B/Yam viruses, and, for the first time, present detailed reconstructions of the antigenic dynamics of all four circulating influenza lineages.
 
 %%% RESULTS %%%
 \section*{Results and discussion}
@@ -305,7 +305,7 @@ Most variation is contained within the first antigenic dimension, but dimension 
 	\label{drift} 
 \end{figure}
 
-We find that other clades of influenza evolved in antigenic phenotype substantially slower than A/H3N2 (Figure~\ref{drift}, Table~\ref{paramtable}).
+We find that other lineages of influenza evolved in antigenic phenotype substantially slower than A/H3N2 (Figure~\ref{drift}, Table~\ref{paramtable}).
 Influenza A/H1N1 evolved at a rate of 0.62 units per year, but showed a similar pattern of punctuated antigenic evolution with occasional larger jumps in phenotype, such as the emergence of the Solomon Islands/06 cluster.  
 Influenza B/Victoria and B/Yamagata evolved slower still, with mean estimated rates 0.42 units per year and 0.32 units per year, respectively.
 Punctuated evolution is less obvious in B/Yam and B/Vic compared to A/H3N2 and A/H1N1, but antigenic clusters are still apparent, with recent transitions to the Brisbane/08 cluster in B/Vic \cite{Barr10} and to the Wisconsin/10 cluster in B/Yam \cite{Klimov12}.
@@ -458,7 +458,7 @@ Although the general correlation between rate of antigenic drift and incidence a
 Understanding antigenic evolution in seasonal influenza is crucial to our efforts of surveillance and control.
 Cartographic methods allow complex HI datasets to be compressed to more approachable location-based summaries that quantify antigenic relationships between strains, including relationships not directly assessed via HI.
 In this study we provide a foundation for evolutionary antigenic cartography, which seeks to simultaneously assess antigenic phenotype and antigenic evolution.
-We use this approach to characterize competitive dynamics across influenza clades A/H3N2, A/H1N1, B/Vic and B/Yam and show that antigenic evolution drives strain replacement in each clade and influences incidence patterns.
+We use this approach to characterize competitive dynamics across influenza lineages A/H3N2, A/H1N1, B/Vic and B/Yam and show that antigenic evolution within each lineage drives strain replacement and contributes to seasonal incidence patterns.
 
 %We find that varying levels of mutational input and varying efficiencies of the conversion of antigenic polymorphism into fixed differences results in different rates of antigenic drift across influenza clades.
 %Influenza A/H3N2 benefits from a higher rate of new antigenic mutation coupled with strong adaptive evolution and evolves in antigenic phenotype faster than A/H1N1, B/Vic and B/Yam.
@@ -687,7 +687,7 @@ Each virus isolate was compared to an average of 6.9 serum isolates, and each se
 
 Surveillance data was obtained from the Centers of Disease Control and Prevention FluView Influenza Reports from the yearly summaries of influenza seasons 1997--1998 to 2010--2011 \cite{CDCReports}.
 As an example, one report states ``collaborating laboratories in the United States tested 195,744 respiratory specimens for influenza viruses, 27,682 (14\%) of which were positive. Of these, 18,175 (66\%) were positive for influenza A viruses, and 9,507 (34\%) were positive for influenza B viruses. Of the 18,175 specimens positive for influenza A viruses, 7,631 (42\%) were subtyped; 6,762 (87\%) of these were seasonal influenza A (H1N1) viruses, and 869 (13\%) were influenza A (H3N2) viruses.''
-In this case, we estimate the relative proportion of A/H3N2 of the four clades as $0.66 \times 0.13 = 0.09$.
+In this case, we estimate the relative proportion of A/H3N2 of the four lineages as $0.66 \times 0.13 = 0.09$.
 Similar calculations were performed for A/H1N1, B/Vic and B/Yam.
 
 \subsection*{Implementation}
