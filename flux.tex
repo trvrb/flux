@@ -119,8 +119,8 @@ Integrating influenza antigenic dynamics with molecular evolution
 Influenza viruses undergo continual antigenic evolution allowing mutant viruses to evade host immunity acquired to previous virus strains.
 Antigenic phenotype is often assessed through pairwise measurement of cross-reactivity between influenza strains using the hemagglutination inhibition (HI) assay.
 Here, we extend previous approaches to antigenic cartography, and simultaneously characterize antigenic and genetic evolution by modeling the diffusion of antigenic phenotype over a shared virus phylogeny.
-Using HI data from influenza A subtypes H3N2 and H1N1 and influenza B lineages Victoria and Yamagata, we determine patterns of antigenic drift across lineages and show that antigenic drift drives incidence rates and mediates interference between influenza lineages.
-%Additionally, we describe the selective underpinnings of differences in antigenic drift across lineages.
+Using HI data from influenza A subtypes H3N2 and H1N1 and influenza B lineages Victoria and Yamagata, we determine patterns of antigenic drift across viral lineages, showing that A/H3N2 evolves faster and in a more punctuated fashion than other influenza lineages.
+We also show that year-to-year antigenic drift appears to drive incidence patterns within each influenza lineage.
 This work makes possible substantial future advances in investigating the dynamics of influenza and other antigenically-variable pathogens by providing a model that intimately combines molecular and antigenic evolution.
 
 \end{abstract}
@@ -336,6 +336,10 @@ The scaled effective population size $N_e \tau$ measures the timescale of coales
 Here, we see that $N_e \tau$ broadly correlates with the rate of antigenic drift (Table~\ref{paramtable}), with A/H3N2 showing fast drift and reduced effective population size as expected from basic epidemiological models \cite{Bedford12}.
 Antigenic drift results in the replacement of antigenically primitive lineages by antigenically advanced lineages, thereby reducing genealogical diversity.
 
+Thus, we observe a faster rate of antigenic drift in influenza A/H3N2 than in A/H1N1 or in either lineage of influenza B.
+Previous work using general epidemiological models has suggested that rates of antigenic drift may be influenced by both the fundamental reproductive number $R_0$ and the rate at which mutation decreases cross-immunity \cite{Gog02,Lin03}.
+Models of influenza evolution acribe differences in the rate of antigenic drift of A/H3N2 relative to A/H1N1 and influenza B to either greater $R_0$ or greater mutation rate \cite{Ferguson03,Bedford12}.
+Without more detailed epidemiological modeling, the present study cannot conclusively distinguish between these causal possibilities.
 
 %%% trees %%%
 \begin{figure}[h]
@@ -373,7 +377,7 @@ This analysis classifies drift only to the level of consecutive years; some coar
 \end{figure}
 
 We investigate the relationship between rates of antigenic drift and seasonal incidence in the USA in A/H3N2, A/H1N1, B/Vic and B/Yam.
-We measure seasonal incidence from USA CDC data for each virus lineage (A/H3N2, A/H1N1, B/Vic, B/Yam) by taking the average influenza-like (ILI) percentage in a season and multiplying this by the relative proportion of virus isolations attributable to a particular influenza lineage in a season (see Materials and methods).
+We measure seasonal incidence from USA CDC influenza surveillance reports for each virus lineage (A/H3N2, A/H1N1, B/Vic, B/Yam) by taking the average influenza-like (ILI) percentage in a season and multiplying this by the relative proportion of virus isolations attributable to a particular influenza lineage in a season (see Materials and methods).
 This measure of incidence has previously been shown to have have predictive power in the analysis of seasonal influenza trends \cite{Goldstein11}.
 We analyze incidence from the 1998/1999 to the 2008/2009 seasons to avoid possible complications from the 2009 pandemic.
 We begin by comparing overall rates of antigenic drift (Figure~\ref{drift}, Table~\ref{paramtable}) to overall levels of seasonal incidence across influenza lineages, finding a significant correlation between rate of antigenic drift and relative incidence across the four lineages (Pearson correlation, $r=0.97$, $p = 0.041$).
@@ -395,7 +399,7 @@ We applied a similar bootstrap permutation test to calculate the significance of
 	\label{corr} 
 \end{figure}
 
-Combining observations of year-to-year drift vs seasonal incidence across all four lineages, yields a simple linear model where one unit of antigenic drift results in an increase of 0.8\% in lineage-specific ILI.
+Although the general correlation between rate of antigenic drift and incidence across the four influenza lineages may not represent a causal relationship, the within-lineage year-to-year correlations suggest a causal relationship as increases in incidence tend to occur subsequent to periods of pronounced antigenic drift.
 
 %Furthermore, these findings suggest that the predominant clade of a particular influenza season could be estimated ahead of time by examining the degree of variation in antigenic drift between influenza clades.
 %However, this prediction would not be perfect, and 56\% of the variance in incidence remains unexplained by these estimates of antigenic drift.
@@ -454,17 +458,17 @@ Combining observations of year-to-year drift vs seasonal incidence across all fo
 Understanding antigenic evolution in seasonal influenza is crucial to our efforts of surveillance and control.
 Cartographic methods allow complex HI datasets to be compressed to more approachable location-based summaries that quantify antigenic relationships between strains, including relationships not directly assessed via HI.
 In this study we provide a foundation for evolutionary antigenic cartography, which seeks to simultaneously assess antigenic phenotype and antigenic evolution.
-We use this approach to characterize competitive dynamics across influenza clades A/H3N2, A/H1N1, B/Vic and B/Yam and show that antigenic evolution drives strain replacement in each clade and interference between clades.
-We find that varying levels of mutational input and varying efficiencies of the conversion of antigenic polymorphism into fixed differences results in different rates of antigenic drift across influenza clades.
-Influenza A/H3N2 benefits from a higher rate of new antigenic mutation coupled with strong adaptive evolution and evolves in antigenic phenotype faster than A/H1N1, B/Vic and B/Yam.
-Correspondingly, we observe substantially greater levels of incidence in A/H3N2 than in other influenza clades.
-We suggest that antigenic evolution strongly influences competitive dynamics both within and between influenza clades.
+We use this approach to characterize competitive dynamics across influenza clades A/H3N2, A/H1N1, B/Vic and B/Yam and show that antigenic evolution drives strain replacement in each clade and influences incidence patterns.
+
+%We find that varying levels of mutational input and varying efficiencies of the conversion of antigenic polymorphism into fixed differences results in different rates of antigenic drift across influenza clades.
+%Influenza A/H3N2 benefits from a higher rate of new antigenic mutation coupled with strong adaptive evolution and evolves in antigenic phenotype faster than A/H1N1, B/Vic and B/Yam.
+%Correspondingly, we observe substantially greater levels of incidence in A/H3N2 than in other influenza clades.
+%We suggest that antigenic evolution strongly influences competitive dynamics both within and between influenza clades.
 
 The statistical framework presented here represents a baseline to which further advancements in modeling antigenic phenotype and evolution may be made.
 For example, our likelihood-based model facilitates the inclusion of possible covariates affecting immunological titer, which could include experimental factors such as red blood cell type used in the HI assay \cite{Lin12} and whether oseltamivir is included in the HI reaction \cite{Lin10}.
 Additionally, this framework should be ideally suited to uncovering genetic determinants of antigenic change, as both the sequence state and antigenic location of internal nodes in the phylogeny may be estimated.
 In this fashion, it should be possible to correlate sequence substitutions directly to antigenic diffusion.
-
 Identifying viruses that will come to predominate in the global virus population while they are still at low frequency remains an enormous challenge.
 However, combining evolutionary and antigenic information may eventually prove useful in identifying low-frequency, but expanding, lineages of antigenically novel viruses that represent ideal targets for vaccine strain selection.
 
