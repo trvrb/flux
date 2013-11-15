@@ -409,7 +409,7 @@ The location-tagged phylogeny is logged with:
 	<posterior idref="posterior"/>
 	<driftedTraits>
 		<multivariateTraitLikelihood idref="traitLikelihood"/> 
-		<parameter idref="location.drift"
+		<parameter idref="location.drift"/>
 	</driftedTraits>
 </logTree>
 ```
