@@ -12,7 +12,7 @@
 
 % text layout
 \usepackage{geometry}
-\geometry{textwidth=15cm} % 15.25cm for single-space, 16.25cm for double-space
+\geometry{textwidth=15.25cm} % 15.25cm for single-space, 16.25cm for double-space
 \geometry{textheight=22cm} % 22cm for single-space, 22.5cm for double-space
 
 % helps to keep figures from being orphaned on a page by themselves
@@ -81,42 +81,32 @@
 \newcommand{\twomatrix}[2]{\left( \begin{matrix} #1 \\ #2 \end{matrix} \right)}								% pretty inline matrix 
 \newcommand{\fourmatrix}[4]{\left( \begin{matrix} #1 & #2 \\ #3 & #4 \end{matrix} \right)}					% pretty inline matrix 
 
-
-%%% TITLE %%%
-\title{\vspace{1.0cm} \Large \bf
-Reviewer responses for\\
-Integrating influenza antigenic dynamics with molecular evolution
-}
-
-\author[1]{Trevor Bedford}
-\author[2,3,4]{Marc A. Suchard}
-\author[5]{Philippe Lemey}
-\author[1]{Gytis Dudas}
-\author[6]{Victoria Gregory}
-\author[6]{Alan J. Hay}
-\author[6]{John W. McCauley}
-\author[7,8]{Colin A. Russell}
-\author[7,8,9]{Derek J. Smith}
-\author[1,10]{Andrew Rambaut}
-
-\affil[1]{Institute of Evolutionary Biology, University of Edinburgh, Edinburgh, UK}
-\affil[2]{Department of Biomathematics, David Geffen School of Medicine at UCLA, University of California, Los Angeles CA, USA}
-\affil[3]{Department of Human Genetics, David Geffen School of Medicine at UCLA, University of California, Los Angeles CA, USA}
-\affil[4]{Department of Biostatistics, UCLA Fielding School of Public Health, University of California, Los Angeles CA, USA}
-\affil[5]{Department of Microbiology and Immunology, Katholieke Universiteit Leuven, Leuven, Belgium}
-\affil[6]{Division of Virology, MRC National Institute for Medical Research, Mill Hill, London, UK}
-\affil[7]{Centre for Pathogen Evolution, Department of Zoology, University of Cambridge, Cambridge, UK}
-\affil[8]{WHO Collaborating Center for Modeling, Evolution, and Control of Emerging Infectious Diseases, University of Cambridge, Cambridge, UK}
-\affil[9]{Department of Virology, Erasmus Medical Centre, Rotterdam, Netherlands}
-\affil[10]{Fogarty International Center, National Institutes of Health, Bethesda, MD, USA}
-
-\date{}
-
 \begin{document}
 
-\maketitle
+\newgeometry{top=4cm}
 
-Original reviewer criticisms are in plain text.  Our responses follow in \textbf{bold}.  A detailed list of every criticism and exactly what was revised in the manuscript in response to this criticism is available at \url{https://github.com/trvrb/flux/issues?state=closed}.
+Dear eLife editorial board,
+
+Please find attached our extensively revised manuscript entitled ``Integrating influenza antigenic dynamics with molecular evolution''.  This is a resubmission of manuscript number 04-04-2013-RA-eLife-00803. The editorial response stated that:
+
+\begin{quote}
+Given, however, the extreme importance of this work to understanding influenza evolution and vaccine selection and the potential to provide a quantitative assessment of the association between drift (as measured by cartography) and incidence, the reviewers and editor would be willing to consider a fresh submission with major revisions that convinced us that the correlation is true or that there is perhaps no correlation between drift and incidence (or conceivably that antigenic cartography is not a good way to measure drift). 
+\end{quote}
+
+We have paid particular attention to the reviewer's criticisms regarding our observed correlation between year-to-year antigenic drift and influenza incidence.  We have revised our statistics to show correlation within A/H3N2, A/H1N1, B/Vic and B/Yam individually and as well as to show that measurements of antigenic drift are robust to sampling counts.  Additionally, we have included substantial new results regarding relationships between amino acid substitutions and antigenic drift as suggested by reviewer 2 and provided a new analysis of phylogenetic trees as suggested by reviewer 1.
+
+Point-by-point review responses are attached, as well as a diffed PDF detailing all the changes that have been made since the initial submission.  Additionally, a detailed list of every criticism and exactly what was revised in the manuscript in response to this criticism is available at \url{https://github.com/trvrb/flux/issues?state=closed}.
+
+Sincerely,\\
+Trevor Bedford
+
+\restoregeometry
+
+\newpage
+
+\section*{Reviewer responses}
+
+Original reviewer criticisms are in plain text.  Our responses follow in \textbf{bold}.  
 
 %%% REVIEWER 1 %%%
 \section*{Reviewer 1}
@@ -306,9 +296,5 @@ The ``uninformed'' prior used in Table 1 is not described in detail, but it actu
 The authors should add a column to Table 1 showing the performance of the best possible model arising from purely genetic data -- that is, 2-D or 3-D embeddings based on aa hamming distances alone, ignoring all HI data.
 
 \textbf{We agree that it would be ideal to provide a test error associated with a purely genetic model.  However, test errors in Table 1 are based on the prediction of a set of HI titers based on other HI titers or other HI titers plus genetic data.  Without including some form of HI information, it's difficult to see how to predict HI titer.  One could have a `distance' in terms of AA rather than antigenic map units, but in this case, one would still need to include a scaling for `serum effects', which could not be made without reference to HI data.  Regardless, we've attempted to address this issue in our discussion of correlation between antigenic and genetic distances, as described above.}
-
-%%% REFERENCES %%%
-\bibliographystyle{plos}
-\bibliography{flux}
 
 \end{document}
