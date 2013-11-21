@@ -25,9 +25,6 @@ The antigenic model is specified by:
 							fileName="H1N1_HI_data.txt"
 							mdsDimension="2"
 							intervalWidth="1.0">
-	<locations>
-		<matrixParameter id="locations"/>
-	</locations>
 	<virusLocations>
 		<matrixParameter id="virusLocations"/>
 	</virusLocations>	
@@ -37,26 +34,23 @@ The antigenic model is specified by:
 	<mdsPrecision>
 		<parameter id="mds.precision" value="1.0" lower="0.0"/>
 	</mdsPrecision>
-	<locationDrift>
-		<parameter id="location.drift" value="0.0" lower="0.0"/>
-	</locationDrift>
 </antigenicLikelihood>
 ```
 
-Here `mdsDimension` specifies the number of dimensions to use in the BMDS.  `intervalWidth` is an optional parameter, that when specified uses interval likelihoods (eq. 7 in the manuscript) rather than point likelihoods (eq. 5 in manuscript).  Additionally, there is an optional parameter `mergeIsolates`, that when set to `"true"` takes locations based on `virusStrain` and `serumStrain` rather than based `virusIsolate` and `serumIsolate`.  In this case, the `locationDrift` parameter is included, but fixed at a value of `0.0`.
+Here `mdsDimension` specifies the number of dimensions to use in the BMDS.  `intervalWidth` is an optional parameter, that when specified uses interval likelihoods (eq. 7 in the manuscript) rather than point likelihoods (eq. 5 in manuscript).  Additionally, there is an optional parameter `mergeSerumIsolates`, that when set to `"true"` takes locations based on `serumStrain` rather than `serumIsolate`.
 
-MCMC proposals on `locations` and `mds.precision` follow:
+MCMC proposals on `virusLocations`, `serumLocations` and `mds.precision` follow:
 
 ```xml
 <operators id="operators" optimizationSchedule="log">
 			
 	<randomWalkOperator windowSize="1.0" weight="1000">
-		<parameter idref="locations"/>
+		<parameter idref="virusLocations"/>
 	</randomWalkOperator>
 
-	<scaleOperator scaleFactor="0.99" weight="1" scaleAll="true">
-		<parameter idref="locations"/>
-	</scaleOperator>	
+	<randomWalkOperator windowSize="1.0" weight="1000">
+		<parameter idref="serumLocations"/>
+	</randomWalkOperator>
 
 	<scaleOperator scaleFactor="0.99" weight="1">
 		<parameter idref="mds.precision"/>
@@ -75,8 +69,12 @@ Priors on virus and serum locations follow a diffuse normal distribution and pri
 	</gammaPrior>
 	
 	<uniformPrior lower="-100" upper="100">
-		<parameter idref="locations"/>
+		<parameter idref="virusLocations"/>
 	</uniformPrior>
+	
+	<uniformPrior lower="-100" upper="100">
+		<parameter idref="serumLocations"/>
+	</uniformPrior>	
 															
 </prior>
 ```
@@ -112,9 +110,6 @@ This differs from the basic model by specifying a positive `location.drift` and 
 							fileName="H1N1_HI_data.txt"
 							mdsDimension="2"
 							intervalWidth="1.0">
-	<locations>
-		<matrixParameter id="locations"/>
-	</locations>
 	<virusLocations>
 		<matrixParameter id="virusLocations"/>
 	</virusLocations>	
@@ -212,7 +207,7 @@ Operators include the addition of:
 </scaleOperator>
 ```
 
-The diffuse normal prior on virus and serum location is replaced hierarchical normal priors:
+The diffuse normal prior on virus and serum locations is replaced by hierarchical normal priors:
 
 ```xml									
 <gammaPrior shape="0.001" scale="1000.0" offset="0.0">
@@ -277,7 +272,7 @@ MCMC proposals now include:
 </scaleOperator>
 ```
 
-Empirical priors are included for both virus and serum effects:
+Empirical priors are included for both virus avidities and serum potencies:
 
 ```xml
 <normalPrior mean="9.966" stdev="1.170">

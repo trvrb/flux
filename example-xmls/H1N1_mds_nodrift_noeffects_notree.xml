@@ -5,9 +5,6 @@
 								fileName="H1N1_HI_data.txt"
 								mdsDimension="2"
 								intervalWidth="1.0">
-		<locations>
-			<matrixParameter id="locations"/>
-		</locations>
 		<virusLocations>
 			<matrixParameter id="virusLocations"/>
 		</virusLocations>	
@@ -17,20 +14,17 @@
 		<mdsPrecision>
 			<parameter id="mds.precision" value="1.0" lower="0.0"/>
 		</mdsPrecision>
-		<locationDrift>
-			<parameter id="location.drift" value="0.0" lower="0.0"/>
-		</locationDrift>
 	</antigenicLikelihood>
 		
 	<operators id="operators" optimizationSchedule="log">
 				
 		<randomWalkOperator windowSize="1.0" weight="1000">
-			<parameter idref="locations"/>
+			<parameter idref="virusLocations"/>
 		</randomWalkOperator>
-
-		<scaleOperator scaleFactor="0.99" weight="1" scaleAll="true">
-			<parameter idref="locations"/>
-		</scaleOperator>	
+		
+		<randomWalkOperator windowSize="1.0" weight="1000">
+			<parameter idref="serumLocations"/>
+		</randomWalkOperator>		
 
 		<scaleOperator scaleFactor="0.99" weight="1">
 			<parameter idref="mds.precision"/>
@@ -47,8 +41,12 @@
 				</gammaPrior>
 				
 				<uniformPrior lower="-100" upper="100">
-					<parameter idref="locations"/>
+					<parameter idref="virusLocations"/>
 				</uniformPrior>
+				
+				<uniformPrior lower="-100" upper="100">
+					<parameter idref="serumLocations"/>
+				</uniformPrior>				
 																		
 			</prior>
 			
