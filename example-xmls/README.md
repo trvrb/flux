@@ -248,19 +248,19 @@ Locations are logged using the *drifted* locations instead of raw locations:
 </log>		
 ```
 
-### Virus and serum effects
+### Estimating virus avidity and serum potency
 
-A more complicated model that include virus and serum effects is specified in `H1N1_mds_drift_effects_notree.xml`.
+A more complicated model that includes virus avidity and estimates (rather than fixing) serum potency is specified in `H1N1_mds_drift_effects_notree.xml`.
 
 This has the addition of:
 
 ```xml
-<virusEffects>
-	<parameter id="virusEffects"/>
-</virusEffects>
-<serumEffects>
-	<parameter id="serumEffects"/>
-</serumEffects>	
+<virusAvidities>
+	<parameter id="virusAvidities"/>
+</virusAvidities>
+<serumPotencies>
+	<parameter id="serumPotencies"/>
+</serumPotencies>	
 ```
 
 in the `antigenicLikelihood` block.
@@ -269,11 +269,11 @@ MCMC proposals now include:
 
 ```xml
 <scaleOperator scaleFactor="0.99" weight="100">
-	<parameter idref="virusEffects"/>
+	<parameter idref="virusAvidities"/>
 </scaleOperator>
 
 <scaleOperator scaleFactor="0.99" weight="100">
-	<parameter idref="serumEffects"/>
+	<parameter idref="serumPotencies"/>
 </scaleOperator>
 ```
 
@@ -281,23 +281,23 @@ Empirical priors are included for both virus and serum effects:
 
 ```xml
 <normalPrior mean="9.966" stdev="1.170">
-	<parameter idref="serumEffects"/>
+	<parameter idref="serumPotencies"/>
 </normalPrior>		
 
 <normalPrior mean="9.917" stdev="1.320">
-	<parameter idref="virusEffects"/>
+	<parameter idref="virusAvidities"/>
 </normalPrior>	
 ```
 
 Effects are logged in the standard fashion:
 
 ```xml
-<log id="fileLog4" logEvery="200000" fileName="H1N1_mds.virusEffects.log">
-	<parameter idref="virusEffects"/>
+<log id="fileLog4" logEvery="200000" fileName="H1N1_mds.virusAvidities.log">
+	<parameter idref="virusAvidities"/>
 </log>
 
-<log id="fileLog5" logEvery="200000" fileName="H1N1_mds.serumEffects.log">
-	<parameter idref="serumEffects"/>
+<log id="fileLog5" logEvery="200000" fileName="H1N1_mds.serumPotencies.log">
+	<parameter idref="serumPotencies"/>
 </log>
 ```
 
