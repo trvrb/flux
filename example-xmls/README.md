@@ -260,31 +260,98 @@ This has the addition of:
 
 in the `antigenicLikelihood` block.
 
-MCMC proposals now include:
+And the addition of hierarchical `distributionLikelihoods` on `virusAvidities` and `serumPotencies`:
 
 ```xml
-<scaleOperator scaleFactor="0.99" weight="100">
+<distributionLikelihood id="virusAvidities.hpm">
+	<data>
+		<parameter idref="virusAvidities"/>
+	</data>
+	<distribution>
+		<normalDistributionModel>
+			<mean>
+				<parameter id="virusAvidities.mean" value="0.0"/>
+			</mean>
+			<precision>
+				<parameter id="virusAvidities.precision" value="1.0" lower="0.0"/>
+			</precision>
+		</normalDistributionModel>
+	</distribution>
+</distributionLikelihood>	
+
+<distributionLikelihood id="serumPotencies.hpm">
+	<data>
+		<parameter idref="serumPotencies"/>
+	</data>
+	<distribution>
+		<normalDistributionModel>
+			<mean>
+				<parameter id="serumPotencies.mean" value="10.0" lower="0.0"/>
+			</mean>
+			<precision>
+				<parameter id="serumPotencies.precision" value="1.0" lower="0.0"/>
+			</precision>
+		</normalDistributionModel>
+	</distribution>
+</distributionLikelihood>	
+```
+
+MCMC proposals now include changes to avidity and potency vectors as well as proposals to the hierarchical priors:
+
+```xml
+<randomWalkOperator windowSize="1.0" weight="100">
 	<parameter idref="virusAvidities"/>
-</scaleOperator>
+</randomWalkOperator>	
 
 <scaleOperator scaleFactor="0.99" weight="100">
 	<parameter idref="serumPotencies"/>
 </scaleOperator>
+
+<scaleOperator scaleFactor="0.99" weight="10">
+	<parameter idref="virusAvidities.precision"/>
+</scaleOperator>					
+
+<scaleOperator scaleFactor="0.99" weight="10">
+	<parameter idref="serumPotencies.mean"/>
+</scaleOperator>	
+
+<scaleOperator scaleFactor="0.99" weight="10">
+	<parameter idref="serumPotencies.precision"/>
+</scaleOperator>	
 ```
 
-Empirical priors are included for both virus avidities and serum potencies:
+Notice there is no proposal for `virusAvidities.mean`.  This stays fixed at `0.0` for reasons of identifiability.
+
+Hierarchical priors are included for both virus avidities and serum potencies:
 
 ```xml
-<normalPrior mean="9.966" stdev="1.170">
-	<parameter idref="serumPotencies"/>
-</normalPrior>		
+<gammaPrior shape="0.001" scale="1000.0" offset="0.0">
+	<parameter idref="virusAvidities.precision"/>
+</gammaPrior>								
 
-<normalPrior mean="9.917" stdev="1.320">
-	<parameter idref="virusAvidities"/>
-</normalPrior>	
+<distributionLikelihood idref="virusAvidities.hpm"/>				
+
+<gammaPrior shape="0.001" scale="1000.0" offset="0.0">
+	<parameter idref="serumPotencies.mean"/>
+</gammaPrior>		
+
+<gammaPrior shape="0.001" scale="1000.0" offset="0.0">
+	<parameter idref="serumPotencies.precision"/>
+</gammaPrior>								
+
+<distributionLikelihood idref="serumPotencies.hpm"/>	
 ```
 
-Effects are logged in the standard fashion:
+Hierarchical parameters are included in the main log file:
+
+```xml
+<parameter idref="virusAvidities.mean"/>			
+<parameter idref="virusAvidities.precision"/>			
+<parameter idref="serumPotencies.mean"/>
+<parameter idref="serumPotencies.precision"/>	
+```
+
+and avidities and potencies are recorded in separate log files:
 
 ```xml
 <log id="fileLog4" logEvery="200000" fileName="H1N1_mds.virusAvidities.log">

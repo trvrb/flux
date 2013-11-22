@@ -86,6 +86,38 @@
 			</normalDistributionModel>
 		</distribution>
 	</distributionLikelihood>	
+	
+	<distributionLikelihood id="virusAvidities.hpm">
+		<data>
+			<parameter idref="virusAvidities"/>
+		</data>
+		<distribution>
+			<normalDistributionModel>
+				<mean>
+					<parameter id="virusAvidities.mean" value="0.0"/>
+				</mean>
+				<precision>
+					<parameter id="virusAvidities.precision" value="1.0" lower="0.0"/>
+				</precision>
+			</normalDistributionModel>
+		</distribution>
+	</distributionLikelihood>	
+	
+	<distributionLikelihood id="serumPotencies.hpm">
+		<data>
+			<parameter idref="serumPotencies"/>
+		</data>
+		<distribution>
+			<normalDistributionModel>
+				<mean>
+					<parameter id="serumPotencies.mean" value="10.0" lower="0.0"/>
+				</mean>
+				<precision>
+					<parameter id="serumPotencies.precision" value="1.0" lower="0.0"/>
+				</precision>
+			</normalDistributionModel>
+		</distribution>
+	</distributionLikelihood>			
 		
 	<operators id="operators" optimizationSchedule="log">
 				
@@ -105,9 +137,9 @@
 			<parameter idref="location.drift"/>
 		</scaleOperator>
 					
-		<scaleOperator scaleFactor="0.99" weight="100">
+		<randomWalkOperator windowSize="1.0" weight="100">
 			<parameter idref="virusAvidities"/>
-		</scaleOperator>
+		</randomWalkOperator>	
 	
 		<scaleOperator scaleFactor="0.99" weight="100">
 			<parameter idref="serumPotencies"/>
@@ -119,6 +151,18 @@
 
 		<scaleOperator scaleFactor="0.99" weight="10">
 			<parameter idref="serum.precision"/>
+		</scaleOperator>			
+		
+		<scaleOperator scaleFactor="0.99" weight="10">
+			<parameter idref="virusAvidities.precision"/>
+		</scaleOperator>					
+		
+		<scaleOperator scaleFactor="0.99" weight="10">
+			<parameter idref="serumPotencies.mean"/>
+		</scaleOperator>	
+		
+		<scaleOperator scaleFactor="0.99" weight="10">
+			<parameter idref="serumPotencies.precision"/>
 		</scaleOperator>			
 		
 	</operators>
@@ -135,14 +179,6 @@
 					<parameter idref="location.drift"/>
 				</gammaPrior>
 												
-				<normalPrior mean="9.966" stdev="1.170">
-					<parameter idref="serumPotencies"/>
-				</normalPrior>		
-				
-				<normalPrior mean="9.917" stdev="1.320">
-					<parameter idref="virusAvidities"/>
-				</normalPrior>						
-
 				<gammaPrior shape="0.001" scale="1000.0" offset="0.0">
 					<parameter idref="virus.precision"/>
 				</gammaPrior>
@@ -153,7 +189,23 @@
 					<parameter idref="serum.precision"/>
 				</gammaPrior>			
 									
-				<distributionLikelihood idref="serumLocations.hpm"/>				
+				<distributionLikelihood idref="serumLocations.hpm"/>	
+				
+				<gammaPrior shape="0.001" scale="1000.0" offset="0.0">
+					<parameter idref="virusAvidities.precision"/>
+				</gammaPrior>								
+				
+				<distributionLikelihood idref="virusAvidities.hpm"/>				
+				
+				<gammaPrior shape="0.001" scale="1000.0" offset="0.0">
+					<parameter idref="serumPotencies.mean"/>
+				</gammaPrior>		
+				
+				<gammaPrior shape="0.001" scale="1000.0" offset="0.0">
+					<parameter idref="serumPotencies.precision"/>
+				</gammaPrior>								
+				
+				<distributionLikelihood idref="serumPotencies.hpm"/>								
 				
 			</prior>
 			
@@ -201,6 +253,10 @@
 			<parameter idref="location.drift"/>
 			<parameter idref="virus.precision"/>
 			<parameter idref="serum.precision"/>
+			<parameter idref="virusAvidities.mean"/>			
+			<parameter idref="virusAvidities.precision"/>			
+			<parameter idref="serumPotencies.mean"/>
+			<parameter idref="serumPotencies.precision"/>				
 		</log>
 
 		<log id="fileLog2" logEvery="200000" fileName="H1N1_mds.virusLocs.log">
