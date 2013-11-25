@@ -286,7 +286,7 @@ And the addition of hierarchical `distributionLikelihoods` on `virusAvidities` a
 	<distribution>
 		<normalDistributionModel>
 			<mean>
-				<parameter id="serumPotencies.mean" value="10.0" lower="0.0"/>
+				<parameter id="serumPotencies.mean" value="10.0"/>
 			</mean>
 			<precision>
 				<parameter id="serumPotencies.precision" value="1.0" lower="0.0"/>
@@ -303,17 +303,17 @@ MCMC proposals now include changes to avidity and potency vectors as well as pro
 	<parameter idref="virusAvidities"/>
 </randomWalkOperator>	
 
-<scaleOperator scaleFactor="0.99" weight="100">
+<randomWalkOperator windowSize="1.0" weight="100">
 	<parameter idref="serumPotencies"/>
-</scaleOperator>
+</randomWalkOperator>
 
 <scaleOperator scaleFactor="0.99" weight="10">
 	<parameter idref="virusAvidities.precision"/>
 </scaleOperator>					
 
-<scaleOperator scaleFactor="0.99" weight="10">
+<randomWalkOperator windowSize="1.0" weight="10">
 	<parameter idref="serumPotencies.mean"/>
-</scaleOperator>	
+</randomWalkOperator>	
 
 <scaleOperator scaleFactor="0.99" weight="10">
 	<parameter idref="serumPotencies.precision"/>
@@ -331,9 +331,9 @@ Hierarchical priors are included for both virus avidities and serum potencies:
 
 <distributionLikelihood idref="virusAvidities.hpm"/>				
 
-<gammaPrior shape="0.001" scale="1000.0" offset="0.0">
+<normalPrior mean="0.0" stdev="100.0">
 	<parameter idref="serumPotencies.mean"/>
-</gammaPrior>		
+</normalPrior>				
 
 <gammaPrior shape="0.001" scale="1000.0" offset="0.0">
 	<parameter idref="serumPotencies.precision"/>
