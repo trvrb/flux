@@ -8,11 +8,14 @@
 #
 # Run `rake` to compile PDFs and `rake clean` to remove the intermediary cruft
 
-TEX = FileList["*.tex"]
+basedir = Dir.getwd 
+
+TEX = FileList["**/*.tex"]
 AUX = TEX.ext("aux")
 BBL = TEX.ext("bbl")
 BLG = TEX.ext("blg")
 LOG = TEX.ext("log")
+OUT = TEX.ext("out")
 PDF = TEX.ext("pdf")
 
 require 'rake/clean'
@@ -20,49 +23,56 @@ CLEAN.include(AUX)
 CLEAN.include(BBL)
 CLEAN.include(BLG)
 CLEAN.include(LOG)
+CLEAN.include(OUT)
+CLOBBER.include(PDF)
 
 desc "Full compile"
 task :default => PDF 
 
 desc "LaTeX aux"
 rule ".aux" => ".tex" do |t|
-	prefix = get_prefix(t.name)
+	prefix = t.name.pathmap("%n")
+	dir = t.name.pathmap("%d")
+	Dir.chdir(dir)
 	puts "pdflatex -draftmode #{prefix}"
 	`pdflatex -draftmode #{prefix}`
+	Dir.chdir(basedir)
 end
 
 desc "LaTeX log"
 rule ".log" => ".tex" do |t|
-	prefix = get_prefix(t.name)
+	prefix = t.name.pathmap("%n")
+	dir = t.name.pathmap("%d")
+	Dir.chdir(dir)	
 	puts "pdflatex -draftmode #{prefix}"
 	`pdflatex -draftmode #{prefix}`
+	Dir.chdir(basedir)	
 end
 
 desc "LaTeX compile"
 # require log file and proceed if references are incomplete
 rule ".pdf" => [".aux", ".bbl", ".log", ".tex"]  do |t|
-	prefix = get_prefix(t.name)
-#	while ref?(prefix) do
-		puts "pdflatex #{prefix}"
-		`pdflatex #{prefix}`
-#	end
+	prefix = t.name.pathmap("%n")
+	dir = t.name.pathmap("%d")
+	Dir.chdir(dir)		
+	puts "pdflatex #{prefix}"
+	`pdflatex #{prefix}`
+	Dir.chdir(basedir)		
 end
 
 desc "BibTex compile"
 # look for .bib file in top-level directory
 rule ".bbl" => [".aux", ".log", ".tex"]  do |t|
-	prefix = get_prefix(t.name)
+	prefix = t.name.pathmap("%n")
+	dir = t.name.pathmap("%d")
+	Dir.chdir(dir)			
 	if cite?(prefix)
 		puts "bibtex #{prefix}"
 		`bibtex #{prefix}`
 		puts "pdflatex -draftmode #{prefix}"
 		`pdflatex -draftmode #{prefix}`
 	end
-end
-
-desc "Get file prefix"
-def get_prefix(file)
-	return file.sub(/\.[^.]*$/, "")
+	Dir.chdir(basedir)		
 end
 
 desc "Look at log file and check if references are complete"
