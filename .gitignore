@@ -3,6 +3,7 @@ flux.pdf
 flux_si.pdf
 cover_letter.pdf
 response.pdf
+reresponse.pdf
 
 # Compiled source #
 ###################
@@ -19,6 +20,7 @@ response.pdf
 *.log
 *.bbl
 *.blg
+*.out
 
 # Packages #
 ############

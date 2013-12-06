@@ -1,0 +1,134 @@
+\documentclass[11pt,oneside,letterpaper]{article}
+
+% graphicx package, useful for including eps and pdf graphics
+\usepackage{graphicx}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+% basic packages
+\usepackage{color} 
+\usepackage{parskip}
+\usepackage{float}
+\usepackage{hyperref}
+
+% text layout
+\usepackage{geometry}
+\geometry{textwidth=15.25cm} % 15.25cm for single-space, 16.25cm for double-space
+\geometry{textheight=22cm} % 22cm for single-space, 22.5cm for double-space
+
+% helps to keep figures from being orphaned on a page by themselves
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\textfraction}{0.1}
+
+% bold the 'Figure #' in the caption and separate it with a period
+% Captions will be left justified
+\usepackage[labelfont=bf,labelsep=period,font=small]{caption}
+
+% review layout with double-spacing
+%\usepackage{setspace} 
+%\doublespacing
+%\captionsetup{labelfont=bf,labelsep=period,font=doublespacing}
+
+% cite package, to clean up citations in the main text. Do not remove.
+\usepackage{cite}
+%\renewcommand\citeleft{(}
+%\renewcommand\citeright{)}
+%\renewcommand\citeform[1]{\textsl{#1}}
+
+% Remove brackets from numbering in list of References
+\renewcommand\refname{\large References}
+\makeatletter
+\renewcommand{\@biblabel}[1]{\quad#1.}
+\makeatother
+
+\usepackage{authblk}
+\renewcommand\Authands{ \& }
+\renewcommand\Authfont{\normalsize \bf}
+\renewcommand\Affilfont{\small \normalfont}
+\makeatletter
+\renewcommand\AB@affilsepx{, \protect\Affilfont}
+\makeatother
+
+% notation
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newcommand{\virus}{\mathbf{x}}						% virus coordinate
+\newcommand{\serum}{\mathbf{y}}						% serum coordinate
+\newcommand{\viruses}{\mathbf{X}}					% set of virus coordinates
+\newcommand{\sera}{\mathbf{Y}}						% set of serum coordinates
+\newcommand{\ve}{v}									% virus effect
+\newcommand{\se}{s}									% serum effect
+\newcommand{\ves}{\mathbf{v}}						% set of virus effects
+\newcommand{\ses}{\mathbf{s}}						% set of serum effects
+\newcommand{\point}{f_{\scriptscriptstyle \vert}}	% point likelihood
+\newcommand{\threshold}{f_{\textstyle \lrcorner}}	% threshold likelihood
+\newcommand{\interval}{f_{\sqcup}}					% interval likelihood
+\newcommand{\mdssd}{\varphi}						% MDS standard deviation
+\newcommand{\virussd}{\sigma_x}						% virus / diffusion standard deviation
+\newcommand{\serumsd}{\sigma_y}						% serum standard deviation
+\newcommand{\drift}{\mu}							% drift / advection
+\newcommand{\tree}{\tau}							% phylogeny
+\newcommand{\vn}{n}									% number of viruses
+\newcommand{\sn}{k}									% number of sera
+\newcommand{\normal}{\mathcal{N}}					% normal distribution
+\newcommand{\bwithin}{\beta_w}		% within clade drift coefficient
+\newcommand{\bsister}{\beta_s}		% sister clade drift coefficient
+\newcommand{\bother}{\beta_t}			% across clade drift coefficient
+\newcommand{\incclade}[1]{y_\mathrm{#1}}
+\newcommand{\driftclade}[1]{x_\mathrm{#1}}
+\setlength{\arraycolsep}{2pt}
+\newcommand{\smalltwomatrix}[2]{\scriptsize \Big( \begin{matrix} #1 \\ #2 \end{matrix} \Big)}				% pretty inline matrix 
+\newcommand{\smallfourmatrix}[4]{\scriptsize \Big( \begin{matrix} #1 & #2 \\ #3 & #4 \end{matrix} \Big)}	% pretty inline matrix 
+\newcommand{\twomatrix}[2]{\left( \begin{matrix} #1 \\ #2 \end{matrix} \right)}								% pretty inline matrix 
+\newcommand{\fourmatrix}[4]{\left( \begin{matrix} #1 & #2 \\ #3 & #4 \end{matrix} \right)}					% pretty inline matrix 
+
+\begin{document}
+
+\newgeometry{top=4cm}
+
+Dear eLife editorial board,
+
+Thank you for conducting a thorough review of our revised manuscript entitled ``Integrating influenza antigenic dynamics with molecular evolution''.  We have responded to the remaining reviewer criticisms and believe the manuscript is now suitable for publication in eLife.
+
+Point-by-point responses follow, as well as a PDF showing revisions that have been made since the last submission.
+
+Sincerely,\\
+Trevor Bedford
+
+\restoregeometry
+
+\newpage
+
+\section*{Reviewer responses}
+
+Original reviewer criticisms are in plain text.  Our responses follow in \textbf{bold}.  
+
+%%% REREVIEW %%%
+\section*{Rereview}
+
+\subsection*{Main comments}
+
+I like how the authors have included ``virus effects'' alone in the new Table 1. At least one ``virus effect'' could be overall receptor avidity, and Plotkin and Hensley have a recent paper (Journal of Virology, 87:9904) showing that avidity can influence antigenic clustering. It might be worthwhile to include a sentence on the possibility that ``virus effects'' could be a manifestation of avidity? 
+
+In Table 2 and the related discussion, the authors discuss the scaled effective population size Ne * tau. They never define what tau represents, and I don't think it is safe to assume that the reader will know this -- I certainly don't. More interpretation here would be helpful. 
+
+In the ``Punctuated evolution and its epidemiological consequences'' section, the part about subsampling to look at whether drift associates with number of isolates should be expanded. I would suggest starting a new paragraph at the current ``We test to see...'' sentence that briefly explains the rationale for why this test is being done (rationale articulated by other reviewer in original critiques). I also think that it would be nice to have a table or figure somehow representing the actual results of this analysis. 
+
+Figure 4 legend refers to ``The mean posterior scaled effective populations... is shown for each virus.'' These are not actually shown in Figure 4, at least not in a way that is obvious to me. 
+
+My comments where the original reason that the authors removed the argument for the across lineage correlation in incidence. However, now page 11 has this orphan paragraph beginning ``Although the general correlation between rate of antigenic drift...'' This paragraph doesn't seem to make sense in the context of the presented data any more, as the paper no longer has any information about across lineage correlations, so it can't even be seen what they are saying may not be causal. I think this paragraph either needs to be dramatically expended or probably better eliminated. Maybe the previous paragraph could then just get a wrap-up sentence interpreting the results to suggest a strong relationship between drift and incidence within each lineage. 
+
+Although the Conclusion is fine, I feel that it might benefit from a paragraph summarizing the main biological results as regards different rates of drift in lineages and the correlation between drift and incidence within lineages. These biological results are not really mentioned in the current Conclusion. 
+
+\subsection*{Minor comments}
+
+The first paragraph of the Introduction refers to ``efficacy against a fixed vaccine formulation to decline over time.'' Although I understand the point, the wording seems off here. What declines is the efficacy of the fixed vaccine formulation against circulating viruses, not the efficacy against the vaccine formulation. 
+
+Last sentence of second paragraph of abstract: might be better just to say ``an advantage'' rather than ``a transmission advantage.'' Although drift leads to an advantage that presumably improves R and so in a sense does increase transmission, this advantage probably is acting at the step of viral replication rather than the act of transmission per se. 
+
+Bottom of page 3 says ``of lower of higher dimension.'' The second ``of'' should be an ``or.'' 
+
+On page 9, ``acribe differences'' should be ``ascribe differences.'' 
+
+On page 9, the two consecutive sentences beginning ``Previous work using...'' and ``Models of influenza evolution...'' seem slightly redundant. If they are indeed redundant that could be fixed -- if they in fact mean different things, that could be clarified. 
+
+\end{document}
