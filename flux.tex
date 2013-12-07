@@ -54,9 +54,9 @@
 \newcommand{\serum}{\mathbf{y}}						% serum coordinate
 \newcommand{\viruses}{\mathbf{X}}					% set of virus coordinates
 \newcommand{\sera}{\mathbf{Y}}						% set of serum coordinates
-\newcommand{\ve}{v}									% virus effect
+\newcommand{\ve}{v}									% virus avidity
 \newcommand{\se}{s}									% serum effect
-\newcommand{\ves}{\mathbf{v}}						% set of virus effects
+\newcommand{\ves}{\mathbf{v}}						% set of virus avidities
 \newcommand{\ses}{\mathbf{s}}						% set of serum effects
 \newcommand{\point}{f_{\scriptscriptstyle \vert}}	% point likelihood
 \newcommand{\threshold}{f_{\textstyle \lrcorner}}	% threshold likelihood
@@ -196,7 +196,7 @@ The finding of a low-dimensional map across influenza lineages extends previous 
 	\begin{tabular}{ c c c c c c c c c c } 
 	\hline
 	\multicolumn{6}{c}{} 	&	\multicolumn{4}{c}{Test error}  \\
-	Model	&	Data		&	Dimen 	& Location prior	& 	Serum effects 	&	Virus effects	& 	A/H3N2	& 	A/H1N1	& 	B/Vic	& 	B/Yam	\\
+	Model	&	Data		&	Dimen 	& Location prior	& 	Serum effects 	&	Virus avidities	& 	A/H3N2	& 	A/H1N1	& 	B/Vic	& 	B/Yam	\\
 	\hline	
 	1		&	HI			&	1D 		& Uninformed		&	Fixed 			&	None			&	1.35	&	0.94 	&	0.90	&	1.08	\\
 	2		&	HI			&	2D 		& Uninformed		&	Fixed 			&	None			&	0.91 	&	0.78 	&	0.82	&	0.90	\\
@@ -246,10 +246,12 @@ However, if serum effect is fixed to the serum's maximum titer, this will often 
 Thus, fixing serum effects will tend to under-estimate effect size; we observe a mean effect of 10.42 log$_2$ HI titers for A/H3N2 when fixing serum effects and a mean of 10.94 when estimating serum effects.
 We find that estimating serum effects improves test error further (model 8, Table \ref{errortable}), with improvements of between 0.01 and 0.12 log$_2$ HI titers.
 
-Additionally, we include and estimate `virus effects' in an analogous fashion, which are intended to represent differences in overall reactivity between viruses.
-With virus effects included, baseline titer derives from both the virus and the serum used in the HI reaction.
-We find that including virus effects further improves test error, either alone with fixed serum effects (model 9, Table \ref{errortable}) or combined with estimating serum effects (model 10, Table \ref{errortable}).
-With fixed serum effects, the inclusion of virus effects results in improvements of between 0.02 and 0.09 log$_2$ HI titers and with estimated serum effects, the inclusion of virus effects results in improvements of between 0.01 and 0.05 log$_2$ HI titers.
+Additionally, we include and estimate `virus avidities' in an analogous fashion, which are intended to represent differences in overall HI reactivity between viruses.
+Experimental work has demonstrated that influenza variants exist that differ in HA binding activity for cell surface glycan receptors, and that these high-avidity variants may arise in the presence of antibody pressure \cite{Hensley09}.
+The presence of differential virus avidity has been previously shown to distort antigenic maps constructed from a model that disregards effects from virus avidity \cite{Li13}.
+Here, with virus avidities estimated, baseline titer derives from both the virus and the serum used in the HI reaction.
+We find that including virus avidities further improves test error, either alone with fixed serum effects (model 9, Table \ref{errortable}) or combined with estimating serum effects (model 10, Table \ref{errortable}).
+With fixed serum effects, the inclusion of virus avidities results in improvements of between 0.02 and 0.09 log$_2$ HI titers and with estimated serum effects, the inclusion of virus avidities results in improvements of between 0.01 and 0.05 log$_2$ HI titers.
 
 We find that the average absolute error in predicted log$_2$ HI titer is nearly constant with antigenic distance (Pearson correlation, $r = 0.098$), thus supporting our model assumption that the drop in log$_2$ titer is proportional to the Euclidean distance separating viruses and sera on the antigenic map.
 Additionally, we find that the absolute error in predicted titer is nearly constant with time (Pearson correlation, $r = -0.007$).
@@ -584,12 +586,12 @@ We assume that $\se_j$ values are hierarchically distributed according to a norm
 We take an Empirical Bayesian approach in specifying the mean and variance of this distribution, set to the empirical mean and empirical variance of the set of maximum titers across sera $\{ \max ( H_{1j},\ldots,H_{\vn j} ) : j = 1,\ldots,\sn \}$.
 This formulation assumes that particular sera are more reactive in general than other sera.
 
-Additionally, we follow the same logic and assume that some virus isolates are more reactive than other virus isolates and include a `virus effect' $\ve_i$ representing the general level of reactivity across HI assays. 
-With virus reactivity included, observed titers follow
+Additionally, we follow the same logic and assume that some virus isolates are more reactive than other virus isolates and include a parameter for `virus avidity' $\ve_i$ representing the general level of reactivity across HI assays. 
+With virus avidity included, observed titers follow
 \begin{equation}
 	H_{ij} \sim \normal \left( \frac{\ve_i+\se_j}{2} - \delta_{ij}, \, \mdssd^2 \right),
 \end{equation}
-and the vector of virus effects $\ve_i$ for $i = 1,\ldots, \vn$ is estimated in an analogous hierarchical fashion, with $\ves$ normally distributed with mean and variance equal to the empirical mean and variance of the set of maximum titers across viruses $\{ \max ( H_{i1},\ldots,H_{i \sn} ) : i = 1,\ldots,\vn \}$.
+and the vector of virus avidities $\ve_i$ for $i = 1,\ldots, \vn$ is estimated in an analogous hierarchical fashion, with $\ves$ normally distributed with mean and variance equal to the empirical mean and variance of the set of maximum titers across viruses $\{ \max ( H_{i1},\ldots,H_{i \sn} ) : i = 1,\ldots,\vn \}$.
 
 \subsection*{Drift model of antigenic evolution}
 
@@ -657,7 +659,7 @@ Under the full model, the posterior probability of observing virus and serum loc
 	p(\ses, \ves, \mdssd, \drift, \virussd, \serumsd, \tree).
 \end{equation}
 We sample from this posterior distribution using the MCMC procedures implemented in the software package BEAST \cite{BEAST17}.
-Metropolis-Hastings proposals include transition kernels that translate individual virus and serum locations $\virus_i$ and $\serum_j$ and individual virus effects $\ve_i$ and serum effects $\se_j$, and other transition kernels that scale the entire set of virus and serum locations $\viruses$ and $\sera$ and that scale parameters $\mdssd$, $\drift$, $\virussd$ and $\serumsd$.
+Metropolis-Hastings proposals include transition kernels that translate individual virus and serum locations $\virus_i$ and $\serum_j$ and individual virus avidities $\ve_i$ and serum effects $\se_j$, and other transition kernels that scale the entire set of virus and serum locations $\viruses$ and $\sera$ and that scale parameters $\mdssd$, $\drift$, $\virussd$ and $\serumsd$.
 For the present analysis, a two-step approach was taken to sample phylogenies, where a posterior sample of phylogenies was gathered using sequence data and then, in the cartographic analysis, trees from this set were randomly proposed and accepted following the Metropolis-Hastings algorithm \cite{Pagel04}.
 
 \subsection*{Genetic, antigenic and surveillance data}
@@ -699,7 +701,7 @@ MCMC was run for 60 million steps and trees were sampled every 50,000 steps afte
 These trees were treated as a discrete set of possibilities when subsequently sampled in the BMDS analysis \cite{Pagel04}.
 However, it would be possible to jointly sample from sequence data and serological data using these methods.
 
-MCMC was used to sample virus locations $\viruses$, serum locations $\sera$, virus effects $\ves$, serum effects $\ses$, MDS precision $1/\mdssd^2$, antigenic drift rate $\drift$, virus location precision $1/\virussd^2$, serum location precision $1/\serumsd^2$ and phylogenetic tree $\tree$.
+MCMC was used to sample virus locations $\viruses$, serum locations $\sera$, virus avidities $\ves$, serum effects $\ses$, MDS precision $1/\mdssd^2$, antigenic drift rate $\drift$, virus location precision $1/\virussd^2$, serum location precision $1/\serumsd^2$ and phylogenetic tree $\tree$.
 MCMC chains were run for 500 million steps and parameter values sampled every 200,000 steps after a burn-in of 100 million steps, yielding a total of 2000 MCMC samples.
 In all cases when drift parameter $\drift$ was included the MCMC chain mixed well and arrived at the same estimated posterior distribution from different starting points.
 However, without drift parameter $\drift$, maps for A/H3N2 showed some degree of metastability, where some chains would converge on one solution and other chains would converge on a different solution.
@@ -840,18 +842,18 @@ We additionally find that including the drift prior on antigenic locations often
 	\label{smith_comparison_drift} 
 \end{figure}
 
-Our final BMDS model (model 9, Table~\ref{errortable}) differs from antigenic model used by Smith et al.\ \cite{Smith04} in including temporally- and phylogenetically-informed priors on antigenic locations and also in estimating serum and virus effects.
+Our final BMDS model (model 9, Table~\ref{errortable}) differs from antigenic model used by Smith et al.\ \cite{Smith04} in including temporally- and phylogenetically-informed priors on antigenic locations and also in estimating serum and virus avidities.
 Here, we investigate the impact on antigenic locations of estimating virus and serum effects in the BMDS model.
 To isolate this difference, we use a Uniform$(-100,100)$ prior on antigenic locations.
 Surprisingly, estimating virus and serum effects results in a more linear antigenic map (Figure~\ref{smith_comparison_effects}), resembling the appearance of the map incorporating the antigenic drift prior, while preserving local consistency.
 We generally observe congruence between MDS and BMDS antigenic locations for viruses less than $\sim$10 years divergent (Figure~\ref{smith_comparison_effects}E).
-However, specific viruses may be affected, for instance A/Bilthoven/16190/1968 (Figure~\ref{smith_comparison_effects}C), which appears more distant from all other viruses when serum and virus effects are included.
+However, specific viruses may be affected, for instance A/Bilthoven/16190/1968 (Figure~\ref{smith_comparison_effects}C), which appears more distant from all other viruses when serum and virus avidities are included.
 
 %%% smith_comparison_effects %%%
 \begin{figure}[h]
 	\centering		
 	\includegraphics[width=1.0\textwidth]{figures/smith_comparison_effects}
-	\caption{\textbf{Comparison of A/H3N2 antigenic locations estimated by Smith et al.\ \cite{Smith04} using MDS and an extended BMDS model that estimates serum and virus effects.} 
+	\caption{\textbf{Comparison of A/H3N2 antigenic locations estimated by Smith et al.\ \cite{Smith04} using MDS and an extended BMDS model that estimates serum and virus avidities.} 
 	(A) MDS antigenic locations, reoriented so that the primary dimension lies on the $x$-axis rather than on the $y$-axis as in Figure 1 of \cite{Smith04}.
 	(B) A posterior sample of antigenic locations from a BMDS model that estimates virus and serum effects.
 	In (A) and (B), viruses are shown as colored circles, with color denoting antigenic cluster inferred by \cite{Smith04}, and sera are shown as gray points.
