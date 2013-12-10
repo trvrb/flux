@@ -362,8 +362,6 @@ We estimate year-to-year antigenic drift for years 1992 to 2011 by calculating t
 There may often be large discontinuities in virus locations across the population; our use of difference in mean location is meant to capture both the distance between antigenic clusters and also the change in cluster frequency over consecutive years.
 We observe greater heterogeneity in year-to-year antigenic drift in type A than in type B lineages (Figure~\ref{jumps}B), with standard deviation of year-to-year antigenic drift equal to 0.97 units in A/H3N2, 0.66 units in A/H1N1, 0.46 units in B/Vic and 0.26 units in B/Yam.
 This analysis classifies drift only to the level of consecutive years; some coarse-graining of the timings of transition events will necessarily occur.
-We tested to see if there could be an artifactual effect on the measurement of year-to-year drift based on the number of viral isolates collected by correlating drift between years $i$ and $i-1$ against the ratio of the number of isolates from year $i$ to the number of isolates from year $i-1$.
-We found no significant correlation (Pearson's $r = -0.01$, $p = 0.411$), suggesting our results to be unbiased with regard to sample count.
 
 %%% jumps %%%
 \begin{figure}[h]
@@ -402,6 +400,25 @@ We applied a similar bootstrap permutation test to calculate the significance of
 	For example, year-to-year antigenic drift from 2000 to 2001 is measured against incidence in the 2001/2002 season. 
 	} 
 	\label{corr} 
+\end{figure}
+
+However, it is possible that if sampling count influences cartographic estimates then a spurious correlation could arise in which years with greater incidence have higher sample counts and artifactually high estimates of drift.
+We controlled for this possibility by testing to see if viral isolate count influences estimates of year-to-year drift by correlating drift between years $i$ and $i-1$ against the ratio of the number of isolates from year $i$ to the number of isolates from year $i-1$.
+We found no significant correlation when combining data across lineages (Figure~\ref{counts_corr}, Pearson's $r = -0.01$).
+We testing significance following the same bootstrap procedure we used to assess the correlation between drift and incidence, finding a $p$-value of 0.514.
+Separating lineages gave $p$-values of 0.717, 0.246, 0.337, 0.504 for A/H3N2, A/H1N1, B/Vic and B/Yam, respectively.
+These findings suggest our results to be unbiased with regard to sample count.
+ 
+%%% counts_corr %%%
+\begin{figure}[h]
+	\centering		
+	\includegraphics[width=0.4\textwidth]{figures/counts_corr}
+	\caption{\textbf{Relationship between antigenic drift and sample counts for years 1998 to 2011 in influenza A/H3N2, A/H1N1, B/Vic and B/Yam.}
+	Antigenic drift from year $i-1$ to year $i$ is compared to the ratio of sample counts in year $i$ to counts in year $i-1$.
+	Only comparisons which had one or more samples in years $i-1$ and $i$ were retained, leaving 11 A/H3N2, 7 A/H1N1, 9 B/Vic and 10 B/Yam comparisons.
+	Points are colored according to influenza lineage based on the color scheme in Figure \ref{corr}.
+	} 
+	\label{counts_corr} 
 \end{figure}
 
 Although the general correlation between rate of antigenic drift and incidence across the four influenza lineages may not represent a causal relationship, the within-lineage year-to-year correlations suggest a causal relationship as increases in incidence tend to occur subsequent to periods of pronounced antigenic drift.
