@@ -146,18 +146,18 @@ In the case of influenza A, subtypes A/H3N2 and A/H1N1 refer to the genes, hemag
 In the case of influenza B, Victoria (B/Vic) and Yamagata (B/Yam) refer to antigenically distinct lineages which diverged from a single lineage prior to 1980 \cite{Rota90}.
 Mutations to the HA1 region of the hemagglutinin protein are thought to drive the majority of antigenic drift in the influenza virus \cite{Wiley81, Nelson07NatRevGenet}. 
 Experimental characterization of antigenic phenotype is possible through the hemagglutination inhibition (HI) assay \cite{Hirst43}, which measures the cross-reactivity of one virus strain to serum raised against another strain through challenge or vaccination. 
-Sera from older strains react poorly with more recent viruses resulting in new strains having a selective advantage over previously established strains.
+Sera raised against older strains react poorly to more recent viruses resulting in new strains having a selective advantage over previously established strains.
 
-The results of many HI assays across a multitude of virus strains of a single subtype can be combined to yield a two-dimensional map, quantifying antigenic similarity and distance \cite{Smith04}. 
+The results of many HI assays across a multitude of viruses of a single subtype can be combined to yield a two-dimensional map, quantifying antigenic similarity and distance \cite{Smith04}. 
 The antigenic map of influenza A/H3N2 has shown substantial evolution of the influenza virus population since its emergence in 1968. 
-Evolution of antigenic phenotype appears punctuated with episodes of more rapid innovation interspersed by periods of stasis, while genetic evolution appears more continuous \cite{Smith04}, suggesting that a relatively small number of genetic changes or combinations of genetic changes may drive changes in antigenic phenotype. 
-The process of antigenic drift results in the rapid turnover of the virus population. 
-Although mutation occurs rapidly, genetic diversity among contemporaneous viruses is low and phylogenetic analysis shows a characteristically `spindly' tree with a single predominant trunk lineage and transitory side branches that persist for only 1--5 years \cite{Fitch97}.
+Evolution of antigenic phenotype appears punctuated with episodes of more rapid innovation interspersed by periods of relative stasis, while genetic evolution appears more continuous \cite{Smith04}, suggesting that a relatively small number of genetic changes or combinations of genetic changes may drive changes in antigenic phenotype \cite{Koel13}. 
+The process of antigenic drift results in the rapid turnover of the virus population, so that despite mutation, genetic diversity among contemporaneous viruses remains low.
+Such population turnover is supported by phylogenetic analysis that shows a characteristically `spindly' tree with a single predominant trunk lineage and transitory side branches that persist for only 1--5 years \cite{Fitch97}.
 
 Previously, the antigenic and genetic patterns of influenza evolution have been analyzed essentially in isolation. 
 An antigenic map is constructed from a panel of HI measurements, and a phylogenetic tree is constructed from sequence data. 
 However, the opportunity for a combined approach exists as both the antigenic map and the phylogenetic tree often contain many of the same isolates. 
-Here, we implement a flexible Bayesian approach to characterize jointly the antigenic and genetic evolution of the influenza virus population. 
+Here, we implement a flexible Bayesian approach to jointly characterize the antigenic and genetic evolution of the influenza virus population. 
 We apply this approach to investigate the dynamics of A/H3N2, A/H1N1, B/Vic and B/Yam viruses, and, for the first time, present detailed reconstructions of the antigenic dynamics of all four circulating influenza lineages.
 
 %%% RESULTS %%%
@@ -170,7 +170,7 @@ In this model, viruses and sera are given $N$-dimensional locations, thus specif
 In the BMDS model, a map distance of one antigenic unit translates to an expectation of a 2-fold drop in HI titer between virus and sera.
 Maps that produce pairwise distances most congruent with the observed titers will have a high likelihood and will be favored by the BMDS model.
 We integrate over sources of uncertainty, such as antigenic locations, in a flexible Bayesian fashion.
-We apply this model to HI measurements of virus isolates against post-infection ferret antisera for influenza A/H3N2, A/H1N1, B/Vic and B/Yam (see Materials and methods).
+We apply this model to HI measurements of virus isolates against post-infection ferret antisera for influenza A/H3N2, A/H1N1, B/Vic and B/Yam.
  
 We begin with Bayesian analogs of the models used by Smith et al.\ \cite{Smith04}, in which viruses and sera are represented as $N$-dimensional locations as described in the `Antigenic cartography' section of Materials and methods.
 In this case, `serum potencies' are fixed to the maximum titers exhibited by particular ferret sera and give the baseline expectation for titer when virus and serum are antigenically identical.
@@ -216,7 +216,7 @@ The finding of a low-dimensional map across influenza lineages extends previous 
 \end{table}
 
 Previous work on influenza antigenic and genetic evolution has shown that antigenic distance accumulates with increasing genetic distance \cite{Hay01, Smith04, Russell08}.
-Here, we examine pairwise relationships between viruses and observe a correlation between amino acid mutations and antigenic distance (Figure~\ref{seq_grid}) and a similar correlation between phylogenetic distance and antigenic distance (Figure~\ref{seq_grid}).
+Here, we examine pairwise relationships between viruses and observe a correlation between amino acid mutations and antigenic distance (Figure~\ref{seq_grid}) and a similar correlation between phylogenetic distance, measured in years, and antigenic distance (Figure~\ref{seq_grid}).
 Thus, genetic relationships between viruses provide some predictive power to estimate antigenic distances in the absence of HI data.
 However, the magnitudes of the coefficients of determination $R^2$ are low (Figure~\ref{seq_grid}), suggesting that genetic relationships alone will not completely resolve antigenic distances.
 
@@ -233,7 +233,7 @@ However, the magnitudes of the coefficients of determination $R^2$ are low (Figu
 	\label{seq_grid} 
 \end{figure}
 
-Consequently, we seek to flexibly incorporate genetic data by simultaneously modeling antigenic and genetic evolution through an evolutionary diffusion process \cite{Lemey10}, wherein a virus's antigenic character state evolves along branches of the phylogenetic tree according to a Brownian motion process (see Materials and methods).
+Consequently, we seek to flexibly incorporate genetic data by modeling antigenic phenotype as an evolutionary diffusion \cite{Lemey10}, wherein a virus's antigenic character state evolves along branches of the phylogenetic tree according to a Brownian motion process (see Materials and methods).
 The phylogenetic diffusion process acts as a prior on virus locations, so that genetically similar viruses are expected to share similar antigenic locations.
 The antigenic diffusion process includes both systematic drift with time and covariance induced by phylogenetic proximity.
 We examine the effects of including only systematic drift (model 6; Table \ref{errortable}) and systematic drift plus phylogenetic diffusion (model 7; Table \ref{errortable}), finding a small increase in predictive accuracy of between 0.02 and 0.08 log$_2$ HI titers when both processes are included.
@@ -241,18 +241,18 @@ The systematic drift process informs virus and serum locations by dates of isola
 Thus, in these models, antigenic locations are inferred using both genetic data and HI data and will differ from locations inferred from HI data alone.
 If HI data is rich, then we expect minor differences in antigenic locations with the inclusion of genetic data (as may be the case for A/H3N2), while if HI data is spare, then we expect genetic data to play a larger role in determining antigenic locations (as may be the case for B/Vic and B/Yam).
 
-We further extend the model by estimating serum potencies that quantify the overall strength reactivity of each serum, rather than fixing serum potencies at maximum titers.
-Different serum potencies likely derive from experimental variation in serum extraction and processing or from variation in immune responses between ferrets.
+We further extend the model by estimating serum potencies, rather than fixing serum potencies at maximum titers.
+Serum potencies differ across isolates due to experimental variation in serum extraction and processing or due to variation in ferret immune response.
 Serum potency determines the baseline expectation of titer when virus and serum have identical antigenic locations.
 However, if serum potency is fixed to the serum's maximum titer, this will often not be the case, as the virus giving the maximum titer may be antigenically distinct from the serum.
 Thus, fixing serum potencies will tend to under-estimate effect size; we observe a mean effect of 10.42 log$_2$ HI titers for A/H3N2 when fixing serum potencies and a mean of 10.94 when estimating serum potencies.
 We find that estimating serum potencies improves test error further (model 8, Table \ref{errortable}), with improvements of between 0.01 and 0.12 log$_2$ HI titers.
 
-Additionally, we include and estimate `virus avidity' in an analogous fashion, which are intended to represent differences in overall HI reactivity between viruses.
+Additionally, we include and estimate `virus avidity' in an analogous fashion, which is intended to represent differences in overall HI reactivity between viruses.
 Experimental work has demonstrated that influenza variants exist that differ in HA binding activity for cell surface glycan receptors, and that these high-avidity variants may arise in the presence of antibody pressure \cite{Hensley09}.
-The presence of differential virus avidity has been previously shown to distort antigenic maps constructed from a model that disregards effects from virus avidity \cite{Li13}.
+The presence of differential virus avidity has been previously shown to distort antigenic maps constructed from a model that disregards avidity effects \cite{Li13}.
 Here, with virus avidities estimated, baseline titer derives from both the virus and the serum used in the HI reaction.
-We find that including virus avidities further improves test error, either along with fixed serum potencies (model 9, Table \ref{errortable}) or combined with estimating serum potencies (model 10, Table \ref{errortable}).
+We find that including virus avidities further improves test error, either with fixed serum potencies (model 9, Table \ref{errortable}) or with estimated serum potencies (model 10, Table \ref{errortable}).
 With fixed serum potencies, the inclusion of virus avidities results in improvements of between 0.02 and 0.09 log$_2$ HI titers and with estimated serum potencies, the inclusion of virus avidities results in improvements of between 0.01 and 0.05 log$_2$ HI titers.
 
 We find that the average absolute error in predicted log$_2$ HI titer is nearly constant with antigenic distance (Pearson correlation, $r = 0.098$), thus supporting our model assumption that the drop in log$_2$ titer is proportional to the Euclidean distance separating viruses and sera on the antigenic map.
@@ -334,14 +334,14 @@ This is reflected in Figure \ref{drift}, where all four lineages exhibit similar
 	\end{tabular}	
 \end{table}
 
-These patterns of antigenic drift are reflected in the virus phylogenies (Figure~\ref{trees}).
+These patterns of antigenic drift influence the corresponding virus phylogenies (Figure~\ref{trees}).
 Influenza A/H3N2 has a characteristically spindly tree showing rapid turnover of the virus population, while A/H1N1 and B have trees that show greater degrees of viral coexistance (Figure~\ref{trees}).
 The scaled effective population size $N_e \tau$ measures the timescale of coalescence of a phylogeny and quantifies the visual distinction between a `spindly' tree and a `bushy' tree \cite{Bedford11}.
-In this case, $N_e$ represents the number of concurrent infections in a panmictic population with generation interval $\tau$ (time separating infections up the genealogical tree), so that the resulting $N_e \tau$ is measured in terms of years and gives the expected waiting time for two randomly chosen lineages to coalesce in the genealogical tree.
+In this case, $N_e$ represents the number of concurrent infections in a panmictic population with generation interval $\tau$ (time separating infections up the genealogical tree), so that $N_e \tau$ is measured in terms of years and gives the expected waiting time for two randomly chosen lineages to coalesce in the genealogical tree.
 We see that $N_e \tau$ broadly correlates with the rate of antigenic drift (Table~\ref{paramtable}), with A/H3N2 showing fast drift and reduced effective population size as expected from basic epidemiological models \cite{Bedford12}.
 Antigenic drift results in the replacement of antigenically primitive lineages by antigenically advanced lineages, thereby reducing genealogical diversity.
 
-Thus, we observe a faster rate of antigenic drift in influenza A/H3N2 than in A/H1N1 or in either lineage of influenza B.
+Thus, we observe a faster rate of antigenic drift in influenza A/H3N2 than in A/H1N1 or either lineage of influenza B.
 Previous work using general epidemiological models has suggested that rates of antigenic drift may be influenced by both the fundamental reproductive number $R_0$ and the rate at which mutation decreases cross-immunity \cite{Gog02,Lin03}.
 Correspondingly, models specific to influenza evolution ascribe differences in the rate of antigenic drift of A/H3N2 relative to A/H1N1 and influenza B to either greater $R_0$ or greater mutation rate \cite{Ferguson03,Bedford12}.
 Without more detailed epidemiological modeling, the present study cannot conclusively distinguish between these causal possibilities.
@@ -358,7 +358,7 @@ Without more detailed epidemiological modeling, the present study cannot conclus
 
 \subsection*{Punctuated evolution and its epidemiological consequences}
 
-We sought to summarize year-to-year patterns of antigenic drift by calculating the difference in mean location between consecutive years (Figure~\ref{jumps}A).
+We sought to summarize year-to-year patterns of antigenic drift by calculating the difference in mean virus location between consecutive years (Figure~\ref{jumps}A).
 We estimate year-to-year antigenic drift for years 1992 to 2011 by calculating the average location along dimension 1 of phylogenetic lineages present in the tree at year $i$ and comparing this location to the average location of phylogenetic lineages present in the tree at year $i-1$.
 There may often be large discontinuities in virus locations across the population; our use of difference in mean location is meant to capture both the distance between antigenic clusters and also the change in cluster frequency over consecutive years.
 We observe greater heterogeneity in year-to-year antigenic drift in type A than in type B lineages (Figure~\ref{jumps}B), with standard deviation of year-to-year antigenic drift equal to 0.97 units in A/H3N2, 0.66 units in A/H1N1, 0.46 units in B/Vic and 0.26 units in B/Yam.
@@ -386,11 +386,11 @@ This measure of incidence has previously been shown to have have predictive powe
 We analyze incidence from the 1998/1999 to the 2008/2009 seasons to avoid possible complications from the 2009 pandemic.
 We begin by comparing overall rates of antigenic drift (Figure~\ref{drift}, Table~\ref{paramtable}) to overall levels of seasonal incidence across influenza lineages, finding a significant correlation between rate of antigenic drift and relative incidence across the four lineages (Pearson correlation, $r=0.97$, $p = 0.041$).
 
-We follow-up this analysis with a more detailed analysis of year-to-year variation in antigenic drift and lineage-specific incidence, comparing incidence in a seasonal to antigenic drift of viruses coming into this season (Figure~\ref{jumps}A).
+We follow-up this analysis with a more detailed analysis of year-to-year variation in antigenic drift and lineage-specific incidence, comparing incidence in a season to antigenic drift of viruses coming into this season (Figure~\ref{jumps}A).
 For example, we compare antigenic drift of viruses from 2000 to 2001 to incidence in the 2001/2002 season.
 Within each virus lineage, we find that years with pronounced antigenic drift tend to show increased incidence (Figure~\ref{corr}), finding Pearson correlation coefficients of 0.51, 0.29, 0.44 and 0.14 for A/H3N2, A/H1N1, B/Vic and B/Yam respectively.
 We calculated significance using bootstrap permutation tests finding $p$-values of 0.056, 0.201, 0.097 and 0.341 respectively.
-We applied a similar bootstrap permutation test to calculate the significance of finding the observed levels of correlation across all four lineages, arriving at a $p$-value of 0.018.
+We applied a similar bootstrap permutation test to calculate the significance of finding the observed degree of correlation across all four lineages, arriving at a $p$-value of 0.018.
 The fact that we observe periods of pronounced antigenic drift preceding increased incidence in each of the four influenza lineages suggests a causal relationship, in which antigenic evolution drives increased incidence.
 
 %%% corr %%%
@@ -406,8 +406,8 @@ The fact that we observe periods of pronounced antigenic drift preceding increas
 
 However, it is possible that if sampling count influences cartographic estimates then a spurious correlation could arise in which years with greater incidence have higher sample counts and artifactually high estimates of drift.
 We controlled for this possibility by testing to see if viral isolate count influences estimates of year-to-year drift by correlating drift between years $i$ and $i-1$ against the ratio of the number of isolates from year $i$ to the number of isolates from year $i-1$.
-We found no significant correlation when combining data across lineages (Figure~\ref{counts_corr}, Pearson's $r = -0.01$).
-We testing significance following the same bootstrap procedure we used to assess the correlation between drift and incidence, finding a $p$-value of 0.514.
+We found little correlation when combining data across lineages (Figure~\ref{counts_corr}, Pearson's $r = -0.01$).
+We tested significance following the same bootstrap procedure we used to assess the correlation between drift and incidence, finding a $p$-value of 0.514.
 Separating lineages gave $p$-values of 0.717, 0.246, 0.337, 0.504 for A/H3N2, A/H1N1, B/Vic and B/Yam, respectively.
 These findings suggest our results to be unbiased with regard to sample count.
  
@@ -433,8 +433,8 @@ We use this approach to characterize competitive dynamics across influenza linea
 We find that influenza A/H3N2 evolves faster in antigenic phenotype than A/H1N1, which in turn evolves faster than B/Vic or B/Yam.
 Consequently, the influenza A/H3N2 virus population turns over more quickly than A/H1N1 or influenza B, exhibiting a smaller effective population size and a `spindlier' phylogenetic tree.
 Furthermore, we observe a correlation between antigenic drift and viral incidence both across and within influenza lineages.
-The finding of that antigenically advancement correlates with subsequent increased incidence within a lineage suggests a causal role for antigenic drift driving influenza incidence patterns.
-The correlation between incidence and drift further suggests the possibility of aiding prediction at the start of an influenza of which lineage will predominate.
+The finding that antigenic evolution correlates with subsequent increased incidence within a lineage suggests a causal role for antigenic drift driving influenza incidence patterns.
+The correlation between incidence and drift further suggests the possibility of using HI data at the start of an influenza season to predict which lineage will subsequently predominate.
 
 The statistical framework presented here represents a baseline to which further advancements in modeling antigenic phenotype and evolution may be made.
 For example, our likelihood-based model facilitates the inclusion of possible covariates affecting immunological titer, which could include experimental factors such as red blood cell type used in the HI assay \cite{Lin12} and whether oseltamivir is included in the HI reaction \cite{Lin10}.
@@ -456,9 +456,9 @@ Because experimental HI titers typically differ by factors of two, we find it co
 Due to experimental constraints, most comparisons cannot be made, leading to a sparse observation matrix $\mathbf{H} = \{H_{ij}\}$.  
 Further, measurements are usually interval and truncated, e.g.\ inhibition may cease somewhere between the serial titers of 160 and 320, or inhibition may be absent at all titers assayed, suggesting a threshold somewhere between 0 and 40.  
 
-Previous work \cite{Smith04, Cai10} has used multidimensional scaling to place viruses and sera on an `antigenic map'.  
+Previous work \cite{Smith04, Cai10} has used multidimensional scaling (MDS) to place viruses and sera on an `antigenic map'.  
 These methods heuristically optimize locations of viruses and sera by seeking to minimize the sum of squared errors between titers predicted by map locations and observed titers.  
-Antigenic maps produced by these methods have proved useful in categorizing virus phenotypes \cite{Smith04}, but the extension of these methods to integrate genetic data remains notably lacking.
+Antigenic maps produced by these methods have proven useful in categorizing virus phenotypes \cite{Smith04}, but the extension of these methods to integrate genetic data remains notably lacking.
 
 Here, we follow previous models in representing antigenic locations as points in a low $P$-dimensional antigenic map. 
 One of our initial goals is to find an optimal projection of the high-dimensional distance matrix $\mathbf{H}$ into this lower dimensional space. 
@@ -480,7 +480,7 @@ Traditional approaches to antigenic cartography \cite{Smith04} begin by defining
 	d_{ij} =  \se_j - H_{ij},
 \end{equation}
 where $H_{ij}$ is the log$_2$ titer of virus $i$ against serum $j$ and serum potency $\se_j = \max ( H_{1j},\ldots,H_{\vn j} )$ is fixed.
-In following multidimensional scaling (MDS), these approaches attempt to optimize over unknown $\viruses$ and $\sera$ such that
+In following multidimensional scaling, these approaches attempt to optimize over unknown $\viruses$ and $\sera$ such that
 \begin{equation} \label{mds}
 	\sum_{(i,j) \in \cal I} 
 	\left(
@@ -644,7 +644,7 @@ This censoring left 402 virus isolates, 519 serum isolates and 10,059 HI measure
 Each virus isolate was compared to an average of 21.9 serum isolates, and each serum isolate was compared to an average of 18.0 virus isolates.
 
 Antigenic data for influenza A/H1N1 was collected from previous publications \cite{Kendal78,Webster79,Nakajima79,Nakajima81,Chakraverty82,Pereira82,Chakraverty86,Cox83,Daniels85,Raymond86,Stevens87,Donatelli93,Hay01,Daum02,McDonald07,Barr10} and NIMR vaccine strain selection reports for 2002--2010 \cite{NIMR02,NIMR03,NIMR04,NIMRFeb05,NIMRSep05,NIMRMarch06,NIMRSep06,NIMRMarch07,NIMRSep07,NIMRMarch08,NIMRSep08,NIMRFeb09,NIMRFeb10}.
-The same procedure was followed as was followed for H3N2 to match sequence data and to subsample antigenic comparisons.
+The same procedure that was followed for A/H3N2 was repeated to match sequence data and to subsample antigenic comparisons.
 This procedure yielded 115 virus isolates, 77 serum isolates and 1882 HI measurements over the course of 1977 to 2009.
 Each virus isolate was compared to an average of 10.0 serum isolates, and each serum isolate was compared to an average of 16.2 virus isolates.
 
