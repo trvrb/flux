@@ -1,4 +1,4 @@
-type	name	year	ag1	ag2	effect
+type	name	year	ag1	ag2	potency
 virus	A/Rotterdam/577/1980	1980.	-7.3672	1.5776	na
 virus	A/ChristChurch/2/1988	1988.	-4.9305	-0.7725	na
 virus	A/Netherlands/241/1993	1993.	5.3776	2.4348	na
