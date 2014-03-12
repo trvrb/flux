@@ -1,5 +1,14 @@
 ## Example XMLs for BMDS cartographic models in BEAST
 
+### BEAST
+
+To run these XMLs [BEAST](http://beast.bio.ed.ac.uk/) will need to be built from the source code.  Source code can be found in [Google Code repository](https://code.google.com/p/beast-mcmc/source/checkout).  I've set up a [Homebrew formula](https://github.com/Homebrew/homebrew-science/blob/master/beast.rb) to make this easy on Mac.  With [Homebrew](http://brew.sh/) installed, just run:
+
+```
+brew tap homebrew/science
+brew install beast --HEAD
+```
+
 ### Data specification
 
 Titer data should be specified in the following fashion:
@@ -479,3 +488,13 @@ The location-tagged phylogeny is logged with:
 	</driftedTraits>
 </logTree>
 ```
+
+## Other subtypes
+
+Full analysis files for H3N2, B/Vic and B/Yam, corresponding to the `mds_drift_effects_tree` model are also provided here:
+
+* [`H3N2_mds_drift_effects_tree.xml`](H3N2_mds_drift_effects_tree.xml)
+* [`Vic_mds_drift_effects_tree.xml`](Vic_mds_drift_effects_tree.xml)
+* [`Yam_mds_drift_effects_tree.xml`](Yam_mds_drift_effects_tree.xml)
+
+Data files for trees and HI titers for these also reside in the [`data/`](../data/) directory.
