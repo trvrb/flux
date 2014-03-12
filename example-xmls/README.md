@@ -14,6 +14,8 @@ A/Lackland/3/78	A/Lackland/3/1978	1978	A/Arizona/14/78	A/Arizona/14/1978	1978	16
 
 where `virusIsolate` and `serumIsolate` are the unique virus and serum isolates (traditionally rows and columns in an HI table) and `virusStrain` and `serumStrain` are the strains from which these isolates derive.
 
+The HI data file [`H1N1_HI_data.tsv`](../data/H1N1_HI_data.tsv) is located in the [`data/`](../data/) directory.
+
 ### Basic model
 
 The file `H1N1_mds_nodrift_noeffects_notree.xml` gives the most basic cartographic model, corresponding to model #2 in Table 1 of the manuscript.  
@@ -22,7 +24,7 @@ The antigenic model is specified by:
 
 ```xml
 <antigenicLikelihood id="antigenicLikelihood" 
-							fileName="H1N1_HI_data.txt"
+							fileName="H1N1_HI_data.tsv"
 							mdsDimension="2"
 							intervalWidth="1.0">
 	<virusLocations>
@@ -107,7 +109,7 @@ This differs from the basic model by specifying a positive `location.drift` and 
 
 ```xml
 <antigenicLikelihood id="antigenicLikelihood" 
-							fileName="H1N1_HI_data.txt"
+							fileName="H1N1_HI_data.tsv"
 							mdsDimension="2"
 							intervalWidth="1.0">
 	<virusLocations>
@@ -394,6 +396,8 @@ A sequence `alignment` and a `treeLikelihood` model can be included to sample th
 	<empiricalTreeDistributionModel idref="treeModel"/>
 </statistic>
 ```
+
+The trees input file [`H1N1_sample.trees`](../data/H1N1_sample.trees) is located in the [`data/`](../data/) directory.
 
 The multivariate diffusion is specified with:
 

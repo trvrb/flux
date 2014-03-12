@@ -2,7 +2,7 @@
 <beast>
 
 	<antigenicLikelihood id="antigenicLikelihood" 
-								fileName="H1N1_HI_data.txt"
+								fileName="H1N1_HI_data.tsv"
 								mdsDimension="2"
 								intervalWidth="1.0">
 		<virusLocations>
