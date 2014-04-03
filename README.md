@@ -21,8 +21,7 @@ National Institutes of Health, Bethesda, MD, USA
 ## Citation
 
 [Bedford T, Suchard MA, Lemey P, Dudas G, Gregory V, Hay AJ, McCauley JW, Russell CA, Smith DJ,
-Rambaut A. 2013. Integrating influenza antigenic dynamics with molecular evolution. arXiv:
-1304.3637.](http://arxiv.org/abs/1304.3637)
+Rambaut A. 2014. Integrating influenza antigenic dynamics with molecular evolution. eLife 3: e01914.](http://dx.doi.org/10.7554/elife.01914)
 
 ## Abstract
 
